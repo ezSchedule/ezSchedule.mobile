@@ -1,13 +1,14 @@
 package com.ezschedule.network.data.network.interceptor
 
-import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.BuildConfig
+import okhttp3.Interceptor
+import okhttp3.Response
 
-class LoggingInterceptor {
-    fun getInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().apply {
-            level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
-            else HttpLoggingInterceptor.Level.NONE
-        }
+class LoggingInterceptor : Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        return chain.proceed(
+            chain.request()
+                .newBuilder()
+                .build()
+        )
     }
 }

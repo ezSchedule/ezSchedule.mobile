@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface TenantEndpoint {
     @GET("users")
-    suspend fun getUsers(): List<TenantData>
+    suspend fun getTenants(): List<TenantData>
 }

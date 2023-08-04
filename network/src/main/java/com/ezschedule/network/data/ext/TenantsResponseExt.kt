@@ -11,8 +11,8 @@ fun List<TenantData>.toResponse() = TenantsResponse(
 )
 
 private fun TenantData.toResponse() = TenantResponse(
-    id = id,
+    id = id.toString(),
     name = name,
     email = email,
-    password = password
+    password = password ?: ""
 )
