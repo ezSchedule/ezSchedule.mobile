@@ -1,4 +1,4 @@
-package com.ezschedule.network.data.di
+package com.ezschedule.network.data.network
 
 import com.ezschedule.network.data.network.interceptor.LoggingInterceptor
 import com.google.gson.Gson
@@ -8,12 +8,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class NetworkServiceFactory {
     inline fun <reified T> createNetworkService(): T {
-        val log = LoggingInterceptor().getInterceptor()
-        val client = OkHttpClient().newBuilder().addInterceptor(log)
+        val client = OkHttpClient()
+            .newBuilder()
+            .addInterceptor(LoggingInterceptor())
+
         val retrofit = Retrofit.Builder()
-            .baseUrl("localhost:8080")
-            .client(client.build())
+            .baseUrl("http://192.168.18.31:8080/")
             .addConverterFactory(GsonConverterFactory.create(Gson()))
+            .client(client.build())
             .build()
 
         return retrofit.create(T::class.java)
