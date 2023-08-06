@@ -2,4 +2,19 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#717171</color>
+
+    <!--Light Theme-->
+    <color name="colorPrimaryLight">#5AE982</color>
+    <color name="colorOnPrimaryLight">#0A0C10</color>
+
+    <color name="colorSecondaryLight">#F5F5F5</color>
+    <color name="colorOnSecondaryLight">#0A0C10</color>
+
+    <!-- Dark Theme-->
+    <color name="colorPrimaryDark">#5AE982</color>
+    <color name="colorOnPrimaryDark">#0A0C10</color>
+
+    <color name="colorSecondaryDark">#F5F5F5</color>
+    <color name="colorOnSecondaryDark">#0A0C10</color>
 </resources>
