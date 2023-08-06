@@ -1,9 +1,11 @@
 package com.ezschedule.network.data.api
 
-import com.ezschedule.network.data.data.TenantData
-import retrofit2.http.GET
+import com.ezschedule.network.domain.data.TenantLoginData
+import com.ezschedule.network.domain.data.TenantLoginRequest
+import retrofit2.http.Body
+import retrofit2.http.POST
 
 interface TenantEndpoint {
-    @GET("users")
-    suspend fun getTenants(): List<TenantData>
+    @POST("users/login")
+    suspend fun singUp(@Body tenantRequest: TenantLoginRequest): TenantLoginData
 }
