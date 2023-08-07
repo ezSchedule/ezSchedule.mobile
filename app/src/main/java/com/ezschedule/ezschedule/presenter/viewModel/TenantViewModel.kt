@@ -4,14 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ezschedule.ezschedule.domain.useCase.LoginUserCase
+import com.ezschedule.ezschedule.domain.useCase.LoginUseCase
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.data.TenantLoginRequest
 import com.ezschedule.network.domain.presentation.TenantPresentation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TenantViewModel(private val loginUserCase: LoginUserCase) : ViewModel() {
+class TenantViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
     private val _tenant = MutableLiveData<TenantPresentation>()
     val tenant: LiveData<TenantPresentation> = _tenant
 
@@ -20,7 +20,7 @@ class TenantViewModel(private val loginUserCase: LoginUserCase) : ViewModel() {
 
     fun login(tenant: TenantLoginRequest) {
         viewModelScope.launch(Dispatchers.IO) {
-            when (val response = loginUserCase.execute(tenant)) {
+            when (val response = loginUseCase.execute(tenant)) {
                 is ResultWrapper.Success -> {
                     response.content.toTenantPresentation().let {
                         _tenant.postValue(it)
