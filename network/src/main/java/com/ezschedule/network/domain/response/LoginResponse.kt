@@ -1,8 +1,8 @@
 package com.ezschedule.network.domain.response
 
-import com.ezschedule.network.domain.presentation.TenantPresentation
+import com.ezschedule.network.domain.presentation.LoginPresentation
 
-data class TenantLoginResponse(
+data class LoginResponse(
     val id: Int,
     val name: String,
     val email: String,
@@ -17,7 +17,7 @@ data class TenantLoginResponse(
     val tokenJWT: String,
     val idCondominium: Int
 ) {
-    fun toTenantPresentation(): TenantPresentation = TenantPresentation(
+    fun toLoginPresentation(): LoginPresentation = LoginPresentation(
         id = id,
         name = name,
         email = email,

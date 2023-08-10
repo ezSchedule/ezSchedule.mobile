@@ -1,8 +1,8 @@
 package com.ezschedule.ezschedule.domain.useCase
 
-import com.ezschedule.ezschedule.data.repository.TenantRepository
-import com.ezschedule.ezschedule.fixture.data.TenantLoginRequestFixture
-import com.ezschedule.ezschedule.fixture.response.TenantLoginResponseFixture
+import com.ezschedule.ezschedule.data.repository.LoginRepository
+import com.ezschedule.ezschedule.fixture.data.LoginRequestFixture
+import com.ezschedule.ezschedule.fixture.response.LoginResponseFixture
 import com.ezschedule.ezschedule.util.CoroutineViewModelTest
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import io.mockk.coEvery
@@ -15,8 +15,8 @@ import org.junit.Test
 import java.lang.Exception
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class TenantUseCase : CoroutineViewModelTest() {
-    private lateinit var repository: TenantRepository
+class LoginUseCaseTest : CoroutineViewModelTest() {
+    private lateinit var repository: LoginRepository
     private lateinit var useCase: LoginUseCase
 
     @Before
@@ -28,12 +28,12 @@ class TenantUseCase : CoroutineViewModelTest() {
     @Test
     fun `WHEN successfully requested login SHOULD return a ResultWrapper successfully`() = runTest {
         val expected = ResultWrapper.Success(
-            TenantLoginResponseFixture.getTenantLoginResponseComplete().build()
+            LoginResponseFixture.getLoginResponseComplete().build()
         )
         coEvery { useCase.execute(any()) } returns expected
 
         val result =
-            useCase.execute(TenantLoginRequestFixture.getTenantLoginRequestComplete().build())
+            useCase.execute(LoginRequestFixture.getLoginRequestComplete().build())
 
         assertEquals(expected, result)
     }
@@ -44,7 +44,7 @@ class TenantUseCase : CoroutineViewModelTest() {
         coEvery { useCase.execute(any()) } returns expected
 
         val result =
-            useCase.execute(TenantLoginRequestFixture.getTenantLoginRequestComplete().build())
+            useCase.execute(LoginRequestFixture.getLoginRequestComplete().build())
 
         assertEquals(expected, result)
     }

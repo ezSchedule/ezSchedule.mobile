@@ -1,9 +1,9 @@
 package com.ezschedule.network.data.ext
 
-import com.ezschedule.network.domain.data.TenantLoginData
-import com.ezschedule.network.domain.response.TenantLoginResponse
+import com.ezschedule.network.domain.data.LoginData
+import com.ezschedule.network.domain.response.LoginResponse
 
-fun TenantLoginData.toResponse() = TenantLoginResponse(
+fun LoginData.toResponse() = LoginResponse(
     id = id,
     email = email,
     name = name,

@@ -1,8 +1,8 @@
 package com.ezschedule.ezschedule.data.repository
 
-import com.ezschedule.ezschedule.fixture.data.TenantLoginRequestFixture
+import com.ezschedule.ezschedule.fixture.data.LoginRequestFixture
 import com.ezschedule.ezschedule.util.CoroutineViewModelTest
-import com.ezschedule.network.data.api.TenantEndpoint
+import com.ezschedule.network.data.api.LoginEndpoint
 import com.ezschedule.network.data.network.exception.ClientException
 import com.ezschedule.network.data.network.exception.ServerException
 import com.ezschedule.network.data.network.exception.UnknownResponseException
@@ -19,14 +19,14 @@ import org.junit.Test
 import retrofit2.HttpException
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class TenantRepositoryTest : CoroutineViewModelTest() {
-    private lateinit var endpoint: TenantEndpoint
-    private lateinit var repository: TenantRepository
+class LoginRepositoryTest : CoroutineViewModelTest() {
+    private lateinit var endpoint: LoginEndpoint
+    private lateinit var repository: LoginRepository
 
     @Before
     override fun setUp() {
         endpoint = mockk(relaxed = true)
-        repository = TenantRepository(endpoint)
+        repository = LoginRepository(endpoint)
     }
 
     @Test
@@ -37,7 +37,7 @@ class TenantRepositoryTest : CoroutineViewModelTest() {
             setupExceptionMockPost(code, message)
 
             val result =
-                repository.login(TenantLoginRequestFixture.getTenantLoginRequestComplete().build())
+                repository.login(LoginRequestFixture.getLoginRequestComplete().build())
             val error = (result as ResultWrapper.Error).error as ClientException
 
             coVerify { endpoint.singUp(any()) }
@@ -53,7 +53,7 @@ class TenantRepositoryTest : CoroutineViewModelTest() {
             setupExceptionMockPost(code, message)
 
             val result =
-                repository.login(TenantLoginRequestFixture.getTenantLoginRequestComplete().build())
+                repository.login(LoginRequestFixture.getLoginRequestComplete().build())
             val error = (result as ResultWrapper.Error).error as ServerException
 
             coVerify { endpoint.singUp(any()) }
@@ -69,7 +69,7 @@ class TenantRepositoryTest : CoroutineViewModelTest() {
             setupExceptionMockPost(code, message)
 
             val result =
-                repository.login(TenantLoginRequestFixture.getTenantLoginRequestComplete().build())
+                repository.login(LoginRequestFixture.getLoginRequestComplete().build())
             val error = (result as ResultWrapper.Error).error as UnknownResponseException
 
             coVerify { endpoint.singUp(any()) }

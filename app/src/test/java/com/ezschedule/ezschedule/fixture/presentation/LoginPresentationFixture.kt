@@ -1,8 +1,8 @@
 package com.ezschedule.ezschedule.fixture.presentation
 
-import com.ezschedule.network.domain.presentation.TenantPresentation
+import com.ezschedule.network.domain.presentation.LoginPresentation
 
-class TenantPresentationFixture(
+class LoginPresentationFixture(
     val id: Int,
     val email: String,
     val name: String,
@@ -10,14 +10,14 @@ class TenantPresentationFixture(
     val idCondominium: Int
 ) {
     companion object {
-        fun getTenantPresentationComplete(
+        fun getLoginPresentationComplete(
             withId: Int = 1,
             withEmail: String = "endryl@gmail.com",
             withName: String = "endryl fiorotti",
             withTokenJWT: String = "token",
             withIdCondominium: Int = 1
-        ): TenantPresentationFixture {
-            return TenantPresentationFixture(
+        ): LoginPresentationFixture {
+            return LoginPresentationFixture(
                 id = withId,
                 email = withEmail,
                 name = withName,
@@ -27,7 +27,7 @@ class TenantPresentationFixture(
         }
     }
 
-    fun build() = TenantPresentation(
+    fun build() = LoginPresentation(
         id = id,
         email = email,
         name = name,

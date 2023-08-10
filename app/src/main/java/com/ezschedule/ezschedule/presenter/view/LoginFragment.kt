@@ -9,14 +9,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.ezschedule.ezschedule.data.utils.TokenManager
 import com.ezschedule.ezschedule.databinding.FragmentLoginBinding
-import com.ezschedule.ezschedule.presenter.viewModel.TenantViewModel
-import com.ezschedule.network.domain.data.TenantLoginRequest
+import com.ezschedule.ezschedule.presenter.viewModel.LoginViewModel
+import com.ezschedule.network.domain.data.LoginRequest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
-    private val viewModel by viewModel<TenantViewModel>()
+    private val viewModel by viewModel<LoginViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -28,10 +28,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (TokenManager(requireContext()).getToken() != null) {
-            Log.i("TEST", "Direct to next page, cause I have the token")
-        }
-        viewModel.login(TenantLoginRequest("elias@gmail.com", "12345678"))
+        viewModel.login(LoginRequest("elias@gmail.com", "12345678"))
         setupObservers()
     }
 

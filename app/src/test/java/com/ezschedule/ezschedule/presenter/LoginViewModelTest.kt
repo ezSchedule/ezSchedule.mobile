@@ -1,10 +1,10 @@
 package com.ezschedule.ezschedule.presenter
 
 import com.ezschedule.ezschedule.domain.useCase.LoginUseCase
-import com.ezschedule.ezschedule.fixture.data.TenantLoginRequestFixture
-import com.ezschedule.ezschedule.fixture.presentation.TenantPresentationFixture
-import com.ezschedule.ezschedule.fixture.response.TenantLoginResponseFixture
-import com.ezschedule.ezschedule.presenter.viewModel.TenantViewModel
+import com.ezschedule.ezschedule.fixture.data.LoginRequestFixture
+import com.ezschedule.ezschedule.fixture.presentation.LoginPresentationFixture
+import com.ezschedule.ezschedule.fixture.response.LoginResponseFixture
+import com.ezschedule.ezschedule.presenter.viewModel.LoginViewModel
 import com.ezschedule.ezschedule.util.CoroutineViewModelTest
 import com.ezschedule.ezschedule.util.getOrAwaitValue
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
@@ -19,29 +19,29 @@ import org.junit.jupiter.api.Assertions.assertInstanceOf
 
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class TenantViewModelTest : CoroutineViewModelTest() {
+class LoginViewModelTest : CoroutineViewModelTest() {
     private lateinit var useCase: LoginUseCase
-    private lateinit var viewModel: TenantViewModel
+    private lateinit var viewModel: LoginViewModel
 
     @Before
     override fun setUp() {
         useCase = mockk(relaxed = true)
-        viewModel = TenantViewModel(useCase)
+        viewModel = LoginViewModel(useCase)
     }
 
     @Test
     fun `WHEN successfully requested login SHOULD insert into the liveData of the tenant`() =
         runTest {
             coEvery {
-                useCase.execute(TenantLoginRequestFixture.getTenantLoginRequestComplete().build())
+                useCase.execute(LoginRequestFixture.getLoginRequestComplete().build())
             } returns ResultWrapper.Success(
-                TenantLoginResponseFixture.getTenantLoginResponseComplete().build()
+                LoginResponseFixture.getLoginResponseComplete().build()
             )
 
-            viewModel.login(TenantLoginRequestFixture.getTenantLoginRequestComplete().build())
+            viewModel.login(LoginRequestFixture.getLoginRequestComplete().build())
 
             val result = viewModel.tenant.getOrAwaitValue()
-            val expected = TenantPresentationFixture.getTenantPresentationComplete().build()
+            val expected = LoginPresentationFixture.getLoginPresentationComplete().build()
 
             assertEquals(expected, result)
         }
@@ -50,10 +50,10 @@ class TenantViewModelTest : CoroutineViewModelTest() {
     fun `WHEN executing the request with an error SHOULD show error request`() =
         runTest {
             coEvery {
-                useCase.execute(TenantLoginRequestFixture.getTenantLoginRequestComplete().build())
+                useCase.execute(LoginRequestFixture.getLoginRequestComplete().build())
             } returns ResultWrapper.Error(Exception())
 
-            viewModel.login(TenantLoginRequestFixture.getTenantLoginRequestComplete().build())
+            viewModel.login(LoginRequestFixture.getLoginRequestComplete().build())
 
             val result = viewModel.error.getOrAwaitValue()
             val expected = Exception::class.java
