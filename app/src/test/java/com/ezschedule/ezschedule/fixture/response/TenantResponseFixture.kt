@@ -1,8 +1,8 @@
 package com.ezschedule.ezschedule.fixture.response
 
-import com.ezschedule.network.domain.response.TenantLoginResponse
+import com.ezschedule.network.domain.response.TenantResponse
 
-class TenantLoginResponseFixture(
+class TenantResponseFixture(
     val id: Int,
     val name: String,
     val email: String,
@@ -18,7 +18,7 @@ class TenantLoginResponseFixture(
     val idCondominium: Int
 ) {
     companion object {
-        fun getTenantLoginResponseComplete(
+        fun getTenantResponseComplete(
             withId: Int = 1,
             withName: String = "endryl fiorotti",
             withEmail: String = "endryl@gmail.com",
@@ -32,8 +32,8 @@ class TenantLoginResponseFixture(
             withIsAdmin: Boolean = true,
             withTokenJWT: String = "token",
             withIdCondominium: Int = 1
-        ): TenantLoginResponseFixture {
-            return TenantLoginResponseFixture(
+        ): TenantResponseFixture {
+            return TenantResponseFixture(
                 id = withId,
                 name = withName,
                 email = withEmail,
@@ -51,7 +51,7 @@ class TenantLoginResponseFixture(
         }
     }
 
-    fun build() = TenantLoginResponse(
+    fun build() = TenantResponse(
         id = id,
         name = name,
         email = email,

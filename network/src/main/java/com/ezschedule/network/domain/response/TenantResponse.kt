@@ -2,7 +2,7 @@ package com.ezschedule.network.domain.response
 
 import com.ezschedule.network.domain.presentation.TenantPresentation
 
-data class TenantLoginResponse(
+data class TenantResponse(
     val id: Int,
     val name: String,
     val email: String,

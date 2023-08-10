@@ -1,9 +1,9 @@
 package com.ezschedule.ezschedule.presenter
 
 import com.ezschedule.ezschedule.domain.useCase.LoginUseCase
-import com.ezschedule.ezschedule.fixture.data.TenantLoginRequestFixture
+import com.ezschedule.ezschedule.fixture.data.TenantRequestFixture
 import com.ezschedule.ezschedule.fixture.presentation.TenantPresentationFixture
-import com.ezschedule.ezschedule.fixture.response.TenantLoginResponseFixture
+import com.ezschedule.ezschedule.fixture.response.TenantResponseFixture
 import com.ezschedule.ezschedule.presenter.viewModel.TenantViewModel
 import com.ezschedule.ezschedule.util.CoroutineViewModelTest
 import com.ezschedule.ezschedule.util.getOrAwaitValue
@@ -33,12 +33,12 @@ class TenantViewModelTest : CoroutineViewModelTest() {
     fun `WHEN successfully requested login SHOULD insert into the liveData of the tenant`() =
         runTest {
             coEvery {
-                useCase.execute(TenantLoginRequestFixture.getTenantLoginRequestComplete().build())
+                useCase.execute(TenantRequestFixture.getTenantRequestComplete().build())
             } returns ResultWrapper.Success(
-                TenantLoginResponseFixture.getTenantLoginResponseComplete().build()
+                TenantResponseFixture.getTenantResponseComplete().build()
             )
 
-            viewModel.login(TenantLoginRequestFixture.getTenantLoginRequestComplete().build())
+            viewModel.login(TenantRequestFixture.getTenantRequestComplete().build())
 
             val result = viewModel.tenant.getOrAwaitValue()
             val expected = TenantPresentationFixture.getTenantPresentationComplete().build()
@@ -50,10 +50,10 @@ class TenantViewModelTest : CoroutineViewModelTest() {
     fun `WHEN executing the request with an error SHOULD show error request`() =
         runTest {
             coEvery {
-                useCase.execute(TenantLoginRequestFixture.getTenantLoginRequestComplete().build())
+                useCase.execute(TenantRequestFixture.getTenantRequestComplete().build())
             } returns ResultWrapper.Error(Exception())
 
-            viewModel.login(TenantLoginRequestFixture.getTenantLoginRequestComplete().build())
+            viewModel.login(TenantRequestFixture.getTenantRequestComplete().build())
 
             val result = viewModel.error.getOrAwaitValue()
             val expected = Exception::class.java

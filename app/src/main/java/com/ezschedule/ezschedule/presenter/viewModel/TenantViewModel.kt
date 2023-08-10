@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ezschedule.ezschedule.domain.useCase.LoginUseCase
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
-import com.ezschedule.network.domain.data.TenantLoginRequest
+import com.ezschedule.network.domain.data.TenantRequest
 import com.ezschedule.network.domain.presentation.TenantPresentation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,7 +18,7 @@ class TenantViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
     private val _error = MutableLiveData<Exception>()
     val error: LiveData<Exception> = _error
 
-    fun login(tenant: TenantLoginRequest) {
+    fun login(tenant: TenantRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             when (val response = loginUseCase.execute(tenant)) {
                 is ResultWrapper.Success -> {

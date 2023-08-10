@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.ezschedule.ezschedule.data.utils.TokenManager
 import com.ezschedule.ezschedule.databinding.FragmentLoginBinding
 import com.ezschedule.ezschedule.presenter.viewModel.TenantViewModel
-import com.ezschedule.network.domain.data.TenantLoginRequest
+import com.ezschedule.network.domain.data.TenantRequest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
@@ -31,7 +31,7 @@ class LoginFragment : Fragment() {
         if (TokenManager(requireContext()).getToken() != null) {
             Log.i("TEST", "Direct to next page, cause I have the token")
         }
-        viewModel.login(TenantLoginRequest("elias@gmail.com", "12345678"))
+        viewModel.login(TenantRequest("elias@gmail.com", "12345678"))
         setupObservers()
     }
 
