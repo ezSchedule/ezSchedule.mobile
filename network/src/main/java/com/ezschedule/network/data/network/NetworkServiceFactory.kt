@@ -13,7 +13,7 @@ class NetworkServiceFactory {
             .addInterceptor(LoggingInterceptor())
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.18.31:8080/")
+            .baseUrl("http://192.168.18.5:8080/")
             .addConverterFactory(GsonConverterFactory.create(Gson()))
             .client(client.build())
             .build()
