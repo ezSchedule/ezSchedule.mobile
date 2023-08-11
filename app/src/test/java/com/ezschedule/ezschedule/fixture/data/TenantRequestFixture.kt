@@ -1,24 +1,24 @@
 package com.ezschedule.ezschedule.fixture.data
 
-import com.ezschedule.network.domain.data.TenantLoginRequest
+import com.ezschedule.network.domain.data.TenantRequest
 
-class TenantLoginRequestFixture(
+class TenantRequestFixture(
     val email: String,
     val password: String
 ) {
     companion object {
-        fun getTenantLoginRequestComplete(
+        fun getTenantRequestComplete(
             withEmail: String = "endryl@gmail.com",
             withPassword: String = "123"
-        ): TenantLoginRequestFixture {
-            return TenantLoginRequestFixture(
+        ): TenantRequestFixture {
+            return TenantRequestFixture(
                 email = withEmail,
                 password = withPassword
             )
         }
     }
 
-    fun build() = TenantLoginRequest(
+    fun build() = TenantRequest(
         email = email,
         password = password
     )
