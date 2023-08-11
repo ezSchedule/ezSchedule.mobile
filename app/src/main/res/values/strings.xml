@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">EzSchedule</string>
+    <string name="title_login">Login</string>
+    <string name="title_to_enter">Entrar</string>
+    <string name="forget_password">Esqueci minha senha</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Senha</string>
 </resources>
