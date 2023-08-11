@@ -40,7 +40,7 @@ class TenantViewModelTest : CoroutineViewModelTest() {
 
             viewModel.login(TenantRequestFixture.getTenantRequestComplete().build())
 
-            val result = viewModel.tenant.getOrAwaitValue()
+            val result = viewModel.loginSuccess.getOrAwaitValue()
             val expected = TenantPresentationFixture.getTenantPresentationComplete().build()
 
             assertEquals(expected, result)
