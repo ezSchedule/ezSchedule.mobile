@@ -2,9 +2,10 @@ package com.ezschedule.ezschedule
 
 import android.app.Application
 import com.ezschedule.ezschedule.data.di.moduleMain
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class TenantApplication : Application() {
+class EzScheduleApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         setupKoin()
@@ -12,6 +13,7 @@ class TenantApplication : Application() {
 
     private fun setupKoin() {
         startKoin {
+            androidContext(this@EzScheduleApplication)
             modules(moduleMain)
         }
     }

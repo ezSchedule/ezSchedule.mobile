@@ -1,4 +1,4 @@
-package com.ezschedule.ezschedule.data.utils
+package com.ezschedule.ezschedule.presenter.utils
 
 import android.content.Context
 import android.content.SharedPreferences

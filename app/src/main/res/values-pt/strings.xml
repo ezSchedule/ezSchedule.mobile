@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EzSchedule</string>
+
+    <!-- Login Screen -->
+    <string name="frag_login_tv_title_login">Entrar</string>
+    <string name="frag_login_btn_login">Entrar</string>
+    <string name="frag_login_tv_forgot_password">Esqueci minha senha</string>
+    <string name="frag_login_edt_hint_email">Email</string>
+    <string name="frag_login_edt_hint_password">Senha</string>
+    <string name="frag_login_edt_email_error">Email inválido</string>
+    <string name="frag_login_client_exception">Usuário não encontrado</string>
+    <string name="frag_login_server_exception">Erro de servidor</string>
+    <string name="frag_login_unknown_exception">Erro desconhecido</string>
+</resources>
