@@ -1,13 +1,17 @@
 package com.ezschedule.ezschedule.presenter.view
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.view.inputmethod.InputMethodManager
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.ezschedule.ezschedule.R
 import com.ezschedule.ezschedule.databinding.FragmentLoginBinding
 import com.ezschedule.ezschedule.presenter.utils.TokenManager
 import com.ezschedule.ezschedule.presenter.viewModel.TenantViewModel
@@ -29,33 +33,35 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        setupSharedPreferences()
+        verifySharedPreferences()
         setupObservers()
         setupFieldEmail()
         setupFieldPassword()
         setupButtonLogin()
     }
 
-    private fun setupSharedPreferences() {
-        if (TokenManager(requireContext()).getToken() != null) {
-            Log.i("TEST", "Direct to next page, cause I have the token")
-        }
+    private fun verifySharedPreferences() {
+        viewModel.verifySharedPreferences(requireContext())
     }
 
     private fun setupObservers() {
         with(viewModel) {
             loginSuccess.observe(viewLifecycleOwner) {
-                showSnackBarMessage("Tenant ${it.name} has logged in successfully!")
                 TokenManager(requireContext()).saveToken(it.tokenJWT)
+                findNavController().navigate(R.id.action_to_calendar)
             }
             error.observe(viewLifecycleOwner) {
                 showSnackBarMessage(it ?: "error")
+                setupLoading(false)
             }
             setErrorEmail.observe(viewLifecycleOwner) {
                 binding.tilEmail.error = it
             }
             setStatusButtonLogin.observe(viewLifecycleOwner) {
                 binding.btnLogin.isEnabled = it
+            }
+            triggerNavigation.observe(viewLifecycleOwner) {
+                findNavController().navigate(R.id.action_to_calendar)
             }
         }
     }
@@ -79,6 +85,7 @@ class LoginFragment : Fragment() {
     private fun setupButtonLogin() {
         with(binding) {
             btnLogin.setOnClickListener {
+                setupLoading(true)
                 viewModel.login(
                     TenantRequest(
                         email = tietEmail.text.toString(),
@@ -87,5 +94,17 @@ class LoginFragment : Fragment() {
                 )
             }
         }
+    }
+
+    private fun setupLoading(isVisible: Boolean) {
+        binding.includeLoading.root.isVisible = isVisible
+        view?.let {
+            requireContext().hideKeyboard(it)
+        }
+    }
+
+    private fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
