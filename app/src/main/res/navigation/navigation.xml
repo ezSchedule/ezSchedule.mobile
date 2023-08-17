@@ -17,6 +17,30 @@
         android:label="CalendarFragment"
         tools:layout="@layout/fragment_calendar" />
 
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.ezschedule.admin.presenter.view.DashboardFragment"
+        android:label="DashboardFragment"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/servicesFragment"
+        android:name="com.ezschedule.admin.presenter.view.ServicesFragment"
+        android:label="ServicesFragment"
+        tools:layout="@layout/fragment_services" />
+
+    <fragment
+        android:id="@+id/forumFragment"
+        android:name="com.ezschedule.admin.presenter.view.ForumFragment"
+        android:label="ForumFragment"
+        tools:layout="@layout/fragment_forum" />
+
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.ezschedule.admin.presenter.view.PaymentFragment"
+        android:label="PaymentFragment"
+        tools:layout="@layout/fragment_payment" />
+
     <action
         android:id="@+id/action_to_calendar"
         app:destination="@id/calendarFragment" />

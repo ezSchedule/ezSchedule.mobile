@@ -2,6 +2,14 @@
 <resources>
     <string name="app_name">EzSchedule</string>
 
+    <!-- Screen name -->
+    <string name="frag_calendar_name">Eventos</string>
+    <string name="frag_dashboard_name">2023</string>
+    <string name="frag_services_name">Serviços</string>
+    <string name="frag_payments_name">Histórico</string>
+    <string name="frag_forum_name">Posts</string>
+    <string name="frag_not_found_name">Não encontrado</string>
+
     <!-- Login Screen -->
     <string name="frag_login_tv_title_login">Entrar</string>
     <string name="frag_login_btn_login">Entrar</string>

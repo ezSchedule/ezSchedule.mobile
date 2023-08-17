@@ -16,6 +16,8 @@ import com.ezschedule.ezschedule.databinding.FragmentLoginBinding
 import com.ezschedule.ezschedule.presenter.utils.TokenManager
 import com.ezschedule.ezschedule.presenter.viewModel.TenantViewModel
 import com.ezschedule.network.domain.data.TenantRequest
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,21 +35,17 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        verifySharedPreferences()
         setupObservers()
         setupFieldEmail()
         setupFieldPassword()
         setupButtonLogin()
     }
 
-    private fun verifySharedPreferences() {
-        viewModel.verifySharedPreferences(requireContext())
-    }
-
     private fun setupObservers() {
         with(viewModel) {
             loginSuccess.observe(viewLifecycleOwner) {
                 TokenManager(requireContext()).saveToken(it.tokenJWT)
+                displayActivityItems()
                 findNavController().navigate(R.id.action_to_calendar)
             }
             error.observe(viewLifecycleOwner) {
@@ -60,10 +58,16 @@ class LoginFragment : Fragment() {
             setStatusButtonLogin.observe(viewLifecycleOwner) {
                 binding.btnLogin.isEnabled = it
             }
-            triggerNavigation.observe(viewLifecycleOwner) {
-                findNavController().navigate(R.id.action_to_calendar)
-            }
         }
+    }
+
+    private fun displayActivityItems() {
+        val bottomNav =
+            requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val toolbar =
+            requireActivity().findViewById<AppBarLayout>(R.id.include_toolbar)
+        bottomNav.isVisible = true
+        toolbar.isVisible = true
     }
 
     private fun showSnackBarMessage(message: String) {
@@ -104,7 +108,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun Context.hideKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

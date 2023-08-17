@@ -1,6 +1,5 @@
 package com.ezschedule.ezschedule.presenter.viewModel
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.ezschedule.ezschedule.R
 import com.ezschedule.ezschedule.domain.useCase.LoginUseCase
 import com.ezschedule.ezschedule.presenter.utils.ResourceWrapper
-import com.ezschedule.ezschedule.presenter.utils.TokenManager
 import com.ezschedule.ezschedule.presenter.utils.isValidEmail
 import com.ezschedule.network.data.network.exception.ClientException
 import com.ezschedule.network.data.network.exception.ServerException
@@ -31,9 +29,6 @@ class TenantViewModel(
 
     private val _loginSuccess = MutableLiveData<TenantPresentation>()
     val loginSuccess: LiveData<TenantPresentation> = _loginSuccess
-
-    private val _triggerNavigation = MutableLiveData<Unit>()
-    val triggerNavigation: LiveData<Unit> = _triggerNavigation
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
@@ -78,10 +73,6 @@ class TenantViewModel(
                 }
             }
         }
-    }
-
-    fun verifySharedPreferences(context: Context) {
-        if (TokenManager(context).getToken() != null) _triggerNavigation.value = Unit
     }
 
     private fun validationEmail(email: String) {
