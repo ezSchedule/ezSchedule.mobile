@@ -47,24 +47,36 @@
         android:layout_height="@dimen/spacing_none"
         android:layout_marginHorizontal="@dimen/spacing_large"
         android:layout_marginTop="@dimen/spacing_large"
-        app:layout_constraintBottom_toTopOf="@id/frag_btn_service"
+        android:clipToPadding="false"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/cv_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/frag_til_service"
         tools:listitem="@layout/adapter_service" />
 
-    <Button
-        android:id="@+id/frag_btn_service"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_button"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_margin="@dimen/spacing_large"
-        android:background="@drawable/btn_squared"
-        android:text="@string/frag_services_btn_desc"
-        android:textColor="@color/black"
+        android:backgroundTint="@color/colorPrimary"
+        app:cardCornerRadius="@dimen/corners_micro"
+        app:cardElevation="@dimen/spacing_tiny"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/frag_rv_service"
-        app:layout_constraintWidth_percent="0.5" />
+        app:layout_constraintWidth_percent="0.4">
+
+        <Button
+            android:id="@+id/frag_btn_service"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:text="@string/frag_services_btn_desc"
+            android:textColor="@color/black" />
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="32dp"
+    android:layout_marginBottom="@dimen/spacing_large"
     android:background="@drawable/item_rounded">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_service_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="@dimen/corners_small"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/image_service_item"
+            android:id="@+id/iv_service"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:background="@drawable/item_image_rounded"
@@ -27,7 +27,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/tv_service_item"
+        android:id="@+id/tv_service_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_small"
@@ -41,12 +41,14 @@
         tools:text="Service name" />
 
     <TextView
+        android:id="@+id/tv_service_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_small"
+        android:textColor="@color/gray"
         android:textSize="@dimen/size_small"
         app:layout_constraintStart_toEndOf="@id/card_service_item"
-        app:layout_constraintTop_toBottomOf="@id/tv_service_item"
+        app:layout_constraintTop_toBottomOf="@id/tv_service_name"
         tools:text="Vinicius Almeida" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
