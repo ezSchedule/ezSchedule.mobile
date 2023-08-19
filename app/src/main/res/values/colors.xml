@@ -6,8 +6,11 @@
     <color name="clear_gray">#D9D9D9</color>
 
     <color name="colorPrimary">#5AE982</color>
+    <color name="colorPrimaryOpacity">#4D5AE982</color>
     <color name="colorOnPrimary">#0A0C10</color>
 
     <color name="colorSecondary">#F5F5F5</color>
     <color name="colorOnSecondary">#0A0C10</color>
+
+    <color name="colorVariant">#000</color>
 </resources>

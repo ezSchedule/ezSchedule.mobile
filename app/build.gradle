@@ -43,11 +43,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     api project(path: ':network')
-
-    def nav_version = "2.6.0"
-    api "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
-    api "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    api "androidx.navigation:navigation-ui-ktx:$nav_version"
+    api project(path: ':admin')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

@@ -9,5 +9,49 @@
         android:id="@+id/loginFragment"
         android:name="com.ezschedule.ezschedule.presenter.view.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login"/>
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.ezschedule.admin.presenter.view.CalendarFragment"
+        android:label="CalendarFragment"
+        tools:layout="@layout/fragment_calendar" />
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.ezschedule.admin.presenter.view.DashboardFragment"
+        android:label="DashboardFragment"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/servicesFragment"
+        android:name="com.ezschedule.admin.presenter.view.ServicesFragment"
+        android:label="ServicesFragment"
+        tools:layout="@layout/fragment_services" />
+
+    <fragment
+        android:id="@+id/forumFragment"
+        android:name="com.ezschedule.admin.presenter.view.ForumFragment"
+        android:label="ForumFragment"
+        tools:layout="@layout/fragment_forum" />
+
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.ezschedule.admin.presenter.view.PaymentFragment"
+        android:label="PaymentFragment"
+        tools:layout="@layout/fragment_payment" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.ezschedule.admin.presenter.view.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+
+    <action
+        android:id="@+id/action_to_calendar"
+        app:destination="@id/calendarFragment" />
+
+    <action
+        android:id="@+id/action_to_settings"
+        app:destination="@id/settingsFragment" />
 </navigation>

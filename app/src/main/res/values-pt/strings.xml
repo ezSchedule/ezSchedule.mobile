@@ -2,6 +2,23 @@
 <resources>
     <string name="app_name">EzSchedule</string>
 
+    <!-- Screen name -->
+    <string name="frag_calendar_name">Eventos</string>
+    <string name="frag_dashboard_name">2023</string>
+    <string name="frag_services_name">Serviços</string>
+    <string name="frag_payments_name">Histórico</string>
+    <string name="frag_forum_name">Posts</string>
+    <string name="frag_settings_name">Configurações</string>
+    <string name="frag_not_found_name">Não encontrado</string>
+
+    <!-- Toolbar image -->
+    <string name="toolbar_image_base_url">https://ezscheduleusersimages.blob.core.windows.net/ezschedules/%s</string>
+
+    <!-- Menu Popup -->
+    <string name="bt_logout">Sair</string>
+    <string name="bt_settings">Configurações</string>
+    <string name="bt_logout_error">Houve algum erro</string>
+
     <!-- Login Screen -->
     <string name="frag_login_tv_title_login">Entrar</string>
     <string name="frag_login_btn_login">Entrar</string>

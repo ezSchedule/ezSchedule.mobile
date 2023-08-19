@@ -57,13 +57,15 @@ class TenantViewModel(
                 }
 
                 is ResultWrapper.Error -> {
-                    when(response.error) {
+                    when (response.error) {
                         is ClientException -> _error.postValue(
                             resourceWrapper.getString(R.string.frag_login_client_exception)
                         )
+
                         is ServerException -> _error.postValue(
                             resourceWrapper.getString(R.string.frag_login_server_exception)
                         )
+
                         is UnknownResponseException -> _error.postValue(
                             resourceWrapper.getString(R.string.frag_login_unknown_exception)
                         )
@@ -71,6 +73,11 @@ class TenantViewModel(
                 }
             }
         }
+    }
+
+    fun getImage(image: String): String? {
+        if (image.isNotEmpty()) return image
+        return null
     }
 
     private fun validationEmail(email: String) {
