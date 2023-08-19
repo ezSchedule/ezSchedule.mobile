@@ -13,4 +13,10 @@ class TenantRepository(private val endpoint: TenantEndpoint) {
             endpoint.singUp(tenant).toResponse()
         }
     }
+
+    suspend fun logout(email: String): ResultWrapper<Unit> {
+        return requestHandler {
+            endpoint.singOut(email)
+        }
+    }
 }

@@ -75,6 +75,11 @@ class TenantViewModel(
         }
     }
 
+    fun getImage(image: String): String? {
+        if (image.isNotEmpty()) return image
+        return null
+    }
+
     private fun validationEmail(email: String) {
         if (email.isValidEmail()) _setErrorEmail.postValue(EMPTY_STRING)
         else _setErrorEmail.postValue(resourceWrapper.getString(R.string.frag_login_edt_email_error))

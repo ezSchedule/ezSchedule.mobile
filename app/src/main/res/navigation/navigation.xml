@@ -41,7 +41,17 @@
         android:label="PaymentFragment"
         tools:layout="@layout/fragment_payment" />
 
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.ezschedule.admin.presenter.view.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+
     <action
         android:id="@+id/action_to_calendar"
         app:destination="@id/calendarFragment" />
+
+    <action
+        android:id="@+id/action_to_settings"
+        app:destination="@id/settingsFragment" />
 </navigation>
