@@ -28,11 +28,4 @@
     <string name="frag_login_client_exception">User not found</string>
     <string name="frag_login_server_exception">Server error</string>
     <string name="frag_login_unknown_exception">Unknown error</string>
-
-    <!--    Services Screen-->
-    <string name="frag_services_tv_title">Serviços</string>
-    <string name="frag_services_btn_desc">+</string>
-    <string name="frag_services_atv_hint">Buscar...</string>
-    <string name="tv_services_item_name">Vinicius A. Nunes</string>
-    <string name="tv_services_item_title_service">Faxineiro</string>
 </resources>

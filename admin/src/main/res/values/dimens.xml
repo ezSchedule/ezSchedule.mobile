@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="spacing_none">0dp</dimen>
+    <dimen name="spacing_micro">4dp</dimen>
+    <dimen name="spacing_tiny">8dp</dimen>
+    <dimen name="spacing_small">16dp</dimen>
+    <dimen name="spacing_standard">24dp</dimen>
+    <dimen name="spacing_large">32dp</dimen>
+    <dimen name="spacing_huge">64dp</dimen>
+
+    <dimen name="corners_nano">2dp</dimen>
+    <dimen name="corners_micro">4dp</dimen>
+    <dimen name="corners_tiny">8dp</dimen>
+    <dimen name="corners_small">16dp</dimen>
+    <dimen name="corners_standard">24dp</dimen>
+    <dimen name="corners_large">32dp</dimen>
+
+    <dimen name="size_none">0sp</dimen>
+    <dimen name="size_micro">4sp</dimen>
+    <dimen name="size_tiny">8sp</dimen>
+    <dimen name="size_small">16sp</dimen>
+    <dimen name="size_standard">24sp</dimen>
+    <dimen name="size_large">32sp</dimen>
+    <dimen name="size_largeX">40sp</dimen>
+    <dimen name="size_largeXX">48sp</dimen>
+    <dimen name="size_largeXXX">56sp</dimen>
+    <dimen name="size_huge">64sp</dimen>
+    <dimen name="size_hugeX">72sp</dimen>
+    <dimen name="size_hugeXX">80sp</dimen>
+    <dimen name="size_hugeXXX">88sp</dimen>
+</resources>
