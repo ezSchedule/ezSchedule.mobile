@@ -5,44 +5,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <AutoCompleteTextView
-        android:id="@+id/frag_atv_service"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/frag_til_service"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/atv_rounded"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_small"
         android:hint="@string/frag_services_atv_hint"
-        android:padding="10dp"
-        android:textColorHint="@color/gray"
+        app:boxCornerRadiusBottomEnd="@dimen/corners_nano"
+        app:boxCornerRadiusBottomStart="@dimen/corners_nano"
+        app:boxCornerRadiusTopEnd="@dimen/corners_nano"
+        app:boxCornerRadiusTopStart="@dimen/corners_nano"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:endIconDrawable="@android:drawable/ic_menu_search"
+        app:endIconMode="custom"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toTopOf="@id/frag_rv_service"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <AutoCompleteTextView
+            android:id="@+id/frag_atv_service"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:completionThreshold="1"
+            android:hint="@string/frag_services_atv_hint"
+            android:inputType="text"
+            android:labelFor="@id/frag_til_service"
+            android:paddingLeft="@dimen/spacing_small"
+            android:textSize="@dimen/size_small"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/frag_rv_service"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="@dimen/spacing_none"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_large"
         app:layout_constraintBottom_toTopOf="@id/frag_btn_service"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frag_atv_service"
-        tools:listitem="@layout/service_item" />
+        app:layout_constraintTop_toBottomOf="@id/frag_til_service"
+        tools:listitem="@layout/adapter_service" />
 
     <Button
         android:id="@+id/frag_btn_service"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_margin="32dp"
+        android:layout_margin="@dimen/spacing_large"
         android:background="@drawable/btn_squared"
         android:text="@string/frag_services_btn_desc"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frag_rv_service" />
+        app:layout_constraintTop_toBottomOf="@id/frag_rv_service"
+        app:layout_constraintWidth_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

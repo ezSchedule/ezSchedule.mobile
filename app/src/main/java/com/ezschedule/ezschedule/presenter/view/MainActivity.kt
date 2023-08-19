@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
             .navigate(navigationId)
     }
 
-    private fun displayLoginItems(isVisible: Boolean) {
+    fun displayLoginItems(isVisible: Boolean) {
         with(binding) {
             bottomNavigation.isVisible = isVisible
             includeToolbar.root.isVisible = isVisible
