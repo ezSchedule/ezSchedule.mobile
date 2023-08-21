@@ -29,4 +29,8 @@
     <string name="frag_login_client_exception">Usuário não encontrado</string>
     <string name="frag_login_server_exception">Erro de servidor</string>
     <string name="frag_login_unknown_exception">Erro desconhecido</string>
+
+    <!-- Settings Screen -->
+    <string name="frag_settings_btn_previous">Tela anterior</string>
+    <string name="frag_settings_btn_save">Salvar</string>
 </resources>

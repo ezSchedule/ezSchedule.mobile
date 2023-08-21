@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Services Screen -->
+    <string name="frag_services_btn_desc">+</string>
+    <string name="frag_services_atv_hint">Search…</string>
+</resources>

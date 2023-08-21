@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.ezschedule.admin.presenter.view.SettingsFragment"
+        android:name="com.ezschedule.ezschedule.presenter.view.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings" />
 
