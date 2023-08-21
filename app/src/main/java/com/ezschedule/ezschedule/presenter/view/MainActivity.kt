@@ -6,10 +6,7 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
@@ -43,9 +40,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun displayLoginItems(isVisible: Boolean) {
+        with(binding) {
+            bottomNavigation.isVisible = isVisible
+            includeToolbar.root.isVisible = isVisible
+            setImageUser(includeToolbar.ivUser)
+        }
+    }
+
     private fun setupObservers() = with(viewModel) {
         setSettingsAction.observe(this@MainActivity) {
-            showSnackBarMessage("Settings")
+            navigateTo(R.id.action_to_settings)
+            displayLoginItems(false)
         }
         setLogoutAction.observe(this@MainActivity) {
             displayLoginItems(isVisible = false)
@@ -73,18 +79,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigation() {
-        val navController =
-            (supportFragmentManager.findFragmentById(R.id.fragment_nav_host) as NavHostFragment)
-                .navController
-        binding.bottomNavigation.setupWithNavController(navController)
-        setupTitleToolbar(navController)
+        binding.bottomNavigation.setOnItemSelectedListener {
+            navigateTo(it.itemId)
+            setupTitleToolbar(it.itemId)
+            true
+        }
     }
 
-    private fun setupTitleToolbar(navController: NavController) {
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            binding.includeToolbar.viewToolbar.title =
-                getString(viewModel.getTitleScreen(destination.id))
-        }
+    private fun setupTitleToolbar(destinationId: Int) {
+        binding.includeToolbar.viewToolbar.title =
+            getString(viewModel.getTitleScreen(destinationId))
     }
 
     private fun setupOnClickMenu() = binding.includeToolbar.ivUser.setOnClickListener {
@@ -94,14 +98,6 @@ class MainActivity : AppCompatActivity() {
     private fun navigateTo(navigationId: Int) {
         Navigation.findNavController(this, R.id.fragment_nav_host)
             .navigate(navigationId)
-    }
-
-    private fun displayLoginItems(isVisible: Boolean) {
-        with(binding) {
-            bottomNavigation.isVisible = isVisible
-            includeToolbar.root.isVisible = isVisible
-            setImageUser(includeToolbar.ivUser)
-        }
     }
 
     private fun setImageUser(imageView: ImageView) {
