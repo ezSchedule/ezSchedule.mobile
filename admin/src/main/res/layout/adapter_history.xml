@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp">
+
+    <TextView
+        android:id="@+id/tv_history_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sandra Maria"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_history_saloon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salão: "
+        android:textSize="@dimen/size_small"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_history_name" />
+
+    <TextView
+        android:id="@+id/tv_history_saloon_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Magnolia"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintStart_toEndOf="@id/tv_history_saloon"
+        app:layout_constraintTop_toBottomOf="@id/tv_history_name" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:src="@drawable/verifiy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_history_name" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:src="@drawable/error"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/tv_history_name" />
+
+    <TextView
+        android:id="@+id/tv_history_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valor: "
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_history_saloon" />
+
+    <TextView
+        android:id="@+id/tv_history_saloon_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="110,00"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/tv_history_value"
+        app:layout_constraintTop_toBottomOf="@id/tv_history_saloon" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_history_saloon_value" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
