@@ -9,9 +9,11 @@
         android:id="@+id/tv_history_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sandra Maria"
+        android:fontFamily="@font/inter_basis"
+        android:text="@string/frag_history_tv_name"
         android:textColor="@color/black"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -19,7 +21,9 @@
         android:id="@+id/tv_history_saloon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Salão: "
+        android:fontFamily="@font/inter_basis"
+        android:text="@string/frag_history_tv_saloon"
+        android:textColor="@color/gray"
         android:textSize="@dimen/size_small"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,12 +33,16 @@
         android:id="@+id/tv_history_saloon_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Magnolia"
+        android:layout_marginStart="4dp"
+        android:fontFamily="@font/inter_basis"
+        android:text="@string/frag_history_saloon_name"
+        android:textColor="@color/gray"
         android:textSize="@dimen/size_small"
         app:layout_constraintStart_toEndOf="@id/tv_history_saloon"
         app:layout_constraintTop_toBottomOf="@id/tv_history_name" />
 
     <ImageView
+        android:id="@+id/frag_history_img_accept"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:src="@drawable/verifiy"
@@ -42,18 +50,21 @@
         app:layout_constraintTop_toBottomOf="@id/tv_history_name" />
 
     <ImageView
+        android:id="@+id/frag_history_img_error"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:src="@drawable/error"
-        app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_history_name" />
 
     <TextView
         android:id="@+id/tv_history_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Valor: "
+        android:fontFamily="@font/inter_basis"
+        android:text="@string/frag_history_tv_value"
+        android:textColor="@color/gray"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,14 +74,17 @@
         android:id="@+id/tv_history_saloon_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="110,00"
+        android:layout_marginStart="4dp"
+        android:fontFamily="@font/inter_basis"
+        android:text="@string/frag_history_tv_saloon_value"
+        android:textColor="@color/gray"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/tv_history_value"
         app:layout_constraintTop_toBottomOf="@id/tv_history_saloon" />
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
-        android:layout_height="0.2dp"
+        android:layout_height="1dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_history_saloon_value" />
