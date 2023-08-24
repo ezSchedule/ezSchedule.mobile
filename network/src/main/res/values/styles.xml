@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TitleAppearance">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/size_large</item>
+        <item name="android:textColor">@color/colorVariant</item>
+    </style>
+
+    <style name="ButtonAppearance">
+        <item name="android:textSize">@dimen/size_small</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+    </style>
+
+    <style name="ButtonEzSchedule" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/bg_btn_ezschedule</item>
+        <item name="android:elevation">@dimen/spacing_large</item>
+    </style>
+</resources>

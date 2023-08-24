@@ -4,53 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/frag_settings_cv_back"
+    <ImageButton
+        android:id="@+id/frag_settings_btn_back"
+        style="@style/ButtonEzSchedule"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:backgroundTint="@color/colorPrimary"
-        app:cardCornerRadius="@dimen/corners_micro"
-        app:cardElevation="@dimen/spacing_tiny"
-        app:layout_constraintEnd_toStartOf="@id/frag_settings_cv_save"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:contentDescription="@string/frag_settings_btn_previous"
+        android:src="@drawable/baseline_previous"
+        android:textAppearance="@style/ButtonAppearance"
+        app:layout_constraintEnd_toStartOf="@id/frag_settings_btn_save"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.4">
+        app:layout_constraintWidth_percent="0.4" />
 
-        <ImageButton
-            android:id="@+id/frag_settings_btn_back"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/frag_settings_btn_previous"
-            android:src="@drawable/baseline_previous" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/frag_settings_cv_save"
+    <Button
+        android:id="@+id/frag_settings_btn_save"
+        style="@style/ButtonEzSchedule"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:backgroundTint="@color/colorPrimary"
-        app:cardCornerRadius="@dimen/corners_micro"
-        app:cardElevation="@dimen/spacing_tiny"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:padding="0dp"
+        android:text="@string/frag_settings_btn_save"
+        android:textAppearance="@style/ButtonAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@id/frag_settings_cv_back"
+        app:layout_constraintStart_toEndOf="@id/frag_settings_btn_back"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.4">
-
-        <Button
-            android:id="@+id/frag_settings_btn_save"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:text="@string/frag_settings_btn_save"
-            android:textAllCaps="false"
-            android:textColor="@color/black" />
-
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintWidth_percent="0.4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
