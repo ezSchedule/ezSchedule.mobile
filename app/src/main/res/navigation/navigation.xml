@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/paymentFragment"
-        android:name="com.ezschedule.admin.presenter.view.PaymentFragment"
+        android:name="com.ezschedule.admin.presenter.view.HistoryFragment"
         android:label="PaymentFragment"
         tools:layout="@layout/fragment_history" />
 
