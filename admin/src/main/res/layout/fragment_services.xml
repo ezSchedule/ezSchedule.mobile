@@ -59,7 +59,7 @@
         android:id="@+id/frag_btn_service"
         style="@style/ButtonEzSchedule"
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:layout_margin="@dimen/spacing_large"
         android:text="@string/frag_services_btn_desc"
         android:textAppearance="@style/ButtonAppearance"
