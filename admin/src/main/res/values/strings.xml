@@ -5,13 +5,15 @@
     <string name="frag_services_atv_hint">Search…</string>
 
     <!--  History Screen  -->
-    <string name="frag_history_atv_hint">Buscar…</string>
-    <string name="frag_history_btn_payments">Pagamentos</string>
-    <string name="frag_history_btn_requests">Pedidos</string>
-    <string name="frag_history_tv_name">Sandra Maria</string>
-    <string name="frag_history_tv_saloon">Salão:</string>
+    <string name="frag_history_atv_hint">Search…</string>
+    <string name="frag_history_btn_payments">Payments</string>
+    <string name="frag_history_btn_requests">Requests</string>
+    <string name="frag_history_tv_name">Anna Doe</string>
+    <string name="frag_history_tv_saloon">Saloon:</string>
     <string name="frag_history_saloon_name">Magnolia</string>
-    <string name="frag_history_tv_value">Valor:</string>
-    <string name="frag_history_tv_saloon_value">110,00</string>
+    <string name="frag_history_tv_value">Value:</string>
+    <string name="frag_history_tv_saloon_value">R$ 110,00</string>
+    <string name="frag_history_error_img_desc">payment not processed</string>
+    <string name="frag_history_accept_img_desc">payment processed</string>
 
 </resources>
