@@ -3,4 +3,12 @@
     <!-- Services Screen -->
     <string name="frag_services_btn_desc">+</string>
     <string name="frag_services_atv_hint">Buscar…</string>
+
+    <!-- Calendar Screen -->
+    <string name="frag_calendar_btn_calendar">Calendario</string>
+    <string name="frag_calendar_btn_canceled">Cancelados</string>
+    <string name="frag_calendar_tv_canceled_day">Cancelar dia</string>
+    <string name="frag_calendar_edt_reason">Motivo</string>
+    <string name="frag_calendar_tv_salon_label">Salão: </string>
+    <string name="frag_calendar_tv_value_label">Valor: </string>
 </resources>

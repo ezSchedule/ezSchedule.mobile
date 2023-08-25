@@ -1,20 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="HELLO WORLD"
-        android:textAlignment="center"
-        android:textColor="#707070"
-        android:textSize="64sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="316dp"
+            android:layout_margin="@dimen/spacing_large"
+            android:background="@color/colorPrimary"
+            android:elevation="@dimen/spacing_large"
+            app:cardCornerRadius="@dimen/corners_small"
+            app:layout_constraintBottom_toTopOf="@id/frag_calendar_btn_calendar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.squareup.timessquare.CalendarPickerView
+                android:id="@+id/cpv_calendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                app:tsquare_dayBackground="@color/colorPrimary"
+                app:tsquare_headerTextColor="@color/black"
+                app:tsquare_titleTextColor="@color/black" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/frag_canceled_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="frag_canceled_til_canceled, frag_canceled_rv_canceled" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/frag_canceled_til_canceled"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:hint="@string/frag_services_atv_hint"
+            app:boxCornerRadiusBottomEnd="@dimen/corners_nano"
+            app:boxCornerRadiusBottomStart="@dimen/corners_nano"
+            app:boxCornerRadiusTopEnd="@dimen/corners_nano"
+            app:boxCornerRadiusTopStart="@dimen/corners_nano"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:endIconDrawable="@android:drawable/ic_menu_search"
+            app:endIconMode="custom"
+            app:hintEnabled="false"
+            app:layout_constraintBottom_toTopOf="@id/frag_canceled_rv_canceled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <AutoCompleteTextView
+                android:id="@+id/frag_canceled_atv_canceled"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:completionThreshold="1"
+                android:hint="@string/frag_services_atv_hint"
+                android:inputType="text"
+                android:labelFor="@id/frag_canceled_til_canceled"
+                android:paddingLeft="@dimen/spacing_small"
+                android:textSize="@dimen/size_small"
+                android:textStyle="bold" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/frag_canceled_rv_canceled"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            android:layout_marginVertical="@dimen/spacing_large"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/frag_calendar_btn_canceled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_canceled_til_canceled"
+            tools:listitem="@layout/adapter_canceled" />
+
+        <Button
+            android:id="@+id/frag_calendar_btn_calendar"
+            style="@style/ButtonEzSchedule"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="@dimen/spacing_large"
+            android:padding="0dp"
+            android:text="@string/frag_calendar_btn_calendar"
+            android:textAppearance="@style/ButtonAppearance"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/frag_calendar_btn_canceled"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.4" />
+
+        <Button
+            android:id="@+id/frag_calendar_btn_canceled"
+            style="@style/ButtonEzSchedule"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="@dimen/spacing_large"
+            android:enabled="false"
+            android:padding="0dp"
+            android:text="@string/frag_calendar_btn_canceled"
+            android:textAppearance="@style/ButtonAppearance"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/frag_calendar_btn_calendar"
+            app:layout_constraintWidth_percent="0.4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/include_calendar_bottom_sheet"
+        layout="@layout/fragment_calendar_bottom_sheet"
+        android:visibility="gone" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
