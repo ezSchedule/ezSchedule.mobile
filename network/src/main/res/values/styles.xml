@@ -7,6 +7,11 @@
         <item name="android:textColor">@color/colorVariant</item>
     </style>
 
+    <style name="SubTitleAppearance">
+        <item name="android:textSize">@dimen/size_small</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="ButtonAppearance">
         <item name="android:textSize">@dimen/size_small</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
