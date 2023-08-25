@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="default_text_input" parent="Base.Widget.MaterialComponents.TextInputLayout">
+        <item name="materialThemeOverlay">
+            @style/ThemeOverlay.MaterialComponents.TextInputEditText.FilledBox
+        </item>
+        <item name="boxBackgroundMode">filled</item>
+        <item name="boxBackgroundColor">#45D9D9D9</item>
+        <item name="endIconTint">#7f7f7f</item>
+        <item name="startIconTint">#7f7f7f</item>
+        <item name="boxCollapsedPaddingTop">10dp</item>
+        <item name="boxStrokeColor">@color/light_gray</item>
+        <item name="shapeAppearanceOverlay">
+            @style/ShapeAppearanceOverlay.MaterialComponents.TextInputLayout.FilledBox
+        </item>
+    </style>
+
+
+</resources>

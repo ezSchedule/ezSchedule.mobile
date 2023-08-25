@@ -7,7 +7,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/frag_til_history"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        style="@style/default_text_input"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginHorizontal="@dimen/spacing_huge"
@@ -32,11 +32,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:completionThreshold="1"
+            android:fontFamily="@font/inter_regular_400"
             android:hint="@string/frag_history_atv_hint"
             android:inputType="text"
             android:paddingLeft="@dimen/spacing_small"
-            android:textSize="@dimen/size_small"
-            android:textStyle="bold" />
+            android:textSize="@dimen/size_small" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,6 +48,10 @@
         android:layout_marginTop="@dimen/spacing_large"
         android:layout_marginBottom="@dimen/spacing_large"
         android:clipToPadding="false"
+        android:scrollbarSize="1dp"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbarThumbVertical="@color/light_gray"
+        android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/frag_btn_payments_history"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,31 +59,38 @@
         app:layout_constraintTop_toBottomOf="@id/frag_til_history"
         tools:listitem="@layout/adapter_history" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/frag_btn_payments_history"
-        android:layout_width="148dp"
-        android:layout_height="wrap_content"
+        android:layout_width="144dp"
+        android:layout_height="38dp"
         android:layout_marginHorizontal="@dimen/spacing_large"
         android:layout_marginBottom="@dimen/spacing_large"
         android:background="@drawable/item_rounded"
-        android:fontFamily="@font/inter_basis"
+        android:elevation="10dp"
+        android:fontFamily="@font/inter_regular_400"
         android:text="@string/frag_history_btn_payments"
+        android:textAlignment="center"
         android:textAllCaps="false"
+        android:textColor="#2A4B37"
         android:textSize="@dimen/size_small"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/frag_btn_requests_history"
-        android:layout_width="148dp"
-        android:layout_height="wrap_content"
+        android:layout_width="144dp"
+        android:layout_height="38dp"
         android:layout_marginHorizontal="@dimen/spacing_large"
         android:layout_marginBottom="@dimen/spacing_large"
         android:background="@drawable/item_rounded_secondary"
-        android:fontFamily="@font/inter_basis"
+        android:elevation="10dp"
+        android:fontFamily="@font/inter_regular_400"
         android:text="@string/frag_history_btn_requests"
         android:textAllCaps="false"
+        android:textColor="#2A4B37"
         android:textSize="@dimen/size_small"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
