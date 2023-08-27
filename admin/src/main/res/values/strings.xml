@@ -16,4 +16,12 @@
     <string name="frag_history_error_img_desc">payment not processed</string>
     <string name="frag_history_accept_img_desc">payment processed</string>
 
+
+    <!-- Calendar Screen -->
+    <string name="frag_calendar_btn_calendar">Calendar</string>
+    <string name="frag_calendar_btn_canceled">Canceled</string>
+    <string name="frag_calendar_tv_canceled_day">Cancel day</string>
+    <string name="frag_calendar_edt_reason">Reason</string>
+    <string name="frag_calendar_tv_salon_label">Salon: </string>
+    <string name="frag_calendar_tv_value_label">Value: </string>
 </resources>

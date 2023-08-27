@@ -2,6 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#717171</color>
+    <color name="light_gray">#D9D9D9</color>
+    <color name="light_green">#B0C4B6</color>
+    <color name="dark_green">#2A4B37</color>
+
+    <color name="light_white">#B2FFFFFF</color>
+    <color name="red">#B2E75C5C</color>
 
     <color name="colorPrimary">#5AE982</color>
     <color name="colorPrimaryOpacity">#4D5AE982</color>
@@ -11,4 +18,5 @@
     <color name="colorOnSecondary">#0A0C10</color>
 
     <color name="colorVariant">#000</color>
+    <color name="grayVariant">#717171</color>
 </resources>

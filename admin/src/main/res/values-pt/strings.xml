@@ -3,6 +3,8 @@
     <!-- Services Screen -->
     <string name="frag_services_btn_desc">+</string>
     <string name="frag_services_atv_hint">Buscar…</string>
+
+    <!-- History Screen -->
     <string name="frag_history_atv_hint">Buscar…</string>
     <string name="frag_history_btn_payments">Pagamentos</string>
     <string name="frag_history_btn_requests">Pedidos</string>
@@ -13,4 +15,12 @@
     <string name="frag_history_tv_saloon_value">R$ 110,00</string>
     <string name="frag_history_error_img_desc">pagamento não processado</string>
     <string name="frag_history_accept_img_desc">pagamento processado</string>
+
+    <!-- Calendar Screen -->
+    <string name="frag_calendar_btn_calendar">Calendario</string>
+    <string name="frag_calendar_btn_canceled">Cancelados</string>
+    <string name="frag_calendar_tv_canceled_day">Cancelar dia</string>
+    <string name="frag_calendar_edt_reason">Motivo</string>
+    <string name="frag_calendar_tv_salon_label">Salão: </string>
+    <string name="frag_calendar_tv_value_label">Valor: </string>
 </resources>
