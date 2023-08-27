@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_medium_500"
         android:text="@string/frag_history_tv_name"
-        android:textColor="@color/black"
+        android:textColor="@color/colorVariant"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_bold_700"
         android:text="@string/frag_history_tv_saloon"
-        android:textColor="@color/gray"
+        android:textColor="@color/grayVariant"
         android:textSize="@dimen/size_small"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_history_name" />
@@ -35,7 +35,7 @@
         android:layout_marginStart="4dp"
         android:fontFamily="@font/inter_regular_400"
         android:text="@string/frag_history_saloon_name"
-        android:textColor="@color/gray"
+        android:textColor="@color/grayVariant"
         android:textSize="@dimen/size_small"
         app:layout_constraintStart_toEndOf="@id/tv_history_saloon"
         app:layout_constraintTop_toBottomOf="@id/tv_history_name" />
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_bold_700"
         android:text="@string/frag_history_tv_value"
-        android:textColor="@color/gray"
+        android:textColor="@color/grayVariant"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_history_saloon" />
@@ -77,7 +77,7 @@
         android:layout_marginStart="4dp"
         android:fontFamily="@font/inter_regular_400"
         android:text="@string/frag_history_tv_saloon_value"
-        android:textColor="@color/gray"
+        android:textColor="@color/grayVariant"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/tv_history_value"
         app:layout_constraintTop_toBottomOf="@id/tv_history_saloon" />

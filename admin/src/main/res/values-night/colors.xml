@@ -8,4 +8,5 @@
     <color name="colorOnSecondary">#0A0C10</color>
 
     <color name="colorVariant">#FFF</color>
+    <color name="grayVariant">#AEAEAE</color>
 </resources>
