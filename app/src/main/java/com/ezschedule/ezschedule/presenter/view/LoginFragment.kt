@@ -36,6 +36,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObservers()
+        setupActivity()
         setupFieldEmail()
         setupFieldPassword()
         setupButtonLogin()
@@ -45,7 +46,7 @@ class LoginFragment : Fragment() {
         with(viewModel) {
             loginSuccess.observe(viewLifecycleOwner) {
                 savingInfoSharedPref(it)
-                setupActivity()
+                activity.displayLoginItems(true)
                 findNavController().navigate(R.id.action_to_calendar)
             }
             error.observe(viewLifecycleOwner) {
@@ -61,6 +62,10 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun setupActivity() {
+        activity = requireActivity() as MainActivity
+    }
+
     private fun savingInfoSharedPref(it: TenantPresentation) {
         TokenManager(requireContext()).saveInfo(
             tenant = TenantPresentation(
@@ -72,12 +77,6 @@ class LoginFragment : Fragment() {
                 idCondominium = it.idCondominium
             )
         )
-    }
-
-    private fun setupActivity() {
-        activity  = requireActivity() as MainActivity
-
-        activity.displayLoginItems(true)
     }
 
     private fun showSnackBarMessage(message: String) {
