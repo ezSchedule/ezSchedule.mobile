@@ -44,6 +44,27 @@ class CalendarFragment : Fragment() {
         setEventOnDate("2023-08-30", light_white)
         setEventOnDate("2023-08-20", light_white)
         setEventOnDate("2023-11-20", light_white)
+
+        setupClickButtons()
+    }
+
+    private fun setupClickButtons() {
+        with(binding) {
+            fragCalendarBtnCalendar.setOnClickListener {
+                setLayoutChange(isCalendarVisible = true)
+            }
+            fragCalendarBtnCanceled.setOnClickListener {
+                setLayoutChange(isCalendarVisible = false)
+                includeCalendarBottomSheet.root.isVisible = false
+            }
+        }
+    }
+
+    private fun setLayoutChange(isCalendarVisible: Boolean) = with(binding) {
+        cvCalendar.isVisible = isCalendarVisible
+        fragCalendarBtnCanceled.isEnabled = isCalendarVisible
+        fragCanceledGroup.isVisible = !isCalendarVisible
+        fragCalendarBtnCalendar.isEnabled = !isCalendarVisible
     }
 
     private fun setEventOnDate(date: String, color: Int) {
