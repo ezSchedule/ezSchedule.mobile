@@ -3,6 +3,7 @@
     <!-- Services Screen -->
     <string name="frag_services_btn_desc">+</string>
     <string name="frag_services_atv_hint">Search…</string>
+    <string name="frag_tv_title">Add</string>
 
     <!-- Calendar Screen -->
     <string name="frag_calendar_btn_calendar">Calendar</string>
@@ -11,4 +12,5 @@
     <string name="frag_calendar_edt_reason">Reason</string>
     <string name="frag_calendar_tv_salon_label">Salon: </string>
     <string name="frag_calendar_tv_value_label">Value: </string>
+
 </resources>
