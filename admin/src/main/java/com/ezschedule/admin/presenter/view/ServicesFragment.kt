@@ -72,4 +72,5 @@ class ServicesFragment : Fragment() {
     private fun setupRecyclerView() {
         binding.fragRvService.adapter = ServicesAdapter(getDataService(), requireContext())
     }
+
 }

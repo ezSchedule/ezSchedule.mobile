@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp">
+
+    <TextView
+        android:id="@+id/tv_history_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_medium_500"
+        android:text="@string/frag_history_tv_name"
+        android:textColor="@color/colorVariant"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_history_saloon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold_700"
+        android:text="@string/frag_history_tv_saloon"
+        android:textColor="@color/grayVariant"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_history_name" />
+
+    <TextView
+        android:id="@+id/tv_history_saloon_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:fontFamily="@font/inter_regular_400"
+        android:text="@string/frag_history_saloon_name"
+        android:textColor="@color/grayVariant"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintStart_toEndOf="@id/tv_history_saloon"
+        app:layout_constraintTop_toBottomOf="@id/tv_history_name" />
+
+    <ImageView
+        android:id="@+id/frag_history_img_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:contentDescription="@string/frag_history_accept_img_desc"
+        android:src="@drawable/verifiy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_history_name" />
+
+    <ImageView
+        android:id="@+id/frag_history_img_error"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:contentDescription="@string/frag_history_error_img_desc"
+        android:src="@drawable/error"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_history_name" />
+
+    <TextView
+        android:id="@+id/tv_history_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold_700"
+        android:text="@string/frag_history_tv_value"
+        android:textColor="@color/grayVariant"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_history_saloon" />
+
+    <TextView
+        android:id="@+id/tv_history_saloon_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:fontFamily="@font/inter_regular_400"
+        android:text="@string/frag_history_tv_saloon_value"
+        android:textColor="@color/grayVariant"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/tv_history_value"
+        app:layout_constraintTop_toBottomOf="@id/tv_history_saloon" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_history_saloon_value" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
