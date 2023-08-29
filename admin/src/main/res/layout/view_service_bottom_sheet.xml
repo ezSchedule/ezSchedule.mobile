@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_ezschedule"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <ImageView
+        android:id="@+id/iv_lower"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:scaleType="centerCrop"
+        android:src="@drawable/lower"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/frag_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:gravity="center"
+        android:text="@string/frag_tv_title"
+        android:textAppearance="@style/TitleAppearance"
+        app:layout_constraintBottom_toTopOf="@id/frag_til_service"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/frag_til_service"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:hint="@string/frag_services_atv_hint"
+        app:boxCornerRadiusBottomEnd="@dimen/corners_nano"
+        app:boxCornerRadiusBottomStart="@dimen/corners_nano"
+        app:boxCornerRadiusTopEnd="@dimen/corners_nano"
+        app:boxCornerRadiusTopStart="@dimen/corners_nano"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:endIconDrawable="@android:drawable/ic_menu_search"
+        app:endIconMode="custom"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toTopOf="@id/frag_rv_service"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frag_tv_title">
+
+        <AutoCompleteTextView
+            android:id="@+id/frag_atv_service"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:completionThreshold="1"
+            android:hint="@string/frag_services_atv_hint"
+            android:inputType="text"
+            android:labelFor="@id/frag_til_service"
+            android:paddingLeft="@dimen/spacing_small"
+            android:textSize="@dimen/size_small"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/frag_rv_service"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginVertical="@dimen/spacing_large"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/frag_til_name_new_service"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frag_til_service"
+        tools:listitem="@layout/adapter_service" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/frag_til_name_new_service"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="@dimen/spacing_small"
+        app:boxCornerRadiusBottomEnd="@dimen/corners_tiny"
+        app:boxCornerRadiusBottomStart="@dimen/corners_tiny"
+        app:boxCornerRadiusTopEnd="@dimen/corners_tiny"
+        app:boxCornerRadiusTopStart="@dimen/corners_tiny"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/frag_btn_add_service"
+        app:layout_constraintStart_toStartOf="@id/frag_rv_service">
+
+        <EditText
+            android:id="@+id/frag_edt_name_new_service"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/frag_services_atv_hint"
+            android:inputType="text"
+            android:paddingLeft="@dimen/spacing_small"
+            android:textSize="@dimen/size_small" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/frag_btn_add_service"
+        style="@style/ButtonEzSchedule"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:text="@string/frag_services_btn_desc"
+        android:textAppearance="@style/ButtonAppearance"
+        app:layout_constraintBottom_toBottomOf="@id/frag_til_name_new_service"
+        app:layout_constraintEnd_toEndOf="@id/frag_rv_service"
+        app:layout_constraintStart_toEndOf="@id/frag_til_name_new_service"
+        app:layout_constraintTop_toTopOf="@id/frag_til_name_new_service"
+        app:layout_constraintWidth_percent=".3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
