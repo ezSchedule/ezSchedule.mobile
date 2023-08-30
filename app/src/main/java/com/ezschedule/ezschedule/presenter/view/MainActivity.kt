@@ -12,7 +12,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.ezschedule.ezschedule.R
 import com.ezschedule.ezschedule.databinding.ActivityMainBinding
-import com.ezschedule.ezschedule.presenter.utils.ResourceWrapper
+import com.ezschedule.utils.ResourceWrapper
 import com.ezschedule.ezschedule.presenter.utils.TokenManager
 import com.ezschedule.ezschedule.presenter.viewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar

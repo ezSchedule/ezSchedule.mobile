@@ -4,7 +4,7 @@ import android.content.Context
 import com.ezschedule.ezschedule.data.repository.TenantRepository
 import com.ezschedule.ezschedule.domain.useCase.LoginUseCase
 import com.ezschedule.ezschedule.domain.useCase.LogoutUseCase
-import com.ezschedule.ezschedule.presenter.utils.ResourceWrapper
+import com.ezschedule.utils.ResourceWrapper
 import com.ezschedule.ezschedule.presenter.viewModel.MainViewModel
 import com.ezschedule.ezschedule.presenter.viewModel.TenantViewModel
 import com.ezschedule.network.data.api.TenantEndpoint
