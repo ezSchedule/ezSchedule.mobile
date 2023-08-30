@@ -7,7 +7,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/frag_til_history"
-        style="@style/default_text_input"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginHorizontal="@dimen/spacing_large"
@@ -53,62 +53,47 @@
         android:scrollbarThumbVertical="@color/light_gray"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/frag_history_cv_button_payments"
+        app:layout_constraintBottom_toTopOf="@id/frag_btn_payments_history"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/frag_til_history"
         tools:listitem="@layout/adapter_history" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/frag_history_cv_button_payments"
+
+    <Button
+        android:id="@+id/frag_btn_payments_history"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_margin="@dimen/spacing_large"
-        android:backgroundTint="@color/colorPrimary"
-        app:cardCornerRadius="@dimen/corners_micro"
-        app:cardElevation="@dimen/spacing_tiny"
+        android:background="@color/colorPrimary"
+        android:elevation="@dimen/spacing_tiny"
+        android:fontFamily="@font/inter_regular_400"
+        android:text="@string/frag_history_btn_payments"
+        android:textAllCaps="false"
+        android:enabled="false"
+        android:textColor="@color/dark_green"
+        android:textSize="@dimen/size_small"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.4">
+        app:layout_constraintWidth_percent="0.4" />
 
-        <Button
-            android:id="@+id/frag_btn_payments_history"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/inter_regular_400"
-            android:text="@string/frag_history_btn_payments"
-            android:textAllCaps="false"
-            android:textColor="@color/dark_green"
-            android:textSize="@dimen/size_small"
-            android:textStyle="bold" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/frag_history_cv_button_requests"
+    <Button
+        android:id="@+id/frag_btn_requests_history"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_margin="@dimen/spacing_large"
-        android:backgroundTint="@color/light_green"
-        app:cardCornerRadius="@dimen/corners_micro"
-        app:cardElevation="@dimen/spacing_tiny"
+        android:background="@color/colorPrimary"
+        android:elevation="@dimen/spacing_tiny"
+        android:fontFamily="@font/inter_regular_400"
+        android:text="@string/frag_history_btn_requests"
+        android:textAllCaps="false"
+        android:textColor="@color/dark_green"
+        android:textSize="@dimen/size_small"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.4">
+        app:layout_constraintWidth_percent="0.4" />
 
-        <Button
-            android:id="@+id/frag_btn_requests_history"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/inter_regular_400"
-            android:text="@string/frag_history_btn_requests"
-            android:textAllCaps="false"
-            android:textColor="@color/dark_green"
-            android:textSize="@dimen/size_small"
-            android:textStyle="bold" />
-
-    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
