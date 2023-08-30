@@ -1,4 +1,4 @@
-package com.ezschedule.ezschedule.presenter.utils
+package com.ezschedule.utils
 
 import android.content.Context
 

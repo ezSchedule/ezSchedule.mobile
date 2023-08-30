@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ezschedule.ezschedule.R
 import com.ezschedule.ezschedule.domain.useCase.LoginUseCase
-import com.ezschedule.ezschedule.presenter.utils.ResourceWrapper
+import com.ezschedule.utils.ResourceWrapper
 import com.ezschedule.ezschedule.presenter.utils.isValidEmail
 import com.ezschedule.network.data.network.exception.ClientException
 import com.ezschedule.network.data.network.exception.ServerException

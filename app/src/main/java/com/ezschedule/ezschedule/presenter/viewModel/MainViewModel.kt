@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ezschedule.ezschedule.R
 import com.ezschedule.ezschedule.domain.useCase.LogoutUseCase
-import com.ezschedule.ezschedule.presenter.utils.ResourceWrapper
+import com.ezschedule.utils.ResourceWrapper
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
