@@ -3,6 +3,7 @@
     <!-- Services Screen -->
     <string name="frag_services_btn_desc">+</string>
     <string name="frag_services_atv_hint">Buscar…</string>
+    <string name="frag_tv_title">Adicionar</string>
 
     <!-- History Screen -->
     <string name="frag_history_atv_hint">Buscar…</string>
@@ -23,4 +24,23 @@
     <string name="frag_calendar_edt_reason">Motivo</string>
     <string name="frag_calendar_tv_salon_label">Salão: </string>
     <string name="frag_calendar_tv_value_label">Valor: </string>
+
+    <!-- Dashboard Screen -->
+    <string name="frag_dashboard_tv_title">Estátistica Anual</string>
+    <string name="frag_dashboard_label_events">Eventos</string>
+    <string name="frag_dashboard_label_people">Pessoas</string>
+    <string name="frag_dashboard_text_events">%4d Eventos</string>
+    <string name="frag_dashboard_text_people">%4d Pessoas</string>
+    <string name="frag_dashboard_month_january">Janeiro</string>
+    <string name="frag_dashboard_month_february">Fevereiro</string>
+    <string name="frag_dashboard_month_march">Março</string>
+    <string name="frag_dashboard_month_april">Abril</string>
+    <string name="frag_dashboard_month_may">Maio</string>
+    <string name="frag_dashboard_month_june">Junho</string>
+    <string name="frag_dashboard_month_july">Julho</string>
+    <string name="frag_dashboard_month_august">Agosto</string>
+    <string name="frag_dashboard_month_september">Setembro</string>
+    <string name="frag_dashboard_month_october">Outubro</string>
+    <string name="frag_dashboard_month_november">Novembro</string>
+    <string name="frag_dashboard_month_december">Dezembro</string>
 </resources>

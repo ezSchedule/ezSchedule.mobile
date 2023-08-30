@@ -3,6 +3,7 @@
     <!-- Services Screen -->
     <string name="frag_services_btn_desc">+</string>
     <string name="frag_services_atv_hint">Search…</string>
+    <string name="frag_tv_title">Add</string>
 
     <!--  History Screen  -->
     <string name="frag_history_atv_hint">Search…</string>
@@ -16,7 +17,6 @@
     <string name="frag_history_error_img_desc">payment not processed</string>
     <string name="frag_history_accept_img_desc">payment processed</string>
 
-
     <!-- Calendar Screen -->
     <string name="frag_calendar_btn_calendar">Calendar</string>
     <string name="frag_calendar_btn_canceled">Canceled</string>
@@ -24,4 +24,23 @@
     <string name="frag_calendar_edt_reason">Reason</string>
     <string name="frag_calendar_tv_salon_label">Salon: </string>
     <string name="frag_calendar_tv_value_label">Value: </string>
+
+    <!-- Dashboard Screen -->
+    <string name="frag_dashboard_tv_title">Annual Statistics</string>
+    <string name="frag_dashboard_label_events">Events</string>
+    <string name="frag_dashboard_label_people">People</string>
+    <string name="frag_dashboard_text_events">%4d Events</string>
+    <string name="frag_dashboard_text_people">%4d People</string>
+    <string name="frag_dashboard_month_january">January</string>
+    <string name="frag_dashboard_month_february">February</string>
+    <string name="frag_dashboard_month_march">March</string>
+    <string name="frag_dashboard_month_april">April</string>
+    <string name="frag_dashboard_month_may">May</string>
+    <string name="frag_dashboard_month_june">June</string>
+    <string name="frag_dashboard_month_july">July</string>
+    <string name="frag_dashboard_month_august">August</string>
+    <string name="frag_dashboard_month_september">September</string>
+    <string name="frag_dashboard_month_october">October</string>
+    <string name="frag_dashboard_month_november">November</string>
+    <string name="frag_dashboard_month_december">December</string>
 </resources>

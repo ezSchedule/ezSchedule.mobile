@@ -2,26 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/calendarFragment"
-        android:icon="@drawable/baseline_calendar"
+        android:icon="@drawable/ic_calendar"
         android:title="@string/frag_calendar_name" />
 
     <item
         android:id="@+id/dashboardFragment"
-        android:icon="@drawable/baseline_chart"
+        android:icon="@drawable/ic_graphic"
         android:title="@string/frag_dashboard_name" />
 
     <item
         android:id="@+id/servicesFragment"
-        android:icon="@drawable/baseline_service"
+        android:icon="@drawable/ic_services"
         android:title="@string/frag_services_name" />
 
     <item
         android:id="@+id/forumFragment"
-        android:icon="@drawable/baseline_chat"
+        android:icon="@drawable/ic_posts"
         android:title="@string/frag_forum_name" />
 
     <item
         android:id="@+id/paymentFragment"
-        android:icon="@drawable/baseline_payment"
+        android:icon="@drawable/ic_finance"
         android:title="@string/frag_payments_name" />
 </menu>
