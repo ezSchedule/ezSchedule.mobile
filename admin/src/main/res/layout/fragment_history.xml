@@ -62,15 +62,16 @@
 
     <Button
         android:id="@+id/frag_btn_payments_history"
+        style="@style/ButtonEzSchedule"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_margin="@dimen/spacing_large"
         android:background="@color/colorPrimary"
         android:elevation="@dimen/spacing_tiny"
+        android:enabled="false"
         android:fontFamily="@font/inter_regular_400"
         android:text="@string/frag_history_btn_payments"
         android:textAllCaps="false"
-        android:enabled="false"
         android:textColor="@color/dark_green"
         android:textSize="@dimen/size_small"
         android:textStyle="bold"
@@ -80,6 +81,7 @@
 
     <Button
         android:id="@+id/frag_btn_requests_history"
+        style="@style/ButtonEzSchedule"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_margin="@dimen/spacing_large"
