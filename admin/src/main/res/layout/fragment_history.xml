@@ -32,11 +32,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:completionThreshold="1"
-            android:fontFamily="@font/inter_regular_400"
             android:hint="@string/frag_history_atv_hint"
             android:inputType="text"
+            android:labelFor="@id/frag_til_history"
             android:paddingLeft="@dimen/spacing_small"
-            android:textSize="@dimen/size_small" />
+            android:textAppearance="@style/InputAppearance" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,18 +65,15 @@
         style="@style/ButtonEzSchedule"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_margin="@dimen/spacing_large"
-        android:elevation="@dimen/spacing_tiny"
+        android:layout_marginBottom="@dimen/spacing_large"
         android:enabled="false"
-        android:fontFamily="@font/inter_regular_400"
         android:text="@string/frag_history_btn_payments"
-        android:textAllCaps="false"
-        android:textColor="@color/dark_green"
-        android:textSize="@dimen/size_small"
-        android:textStyle="bold"
+        android:textAppearance="@style/ButtonAppearance"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/frag_btn_requests_history"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/frag_rv_history"
         app:layout_constraintWidth_percent="0.4" />
 
     <Button
@@ -84,18 +81,13 @@
         style="@style/ButtonEzSchedule"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_margin="@dimen/spacing_large"
-        android:elevation="@dimen/spacing_tiny"
-        android:fontFamily="@font/inter_regular_400"
+        android:layout_marginBottom="@dimen/spacing_large"
         android:text="@string/frag_history_btn_requests"
-        android:textAllCaps="false"
-        android:textColor="@color/dark_green"
-        android:textSize="@dimen/size_small"
-        android:textStyle="bold"
+        android:textAppearance="@style/ButtonAppearance"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/frag_rv_history"
         app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/frag_btn_payments_history"
         app:layout_constraintWidth_percent="0.4" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
