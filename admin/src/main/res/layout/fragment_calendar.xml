@@ -12,24 +12,88 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_calendar"
             android:layout_width="match_parent"
-            android:layout_height="316dp"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_large"
-            android:background="@color/colorPrimary"
+            android:backgroundTint="@color/colorPrimary"
             android:elevation="@dimen/spacing_large"
-            app:cardCornerRadius="@dimen/corners_small"
+            app:cardCornerRadius="@dimen/corners_tiny"
             app:layout_constraintBottom_toTopOf="@id/frag_calendar_btn_calendar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.squareup.timessquare.CalendarPickerView
-                android:id="@+id/cpv_calendar"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                app:tsquare_dayBackground="@color/colorPrimary"
-                app:tsquare_headerTextColor="@color/black"
-                app:tsquare_titleTextColor="@color/black" />
+                android:layout_height="wrap_content">
+
+                <com.squareup.timessquare.CalendarPickerView
+                    android:id="@+id/cpv_calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="316dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tsquare_dayBackground="@color/colorPrimary"
+                    app:tsquare_dividerColor="@android:color/transparent"
+                    app:tsquare_headerTextColor="@color/black"
+                    app:tsquare_titleTextColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/frag_calendar_tv_marked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginBottom="@dimen/spacing_large"
+                    android:drawablePadding="@dimen/spacing_tiny"
+                    android:gravity="center"
+                    android:text="@string/frag_calendar_tv_legend_marked"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/ic_legend"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/frag_calendar_tv_today"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cpv_calendar" />
+
+                <TextView
+                    android:id="@+id/frag_calendar_tv_today"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/spacing_tiny"
+                    android:gravity="center"
+                    android:text="@string/frag_calendar_tv_legend_today"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/ic_legend"
+                    app:drawableTint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@id/frag_calendar_tv_marked"
+                    app:layout_constraintEnd_toStartOf="@id/frag_calendar_tv_canceled"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/frag_calendar_tv_marked"
+                    app:layout_constraintTop_toTopOf="@id/frag_calendar_tv_marked" />
+
+                <TextView
+                    android:id="@+id/frag_calendar_tv_canceled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/spacing_tiny"
+                    android:gravity="center"
+                    android:text="@string/frag_calendar_tv_legend_canceled"
+                    android:textColor="@color/red"
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/ic_legend"
+                    app:drawableTint="@color/red"
+                    app:layout_constraintBottom_toBottomOf="@id/frag_calendar_tv_marked"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/frag_calendar_tv_today"
+                    app:layout_constraintTop_toTopOf="@id/frag_calendar_tv_marked" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -100,8 +164,9 @@
             android:textAppearance="@style/ButtonAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/frag_calendar_btn_canceled"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/cv_calendar"
             app:layout_constraintWidth_percent="0.4" />
 
         <Button
@@ -113,7 +178,7 @@
             android:text="@string/frag_calendar_btn_canceled"
             android:textAppearance="@style/ButtonAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/cv_calendar"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@id/frag_calendar_btn_calendar"
             app:layout_constraintWidth_percent="0.4" />
