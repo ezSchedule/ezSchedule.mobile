@@ -23,6 +23,7 @@ data class TenantResponse(
         email = email,
         image = image,
         tokenJWT = tokenJWT,
+        isAdmin = isAdmin,
         idCondominium = idCondominium
     )
 }

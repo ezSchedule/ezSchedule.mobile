@@ -5,6 +5,7 @@ data class TenantPresentation(
     val email: String,
     val name: String,
     val image: String,
+    val isAdmin: Boolean,
     val tokenJWT: String,
     val idCondominium: Int
 )

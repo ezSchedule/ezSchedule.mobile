@@ -9,6 +9,7 @@
     <string name="frag_payments_name">Histórico</string>
     <string name="frag_forum_name">Posts</string>
     <string name="frag_settings_name">Configurações</string>
+    <string name="frag_schedule_name">Agendado</string>
     <string name="frag_not_found_name">Não encontrado</string>
 
     <!-- Toolbar image -->

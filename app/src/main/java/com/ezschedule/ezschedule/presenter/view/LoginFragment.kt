@@ -11,7 +11,6 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.ezschedule.ezschedule.R
 import com.ezschedule.ezschedule.databinding.FragmentLoginBinding
 import com.ezschedule.ezschedule.presenter.utils.TokenManager
 import com.ezschedule.ezschedule.presenter.viewModel.TenantViewModel
@@ -46,8 +45,12 @@ class LoginFragment : Fragment() {
         with(viewModel) {
             loginSuccess.observe(viewLifecycleOwner) {
                 savingInfoSharedPref(it)
+                validateIsAdmin(it.isAdmin)
+            }
+            setLocationAndMenu.observe(viewLifecycleOwner) {
+                findNavController().navigate(it.first)
+                activity.setupBottomNavigation(it.second)
                 activity.displayLoginItems(true)
-                findNavController().navigate(R.id.action_to_calendar)
             }
             error.observe(viewLifecycleOwner) {
                 showSnackBarMessage(it ?: "error")
@@ -73,6 +76,7 @@ class LoginFragment : Fragment() {
                 email = it.email,
                 name = it.name,
                 image = it.image,
+                isAdmin = it.isAdmin,
                 tokenJWT = it.tokenJWT,
                 idCondominium = it.idCondominium
             )

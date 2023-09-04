@@ -47,11 +47,46 @@
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings" />
 
+    <fragment
+        android:id="@+id/calendarUserFragment"
+        android:name="com.sptech.user.presenter.view.CalendarUserFragment"
+        android:label="CalendarUserFragment"
+        tools:layout="@layout/fragment_calendar_user" />
+
+    <fragment
+        android:id="@+id/scheduleUserFragment"
+        android:name="com.sptech.user.presenter.view.ScheduleUserFragment"
+        android:label="ScheduleUserFragment"
+        tools:layout="@layout/fragment_schedule_user" />
+
+    <fragment
+        android:id="@+id/historyUserFragment"
+        android:name="com.sptech.user.presenter.view.HistoryUserFragment"
+        android:label="HistoryUserFragment"
+        tools:layout="@layout/fragment_history_user" />
+
+    <fragment
+        android:id="@+id/servicesUserFragment"
+        android:name="com.sptech.user.presenter.view.ServicesUserFragment"
+        android:label="ServicesUserFragment"
+        tools:layout="@layout/fragment_services_user" />
+
+    <fragment
+        android:id="@+id/forumUserFragment"
+        android:name="com.sptech.user.presenter.view.ForumUserFragment"
+        android:label="ForumUserFragment"
+        tools:layout="@layout/fragment_forum_user"/>
+
     <action
         android:id="@+id/action_to_calendar"
         app:destination="@id/calendarFragment" />
 
     <action
+        android:id="@+id/action_to_calendar_user"
+        app:destination="@id/calendarUserFragment" />
+
+    <action
         android:id="@+id/action_to_settings"
         app:destination="@id/settingsFragment" />
+
 </navigation>
