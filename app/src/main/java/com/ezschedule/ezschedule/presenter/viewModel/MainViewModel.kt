@@ -18,6 +18,9 @@ class MainViewModel(
     private var _setSettingsAction = MutableLiveData<Unit>()
     val setSettingsAction: LiveData<Unit> = _setSettingsAction
 
+    private var _setLocationAndMenu = MutableLiveData<Pair<Int, Int>>()
+    val setLocationAndMenu: LiveData<Pair<Int, Int>> = _setLocationAndMenu
+
     private var _setLogoutAction = MutableLiveData<Unit>()
     val setLogoutAction: LiveData<Unit> = _setLogoutAction
 
@@ -25,11 +28,12 @@ class MainViewModel(
     val error: LiveData<String> = _error
 
     fun getTitleScreen(id: Int) = when (id) {
-        R.id.calendarFragment -> R.string.frag_calendar_name
+        R.id.calendarFragment, R.id.calendarUserFragment-> R.string.frag_calendar_name
         R.id.dashboardFragment -> R.string.frag_dashboard_name
-        R.id.servicesFragment -> R.string.frag_services_name
-        R.id.paymentFragment -> R.string.frag_payments_name
-        R.id.forumFragment -> R.string.frag_forum_name
+        R.id.scheduleUserFragment -> R.string.frag_schedule_name
+        R.id.servicesFragment, R.id.servicesUserFragment -> R.string.frag_services_name
+        R.id.paymentFragment, R.id.historyUserFragment -> R.string.frag_payments_name
+        R.id.forumFragment, R.id.forumUserFragment -> R.string.frag_forum_name
         R.id.settingsFragment -> R.string.frag_settings_name
         else -> R.string.frag_not_found_name
     }
@@ -43,6 +47,11 @@ class MainViewModel(
     fun getImage(image: String): String? {
         if (image.isNotEmpty()) return image
         return null
+    }
+
+    fun validateIsAdmin(admin: Boolean) {
+        if (admin) _setLocationAndMenu.value = Pair(R.id.action_to_calendar, R.menu.menu_admin)
+        else _setLocationAndMenu.value = Pair(R.id.action_to_calendar_user, R.menu.menu_user)
     }
 
     private fun logoutTenant(email: String) {

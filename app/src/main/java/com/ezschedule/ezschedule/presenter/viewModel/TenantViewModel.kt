@@ -30,6 +30,9 @@ class TenantViewModel(
     private val _loginSuccess = MutableLiveData<TenantPresentation>()
     val loginSuccess: LiveData<TenantPresentation> = _loginSuccess
 
+    private var _setLocation = MutableLiveData<Pair<Int, Int>>()
+    val setLocationAndMenu: LiveData<Pair<Int, Int>> = _setLocation
+
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
@@ -73,6 +76,11 @@ class TenantViewModel(
                 }
             }
         }
+    }
+
+    fun validateIsAdmin(admin: Boolean) {
+        if (admin) _setLocation.value = Pair(R.id.action_to_calendar, R.menu.menu_admin)
+        else _setLocation.value = Pair(R.id.action_to_calendar_user, R.menu.menu_user)
     }
 
     private fun validationEmail(email: String) {

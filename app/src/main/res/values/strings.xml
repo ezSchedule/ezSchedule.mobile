@@ -5,9 +5,10 @@
     <string name="frag_calendar_name">Events</string>
     <string name="frag_dashboard_name">2023</string>
     <string name="frag_services_name">Services</string>
-    <string name="frag_payments_name">Histórico</string>
+    <string name="frag_payments_name">History</string>
     <string name="frag_forum_name">Posts</string>
     <string name="frag_settings_name">Settings</string>
+    <string name="frag_schedule_name">Schedule</string>
     <string name="frag_not_found_name">Not found</string>
 
     <!-- Toolbar image -->
