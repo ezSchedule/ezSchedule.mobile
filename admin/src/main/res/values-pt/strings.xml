@@ -24,6 +24,9 @@
     <string name="frag_calendar_edt_reason">Motivo</string>
     <string name="frag_calendar_tv_salon_label">Salão: </string>
     <string name="frag_calendar_tv_value_label">Valor: </string>
+    <string name="frag_calendar_tv_legend_marked">Marcados</string>
+    <string name="frag_calendar_tv_legend_today">Dia de hoje</string>
+    <string name="frag_calendar_tv_legend_canceled">Cancelados</string>
 
     <!-- Dashboard Screen -->
     <string name="frag_dashboard_tv_title">Estátistica Anual</string>

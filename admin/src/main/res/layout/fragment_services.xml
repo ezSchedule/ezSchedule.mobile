@@ -40,8 +40,7 @@
                 android:inputType="text"
                 android:labelFor="@id/frag_til_service"
                 android:paddingLeft="@dimen/spacing_small"
-                android:textSize="@dimen/size_small"
-                android:textStyle="bold" />
+                android:textAppearance="@style/InputAppearance" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

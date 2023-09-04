@@ -8,10 +8,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.ezschedule.admin.databinding.FragmentCalendarBinding
+import com.ezschedule.admin.presenter.adapter.CanceledDayAdapter
 import com.ezschedule.admin.presenter.utils.CustomCalendarClick
 import com.ezschedule.admin.presenter.utils.CustomCalendarDecorator
 import com.ezschedule.network.R.color.light_white
 import com.ezschedule.network.R.color.red
+import com.ezschedule.network.domain.presentation.CanceledItemPresentation
 import com.ezschedule.utils.CustomBottomSheetCallback
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.squareup.timessquare.CalendarCellDecorator
@@ -46,6 +48,54 @@ class CalendarFragment : Fragment() {
         setEventOnDate("2023-11-20", light_white)
 
         setupClickButtons()
+        setupRecyclerView(getDataList())
+    }
+
+    private fun getDataList() = listOf(
+        CanceledItemPresentation(
+            tenantName = "Endryl Fiorotti",
+            salonName = "Magnólia",
+            salonValue = 110.0
+        ),
+        CanceledItemPresentation(
+            tenantName = "Endryl Fiorotti",
+            salonName = "Magnólia",
+            salonValue = 110.0
+        ),
+        CanceledItemPresentation(
+            tenantName = "Endryl Fiorotti",
+            salonName = "Magnólia",
+            salonValue = 110.0
+        ),
+        CanceledItemPresentation(
+            tenantName = "Endryl Fiorotti",
+            salonName = "Magnólia",
+            salonValue = 110.0
+        ),
+        CanceledItemPresentation(
+            tenantName = "Endryl Fiorotti",
+            salonName = "Magnólia",
+            salonValue = 110.0
+        ),
+        CanceledItemPresentation(
+            tenantName = "Endryl Fiorotti",
+            salonName = "Magnólia",
+            salonValue = 110.0
+        ),
+        CanceledItemPresentation(
+            tenantName = "Endryl Fiorotti",
+            salonName = "Magnólia",
+            salonValue = 110.0
+        ),
+        CanceledItemPresentation(
+            tenantName = "Endryl Fiorotti",
+            salonName = "Magnólia",
+            salonValue = 110.0
+        ),
+    )
+
+    private fun setupRecyclerView(dataList: List<CanceledItemPresentation>) {
+        binding.fragCanceledRvCanceled.adapter = CanceledDayAdapter(dataList)
     }
 
     private fun setupClickButtons() {

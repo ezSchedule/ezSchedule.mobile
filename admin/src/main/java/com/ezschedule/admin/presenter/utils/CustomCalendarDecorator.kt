@@ -42,7 +42,8 @@ class CustomCalendarDecorator(
     }
 
     private fun setupBackgroundView(color: Int) = GradientDrawable().apply {
-        shape = GradientDrawable.OVAL
+        shape = GradientDrawable.RECTANGLE
+        cornerRadius = 16f
         setColor(color)
     }
 
