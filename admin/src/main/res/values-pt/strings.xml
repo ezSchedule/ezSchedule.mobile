@@ -46,4 +46,8 @@
     <string name="frag_dashboard_month_october">Outubro</string>
     <string name="frag_dashboard_month_november">Novembro</string>
     <string name="frag_dashboard_month_december">Dezembro</string>
+
+    <!-- Settings Screen -->
+    <string name="frag_settings_btn_profile">Perfil</string>
+    <string name="frag_settings_btn_condo">Condomínio</string>
 </resources>

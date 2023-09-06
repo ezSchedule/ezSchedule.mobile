@@ -46,4 +46,8 @@
     <string name="frag_dashboard_month_october">October</string>
     <string name="frag_dashboard_month_november">November</string>
     <string name="frag_dashboard_month_december">December</string>
+
+    <!-- Settings Screen -->
+    <string name="frag_settings_btn_profile">Profile</string>
+    <string name="frag_settings_btn_condo">Condominium</string>
 </resources>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/tx_icon_user"
+        android:layout_width="@dimen/size_huge"
+        android:layout_height="@dimen/size_huge"
+        android:src="@drawable/ic_users"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="100dp"/>
+
+    <TextView
+        android:id="@+id/tx_name_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/SubTitleAppearance"
+        android:text="Maurão da Ct"
+        android:textStyle="bold"
+        android:textSize="@dimen/spacing_large"
+        app:layout_constraintTop_toBottomOf="@id/tx_icon_user"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="48dp"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/mt_1"
+        android:layout_width="355dp"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@id/tx_name_user"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/size_largeX"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintTop_toBottomOf="@id/mt_1"
+        app:layout_constraintLeft_toLeftOf="@id/mt_1"
+        android:layout_marginTop="@dimen/corners_small"/>
+
+    <EditText
+        android:id="@+id/tv_name_insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mauro"
+        android:textStyle="bold"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintTop_toBottomOf="@id/mt_1"
+        app:layout_constraintEnd_toEndOf="@id/mt_1"
+        android:layout_marginTop="14dp"
+        android:padding="@dimen/corners_nano"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/mt_2"
+        android:layout_width="355dp"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        app:layout_constraintLeft_toLeftOf="@id/tv_name"
+        android:layout_marginTop="@dimen/corners_small"/>
+
+    <TextView
+        android:id="@+id/tv_sobrenome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sobrenome"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintLeft_toLeftOf="@id/mt_2"
+        app:layout_constraintTop_toBottomOf="@id/mt_2"
+        android:layout_marginTop="@dimen/corners_small"/>
+
+    <EditText
+        android:id="@+id/tv_sobrenome_insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="da CT"
+        android:textStyle="bold"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintEnd_toEndOf="@id/mt_2"
+        app:layout_constraintTop_toBottomOf="@id/mt_2"
+        android:padding="@dimen/corners_micro"
+        android:layout_marginTop="14dp"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/mt_3"
+        android:layout_width="355dp"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_sobrenome"
+        app:layout_constraintLeft_toLeftOf="@id/tv_sobrenome"
+        android:layout_marginTop="@dimen/corners_small"/>
+
+    <TextView
+        android:id="@+id/tv_cpf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cpf"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintLeft_toLeftOf="@id/mt_3"
+        app:layout_constraintTop_toBottomOf="@id/mt_3"
+        android:layout_marginTop="@dimen/corners_small"/>
+
+    <EditText
+        android:id="@+id/tv_cpf_insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="000.000.000-00"
+        android:textStyle="bold"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintEnd_toEndOf="@id/mt_3"
+        app:layout_constraintTop_toBottomOf="@id/mt_3"
+        android:padding="@dimen/corners_micro"
+        android:layout_marginTop="14dp"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/mt_4"
+        android:layout_width="355dp"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_cpf"
+        app:layout_constraintLeft_toLeftOf="@id/tv_cpf"
+        android:layout_marginTop="@dimen/corners_small"/>
+
+    <TextView
+        android:id="@+id/tv_number_apartamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="N° Apto"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintLeft_toLeftOf="@id/mt_4"
+        app:layout_constraintTop_toBottomOf="@id/mt_4"
+        android:layout_marginTop="@dimen/corners_small"/>
+
+    <EditText
+        android:id="@+id/tv_number_apto_insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="25"
+        android:textStyle="bold"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintEnd_toEndOf="@id/mt_4"
+        app:layout_constraintTop_toBottomOf="@id/mt_4"
+        android:padding="@dimen/corners_micro"
+        android:layout_marginTop="14dp"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/mt_5"
+        android:layout_width="355dp"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_number_apartamento"
+        app:layout_constraintLeft_toLeftOf="@id/tv_number_apartamento"
+        android:layout_marginTop="@dimen/corners_small"/>
+
+    <TextView
+        android:id="@+id/tv_bloco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bloco"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintLeft_toLeftOf="@id/mt_5"
+        app:layout_constraintTop_toBottomOf="@id/mt_5"
+        android:layout_marginTop="@dimen/corners_small"/>
+
+    <EditText
+        android:id="@+id/tv_bloco_insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="C"
+        android:textStyle="bold"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintEnd_toEndOf="@id/mt_5"
+        app:layout_constraintTop_toBottomOf="@id/mt_5"
+        android:padding="@dimen/corners_micro"
+        android:layout_marginTop="14dp"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/mt_6"
+        android:layout_width="355dp"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_bloco"
+        app:layout_constraintLeft_toLeftOf="@id/tv_bloco"
+        android:layout_marginTop="@dimen/corners_small"/>
+
+    <TextView
+        android:id="@+id/tv_telefone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telefone"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintLeft_toLeftOf="@id/mt_6"
+        app:layout_constraintTop_toBottomOf="@id/mt_6"
+        android:layout_marginTop="@dimen/corners_small"/>
+
+    <EditText
+        android:id="@+id/tv_telefone_insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(11)xxxxx-xxxx"
+        android:textStyle="bold"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintEnd_toEndOf="@id/mt_6"
+        app:layout_constraintTop_toBottomOf="@id/mt_6"
+        android:padding="@dimen/corners_micro"
+        android:layout_marginTop="14dp"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/mt_7"
+        android:layout_width="355dp"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_telefone"
+        app:layout_constraintLeft_toLeftOf="@id/tv_bloco"
+        android:layout_marginTop="@dimen/corners_small"/>
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintLeft_toLeftOf="@id/mt_7"
+        app:layout_constraintTop_toBottomOf="@id/mt_7"
+        android:layout_marginTop="@dimen/corners_small"/>
+
+    <EditText
+        android:id="@+id/tv_email_insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mauro@gmail.com"
+        android:textStyle="bold"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintEnd_toEndOf="@id/mt_7"
+        app:layout_constraintTop_toBottomOf="@id/mt_7"
+        android:padding="@dimen/corners_micro"
+        android:layout_marginTop="14dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
