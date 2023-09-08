@@ -16,6 +16,7 @@ import com.ezschedule.ezschedule.databinding.ActivityMainBinding
 import com.ezschedule.ezschedule.presenter.utils.TokenManager
 import com.ezschedule.ezschedule.presenter.viewModel.MainViewModel
 import com.ezschedule.utils.ResourceWrapper
+import com.ezschedule.utils.SharedPreferencesManager
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             TokenManager(this).decoded(token) { email ->
                 setupDialogLogout(email)
             }
-            viewModel.validateIsAdmin(TokenManager(this).getInfo().isAdmin)
+            viewModel.validateIsAdmin(SharedPreferencesManager(this).getInfo().isAdmin)
         }
     }
 
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         setLogoutAction.observe(this@MainActivity) {
             displayLoginItems(isVisible = false)
             navigateTo(R.id.loginFragment)
-            TokenManager(this@MainActivity).deleteInfo()
+            SharedPreferencesManager(this@MainActivity).deleteInfo()
         }
         error.observe(this@MainActivity) {
             showSnackBarMessage(it)
@@ -91,7 +92,7 @@ class MainActivity : AppCompatActivity() {
             setOnMenuItemClickListener {
                 viewModel.getMenuAction(
                     it.itemId,
-                    TokenManager(this@MainActivity).getInfo().email
+                    SharedPreferencesManager(this@MainActivity).getInfo().email
                 )
                 true
             }
@@ -125,7 +126,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setImageUser(imageView: ImageView) {
-        viewModel.getImage(TokenManager(this).getInfo().image)?.let {
+        viewModel.getImage(SharedPreferencesManager(this).getInfo().image)?.let {
             Glide.with(this)
                 .load(ResourceWrapper(this).getString(R.string.toolbar_image_base_url, it))
                 .apply(RequestOptions.bitmapTransform(CircleCrop()))
