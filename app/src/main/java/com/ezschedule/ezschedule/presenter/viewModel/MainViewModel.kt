@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ezschedule.ezschedule.R
 import com.ezschedule.ezschedule.domain.useCase.LogoutUseCase
-import com.ezschedule.utils.ResourceWrapper
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
+import com.ezschedule.utils.ResourceWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -28,7 +28,7 @@ class MainViewModel(
     val error: LiveData<String> = _error
 
     fun getTitleScreen(id: Int) = when (id) {
-        R.id.calendarFragment, R.id.calendarUserFragment-> R.string.frag_calendar_name
+        R.id.calendarFragment, R.id.calendarUserFragment -> R.string.frag_calendar_name
         R.id.dashboardFragment -> R.string.frag_dashboard_name
         R.id.scheduleUserFragment -> R.string.frag_schedule_name
         R.id.servicesFragment, R.id.servicesUserFragment -> R.string.frag_services_name
@@ -54,7 +54,7 @@ class MainViewModel(
         else _setLocationAndMenu.value = Pair(R.id.action_to_calendar_user, R.menu.menu_user)
     }
 
-    private fun logoutTenant(email: String) {
+    fun logoutTenant(email: String) {
         viewModelScope.launch(Dispatchers.IO) {
             when (useCase.execute(email)) {
                 is ResultWrapper.Success -> _setLogoutAction.postValue(Unit)
