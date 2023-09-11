@@ -187,7 +187,7 @@
 
     <include
         android:id="@+id/include_calendar_bottom_sheet"
-        layout="@layout/fragment_calendar_bottom_sheet"
+        layout="@layout/view_calendar_bottom_sheet"
         android:visibility="gone" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

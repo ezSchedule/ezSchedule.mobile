@@ -45,7 +45,7 @@
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/frag_dash_chart"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="344dp"
             android:layout_marginTop="@dimen/spacing_huge"
             android:layout_marginBottom="@dimen/spacing_small" />
 
