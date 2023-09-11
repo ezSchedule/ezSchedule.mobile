@@ -5,156 +5,156 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/tx_icon_user"
+        android:id="@+id/frag_iv_icon_user"
         android:layout_width="@dimen/size_huge"
         android:layout_height="@dimen/size_huge"
         android:src="@drawable/ic_users"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="@dimen/spacing_extremeXXX"/>
 
     <TextView
-        android:id="@+id/tx_name_user"
+        android:id="@+id/frag_tv_name_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/SubTitleAppearance"
-        android:text="Maurão da Ct"
+        android:text="@string/frag_settings_text_name_user"
         android:textStyle="bold"
         android:textSize="@dimen/spacing_large"
-        app:layout_constraintTop_toBottomOf="@id/tx_icon_user"
+        app:layout_constraintTop_toBottomOf="@id/frag_iv_icon_user"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="48dp"/>
+        android:layout_marginTop="@dimen/spacing_extremeXX"/>
 
     <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/mt_1"
+        android:id="@+id/frag_md_1"
         android:layout_width="355dp"
         android:layout_height="1dp"
-        app:layout_constraintTop_toBottomOf="@id/tx_name_user"
+        app:layout_constraintTop_toBottomOf="@id/frag_tv_name_user"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="@dimen/size_largeX"/>
 
     <TextView
-        android:id="@+id/tv_moradores"
+        android:id="@+id/frag_tv_residents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Moradores"
+        android:text="@string/frag_settings_text_residents"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="@dimen/size_small"
-        app:layout_constraintTop_toBottomOf="@id/mt_1"
-        app:layout_constraintLeft_toLeftOf="@id/mt_1"
+        app:layout_constraintTop_toBottomOf="@id/frag_md_1"
+        app:layout_constraintLeft_toLeftOf="@id/frag_md_1"
         android:layout_marginTop="@dimen/corners_small"/>
 
     <EditText
-        android:id="@+id/tv_moradres_insert"
+        android:id="@+id/frag_et_residents_insert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="200"
+        android:text="@string/frag_settings_text_residents_insert"
         android:textStyle="bold"
         android:textColor="@color/gray"
         android:textSize="@dimen/size_small"
-        app:layout_constraintTop_toBottomOf="@id/mt_1"
-        app:layout_constraintEnd_toEndOf="@id/mt_1"
-        android:layout_marginTop="14dp"
+        app:layout_constraintTop_toBottomOf="@id/frag_md_1"
+        app:layout_constraintEnd_toEndOf="@id/frag_md_1"
+        android:layout_marginTop="@dimen/spacing_ligth"
         android:padding="@dimen/corners_nano"/>
 
     <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/mt_2"
+        android:id="@+id/frag_md_2"
         android:layout_width="355dp"
         android:layout_height="1dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_moradores"
+        app:layout_constraintTop_toBottomOf="@id/frag_tv_residents"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="@dimen/size_small"/>
 
     <TextView
-        android:id="@+id/tv_apartamentos"
+        android:id="@+id/frag_tv_apartments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Apartamentos"
+        android:text="@string/frag_settings_text_apartments"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="@dimen/size_small"
-        app:layout_constraintTop_toBottomOf="@id/mt_2"
-        app:layout_constraintLeft_toLeftOf="@id/mt_2"
+        app:layout_constraintTop_toBottomOf="@id/frag_md_2"
+        app:layout_constraintLeft_toLeftOf="@id/frag_md_2"
         android:layout_marginTop="@dimen/corners_small"/>
 
     <EditText
-        android:id="@+id/tv_apartamentos_insert"
+        android:id="@+id/frag_et_apartments_insert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="27"
+        android:text="@string/frag_settings_text_apartments_insert"
         android:textStyle="bold"
         android:textColor="@color/gray"
         android:textSize="@dimen/size_small"
-        app:layout_constraintTop_toBottomOf="@id/mt_2"
-        app:layout_constraintEnd_toEndOf="@id/mt_2"
-        android:layout_marginTop="14dp"
+        app:layout_constraintTop_toBottomOf="@id/frag_md_2"
+        app:layout_constraintEnd_toEndOf="@id/frag_md_2"
+        android:layout_marginTop="@dimen/spacing_ligth"
         android:padding="@dimen/corners_nano"/>
 
     <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/mt_3"
+        android:id="@+id/frag_mt_3"
         android:layout_width="355dp"
         android:layout_height="1dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_apartamentos"
+        app:layout_constraintTop_toBottomOf="@id/frag_tv_apartments"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="@dimen/size_small"/>
 
     <TextView
-        android:id="@+id/tv_saloes"
+        android:id="@+id/frag_tv_salons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Salões"
+        android:text="@string/frag_settings_text_salons"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="@dimen/size_small"
-        app:layout_constraintTop_toBottomOf="@id/mt_3"
-        app:layout_constraintLeft_toLeftOf="@id/mt_3"
+        app:layout_constraintTop_toBottomOf="@id/frag_mt_3"
+        app:layout_constraintLeft_toLeftOf="@id/frag_mt_3"
         android:layout_marginTop="@dimen/corners_small"/>
 
     <EditText
-        android:id="@+id/tv_saloes_insert"
+        android:id="@+id/frag_et_salons_insert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="13"
+        android:text="@string/frag_settings_text_salons_insert"
         android:textStyle="bold"
         android:textColor="@color/gray"
         android:textSize="@dimen/size_small"
-        app:layout_constraintTop_toBottomOf="@id/mt_3"
-        app:layout_constraintEnd_toEndOf="@id/mt_3"
-        android:layout_marginTop="14dp"
+        app:layout_constraintTop_toBottomOf="@id/frag_mt_3"
+        app:layout_constraintEnd_toEndOf="@id/frag_mt_3"
+        android:layout_marginTop="@dimen/spacing_ligth"
         android:padding="@dimen/corners_nano"/>
 
     <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/mt_4"
+        android:id="@+id/frag_mt_4"
         android:layout_width="355dp"
         android:layout_height="1dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_saloes"
+        app:layout_constraintTop_toBottomOf="@id/frag_tv_salons"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="@dimen/size_small"/>
 
     <TextView
-        android:id="@+id/tv_add_saloes"
+        android:id="@+id/frag_tv_add_salons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Adicionar Salões +"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
         android:textSize="@dimen/size_small"
-        app:layout_constraintTop_toBottomOf="@id/mt_4"
-        app:layout_constraintLeft_toLeftOf="@id/mt_4"
+        app:layout_constraintTop_toBottomOf="@id/frag_mt_4"
+        app:layout_constraintLeft_toLeftOf="@id/frag_mt_4"
         android:layout_marginTop="@dimen/corners_small"/>
 
     <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/mt_5"
+        android:id="@+id/frag_mt_5"
         android:layout_width="355dp"
         android:layout_height="0.5dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_add_saloes"
+        app:layout_constraintTop_toBottomOf="@id/frag_tv_add_salons"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="@dimen/size_small"/>

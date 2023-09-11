@@ -28,4 +28,9 @@
     <dimen name="size_hugeX">72sp</dimen>
     <dimen name="size_hugeXX">80sp</dimen>
     <dimen name="size_hugeXXX">88sp</dimen>
+
+    <dimen name="spacing_ligth">14dp</dimen>
+    <dimen name="spacing_extremeX">40dp</dimen>
+    <dimen name="spacing_extremeXX">48dp</dimen>
+    <dimen name="spacing_extremeXXX">100dp</dimen>
 </resources>
