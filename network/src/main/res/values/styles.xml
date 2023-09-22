@@ -31,4 +31,10 @@
         <item name="android:textColor">@color/colorOnPrimary</item>
         <item name="android:fontFamily">@font/inter_regular_400</item>
     </style>
+
+    <style name="ImageButtonEzSchedule" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">@drawable/bg_btn_ezschedule</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:elevation">@dimen/spacing_large</item>
+    </style>
 </resources>

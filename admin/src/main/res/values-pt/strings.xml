@@ -46,4 +46,31 @@
     <string name="frag_dashboard_month_october">Outubro</string>
     <string name="frag_dashboard_month_november">Novembro</string>
     <string name="frag_dashboard_month_december">Dezembro</string>
+
+    <!-- Settings Screen -->
+    <string name="frag_settings_btn_profile">Perfil</string>
+    <string name="frag_settings_btn_condo">Condomínio</string>
+    <string name="frag_settings_text_name">Nome</string>
+    <string name="frag_settings_text_surname">Sobrenome</string>
+    <string name="frag_settings_text_document">Cpf</string>
+    <string name="frag_settings_text_number">N° Apto</string>
+    <string name="frag_settings_text_block">Bloco</string>
+    <string name="frag_settings_text_phone">Telefone</string>
+    <string name="frag_settings_text_email">Email</string>
+    <string name="frag_settings_text_name_insert">Mauro</string>
+    <string name="frag_settings_text_surname_insert">da CT</string>
+    <string name="frag_settings_text_document_insert">000.000.000-00</string>
+    <string name="frag_settings_text_house_number_insert">25</string>
+    <string name="frag_settings_text_block_insert">C</string>
+    <string name="frag_settings_text_phone_insert">(11)xxxxx-xxxx</string>
+    <string name="frag_settings_text_email_insert">Mauro@gmail.com</string>
+
+    <!-- Settings Continued Screen -->
+    <string name="frag_settings_text_residents">Moradores</string>
+    <string name="frag_settings_text_apartments">Apartamentos</string>
+    <string name="frag_settings_text_salons">Salões</string>
+    <string name="frag_settings_text_residents_insert">200</string>
+    <string name="frag_settings_text_apartments_insert">27</string>
+    <string name="frag_settings_text_salons_insert">13</string>
+    <string name="frag_settings_text_name_user">Mauro da CT</string>
 </resources>
