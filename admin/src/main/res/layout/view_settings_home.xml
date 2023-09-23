@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toStartOf="@id/frag_settings_btn_condominium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.38" />
+        app:layout_constraintWidth_percent="0.4" />
 
     <Button
         android:id="@+id/frag_settings_btn_condominium"
@@ -44,6 +44,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/frag_settings_btn_profile"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.38" />
+        app:layout_constraintWidth_percent="0.4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

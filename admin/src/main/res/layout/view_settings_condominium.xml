@@ -10,9 +10,9 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/frag_settings_iv_icon_user"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:id="@+id/frag_settings_iv_icon_condominium"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginTop="@dimen/spacing_large"
             android:background="@drawable/badge_user"
             android:src="@drawable/ic_building"
@@ -29,7 +29,7 @@
             android:layout_marginTop="@dimen/spacing_extremeXXX"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/frag_settings_iv_icon_user" />
+            app:layout_constraintTop_toBottomOf="@id/frag_settings_iv_icon_condominium" />
 
         <TextView
             android:id="@+id/frag_settings_tv_label_residents"
