@@ -48,29 +48,18 @@
     <string name="frag_dashboard_month_december">December</string>
 
     <!-- Settings Screen -->
+    <string name="frag_settings_tv_title">What do you want to adjust?</string>
     <string name="frag_settings_btn_profile">Profile</string>
     <string name="frag_settings_btn_condo">Condominium</string>
     <string name="frag_settings_text_name">Name</string>
     <string name="frag_settings_text_surname">Surname</string>
-    <string name="frag_settings_text_document">Document</string>
-    <string name="frag_settings_text_number">House Number</string>
+    <string name="frag_settings_text_document">CPF</string>
+    <string name="frag_settings_text_apartment_number">Apartment No.</string>
     <string name="frag_settings_text_block">Block</string>
     <string name="frag_settings_text_phone">Phone</string>
     <string name="frag_settings_text_email">Email</string>
-    <string name="frag_settings_text_name_insert">Mauro</string>
-    <string name="frag_settings_text_surname_insert">da CT</string>
-    <string name="frag_settings_text_document_insert">000.000.000-00</string>
-    <string name="frag_settings_text_house_number_insert">25</string>
-    <string name="frag_settings_text_block_insert">C</string>
-    <string name="frag_settings_text_phone_insert">(11)xxxxx-xxxx</string>
-    <string name="frag_settings_text_email_insert">Mauro@gmail.com</string>
-
-    <!-- Settings Continued Screen -->
     <string name="frag_settings_text_residents">Residents</string>
     <string name="frag_settings_text_apartments">Apartments</string>
     <string name="frag_settings_text_salons">Salons</string>
-    <string name="frag_settings_text_residents_insert">200</string>
-    <string name="frag_settings_text_apartments_insert">27</string>
-    <string name="frag_settings_text_salons_insert">13</string>
-    <string name="frag_settings_text_name_user">Mauro da CT</string>
+    <string name="frag_settings_btn_add_salons">Add salons +</string>
 </resources>
