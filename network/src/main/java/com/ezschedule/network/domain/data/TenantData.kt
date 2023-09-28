@@ -6,27 +6,27 @@ data class TenantData(
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("email")
-    val email: String,
+    val email: String?,
     @SerializedName("cpf")
-    val cpf: String,
+    val cpf: String?,
     @SerializedName("password")
-    val password: String,
+    val password: String?,
     @SerializedName("residentsBlock")
-    val residentsBlock: String,
+    val residentsBlock: String?,
     @SerializedName("apartmentNumber")
-    val apartmentNumber: Int,
+    val apartmentNumber: Int?,
     @SerializedName("phoneNumber")
-    val phoneNumber: String,
+    val phoneNumber: String?,
     @SerializedName("image")
     val image: String?,
     @SerializedName("isAuthenticated")
-    val isAuthenticated: Boolean,
+    val isAuthenticated: Boolean?,
     @SerializedName("isAdmin")
-    val isAdmin: Int,
+    val isAdmin: Int?,
     @SerializedName("token")
-    val tokenJWT: String,
+    val tokenJWT: String?,
     @SerializedName("idCondominium")
-    val idCondominium: Int
+    val idCondominium: Int?
 )

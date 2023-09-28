@@ -1,8 +1,8 @@
-package com.ezschedule.network.domain.data.calendar
+package com.ezschedule.network.domain.data
 
 import com.google.gson.annotations.SerializedName
 
-data class ScheduleSalonData (
+data class SalonData (
     @SerializedName("id")
     val id: Int,
     @SerializedName("saloonName")

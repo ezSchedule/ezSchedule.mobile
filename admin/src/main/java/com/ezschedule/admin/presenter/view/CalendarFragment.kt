@@ -1,10 +1,14 @@
 package com.ezschedule.admin.presenter.view
 
+import android.app.Activity
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -13,6 +17,7 @@ import com.ezschedule.admin.presenter.adapter.CalendarEventsAdapter
 import com.ezschedule.admin.presenter.utils.CustomCalendarClick
 import com.ezschedule.admin.presenter.utils.CustomCalendarDecorator
 import com.ezschedule.admin.presenter.viewmodel.CalendarViewModel
+import com.ezschedule.network.domain.data.ScheduleData
 import com.ezschedule.network.domain.presentation.EventItemPresentation
 import com.ezschedule.utils.CustomBottomSheetCallback
 import com.ezschedule.utils.SharedPreferencesManager
@@ -21,6 +26,8 @@ import com.squareup.timessquare.CalendarCellDecorator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
@@ -29,6 +36,7 @@ class CalendarFragment : Fragment() {
     private lateinit var binding: FragmentCalendarBinding
     private val viewModel by viewModel<CalendarViewModel>()
     private val dates = mutableMapOf<Date, Int>()
+    private var dateCancel: LocalDateTime? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -54,6 +62,13 @@ class CalendarFragment : Fragment() {
             setupRecyclerView(it)
             setupLoading(false)
         }
+        successfulCancellation.observe(viewLifecycleOwner) {
+            getEvents(SharedPreferencesManager(requireContext()).getInfo().idCondominium)
+        }
+        error.observe(viewLifecycleOwner) {
+            Log.i("ERROR", it.message.toString())
+            setupLoading(false)
+        }
     }
 
     private fun setupRecyclerView(dataList: List<EventItemPresentation>) {
@@ -68,6 +83,18 @@ class CalendarFragment : Fragment() {
             fragCalendarBtnEvents.setOnClickListener {
                 setLayoutChange(isCalendarVisible = false)
                 includeCalendarBottomSheet.root.isVisible = false
+            }
+            includeCalendarBottomSheet.btnConfirm.setOnClickListener {
+                setupLoading(true)
+                includeCalendarBottomSheet.root.isVisible = false
+                view?.let { view -> requireContext().hideKeyboard(view) }
+                viewModel.sendCancelDay(
+                    ScheduleData.cancelDay(
+                        reason = includeCalendarBottomSheet.tietReason.text.toString(),
+                        date = dateCancel.toString(),
+                        idTenant = SharedPreferencesManager(requireContext()).getInfo().id
+                    )
+                )
             }
         }
     }
@@ -102,6 +129,7 @@ class CalendarFragment : Fragment() {
         binding.cpvCalendar.setOnDateSelectedListener(CustomCalendarClick {
             it?.let { date ->
                 setupBottomSheet(DateFormat.getDateInstance(DateFormat.FULL).format(date))
+                dateCancel = convertToDateTime(date)
             }
         })
     }
@@ -128,10 +156,19 @@ class CalendarFragment : Fragment() {
         }
     }
 
-    private fun convertToDate(date: String): Date {
-        val toString = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
-            SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).parse(date) ?: ""
-        )
-        return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(toString)!!
+    private fun convertToDate(date: String) =
+        SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(
+            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
+                SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).parse(date) ?: ""
+            )
+        )!!
+
+    private fun convertToDateTime(date: Date) =
+        LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault())
+
+    private fun Context.hideKeyboard(view: View) {
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
