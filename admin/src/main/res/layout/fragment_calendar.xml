@@ -147,11 +147,11 @@
             android:layout_marginHorizontal="@dimen/spacing_large"
             android:layout_marginVertical="@dimen/spacing_large"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/frag_calendar_btn_canceled"
+            app:layout_constraintBottom_toTopOf="@id/frag_calendar_btn_events"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/frag_canceled_til_canceled"
-            tools:listitem="@layout/adapter_canceled" />
+            tools:listitem="@layout/adapter_events" />
 
         <Button
             android:id="@+id/frag_calendar_btn_calendar"
@@ -163,19 +163,19 @@
             android:text="@string/frag_calendar_btn_calendar"
             android:textAppearance="@style/ButtonAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/frag_calendar_btn_canceled"
+            app:layout_constraintEnd_toStartOf="@id/frag_calendar_btn_events"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="@id/cv_calendar"
             app:layout_constraintWidth_percent="0.4" />
 
         <Button
-            android:id="@+id/frag_calendar_btn_canceled"
+            android:id="@+id/frag_calendar_btn_events"
             style="@style/ButtonEzSchedule"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginBottom="@dimen/spacing_large"
-            android:text="@string/frag_calendar_btn_canceled"
+            android:text="@string/frag_calendar_btn_events"
             android:textAppearance="@style/ButtonAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/cv_calendar"
@@ -188,6 +188,11 @@
     <include
         android:id="@+id/include_calendar_bottom_sheet"
         layout="@layout/view_calendar_bottom_sheet"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/include_loading"
+        layout="@layout/view_loading"
         android:visibility="gone" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
