@@ -1,5 +1,6 @@
 package com.ezschedule.admin.presenter.view
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,15 +9,16 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.ezschedule.admin.databinding.FragmentCalendarBinding
-import com.ezschedule.admin.presenter.adapter.CanceledDayAdapter
+import com.ezschedule.admin.presenter.adapter.CalendarEventsAdapter
 import com.ezschedule.admin.presenter.utils.CustomCalendarClick
 import com.ezschedule.admin.presenter.utils.CustomCalendarDecorator
-import com.ezschedule.network.R.color.light_white
-import com.ezschedule.network.R.color.red
-import com.ezschedule.network.domain.presentation.CanceledItemPresentation
+import com.ezschedule.admin.presenter.viewmodel.CalendarViewModel
+import com.ezschedule.network.domain.presentation.EventItemPresentation
 import com.ezschedule.utils.CustomBottomSheetCallback
+import com.ezschedule.utils.SharedPreferencesManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.squareup.timessquare.CalendarCellDecorator
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -25,6 +27,7 @@ import java.util.Locale
 
 class CalendarFragment : Fragment() {
     private lateinit var binding: FragmentCalendarBinding
+    private val viewModel by viewModel<CalendarViewModel>()
     private val dates = mutableMapOf<Date, Int>()
 
     override fun onCreateView(
@@ -37,65 +40,24 @@ class CalendarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        setEventOnDate("2023-08-10", red)
-        setEventOnDate("2023-08-12", red)
-        setEventOnDate("2023-08-23", red)
-        setEventOnDate("2024-08-22", red)
-
-        setEventOnDate("2023-08-30", light_white)
-        setEventOnDate("2023-08-20", light_white)
-        setEventOnDate("2023-11-20", light_white)
-
+        viewModel.getEvents(SharedPreferencesManager(requireContext()).getInfo().idCondominium)
+        setupLoading(true)
+        setupObservers()
         setupClickButtons()
-        setupRecyclerView(getDataList())
     }
 
-    private fun getDataList() = listOf(
-        CanceledItemPresentation(
-            tenantName = "Endryl Fiorotti",
-            salonName = "Magnólia",
-            salonValue = 110.0
-        ),
-        CanceledItemPresentation(
-            tenantName = "Endryl Fiorotti",
-            salonName = "Magnólia",
-            salonValue = 110.0
-        ),
-        CanceledItemPresentation(
-            tenantName = "Endryl Fiorotti",
-            salonName = "Magnólia",
-            salonValue = 110.0
-        ),
-        CanceledItemPresentation(
-            tenantName = "Endryl Fiorotti",
-            salonName = "Magnólia",
-            salonValue = 110.0
-        ),
-        CanceledItemPresentation(
-            tenantName = "Endryl Fiorotti",
-            salonName = "Magnólia",
-            salonValue = 110.0
-        ),
-        CanceledItemPresentation(
-            tenantName = "Endryl Fiorotti",
-            salonName = "Magnólia",
-            salonValue = 110.0
-        ),
-        CanceledItemPresentation(
-            tenantName = "Endryl Fiorotti",
-            salonName = "Magnólia",
-            salonValue = 110.0
-        ),
-        CanceledItemPresentation(
-            tenantName = "Endryl Fiorotti",
-            salonName = "Magnólia",
-            salonValue = 110.0
-        ),
-    )
+    private fun setupObservers() = with(viewModel) {
+        scheduleList.observe(viewLifecycleOwner) {
+            it.map { event ->
+                setEventOnDate(date = event.date, getColorEvent(event.isCanceled))
+            }
+            setupRecyclerView(it)
+            setupLoading(false)
+        }
+    }
 
-    private fun setupRecyclerView(dataList: List<CanceledItemPresentation>) {
-        binding.fragCanceledRvCanceled.adapter = CanceledDayAdapter(dataList)
+    private fun setupRecyclerView(dataList: List<EventItemPresentation>) {
+        binding.fragCanceledRvCanceled.adapter = CalendarEventsAdapter(dataList)
     }
 
     private fun setupClickButtons() {
@@ -103,7 +65,7 @@ class CalendarFragment : Fragment() {
             fragCalendarBtnCalendar.setOnClickListener {
                 setLayoutChange(isCalendarVisible = true)
             }
-            fragCalendarBtnCanceled.setOnClickListener {
+            fragCalendarBtnEvents.setOnClickListener {
                 setLayoutChange(isCalendarVisible = false)
                 includeCalendarBottomSheet.root.isVisible = false
             }
@@ -112,14 +74,13 @@ class CalendarFragment : Fragment() {
 
     private fun setLayoutChange(isCalendarVisible: Boolean) = with(binding) {
         cvCalendar.isVisible = isCalendarVisible
-        fragCalendarBtnCanceled.isEnabled = isCalendarVisible
+        fragCalendarBtnEvents.isEnabled = isCalendarVisible
         fragCanceledGroup.isVisible = !isCalendarVisible
         fragCalendarBtnCalendar.isEnabled = !isCalendarVisible
     }
 
     private fun setEventOnDate(date: String, color: Int) {
-        dates[SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date)!!] =
-            ContextCompat.getColor(requireContext(), color)
+        dates[convertToDate(date)] = ContextCompat.getColor(requireContext(), color)
         reloadDatesList()
     }
 
@@ -131,8 +92,7 @@ class CalendarFragment : Fragment() {
 
         with(binding) {
             cpvCalendar.decorators = decorators
-            cpvCalendar.init(Date(), nextYear.time)
-                .withSelectedDate(Date())
+            cpvCalendar.init(Date(), nextYear.time).withSelectedDate(Date())
         }
 
         setupClickOnDay()
@@ -156,5 +116,22 @@ class CalendarFragment : Fragment() {
             root.isVisible = true
             tvDate.text = date
         }
+    }
+
+    private fun setupLoading(isLoading: Boolean) = with(binding) {
+        cvCalendar.isVisible = !isLoading
+        fragCalendarBtnCalendar.isVisible = !isLoading
+        fragCalendarBtnEvents.isVisible = !isLoading
+        includeLoading.root.apply {
+            isVisible = isLoading
+            setBackgroundColor(Color.TRANSPARENT)
+        }
+    }
+
+    private fun convertToDate(date: String): Date {
+        val toString = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
+            SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).parse(date) ?: ""
+        )
+        return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(toString)!!
     }
 }
