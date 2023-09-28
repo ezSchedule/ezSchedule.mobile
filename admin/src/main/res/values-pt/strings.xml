@@ -19,6 +19,7 @@
 
     <!-- Calendar Screen -->
     <string name="frag_calendar_btn_calendar">Calendario</string>
+    <string name="frag_calendar_btn_confirm">Confirmar</string>
     <string name="frag_calendar_btn_events">Eventos</string>
     <string name="frag_calendar_tv_canceled_day">Cancelar dia</string>
     <string name="frag_calendar_edt_reason">Motivo</string>

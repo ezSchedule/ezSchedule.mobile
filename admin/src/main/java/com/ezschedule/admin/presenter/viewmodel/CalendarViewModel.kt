@@ -8,6 +8,7 @@ import com.ezschedule.admin.domain.useCase.CalendarUseCase
 import com.ezschedule.network.R.color.light_white
 import com.ezschedule.network.R.color.red
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
+import com.ezschedule.network.domain.data.ScheduleData
 import com.ezschedule.network.domain.presentation.EventItemPresentation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,6 +16,9 @@ import kotlinx.coroutines.launch
 class CalendarViewModel(private val useCase: CalendarUseCase) : ViewModel() {
     private var _scheduleList = MutableLiveData<List<EventItemPresentation>>()
     val scheduleList: LiveData<List<EventItemPresentation>> = _scheduleList
+
+    private var _successfulCancellation = MutableLiveData<Unit>()
+    val successfulCancellation: LiveData<Unit> = _successfulCancellation
 
     private var _emptyList = MutableLiveData<Unit>()
     val emptyList: LiveData<Unit> = _emptyList
@@ -33,6 +37,16 @@ class CalendarViewModel(private val useCase: CalendarUseCase) : ViewModel() {
                         }
                     }
                 }
+
+                is ResultWrapper.Error -> _error.postValue(response.error)
+            }
+        }
+    }
+
+    fun sendCancelDay(schedule: ScheduleData) {
+        viewModelScope.launch(Dispatchers.IO) {
+            when (val response = useCase.cancelDate(schedule)) {
+                is ResultWrapper.Success -> _successfulCancellation.postValue(Unit)
 
                 is ResultWrapper.Error -> _error.postValue(response.error)
             }
