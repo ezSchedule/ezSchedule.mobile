@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -72,7 +73,9 @@ class CalendarFragment : Fragment() {
     }
 
     private fun setupRecyclerView(dataList: List<EventItemPresentation>) {
-        binding.fragCanceledRvCanceled.adapter = CalendarEventsAdapter(dataList)
+        val adapter = CalendarEventsAdapter(dataList)
+        binding.fragCalendarRvEvents.adapter = adapter
+        setupSearchField(adapter)
     }
 
     private fun setupClickButtons() {
@@ -130,6 +133,17 @@ class CalendarFragment : Fragment() {
             it?.let { date ->
                 setupBottomSheet(DateFormat.getDateInstance(DateFormat.FULL).format(date))
                 dateCancel = convertToDateTime(date)
+            }
+        })
+    }
+
+    private fun setupSearchField(adapter: CalendarEventsAdapter) {
+        binding.fragCalendarSvEvents.setOnQueryTextListener(object : OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?) = false
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return true
             }
         })
     }
