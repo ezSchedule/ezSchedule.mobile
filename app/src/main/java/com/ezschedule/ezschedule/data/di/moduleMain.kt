@@ -5,6 +5,7 @@ import com.ezschedule.admin.data.repository.ScheduleRepository
 import com.ezschedule.admin.domain.useCase.CalendarUseCase
 import com.ezschedule.admin.presenter.viewmodel.CalendarViewModel
 import com.ezschedule.ezschedule.data.repository.TenantRepository
+import com.ezschedule.ezschedule.domain.useCase.FindSettingsTenantByIdUseCase
 import com.ezschedule.ezschedule.domain.useCase.LoginUseCase
 import com.ezschedule.ezschedule.domain.useCase.LogoutUseCase
 import com.ezschedule.utils.ResourceWrapper
@@ -32,9 +33,11 @@ val moduleMain = module {
     factory { LogoutUseCase(get()) }
     factory { CalendarUseCase(get()) }
 
+    factory { FindSettingsTenantByIdUseCase(get()) }
+
     viewModel { TenantViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }
     viewModel { CalendarViewModel(get()) }
 
-    viewModel { SettingsViewModel() }
+    viewModel { SettingsViewModel(get()) }
 }

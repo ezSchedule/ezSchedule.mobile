@@ -40,7 +40,7 @@ class TenantRepositoryTest : CoroutineViewModelTest() {
                 repository.login(TenantRequestFixture.getTenantRequestComplete().build())
             val error = (result as ResultWrapper.Error).error as ClientException
 
-            coVerify { endpoint.singUp(any()) }
+            coVerify { endpoint.signUp(any()) }
             assertEquals(error.code, code)
             assertEquals(error.message, message)
         }
@@ -56,7 +56,7 @@ class TenantRepositoryTest : CoroutineViewModelTest() {
                 repository.login(TenantRequestFixture.getTenantRequestComplete().build())
             val error = (result as ResultWrapper.Error).error as ServerException
 
-            coVerify { endpoint.singUp(any()) }
+            coVerify { endpoint.signUp(any()) }
             assertEquals(error.code, code)
             assertEquals(error.message, message)
         }
@@ -72,7 +72,7 @@ class TenantRepositoryTest : CoroutineViewModelTest() {
                 repository.login(TenantRequestFixture.getTenantRequestComplete().build())
             val error = (result as ResultWrapper.Error).error as UnknownResponseException
 
-            coVerify { endpoint.singUp(any()) }
+            coVerify { endpoint.signUp(any()) }
             assertEquals(error.code, code)
             assertEquals(error.message, message)
         }
@@ -83,7 +83,7 @@ class TenantRepositoryTest : CoroutineViewModelTest() {
             every { message } returns messageError
         }
 
-        coEvery { endpoint.singUp(any()) } throws exception
+        coEvery { endpoint.signUp(any()) } throws exception
     }
 
 //    @Test

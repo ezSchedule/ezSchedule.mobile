@@ -11,10 +11,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.ezschedule.ezschedule.databinding.FragmentSettingsBinding
-import com.ezschedule.ezschedule.presenter.utils.TokenManager
 import com.ezschedule.ezschedule.presenter.viewModel.SettingsViewModel
 import com.ezschedule.network.domain.presentation.CondominiumPresentation
-import com.ezschedule.network.domain.presentation.SettingsPresentation
+import com.ezschedule.utils.SharedPreferencesManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsFragment : Fragment() {
@@ -31,12 +30,10 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupActivity()
-        viewModel.verifyIsAdmin(TokenManager(requireContext()).getInfo().isAdmin)
+        viewModel.verifyIsAdmin(SharedPreferencesManager(requireContext()).getInfo().isAdmin)
         setupObservers()
         setupButtonClick()
-        setupLayoutProfile()
     }
 
     private fun setupActivity() {
@@ -50,7 +47,14 @@ class SettingsFragment : Fragment() {
             setScreenPreview(isAdmin = true)
         }
         showUserLayout.observe(viewLifecycleOwner) {
-            setScreenPreview(isAdmin = false)
+//            setScreenPreview(isAdmin = false)
+            setupLoading(true)
+            viewModel.getTenantInfo(SharedPreferencesManager(requireContext()).getInfo().id)
+        }
+        tenantLiveData.observe(viewLifecycleOwner) {
+            setupLayoutProfile()
+            setScreenPreviewAdmin(isProfile = true, isCondominium = false)
+            setupLoading(false)
         }
     }
 
@@ -62,31 +66,36 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setupLayoutProfile() = with(binding.includeSettingsProfile) {
-        Glide.with(requireContext())
-            .load(getInfoTenant().image)
-            .apply(RequestOptions.bitmapTransform(CircleCrop()))
-            .into(fragSettingsIvIconUser)
-        fragSettingsTvNameUser.text = getInfoTenant().name
-        fragSettingsEtValueName.setText(getInfoTenant().name)
-        fragSettingsEtValueSurname.setText(getInfoTenant().name)
-        fragSettingsEtValueCpf.setText(getInfoTenant().cpf)
-        fragSettingsEtValueApartmentNumber.setText(getInfoTenant().apartmentNumber.toString())
-        fragSettingsEtValueBlock.setText(getInfoTenant().residentsBlock)
-        fragSettingsEtValuePhone.setText(getInfoTenant().phoneNumber)
-        fragSettingsEtValueEmail.setText(getInfoTenant().email)
+        viewModel.tenantLiveData.value!!.apply {
+            image.let {
+                Glide.with(requireContext())
+                    .load(it)
+                    .apply(RequestOptions.bitmapTransform(CircleCrop()))
+                    .into(fragSettingsIvIconUser)
+            }
+            fragSettingsTvNameUser.text = fullName
+            fragSettingsEtValueName.setText(firstName)
+            fragSettingsEtValueSurname.setText(surname)
+            fragSettingsEtValueCpf.setText(cpf)
+            fragSettingsEtValueApartmentNumber.setText(apartmentNumber.toString())
+            fragSettingsEtValueBlock.setText(residentsBlock)
+            fragSettingsEtValuePhone.setText(phoneNumber)
+            fragSettingsEtValueEmail.setText(email)
+        }
     }
 
     private fun setupLayoutCondominium() = with(binding.includeSettingsCondominium) {
-        fragSettingsEtValueResidents.setText(getInfoCondominium().residentsQuantity.toString())
-        fragSettingsEtValueApartments.setText(getInfoCondominium().apartmentsQuantity.toString())
-        fragSettingsEtValueSalons.setText(getInfoCondominium().salonsQuantity.toString())
+        getInfoCondominium().apply {
+            fragSettingsEtValueResidents.setText(residentsQuantity.toString())
+            fragSettingsEtValueApartments.setText(apartmentsQuantity.toString())
+            fragSettingsEtValueSalons.setText(salonsQuantity.toString())
+        }
     }
 
     private fun setupButtonClickAdmin() = with(binding) {
         includeSettingsHome.fragSettingsBtnProfile.setOnClickListener {
             setupLoading(true)
-            setScreenPreviewAdmin(isProfile = true, isCondominium = false)
-            setupLoading(false)
+            viewModel.getTenantInfo(SharedPreferencesManager(requireContext()).getInfo().id)
         }
         includeSettingsHome.fragSettingsBtnCondominium.setOnClickListener {
             setupLoading(true)
@@ -111,16 +120,6 @@ class SettingsFragment : Fragment() {
     private fun setupLoading(isVisible: Boolean) {
         binding.includeLoading.root.isVisible = isVisible
     }
-
-    private fun getInfoTenant() = SettingsPresentation(
-        name = "Endryl Fiorotti",
-        email = "endryl@gmail.com",
-        cpf = "000.000.000-00",
-        residentsBlock = "1A",
-        apartmentNumber = 44,
-        phoneNumber = "(11) 99999-9999",
-        image = "https://imgv3.fotor.com/images/gallery/Realistic-Male-Profile-Picture.jpg"
-    )
 
     private fun getInfoCondominium() = CondominiumPresentation(
         residentsQuantity = 223,

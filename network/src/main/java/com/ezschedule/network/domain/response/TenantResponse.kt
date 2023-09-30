@@ -1,6 +1,7 @@
 package com.ezschedule.network.domain.response
 
 import com.ezschedule.network.domain.presentation.TenantPresentation
+import com.ezschedule.network.domain.presentation.TenantSettingsPresentation
 
 data class TenantResponse(
     val id: Int,
@@ -25,5 +26,17 @@ data class TenantResponse(
         tokenJWT = tokenJWT,
         isAdmin = isAdmin,
         idCondominium = idCondominium
+    )
+
+    fun toTenantSettingsPresentation(): TenantSettingsPresentation = TenantSettingsPresentation(
+        fullName = name,
+        firstName = name.split("\\s".toRegex())[0],
+        surname = name.split("\\s".toRegex()).drop(1).joinToString(),
+        cpf = cpf,
+        apartmentNumber = apartmentNumber,
+        residentsBlock = residentsBlock,
+        phoneNumber = phoneNumber,
+        email = email,
+        image = image
     )
 }
