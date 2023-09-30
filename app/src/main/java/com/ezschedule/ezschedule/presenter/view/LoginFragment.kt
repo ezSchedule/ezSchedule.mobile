@@ -12,10 +12,10 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ezschedule.ezschedule.databinding.FragmentLoginBinding
-import com.ezschedule.ezschedule.presenter.utils.TokenManager
 import com.ezschedule.ezschedule.presenter.viewModel.TenantViewModel
 import com.ezschedule.network.domain.data.TenantRequest
 import com.ezschedule.network.domain.presentation.TenantPresentation
+import com.ezschedule.utils.SharedPreferencesManager
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -70,7 +70,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun savingInfoSharedPref(it: TenantPresentation) {
-        TokenManager(requireContext()).saveInfo(
+        SharedPreferencesManager(requireContext()).saveInfo(
             tenant = TenantPresentation(
                 id = it.id,
                 email = it.email,

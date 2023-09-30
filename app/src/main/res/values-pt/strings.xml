@@ -20,6 +20,11 @@
     <string name="bt_settings">Configurações</string>
     <string name="bt_logout_error">Houve algum erro</string>
 
+    <!-- Logout Dialog -->
+    <string name="dialog_logout_tv_title">Deslogado</string>
+    <string name="dialog_logout_tv_description">Caro usuário, sua sessão expirou</string>
+    <string name="dialog_logout_btn_confirm">Confirmar</string>
+
     <!-- Login Screen -->
     <string name="frag_login_tv_title_login">Entrar</string>
     <string name="frag_login_btn_login">Entrar</string>
