@@ -2,7 +2,7 @@
 <resources>
     <!-- Services Screen -->
     <string name="frag_services_btn_desc">+</string>
-    <string name="frag_services_atv_hint">Search…</string>
+    <string name="frag_services_sv_hint">Search…</string>
     <string name="frag_tv_title">Add</string>
 
     <!--  History Screen  -->
@@ -20,6 +20,7 @@
     <!-- Calendar Screen -->
     <string name="frag_calendar_btn_calendar">Calendar</string>
     <string name="frag_calendar_btn_confirm">Confirm</string>
+    <string name="frag_calendar_sv_search">Search…</string>
     <string name="frag_calendar_btn_events">Events</string>
     <string name="frag_calendar_tv_canceled_day">Cancel day</string>
     <string name="frag_calendar_edt_reason">Reason</string>
