@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_cancel_day">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_email"
+            android:id="@+id/tiet_reason"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -69,13 +69,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btn_canceled"
+        android:id="@+id/btn_confirm"
         style="@style/ButtonEzSchedule"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginVertical="@dimen/spacing_large"
         android:padding="0dp"
-        android:text="@string/frag_calendar_btn_canceled"
+        android:text="@string/frag_calendar_btn_confirm"
         android:textAppearance="@style/ButtonAppearance"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

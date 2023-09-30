@@ -1,31 +1,43 @@
 package com.ezschedule.admin.presenter.view
 
+import android.app.Activity
+import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.ezschedule.admin.databinding.FragmentCalendarBinding
-import com.ezschedule.admin.presenter.adapter.CanceledDayAdapter
+import com.ezschedule.admin.presenter.adapter.CalendarEventsAdapter
 import com.ezschedule.admin.presenter.utils.CustomCalendarClick
 import com.ezschedule.admin.presenter.utils.CustomCalendarDecorator
-import com.ezschedule.network.R.color.light_white
-import com.ezschedule.network.R.color.red
-import com.ezschedule.network.domain.presentation.CanceledItemPresentation
+import com.ezschedule.admin.presenter.viewmodel.CalendarViewModel
+import com.ezschedule.network.domain.data.ScheduleData
+import com.ezschedule.network.domain.presentation.EventItemPresentation
 import com.ezschedule.utils.CustomBottomSheetCallback
+import com.ezschedule.utils.SharedPreferencesManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.squareup.timessquare.CalendarCellDecorator
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
 class CalendarFragment : Fragment() {
     private lateinit var binding: FragmentCalendarBinding
+    private val viewModel by viewModel<CalendarViewModel>()
     private val dates = mutableMapOf<Date, Int>()
+    private var dateCancel: LocalDateTime? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -37,65 +49,33 @@ class CalendarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        setEventOnDate("2023-08-10", red)
-        setEventOnDate("2023-08-12", red)
-        setEventOnDate("2023-08-23", red)
-        setEventOnDate("2024-08-22", red)
-
-        setEventOnDate("2023-08-30", light_white)
-        setEventOnDate("2023-08-20", light_white)
-        setEventOnDate("2023-11-20", light_white)
-
+        viewModel.getEvents(SharedPreferencesManager(requireContext()).getInfo().idCondominium)
+        setupLoading(true)
+        setupObservers()
         setupClickButtons()
-        setupRecyclerView(getDataList())
     }
 
-    private fun getDataList() = listOf(
-        CanceledItemPresentation(
-            tenantName = "Endryl Fiorotti",
-            salonName = "Magnólia",
-            salonValue = 110.0
-        ),
-        CanceledItemPresentation(
-            tenantName = "Endryl Fiorotti",
-            salonName = "Magnólia",
-            salonValue = 110.0
-        ),
-        CanceledItemPresentation(
-            tenantName = "Endryl Fiorotti",
-            salonName = "Magnólia",
-            salonValue = 110.0
-        ),
-        CanceledItemPresentation(
-            tenantName = "Endryl Fiorotti",
-            salonName = "Magnólia",
-            salonValue = 110.0
-        ),
-        CanceledItemPresentation(
-            tenantName = "Endryl Fiorotti",
-            salonName = "Magnólia",
-            salonValue = 110.0
-        ),
-        CanceledItemPresentation(
-            tenantName = "Endryl Fiorotti",
-            salonName = "Magnólia",
-            salonValue = 110.0
-        ),
-        CanceledItemPresentation(
-            tenantName = "Endryl Fiorotti",
-            salonName = "Magnólia",
-            salonValue = 110.0
-        ),
-        CanceledItemPresentation(
-            tenantName = "Endryl Fiorotti",
-            salonName = "Magnólia",
-            salonValue = 110.0
-        ),
-    )
+    private fun setupObservers() = with(viewModel) {
+        scheduleList.observe(viewLifecycleOwner) {
+            it.map { event ->
+                setEventOnDate(date = event.date, getColorEvent(event.isCanceled))
+            }
+            setupRecyclerView(it)
+            setupLoading(false)
+        }
+        successfulCancellation.observe(viewLifecycleOwner) {
+            getEvents(SharedPreferencesManager(requireContext()).getInfo().idCondominium)
+        }
+        error.observe(viewLifecycleOwner) {
+            Log.i("ERROR", it.message.toString())
+            setupLoading(false)
+        }
+    }
 
-    private fun setupRecyclerView(dataList: List<CanceledItemPresentation>) {
-        binding.fragCanceledRvCanceled.adapter = CanceledDayAdapter(dataList)
+    private fun setupRecyclerView(dataList: List<EventItemPresentation>) {
+        val adapter = CalendarEventsAdapter(dataList)
+        binding.fragCalendarRvEvents.adapter = adapter
+        setupSearchField(adapter)
     }
 
     private fun setupClickButtons() {
@@ -103,23 +83,34 @@ class CalendarFragment : Fragment() {
             fragCalendarBtnCalendar.setOnClickListener {
                 setLayoutChange(isCalendarVisible = true)
             }
-            fragCalendarBtnCanceled.setOnClickListener {
+            fragCalendarBtnEvents.setOnClickListener {
                 setLayoutChange(isCalendarVisible = false)
                 includeCalendarBottomSheet.root.isVisible = false
+            }
+            includeCalendarBottomSheet.btnConfirm.setOnClickListener {
+                setupLoading(true)
+                includeCalendarBottomSheet.root.isVisible = false
+                view?.let { view -> requireContext().hideKeyboard(view) }
+                viewModel.sendCancelDay(
+                    ScheduleData.cancelDay(
+                        reason = includeCalendarBottomSheet.tietReason.text.toString(),
+                        date = dateCancel.toString(),
+                        idTenant = SharedPreferencesManager(requireContext()).getInfo().id
+                    )
+                )
             }
         }
     }
 
     private fun setLayoutChange(isCalendarVisible: Boolean) = with(binding) {
         cvCalendar.isVisible = isCalendarVisible
-        fragCalendarBtnCanceled.isEnabled = isCalendarVisible
+        fragCalendarBtnEvents.isEnabled = isCalendarVisible
         fragCanceledGroup.isVisible = !isCalendarVisible
         fragCalendarBtnCalendar.isEnabled = !isCalendarVisible
     }
 
     private fun setEventOnDate(date: String, color: Int) {
-        dates[SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date)!!] =
-            ContextCompat.getColor(requireContext(), color)
+        dates[convertToDate(date)] = ContextCompat.getColor(requireContext(), color)
         reloadDatesList()
     }
 
@@ -131,8 +122,7 @@ class CalendarFragment : Fragment() {
 
         with(binding) {
             cpvCalendar.decorators = decorators
-            cpvCalendar.init(Date(), nextYear.time)
-                .withSelectedDate(Date())
+            cpvCalendar.init(Date(), nextYear.time).withSelectedDate(Date())
         }
 
         setupClickOnDay()
@@ -142,6 +132,18 @@ class CalendarFragment : Fragment() {
         binding.cpvCalendar.setOnDateSelectedListener(CustomCalendarClick {
             it?.let { date ->
                 setupBottomSheet(DateFormat.getDateInstance(DateFormat.FULL).format(date))
+                dateCancel = convertToDateTime(date)
+            }
+        })
+    }
+
+    private fun setupSearchField(adapter: CalendarEventsAdapter) {
+        binding.fragCalendarSvEvents.setOnQueryTextListener(object : OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?) = false
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return true
             }
         })
     }
@@ -156,5 +158,31 @@ class CalendarFragment : Fragment() {
             root.isVisible = true
             tvDate.text = date
         }
+    }
+
+    private fun setupLoading(isLoading: Boolean) = with(binding) {
+        cvCalendar.isVisible = !isLoading
+        fragCalendarBtnCalendar.isVisible = !isLoading
+        fragCalendarBtnEvents.isVisible = !isLoading
+        includeLoading.root.apply {
+            isVisible = isLoading
+            setBackgroundColor(Color.TRANSPARENT)
+        }
+    }
+
+    private fun convertToDate(date: String) =
+        SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(
+            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
+                SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).parse(date) ?: ""
+            )
+        )!!
+
+    private fun convertToDateTime(date: Date) =
+        LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault())
+
+    private fun Context.hideKeyboard(view: View) {
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
