@@ -6,6 +6,7 @@ import com.ezschedule.ezschedule.domain.useCase.LoginUseCase
 import com.ezschedule.ezschedule.domain.useCase.LogoutUseCase
 import com.ezschedule.utils.ResourceWrapper
 import com.ezschedule.ezschedule.presenter.viewModel.MainViewModel
+import com.ezschedule.ezschedule.presenter.viewModel.SettingsViewModel
 import com.ezschedule.ezschedule.presenter.viewModel.TenantViewModel
 import com.ezschedule.network.data.api.TenantEndpoint
 import com.ezschedule.network.data.network.NetworkServiceFactory
@@ -28,4 +29,6 @@ val moduleMain = module {
     viewModel { TenantViewModel(get(), get()) }
 
     viewModel { MainViewModel(get(), get()) }
+
+    viewModel { SettingsViewModel() }
 }
