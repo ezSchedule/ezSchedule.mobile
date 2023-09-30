@@ -9,40 +9,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/frag_til_service"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/frag_services_sv_service"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginHorizontal="@dimen/spacing_large"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:hint="@string/frag_services_atv_hint"
-            app:boxCornerRadiusBottomEnd="@dimen/corners_nano"
-            app:boxCornerRadiusBottomStart="@dimen/corners_nano"
-            app:boxCornerRadiusTopEnd="@dimen/corners_nano"
-            app:boxCornerRadiusTopStart="@dimen/corners_nano"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp"
-            app:endIconDrawable="@android:drawable/ic_menu_search"
-            app:endIconMode="custom"
-            app:hintEnabled="false"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:background="@drawable/bg_search_view"
+            android:textSize="@dimen/size_small"
+            android:textStyle="bold"
+            app:iconifiedByDefault="false"
             app:layout_constraintBottom_toTopOf="@id/frag_rv_service"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <AutoCompleteTextView
-                android:id="@+id/frag_atv_service"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:completionThreshold="1"
-                android:hint="@string/frag_services_atv_hint"
-                android:inputType="text"
-                android:labelFor="@id/frag_til_service"
-                android:paddingLeft="@dimen/spacing_small"
-                android:textAppearance="@style/InputAppearance" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryBackground="@android:color/transparent"
+            app:queryHint="@string/frag_services_sv_hint" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/frag_rv_service"
@@ -55,7 +37,7 @@
             app:layout_constraintBottom_toTopOf="@id/frag_btn_service"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/frag_til_service"
+            app:layout_constraintTop_toBottomOf="@id/frag_services_sv_service"
             tools:listitem="@layout/adapter_service" />
 
         <Button

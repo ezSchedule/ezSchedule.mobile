@@ -10,10 +10,10 @@ class TokenManager(context: Context) {
     private lateinit var splitToken: Array<String>
     private val prefs = context.getSharedPreferences(PREFS_TOKEN_FILE, Context.MODE_PRIVATE)
 
-    fun decoded(JWTEncoded: String, behavior: (email: String) -> Unit) {
+    fun decoded(jwtEncoded: String, behavior: (email: String) -> Unit) {
         try {
             splitToken =
-                JWTEncoded.split("\\.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                jwtEncoded.split("\\.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
             val currentTimeStamp =
                 (Date(System.currentTimeMillis()).time).toString().dropLast(3).toLong()
 

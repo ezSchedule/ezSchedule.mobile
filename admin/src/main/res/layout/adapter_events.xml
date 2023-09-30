@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingEnd="@dimen/spacing_micro"
-        android:text="@string/frag_calendar_tv_value_label"
+        android:text="@string/frag_calendar_tv_date_label"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_label_salon" />
@@ -48,13 +48,13 @@
         tools:text="Magnólia" />
 
     <TextView
-        android:id="@+id/tv_content_value"
+        android:id="@+id/tv_content_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/tv_label_value"
         app:layout_constraintStart_toEndOf="@id/tv_label_value"
         app:layout_constraintTop_toTopOf="@id/tv_label_value"
-        tools:text="110,00" />
+        tools:text="27/09/2023 11:59" />
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"

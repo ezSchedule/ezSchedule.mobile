@@ -102,56 +102,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:constraint_referenced_ids="frag_canceled_til_canceled, frag_canceled_rv_canceled" />
+            app:constraint_referenced_ids="frag_calendar_sv_events, frag_calendar_rv_events" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/frag_canceled_til_canceled"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/frag_calendar_sv_events"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginHorizontal="@dimen/spacing_large"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:hint="@string/frag_services_atv_hint"
-            app:boxCornerRadiusBottomEnd="@dimen/corners_nano"
-            app:boxCornerRadiusBottomStart="@dimen/corners_nano"
-            app:boxCornerRadiusTopEnd="@dimen/corners_nano"
-            app:boxCornerRadiusTopStart="@dimen/corners_nano"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp"
-            app:endIconDrawable="@android:drawable/ic_menu_search"
-            app:endIconMode="custom"
-            app:hintEnabled="false"
-            app:layout_constraintBottom_toTopOf="@id/frag_canceled_rv_canceled"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:background="@drawable/bg_search_view"
+            android:textSize="@dimen/size_small"
+            android:textStyle="bold"
+            app:iconifiedByDefault="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <AutoCompleteTextView
-                android:id="@+id/frag_canceled_atv_canceled"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:completionThreshold="1"
-                android:hint="@string/frag_services_atv_hint"
-                android:inputType="text"
-                android:labelFor="@id/frag_canceled_til_canceled"
-                android:paddingLeft="@dimen/spacing_small"
-                android:textSize="@dimen/size_small"
-                android:textStyle="bold" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryBackground="@android:color/transparent"
+            app:queryHint="@string/frag_calendar_sv_search" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/frag_canceled_rv_canceled"
+            android:id="@+id/frag_calendar_rv_events"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/spacing_large"
             android:layout_marginVertical="@dimen/spacing_large"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/frag_calendar_btn_canceled"
+            app:layout_constraintBottom_toTopOf="@id/frag_calendar_btn_events"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/frag_canceled_til_canceled"
-            tools:listitem="@layout/adapter_canceled" />
+            app:layout_constraintTop_toBottomOf="@id/frag_calendar_sv_events"
+            tools:listitem="@layout/adapter_events" />
 
         <Button
             android:id="@+id/frag_calendar_btn_calendar"
@@ -163,19 +143,19 @@
             android:text="@string/frag_calendar_btn_calendar"
             android:textAppearance="@style/ButtonAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/frag_calendar_btn_canceled"
+            app:layout_constraintEnd_toStartOf="@id/frag_calendar_btn_events"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="@id/cv_calendar"
             app:layout_constraintWidth_percent="0.4" />
 
         <Button
-            android:id="@+id/frag_calendar_btn_canceled"
+            android:id="@+id/frag_calendar_btn_events"
             style="@style/ButtonEzSchedule"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginBottom="@dimen/spacing_large"
-            android:text="@string/frag_calendar_btn_canceled"
+            android:text="@string/frag_calendar_btn_events"
             android:textAppearance="@style/ButtonAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/cv_calendar"
@@ -188,6 +168,11 @@
     <include
         android:id="@+id/include_calendar_bottom_sheet"
         layout="@layout/view_calendar_bottom_sheet"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/include_loading"
+        layout="@layout/view_loading"
         android:visibility="gone" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
