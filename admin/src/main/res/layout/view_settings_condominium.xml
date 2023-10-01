@@ -44,8 +44,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/frag_settings_md_first" />
 
-        <EditText
-            android:id="@+id/frag_settings_et_value_residents"
+        <TextView
+            android:id="@+id/frag_settings_tv_value_residents"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="@dimen/spacing_large"
@@ -85,8 +85,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/frag_settings_md_second" />
 
-        <EditText
-            android:id="@+id/frag_settings_et_value_apartments"
+        <TextView
+            android:id="@+id/frag_settings_tv_value_apartments"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="@dimen/spacing_large"
@@ -126,8 +126,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/frag_settings_md_third" />
 
-        <EditText
-            android:id="@+id/frag_settings_et_value_salons"
+        <TextView
+            android:id="@+id/frag_settings_tv_value_salons"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="@dimen/spacing_large"

@@ -64,7 +64,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frag_settings_btn_save" />
+        app:layout_constraintTop_toBottomOf="@id/frag_settings_btn_back" />
 
     <include
         android:id="@+id/include_loading"

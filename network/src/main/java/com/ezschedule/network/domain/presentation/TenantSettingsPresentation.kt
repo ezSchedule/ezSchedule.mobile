@@ -9,5 +9,5 @@ data class TenantSettingsPresentation(
     val residentsBlock: String,
     val phoneNumber: String,
     val email: String,
-    val image:String?
+    val image: String?
 )

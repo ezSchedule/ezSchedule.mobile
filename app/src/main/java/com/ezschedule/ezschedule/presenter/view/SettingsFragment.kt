@@ -1,9 +1,14 @@
 package com.ezschedule.ezschedule.presenter.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -12,14 +17,27 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.ezschedule.ezschedule.databinding.FragmentSettingsBinding
 import com.ezschedule.ezschedule.presenter.viewModel.SettingsViewModel
-import com.ezschedule.network.domain.presentation.CondominiumPresentation
+import com.ezschedule.network.domain.data.TenantUpdateRequest
 import com.ezschedule.utils.SharedPreferencesManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
     private lateinit var activity: MainActivity
+    private lateinit var pickUpMedia: ActivityResultLauncher<PickVisualMediaRequest>
     private val viewModel by viewModel<SettingsViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        pickUpMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
+            if (it != null) {
+                Glide.with(requireContext())
+                    .load(it)
+                    .apply(RequestOptions.bitmapTransform(CircleCrop()))
+                    .into(binding.includeSettingsProfile.fragSettingsIvIconUser)
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -27,6 +45,7 @@ class SettingsFragment : Fragment() {
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,19 +61,28 @@ class SettingsFragment : Fragment() {
 
     private fun setupObservers() = with(viewModel) {
         showAdminLayout.observe(viewLifecycleOwner) {
-            setupLayoutCondominium()
             setupButtonClickAdmin()
             setScreenPreview(isAdmin = true)
         }
         showUserLayout.observe(viewLifecycleOwner) {
-//            setScreenPreview(isAdmin = false)
+            setScreenPreview(isAdmin = false)
             setupLoading(true)
             viewModel.getTenantInfo(SharedPreferencesManager(requireContext()).getInfo().id)
         }
-        tenantLiveData.observe(viewLifecycleOwner) {
+        tenantSettings.observe(viewLifecycleOwner) {
             setupLayoutProfile()
-            setScreenPreviewAdmin(isProfile = true, isCondominium = false)
-            setupLoading(false)
+        }
+        condominiumSettings.observe(viewLifecycleOwner) {
+            setupLayoutCondominium()
+        }
+        updateIsComplete.observe(viewLifecycleOwner) {
+            Toast.makeText(
+                requireContext(),
+                "Dados atualizados com sucesso",
+                Toast.LENGTH_SHORT
+            ).show()
+            setupLoading(true)
+            viewModel.getTenantInfo(SharedPreferencesManager(requireContext()).getInfo().id)
         }
     }
 
@@ -63,10 +91,17 @@ class SettingsFragment : Fragment() {
             findNavController().popBackStack()
             activity.displayLoginItems(isVisible = true)
         }
+        fragSettingsBtnSave.setOnClickListener {
+            updateTenant()
+        }
+
+        includeSettingsProfile.fragSettingsIvIconUser.setOnClickListener {
+            pickUpMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
     }
 
     private fun setupLayoutProfile() = with(binding.includeSettingsProfile) {
-        viewModel.tenantLiveData.value!!.apply {
+        viewModel.tenantSettings.value!!.apply {
             image.let {
                 Glide.with(requireContext())
                     .load(it)
@@ -81,49 +116,61 @@ class SettingsFragment : Fragment() {
             fragSettingsEtValueBlock.setText(residentsBlock)
             fragSettingsEtValuePhone.setText(phoneNumber)
             fragSettingsEtValueEmail.setText(email)
+
         }
+        binding.fragSettingsGroupButtons.isVisible = true
+        root.isVisible = true
+        setupLoading(false)
     }
 
     private fun setupLayoutCondominium() = with(binding.includeSettingsCondominium) {
-        getInfoCondominium().apply {
-            fragSettingsEtValueResidents.setText(residentsQuantity.toString())
-            fragSettingsEtValueApartments.setText(apartmentsQuantity.toString())
-            fragSettingsEtValueSalons.setText(salonsQuantity.toString())
+        viewModel.condominiumSettings.value!!.apply {
+            fragSettingsTvValueResidents.text = residents.toString()
+            fragSettingsTvValueApartments.text = apartments.toString()
+            fragSettingsTvValueSalons.text = saloons.toString()
         }
+        binding.fragSettingsBtnBack.isVisible = true
+        root.isVisible = true
+        setupLoading(false)
     }
 
     private fun setupButtonClickAdmin() = with(binding) {
         includeSettingsHome.fragSettingsBtnProfile.setOnClickListener {
             setupLoading(true)
+            includeSettingsHome.root.isVisible = false
             viewModel.getTenantInfo(SharedPreferencesManager(requireContext()).getInfo().id)
         }
         includeSettingsHome.fragSettingsBtnCondominium.setOnClickListener {
             setupLoading(true)
-            setScreenPreviewAdmin(isProfile = false, isCondominium = true)
-            setupLoading(false)
+            includeSettingsHome.root.isVisible = false
+            viewModel.getCondominiumInfo(SharedPreferencesManager(requireContext()).getInfo().idCondominium)
         }
     }
 
-    private fun setScreenPreviewAdmin(isProfile: Boolean, isCondominium: Boolean) = with(binding) {
-        includeSettingsHome.root.isVisible = false
-        fragSettingsGroupButtons.isVisible = true
-        includeSettingsProfile.root.isVisible = isProfile
-        includeSettingsCondominium.root.isVisible = isCondominium
-    }
-
     private fun setScreenPreview(isAdmin: Boolean) = with(binding) {
-        includeSettingsHome.root.isVisible = isAdmin
-        fragSettingsGroupButtons.isVisible = !isAdmin
         includeSettingsProfile.root.isVisible = !isAdmin
+        includeSettingsHome.root.isVisible = isAdmin
     }
 
     private fun setupLoading(isVisible: Boolean) {
         binding.includeLoading.root.isVisible = isVisible
     }
 
-    private fun getInfoCondominium() = CondominiumPresentation(
-        residentsQuantity = 223,
-        apartmentsQuantity = 67,
-        salonsQuantity = 3
-    )
+    private fun updateTenant() = with(binding.includeSettingsProfile) {
+
+        val updatedTenant = TenantUpdateRequest(
+            name = fragSettingsEtValueName.text.toString() + " " + fragSettingsEtValueSurname.text.toString(),
+            cpf = fragSettingsEtValueCpf.text.toString(),
+            apartmentNumber = fragSettingsEtValueApartmentNumber.text.toString().toInt(),
+            residentsBlock = fragSettingsEtValueBlock.text.toString(),
+            phoneNumber = fragSettingsEtValuePhone.text.toString(),
+            email = fragSettingsEtValueEmail.text.toString(),
+            image = null
+        )
+
+        viewModel.updateTenant(
+            SharedPreferencesManager(requireContext()).getInfo().id,
+            updatedTenant
+        )
+    }
 }
