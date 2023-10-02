@@ -80,20 +80,7 @@ class SettingsFragment : Fragment() {
         }
         tenantSettings.observe(viewLifecycleOwner) {
             setupLayoutProfile()
-        }
-        condominiumSettings.observe(viewLifecycleOwner) {
-            setupLayoutCondominium()
-        }
-        updateIsComplete.observe(viewLifecycleOwner) {
-            Toast.makeText(
-                requireContext(),
-                "Dados atualizados com sucesso",
-                Toast.LENGTH_SHORT
-            ).show()
-            setupLoading(true)
             SharedPreferencesManager(requireContext()).getInfo().apply {
-                viewModel.getTenantInfo(id)
-
                 SharedPreferencesManager(requireContext()).saveInfo(
                     TenantPresentation(
                         id = id,
@@ -106,6 +93,19 @@ class SettingsFragment : Fragment() {
                     )
                 )
             }
+        }
+        condominiumSettings.observe(viewLifecycleOwner) {
+            setupLayoutCondominium()
+        }
+        updateIsComplete.observe(viewLifecycleOwner) {
+            Toast.makeText(
+                requireContext(),
+                "Dados atualizados com sucesso",
+                Toast.LENGTH_SHORT
+            ).show()
+            setupLoading(true)
+
+            viewModel.getTenantInfo(SharedPreferencesManager(requireContext()).getInfo().id)
         }
     }
 
