@@ -41,7 +41,7 @@ class TenantRepository(private val endpoint: TenantEndpoint) {
                 residentsBlock = tenantUpdateRequest.residentsBlock.toRequestBody(),
                 phoneNumber = tenantUpdateRequest.phoneNumber.toRequestBody(),
                 apartmentNumber = tenantUpdateRequest.apartmentNumber,
-                image = tenantUpdateRequest.image
+                params = tenantUpdateRequest.image
             )
         }
     }

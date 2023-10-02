@@ -13,6 +13,8 @@ import com.ezschedule.network.domain.data.CondominiumSettingsData
 import com.ezschedule.network.domain.data.TenantUpdateRequest
 import com.ezschedule.network.domain.presentation.TenantSettingsPresentation
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class SettingsViewModel(
     private val getTenantSettingsUseCase: GetTenantSettingsUseCase,
@@ -34,6 +36,10 @@ class SettingsViewModel(
 
     private var _updateIsComplete = MutableLiveData<Unit>()
     val updateIsComplete: LiveData<Unit> = _updateIsComplete
+
+
+    private var _imgHolder = MutableLiveData<Map<String,RequestBody>>()
+    val imgHolder: LiveData<Map<String,RequestBody>> = _imgHolder
 
     private var updatedImg = false
 
@@ -81,6 +87,10 @@ class SettingsViewModel(
                 is ResultWrapper.Error -> Log.d("ERROR", "erro na requisição de update")
             }
         }
+    }
+
+    fun updateImg(img: Map<String,RequestBody>) {
+        _imgHolder.postValue(img)
     }
 
 }

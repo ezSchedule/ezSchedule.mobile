@@ -128,7 +128,7 @@ class MainActivity : AppCompatActivity() {
     private fun setImageUser(imageView: ImageView) {
         viewModel.getImage(SharedPreferencesManager(this).getInfo().image)?.let {
             Glide.with(this)
-                .load(ResourceWrapper(this).getString(R.string.toolbar_image_base_url, it))
+                .load(it)
                 .apply(RequestOptions.bitmapTransform(CircleCrop()))
                 .into(imageView)
         }

@@ -1,6 +1,5 @@
 package com.ezschedule.ezschedule.presenter.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,9 +15,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.ezschedule.ezschedule.databinding.FragmentSettingsBinding
+import com.ezschedule.ezschedule.presenter.utils.InputStreamRequestBody
 import com.ezschedule.ezschedule.presenter.viewModel.SettingsViewModel
 import com.ezschedule.network.domain.data.TenantUpdateRequest
+import com.ezschedule.network.domain.presentation.TenantPresentation
 import com.ezschedule.utils.SharedPreferencesManager
+import okhttp3.RequestBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsFragment : Fragment() {
@@ -35,6 +37,13 @@ class SettingsFragment : Fragment() {
                     .load(it)
                     .apply(RequestOptions.bitmapTransform(CircleCrop()))
                     .into(binding.includeSettingsProfile.fragSettingsIvIconUser)
+
+                val params = HashMap<String, RequestBody>()
+                val fileName = InputStreamRequestBody.getFileName(requireContext(), it)
+                // "file" is your image upload field name
+                params["image\"; filename=\"${fileName}\""] =
+                    InputStreamRequestBody(requireContext(), it)
+                viewModel.updateImg(params)
             }
         }
     }
@@ -82,7 +91,21 @@ class SettingsFragment : Fragment() {
                 Toast.LENGTH_SHORT
             ).show()
             setupLoading(true)
-            viewModel.getTenantInfo(SharedPreferencesManager(requireContext()).getInfo().id)
+            SharedPreferencesManager(requireContext()).getInfo().apply {
+                viewModel.getTenantInfo(id)
+
+                SharedPreferencesManager(requireContext()).saveInfo(
+                    TenantPresentation(
+                        id = id,
+                        email = viewModel.tenantSettings.value!!.email,
+                        name = viewModel.tenantSettings.value!!.fullName,
+                        image = viewModel.tenantSettings.value!!.image ?: "",
+                        isAdmin = isAdmin,
+                        tokenJWT = tokenJWT,
+                        idCondominium = idCondominium
+                    )
+                )
+            }
         }
     }
 
@@ -157,6 +180,8 @@ class SettingsFragment : Fragment() {
     }
 
     private fun updateTenant() = with(binding.includeSettingsProfile) {
+        val t = HashMap<String, RequestBody>()
+        t["image\"; filename=\""]
 
         val updatedTenant = TenantUpdateRequest(
             name = fragSettingsEtValueName.text.toString() + " " + fragSettingsEtValueSurname.text.toString(),
@@ -165,7 +190,7 @@ class SettingsFragment : Fragment() {
             residentsBlock = fragSettingsEtValueBlock.text.toString(),
             phoneNumber = fragSettingsEtValuePhone.text.toString(),
             email = fragSettingsEtValueEmail.text.toString(),
-            image = null
+            image = viewModel.imgHolder.value ?: t
         )
 
         viewModel.updateTenant(
