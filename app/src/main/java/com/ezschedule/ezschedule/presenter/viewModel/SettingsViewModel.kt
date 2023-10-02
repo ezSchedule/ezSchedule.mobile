@@ -5,11 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ezschedule.ezschedule.domain.useCase.CreateSaloonUseCase
 import com.ezschedule.ezschedule.domain.useCase.GetCondominiumSettingsUseCase
 import com.ezschedule.ezschedule.domain.useCase.GetTenantSettingsUseCase
 import com.ezschedule.ezschedule.domain.useCase.UpdateTenantSettingsUseCase
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.data.CondominiumSettingsData
+import com.ezschedule.network.domain.data.SaloonRequest
 import com.ezschedule.network.domain.data.TenantUpdateRequest
 import com.ezschedule.network.domain.presentation.TenantSettingsPresentation
 import kotlinx.coroutines.launch
@@ -19,7 +21,8 @@ import okhttp3.RequestBody
 class SettingsViewModel(
     private val getTenantSettingsUseCase: GetTenantSettingsUseCase,
     private val getCondominiumSettingsUseCase: GetCondominiumSettingsUseCase,
-    private val updateTenantSettingsUseCase: UpdateTenantSettingsUseCase
+    private val updateTenantSettingsUseCase: UpdateTenantSettingsUseCase,
+    private val createSaloonUseCase: CreateSaloonUseCase
 ) : ViewModel() {
 
     private var _showAdminLayout = MutableLiveData<Unit>()
@@ -37,11 +40,11 @@ class SettingsViewModel(
     private var _updateIsComplete = MutableLiveData<Unit>()
     val updateIsComplete: LiveData<Unit> = _updateIsComplete
 
-
     private var _imgHolder = MutableLiveData<Map<String,RequestBody>>()
     val imgHolder: LiveData<Map<String,RequestBody>> = _imgHolder
 
-    private var updatedImg = false
+    private var _saloonCreated = MutableLiveData<Unit>()
+    val saloonCreated: LiveData<Unit> = _saloonCreated
 
 
     fun verifyIsAdmin(isAdmin: Boolean) {
@@ -91,6 +94,15 @@ class SettingsViewModel(
 
     fun updateImg(img: Map<String,RequestBody>) {
         _imgHolder.postValue(img)
+    }
+
+    fun createSaloon(saloon:SaloonRequest){
+        viewModelScope.launch {
+            when(createSaloonUseCase(saloon)){
+                is ResultWrapper.Success -> _saloonCreated.value = Unit
+                is ResultWrapper.Error -> Log.d("Error","erro na criação de saloon")
+            }
+        }
     }
 
 }

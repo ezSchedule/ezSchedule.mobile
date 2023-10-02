@@ -15,22 +15,32 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.ezschedule.ezschedule.databinding.FragmentSettingsBinding
+import com.ezschedule.ezschedule.databinding.SettingsBottomSheetBinding
 import com.ezschedule.ezschedule.presenter.utils.InputStreamRequestBody
 import com.ezschedule.ezschedule.presenter.viewModel.SettingsViewModel
+import com.ezschedule.network.domain.data.CondominiumRequest
+import com.ezschedule.network.domain.data.SaloonRequest
 import com.ezschedule.network.domain.data.TenantUpdateRequest
 import com.ezschedule.network.domain.presentation.TenantPresentation
 import com.ezschedule.utils.SharedPreferencesManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import okhttp3.RequestBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
+    private lateinit var bottomSheetBinding: SettingsBottomSheetBinding
     private lateinit var activity: MainActivity
     private lateinit var pickUpMedia: ActivityResultLauncher<PickVisualMediaRequest>
     private val viewModel by viewModel<SettingsViewModel>()
+    private lateinit var userInfo: TenantPresentation
+    private lateinit var dialog:BottomSheetDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        userInfo = SharedPreferencesManager(requireContext()).getInfo()
+        dialog = BottomSheetDialog(requireContext())
+
         pickUpMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
             if (it != null) {
                 Glide.with(requireContext())
@@ -46,6 +56,7 @@ class SettingsFragment : Fragment() {
                 viewModel.updateImg(params)
             }
         }
+
     }
 
     override fun onCreateView(
@@ -59,7 +70,7 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupActivity()
-        viewModel.verifyIsAdmin(SharedPreferencesManager(requireContext()).getInfo().isAdmin)
+        viewModel.verifyIsAdmin(userInfo.isAdmin)
         setupObservers()
         setupButtonClick()
     }
@@ -73,30 +84,34 @@ class SettingsFragment : Fragment() {
             setupButtonClickAdmin()
             setScreenPreview(isAdmin = true)
         }
+
         showUserLayout.observe(viewLifecycleOwner) {
             setScreenPreview(isAdmin = false)
             setupLoading(true)
-            viewModel.getTenantInfo(SharedPreferencesManager(requireContext()).getInfo().id)
+            viewModel.getTenantInfo(userInfo.id)
         }
+
         tenantSettings.observe(viewLifecycleOwner) {
             setupLayoutProfile()
-            SharedPreferencesManager(requireContext()).getInfo().apply {
-                SharedPreferencesManager(requireContext()).saveInfo(
-                    TenantPresentation(
-                        id = id,
-                        email = viewModel.tenantSettings.value!!.email,
-                        name = viewModel.tenantSettings.value!!.fullName,
-                        image = viewModel.tenantSettings.value!!.image ?: "",
-                        isAdmin = isAdmin,
-                        tokenJWT = tokenJWT,
-                        idCondominium = idCondominium
-                    )
+            val updatedUser = viewModel.tenantSettings.value!!
+
+            SharedPreferencesManager(requireContext()).saveInfo(
+                TenantPresentation(
+                    id = userInfo.id,
+                    email = updatedUser.email,
+                    name = updatedUser.fullName,
+                    image = updatedUser.image ?: "",
+                    isAdmin = userInfo.isAdmin,
+                    tokenJWT = userInfo.tokenJWT,
+                    idCondominium = userInfo.idCondominium
                 )
-            }
+            )
         }
+
         condominiumSettings.observe(viewLifecycleOwner) {
             setupLayoutCondominium()
         }
+
         updateIsComplete.observe(viewLifecycleOwner) {
             Toast.makeText(
                 requireContext(),
@@ -104,8 +119,14 @@ class SettingsFragment : Fragment() {
                 Toast.LENGTH_SHORT
             ).show()
             setupLoading(true)
+            viewModel.getTenantInfo(userInfo.id)
+        }
 
-            viewModel.getTenantInfo(SharedPreferencesManager(requireContext()).getInfo().id)
+        viewModel.saloonCreated.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), "Salão criado com sucesso!", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+            setupLoading(true)
+            viewModel.getCondominiumInfo(userInfo.idCondominium)
         }
     }
 
@@ -117,7 +138,6 @@ class SettingsFragment : Fragment() {
         fragSettingsBtnSave.setOnClickListener {
             updateTenant()
         }
-
         includeSettingsProfile.fragSettingsIvIconUser.setOnClickListener {
             pickUpMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
@@ -139,7 +159,6 @@ class SettingsFragment : Fragment() {
             fragSettingsEtValueBlock.setText(residentsBlock)
             fragSettingsEtValuePhone.setText(phoneNumber)
             fragSettingsEtValueEmail.setText(email)
-
         }
         binding.fragSettingsGroupButtons.isVisible = true
         root.isVisible = true
@@ -151,6 +170,9 @@ class SettingsFragment : Fragment() {
             fragSettingsTvValueResidents.text = residents.toString()
             fragSettingsTvValueApartments.text = apartments.toString()
             fragSettingsTvValueSalons.text = saloons.toString()
+            fragSettingsTvLabelAddSalons.setOnClickListener {
+                setBottomSheet()
+            }
         }
         binding.fragSettingsBtnBack.isVisible = true
         root.isVisible = true
@@ -161,12 +183,12 @@ class SettingsFragment : Fragment() {
         includeSettingsHome.fragSettingsBtnProfile.setOnClickListener {
             setupLoading(true)
             includeSettingsHome.root.isVisible = false
-            viewModel.getTenantInfo(SharedPreferencesManager(requireContext()).getInfo().id)
+            viewModel.getTenantInfo(userInfo.id)
         }
         includeSettingsHome.fragSettingsBtnCondominium.setOnClickListener {
             setupLoading(true)
             includeSettingsHome.root.isVisible = false
-            viewModel.getCondominiumInfo(SharedPreferencesManager(requireContext()).getInfo().idCondominium)
+            viewModel.getCondominiumInfo(userInfo.idCondominium)
         }
     }
 
@@ -193,9 +215,22 @@ class SettingsFragment : Fragment() {
             image = viewModel.imgHolder.value ?: t
         )
 
-        viewModel.updateTenant(
-            SharedPreferencesManager(requireContext()).getInfo().id,
-            updatedTenant
-        )
+        viewModel.updateTenant(userInfo.id, updatedTenant)
+    }
+
+    private fun setBottomSheet() {
+        bottomSheetBinding = SettingsBottomSheetBinding.inflate(layoutInflater)
+        dialog.setContentView(bottomSheetBinding.root)
+        dialog.show()
+        bottomSheetBinding.settingsBsBtn.setOnClickListener {
+            viewModel.createSaloon(
+                SaloonRequest(
+                    name = bottomSheetBinding.settingsBsEtName.text.toString().trim(),
+                    price = bottomSheetBinding.settingsBsEtPrice.text.toString().trim().toDouble(),
+                    block = bottomSheetBinding.settingsBsEtSaloonNumber.text.toString(),
+                    condominium = CondominiumRequest(userInfo.idCondominium)
+                )
+            )
+        }
     }
 }
