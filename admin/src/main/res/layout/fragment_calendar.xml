@@ -133,6 +133,17 @@
             app:layout_constraintTop_toBottomOf="@id/frag_calendar_sv_events"
             tools:listitem="@layout/adapter_events" />
 
+        <TextView
+            android:id="@+id/frag_calendar_tv_list_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/frag_calendar_tv_list_empty"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/frag_calendar_rv_events"
+            app:layout_constraintEnd_toEndOf="@id/frag_calendar_rv_events"
+            app:layout_constraintStart_toStartOf="@id/frag_calendar_rv_events"
+            app:layout_constraintTop_toTopOf="@id/frag_calendar_rv_events" />
+
         <Button
             android:id="@+id/frag_calendar_btn_calendar"
             style="@style/ButtonEzSchedule"
