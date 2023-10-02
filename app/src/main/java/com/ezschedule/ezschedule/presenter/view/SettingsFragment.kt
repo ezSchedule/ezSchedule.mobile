@@ -41,7 +41,7 @@ class SettingsFragment : Fragment() {
                 val params = HashMap<String, RequestBody>()
                 val fileName = InputStreamRequestBody.getFileName(requireContext(), it)
                 // "file" is your image upload field name
-                params["image\"; filename=\"${fileName}\""] =
+                params["image\"; filename=\"$fileName"] =
                     InputStreamRequestBody(requireContext(), it)
                 viewModel.updateImg(params)
             }
