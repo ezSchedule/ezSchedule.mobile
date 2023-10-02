@@ -63,6 +63,11 @@ class CalendarFragment : Fragment() {
             setupRecyclerView(it)
             setupLoading(false)
         }
+        emptyList.observe(viewLifecycleOwner) {
+            setupLoading(isLoading = false)
+            setEventOnDate(date = "01/01/1999 12:00", getColorEvent(isCanceled = false))
+            binding.fragCalendarTvListEmpty.isVisible = true
+        }
         successfulCancellation.observe(viewLifecycleOwner) {
             getEvents(SharedPreferencesManager(requireContext()).getInfo().idCondominium)
         }
