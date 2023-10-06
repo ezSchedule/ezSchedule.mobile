@@ -38,4 +38,10 @@
     <!-- Settings Screen -->
     <string name="frag_settings_btn_previous">Previous screen</string>
     <string name="frag_settings_btn_save">Save</string>
+    <string name="bottom_sheet_settings_hint_name">Name</string>
+    <string name="bottom_sheet_settings_hint_price">Value</string>
+    <string name="bottom_sheet_settings_title">Add Saloon</string>
+    <string name="bottom_sheet_settings_hint_saloon_number">Number/Letter</string>
+    <string name="bottom_sheet_settings_btn">Save</string>
+    <string name="bottom_sheet_settings_desc">Unit</string>
 </resources>

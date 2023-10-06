@@ -60,13 +60,13 @@
     <string name="frag_settings_text_block">Block</string>
     <string name="frag_settings_text_phone">Phone</string>
     <string name="frag_settings_text_email">Email</string>
-    <string name="frag_settings_text_name_insert">Mauro</string>
-    <string name="frag_settings_text_surname_insert">da CT</string>
-    <string name="frag_settings_text_document_insert">000.000.000–00</string>
-    <string name="frag_settings_text_house_number_insert">25</string>
-    <string name="frag_settings_text_block_insert">C</string>
-    <string name="frag_settings_text_phone_insert">(11)xxxxx-xxxx</string>
-    <string name="frag_settings_text_email_insert">Mauro@gmail.com</string>
+    <string name="frag_settings_text_name_insert" translatable="false">Mauro</string>
+    <string name="frag_settings_text_surname_insert" translatable="false">da CT</string>
+    <string name="frag_settings_text_document_insert" translatable="false">000.000.000–00</string>
+    <string name="frag_settings_text_house_number_insert" translatable="false">25</string>
+    <string name="frag_settings_text_block_insert" translatable="false">C</string>
+    <string name="frag_settings_text_phone_insert" translatable="false">(11)xxxxx-xxxx</string>
+    <string name="frag_settings_text_email_insert" translatable="false">Mauro@gmail.com</string>
 
     <!-- Settings Continued Screen -->
     <string name="frag_settings_text_residents">Residents</string>

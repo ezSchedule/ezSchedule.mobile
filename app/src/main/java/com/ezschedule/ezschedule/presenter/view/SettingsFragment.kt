@@ -34,29 +34,13 @@ class SettingsFragment : Fragment() {
     private lateinit var pickUpMedia: ActivityResultLauncher<PickVisualMediaRequest>
     private val viewModel by viewModel<SettingsViewModel>()
     private lateinit var userInfo: TenantPresentation
-    private lateinit var dialog:BottomSheetDialog
+    private lateinit var dialog: BottomSheetDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         userInfo = SharedPreferencesManager(requireContext()).getInfo()
         dialog = BottomSheetDialog(requireContext())
-
-        pickUpMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
-            if (it != null) {
-                Glide.with(requireContext())
-                    .load(it)
-                    .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                    .into(binding.includeSettingsProfile.fragSettingsIvIconUser)
-
-                val params = HashMap<String, RequestBody>()
-                val fileName = InputStreamRequestBody.getFileName(requireContext(), it)
-                // "file" is your image upload field name
-                params["image\"; filename=\"$fileName"] =
-                    InputStreamRequestBody(requireContext(), it)
-                viewModel.updateImg(params)
-            }
-        }
-
+        setPickUpMedia()
     }
 
     override fun onCreateView(
@@ -115,7 +99,7 @@ class SettingsFragment : Fragment() {
         updateIsComplete.observe(viewLifecycleOwner) {
             Toast.makeText(
                 requireContext(),
-                "Dados atualizados com sucesso",
+                "Dados atualizados com sucesso!",
                 Toast.LENGTH_SHORT
             ).show()
             setupLoading(true)
@@ -222,15 +206,34 @@ class SettingsFragment : Fragment() {
         bottomSheetBinding = SettingsBottomSheetBinding.inflate(layoutInflater)
         dialog.setContentView(bottomSheetBinding.root)
         dialog.show()
-        bottomSheetBinding.settingsBsBtn.setOnClickListener {
+        bottomSheetBinding.bsBtn.setOnClickListener {
             viewModel.createSaloon(
                 SaloonRequest(
-                    name = bottomSheetBinding.settingsBsEtName.text.toString().trim(),
-                    price = bottomSheetBinding.settingsBsEtPrice.text.toString().trim().toDouble(),
-                    block = bottomSheetBinding.settingsBsEtSaloonNumber.text.toString(),
+                    name = bottomSheetBinding.etName.text.toString().trim(),
+                    price = bottomSheetBinding.etPrice.text.toString().trim().toDouble(),
+                    block = bottomSheetBinding.etSaloonNumber.text.toString(),
                     condominium = CondominiumRequest(userInfo.idCondominium)
                 )
             )
         }
     }
+
+    private fun setPickUpMedia(){
+        pickUpMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
+            it?.let {
+                Glide.with(requireContext())
+                    .load(it)
+                    .apply(RequestOptions.bitmapTransform(CircleCrop()))
+                    .into(binding.includeSettingsProfile.fragSettingsIvIconUser)
+
+                val params = HashMap<String, RequestBody>()
+                val fileName = InputStreamRequestBody.getFileName(requireContext(), it)
+                // "file" is your image upload field name
+                params["image\"; filename=\"$fileName"] =
+                    InputStreamRequestBody(requireContext(), it)
+                viewModel.updateImg(params)
+            }
+        }
+    }
+
 }
