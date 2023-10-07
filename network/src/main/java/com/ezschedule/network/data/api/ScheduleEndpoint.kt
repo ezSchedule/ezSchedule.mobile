@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 
-interface CalendarEndpoint {
+interface ScheduleEndpoint {
     @GET("schedules/condominium/{id}")
     suspend fun getSchedules(@Path("id") id: Int): List<ScheduleData>
 

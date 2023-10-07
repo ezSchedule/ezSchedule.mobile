@@ -74,4 +74,5 @@
     <string name="frag_settings_text_apartments">Apartments</string>
     <string name="frag_settings_text_salons">Salons</string>
     <string name="frag_settings_btn_add_salons">Add salons +</string>
+    <string name="frag_history_text_no_payments">No requests have been found</string>
 </resources>

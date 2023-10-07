@@ -1,16 +1,17 @@
 package com.ezschedule.admin.presenter.adapter
 
-import android.content.Context
-import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.ezschedule.admin.databinding.AdapterHistoryBinding
-import com.ezschedule.network.domain.presentation.HistoryPresentation
+import com.ezschedule.network.domain.response.ScheduleResponse
 
 class HistoryAdapter(
-    private val histories: List<HistoryPresentation>) :
+    private val histories: List<ScheduleResponse>, private val isRequest: Boolean
+) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,16 +30,28 @@ class HistoryAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind() = with(binding) {
-            tvHistoryName.text = historyData().username
-            tvHistorySaloonName.text = historyData().saloonName
-            tvHistorySaloonValue.text = historyData().saloonValue.toString()
+            tvHistoryName.text = historyData().name
+            tvHistorySaloonName.text = historyData().nameSalon
+            tvHistorySaloonValue.text = historyData().priceSalon.toString()
 
-            if(historyData().paymentStatus == false){
-                fragHistoryImgAccept.visibility = View.GONE
-                fragHistoryImgError.visibility = View.VISIBLE
+            if(!isRequest) {
+                if (!historyData().isCanceled) {
+                    fragHistoryImgAccept.visibility = View.GONE
+                    fragHistoryImgError.visibility = View.VISIBLE
+                } else {
+                    fragHistoryImgAccept.visibility = View.VISIBLE
+                    fragHistoryImgError.visibility = View.GONE
+                }
             }else{
-                fragHistoryImgAccept.visibility = View.VISIBLE
-                fragHistoryImgError.visibility = View.GONE
+                fragHistoryImgAccept.isVisible = true
+                fragHistoryImgError.isVisible = true
+
+                fragHistoryImgError.setOnClickListener{
+                    Toast.makeText(it.context,"works",Toast.LENGTH_SHORT).show()
+                }
+                fragHistoryImgAccept.setOnClickListener {
+                    Toast.makeText(it.context,"works",Toast.LENGTH_SHORT).show()
+                }
             }
         }
 

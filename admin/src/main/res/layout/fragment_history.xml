@@ -15,7 +15,6 @@
         android:textSize="@dimen/size_small"
         android:textStyle="bold"
         app:iconifiedByDefault="false"
-        app:layout_constraintBottom_toTopOf="@id/frag_rv_history"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -34,12 +33,25 @@
         android:scrollbarStyle="outsideInset"
         android:scrollbarThumbVertical="@color/light_gray"
         android:scrollbars="vertical"
+        android:visibility="invisible"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/frag_btn_payments_history"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/frag_history_sv_history"
         tools:listitem="@layout/adapter_history" />
+
+    <TextView
+        android:id="@+id/frag_history_tv_no_payments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_small"
+        android:text="@string/frag_history_text_no_payments"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <Button
