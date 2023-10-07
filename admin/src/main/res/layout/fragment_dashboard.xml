@@ -5,50 +5,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/frag_dash_rv_events"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frag_dash_cl_chart"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_large"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/adapter_dashboard_events" />
+        android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/frag_dash_cv_chart"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_large"
-        android:layout_marginVertical="@dimen/spacing_large"
-        android:backgroundTint="@color/colorPrimary"
-        app:cardCornerRadius="@dimen/corners_tiny"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frag_dash_rv_events">
-
-        <TextView
-            android:id="@+id/frag_dash_tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|top"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:background="@drawable/bg_item_chart"
-            android:text="@string/frag_dashboard_tv_title"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/frag_dash_chart"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/frag_dash_rv_events"
             android:layout_width="match_parent"
-            android:layout_height="344dp"
-            android:layout_marginTop="@dimen/spacing_huge"
-            android:layout_marginBottom="@dimen/spacing_small" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/adapter_dashboard_events" />
 
-    </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/frag_dash_cv_chart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            android:layout_marginVertical="@dimen/spacing_large"
+            android:backgroundTint="@color/colorPrimary"
+            app:cardCornerRadius="@dimen/corners_tiny"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frag_dash_rv_events">
+
+            <TextView
+                android:id="@+id/frag_dash_tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:background="@drawable/bg_item_chart"
+                android:text="@string/frag_dashboard_tv_title"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/frag_dash_chart"
+                android:layout_width="match_parent"
+                android:layout_height="344dp"
+                android:layout_marginTop="@dimen/spacing_huge"
+                android:layout_marginBottom="@dimen/spacing_small" />
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/include_loading"
+        layout="@layout/view_loading"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
