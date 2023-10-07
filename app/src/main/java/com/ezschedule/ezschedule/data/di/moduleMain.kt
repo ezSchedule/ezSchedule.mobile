@@ -1,6 +1,8 @@
 package com.ezschedule.ezschedule.data.di
 
 import android.content.Context
+import com.ezschedule.admin.domain.useCase.DashboardUseCase
+import com.ezschedule.admin.presenter.viewmodel.DashboardViewModel
 import com.ezschedule.admin.data.repository.ScheduleRepository
 import com.ezschedule.admin.domain.useCase.CalendarUseCase
 import com.ezschedule.admin.presenter.viewmodel.CalendarViewModel
@@ -47,9 +49,11 @@ val moduleMain = module {
     factory { GetCondominiumSettingsUseCase(get()) }
     factory { UpdateTenantSettingsUseCase(get()) }
     factory { CreateSaloonUseCase(get()) }
+    factory { DashboardUseCase(get()) }
 
     viewModel { TenantViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }
     viewModel { CalendarViewModel(get()) }
-    viewModel { SettingsViewModel(get(), get(), get(),get()) }
+    viewModel { SettingsViewModel(get(), get(), get(), get()) }
+    viewModel { DashboardViewModel(get()) }
 }
