@@ -39,4 +39,10 @@
     <!-- Settings Screen -->
     <string name="frag_settings_btn_previous">Tela anterior</string>
     <string name="frag_settings_btn_save">Salvar</string>
+    <string name="bottom_sheet_settings_title">Adicionar Salão</string>
+    <string name="bottom_sheet_settings_hint_name">Nome</string>
+    <string name="bottom_sheet_settings_hint_price">Valor</string>
+    <string name="bottom_sheet_settings_desc">Bloco</string>
+    <string name="bottom_sheet_settings_hint_saloon_number">Numero/Letra</string>
+    <string name="bottom_sheet_settings_btn">Salvar</string>
 </resources>
