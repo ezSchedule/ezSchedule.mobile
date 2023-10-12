@@ -1,11 +1,15 @@
 package com.ezschedule.ezschedule.data.di
 
 import android.content.Context
-import com.ezschedule.admin.domain.useCase.DashboardUseCase
-import com.ezschedule.admin.presenter.viewmodel.DashboardViewModel
 import com.ezschedule.admin.data.repository.ScheduleRepository
+import com.ezschedule.admin.data.repository.ServiceRepository
 import com.ezschedule.admin.domain.useCase.CalendarUseCase
+import com.ezschedule.admin.domain.useCase.DashboardUseCase
+import com.ezschedule.admin.domain.useCase.GetServiceListUseCase
+import com.ezschedule.admin.domain.useCase.GetTenantsListUseCase
 import com.ezschedule.admin.presenter.viewmodel.CalendarViewModel
+import com.ezschedule.admin.presenter.viewmodel.DashboardViewModel
+import com.ezschedule.admin.presenter.viewmodel.ServicesViewModel
 import com.ezschedule.ezschedule.data.repository.CondominiumRepository
 import com.ezschedule.ezschedule.data.repository.SaloonRepository
 import com.ezschedule.ezschedule.data.repository.TenantRepository
@@ -21,6 +25,7 @@ import com.ezschedule.ezschedule.presenter.viewModel.TenantViewModel
 import com.ezschedule.network.data.api.CalendarEndpoint
 import com.ezschedule.network.data.api.CondominiumEndpoint
 import com.ezschedule.network.data.api.SaloonEndpoint
+import com.ezschedule.network.data.api.ServicesEndpoint
 import com.ezschedule.network.data.api.TenantEndpoint
 import com.ezschedule.network.data.network.NetworkServiceFactory
 import com.ezschedule.utils.ResourceWrapper
@@ -36,17 +41,21 @@ val moduleMain = module {
     factory { get<NetworkServiceFactory>().createNetworkService<CalendarEndpoint>() }
     factory { get<NetworkServiceFactory>().createNetworkService<CondominiumEndpoint>() }
     factory { get<NetworkServiceFactory>().createNetworkService<SaloonEndpoint>() }
+    factory { get<NetworkServiceFactory>().createNetworkService<ServicesEndpoint>() }
 
     factory { TenantRepository(get()) }
     factory { ScheduleRepository(get()) }
     factory { CondominiumRepository(get()) }
     factory { SaloonRepository(get()) }
+    factory { ServiceRepository(get()) }
 
     factory { LoginUseCase(get()) }
     factory { LogoutUseCase(get()) }
     factory { CalendarUseCase(get()) }
     factory { GetTenantSettingsUseCase(get()) }
     factory { GetCondominiumSettingsUseCase(get()) }
+    factory { GetTenantsListUseCase(get()) }
+    factory { GetServiceListUseCase(get()) }
     factory { UpdateTenantSettingsUseCase(get()) }
     factory { CreateSaloonUseCase(get()) }
     factory { DashboardUseCase(get()) }
@@ -55,5 +64,6 @@ val moduleMain = module {
     viewModel { MainViewModel(get(), get()) }
     viewModel { CalendarViewModel(get()) }
     viewModel { SettingsViewModel(get(), get(), get(), get()) }
+    viewModel { ServicesViewModel(get(), get()) }
     viewModel { DashboardViewModel(get()) }
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Services Screen -->
-    <string name="frag_services_btn_desc">+</string>
-    <string name="frag_services_sv_hint">Search…</string>
+    <string name="frag_services_btn_desc">Add</string>
+    <string name="frag_services_sv_hint">Type the service\'s name...</string>
     <string name="frag_tv_title">Add</string>
+    <string name="frag_service_text_no_service_found">No service has been found</string>
 
     <!--  History Screen  -->
     <string name="frag_history_atv_hint">Search…</string>

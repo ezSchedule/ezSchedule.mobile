@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Services Screen -->
-    <string name="frag_services_btn_desc">+</string>
-    <string name="frag_services_sv_hint">Buscar…</string>
+    <string name="frag_services_btn_desc">adicionar</string>
+    <string name="frag_services_sv_hint">Digite o serviço...</string>
     <string name="frag_tv_title">Adicionar</string>
 
     <!-- History Screen -->
@@ -65,4 +65,5 @@
     <string name="frag_settings_text_apartments">Apartamentos</string>
     <string name="frag_settings_text_salons">Salões</string>
     <string name="frag_settings_btn_add_salons">Adicionar salões +</string>
+    <string name="frag_service_text_no_service_found">Nenhum serviço encontrado</string>
 </resources>

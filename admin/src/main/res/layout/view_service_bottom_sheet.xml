@@ -20,20 +20,32 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/frag_tv_title"
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_large"
         android:gravity="center"
         android:text="@string/frag_tv_title"
         android:textAppearance="@style/TitleAppearance"
-        app:layout_constraintBottom_toTopOf="@id/frag_services_sv_service"
+        app:layout_constraintBottom_toTopOf="@id/frag_sv_service"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tv_no_residents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No residents have been found"
+        android:visibility="visible"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/frag_services_sv_service"
+        android:id="@+id/frag_sv_service"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginHorizontal="@dimen/spacing_large"
@@ -45,7 +57,7 @@
         app:layout_constraintBottom_toTopOf="@id/frag_rv_service"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frag_tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
         app:queryBackground="@android:color/transparent"
         app:queryHint="@string/frag_services_sv_hint" />
 
@@ -55,11 +67,12 @@
         android:layout_height="320dp"
         android:layout_marginHorizontal="@dimen/spacing_large"
         android:layout_marginVertical="@dimen/spacing_large"
+        android:visibility="invisible"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/frag_til_name_new_service"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frag_services_sv_service"
+        app:layout_constraintTop_toBottomOf="@id/frag_sv_service"
         tools:listitem="@layout/adapter_service" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -76,11 +89,11 @@
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/frag_btn_add_service"
+        app:layout_constraintEnd_toStartOf="@id/btn_add_service"
         app:layout_constraintStart_toStartOf="@id/frag_rv_service">
 
         <EditText
-            android:id="@+id/frag_edt_name_new_service"
+            android:id="@+id/edt_name_new_service"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/frag_services_sv_hint"
@@ -91,7 +104,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/frag_btn_add_service"
+        android:id="@+id/btn_add_service"
         style="@style/ButtonEzSchedule"
         android:layout_width="0dp"
         android:layout_height="48dp"

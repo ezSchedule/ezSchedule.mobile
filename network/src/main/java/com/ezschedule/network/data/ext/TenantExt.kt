@@ -1,8 +1,9 @@
 package com.ezschedule.network.data.ext
 
 import com.ezschedule.network.domain.data.TenantData
+import com.ezschedule.network.domain.data.TenantServiceData
 import com.ezschedule.network.domain.data.TenantSettingsData
-import com.ezschedule.network.domain.presentation.TenantSettingsPresentation
+import com.ezschedule.network.domain.presentation.TenantServicePresentation
 import com.ezschedule.network.domain.response.TenantResponse
 
 fun TenantData.toResponse() = TenantResponse(
@@ -35,4 +36,26 @@ fun TenantSettingsData.toResponse() = TenantResponse(
     isAdmin = isAdmin == 1,
     tokenJWT = "",
     idCondominium = 0
+)
+
+fun TenantServiceData.toResponse() = TenantResponse(
+    id = id,
+    name = name,
+    email = email,
+    cpf = cpf,
+    password = "",
+    residentsBlock = residentsBlock,
+    apartmentNumber = apartmentNumber,
+    phoneNumber = phoneNumber,
+    image = image ?: "",
+    isAuthenticated = isAuthenticated,
+    isAdmin = isAdmin == 1,
+    tokenJWT = "",
+    idCondominium = 0
+)
+
+fun TenantResponse.toServicePresentation() = TenantServicePresentation(
+    name = name,
+    phoneNumber = phoneNumber,
+    image = image
 )
