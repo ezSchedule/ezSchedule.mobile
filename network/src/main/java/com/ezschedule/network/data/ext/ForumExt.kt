@@ -12,11 +12,11 @@ fun QuerySnapshot.toObject() = this.map {
 }.toResponse()
 
 fun QueryDocumentSnapshot.toObject() = PostData(
-    dateTimePost = this.getTimestamp("date_time_post"),
-    idCondominium = this.getLong("id_condominium"),
-    isEdited = this.getBoolean("is_edited"),
-    textContent = this.getString("text_content"),
-    typeMessage = this.getString("type_message")
+    dateTimePost = this.getTimestamp("dateTimePost"),
+    idCondominium = this.getLong("idCondominium"),
+    isEdited = this.getBoolean("isEdited"),
+    textContent = this.getString("textContent"),
+    typeMessage = this.getString("typeMessage")
 )
 
 fun List<PostData>.toResponse() = this.map {
