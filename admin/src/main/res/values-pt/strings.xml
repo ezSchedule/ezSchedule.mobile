@@ -52,6 +52,11 @@
 
     <!-- Forum Screen -->
     <string name="frag_forum_tv_empty">Nenhum post encontrado</string>
+    <string name="frag_forum_btn_communicate">Comunicado</string>
+    <string name="frag_forum_btn_urgent">Urgente</string>
+    <string name="frag_forum_et_hint">O que está acontecendo?</string>
+    <string name="frag_forum_ib_previous">Anterior</string>
+    <string name="frag_forum_ib_send">Enviar</string>
 
     <!-- Settings Screen -->
     <string name="frag_settings_tv_title">O que deseja ajustar?</string>
