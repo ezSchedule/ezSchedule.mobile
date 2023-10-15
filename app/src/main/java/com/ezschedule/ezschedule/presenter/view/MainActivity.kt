@@ -15,7 +15,6 @@ import com.ezschedule.ezschedule.R
 import com.ezschedule.ezschedule.databinding.ActivityMainBinding
 import com.ezschedule.ezschedule.presenter.utils.TokenManager
 import com.ezschedule.ezschedule.presenter.viewModel.MainViewModel
-import com.ezschedule.utils.ResourceWrapper
 import com.ezschedule.utils.SharedPreferencesManager
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
