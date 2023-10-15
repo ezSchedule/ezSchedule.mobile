@@ -50,6 +50,9 @@
     <string name="frag_dashboard_month_november">November</string>
     <string name="frag_dashboard_month_december">December</string>
 
+    <!-- Forum Screen -->
+    <string name="frag_forum_tv_empty">No posts found</string>
+
     <!-- Settings Screen -->
     <string name="frag_settings_tv_title">What do you want to adjust?</string>
     <string name="frag_settings_btn_profile">Profile</string>
