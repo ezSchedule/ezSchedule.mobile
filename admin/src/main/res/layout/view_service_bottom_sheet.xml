@@ -96,7 +96,7 @@
             android:id="@+id/edt_name_new_service"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/frag_services_sv_hint"
+            android:hint="@string/frag_services_et_hint"
             android:inputType="text"
             android:paddingLeft="@dimen/spacing_small"
             android:textSize="@dimen/size_small" />

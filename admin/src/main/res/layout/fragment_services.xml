@@ -67,11 +67,6 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
-        android:id="@+id/include_service_bottom_sheet"
-        layout="@layout/view_service_bottom_sheet"
-        android:visibility="gone" />
-
-    <include
         android:id="@+id/include_loading"
         layout="@layout/view_loading"
         android:visibility="gone" />

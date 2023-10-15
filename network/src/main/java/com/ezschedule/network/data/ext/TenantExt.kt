@@ -55,6 +55,7 @@ fun TenantServiceData.toResponse() = TenantResponse(
 )
 
 fun TenantResponse.toServicePresentation() = TenantServicePresentation(
+    id = id,
     name = name,
     phoneNumber = phoneNumber,
     image = image

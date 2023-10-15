@@ -4,21 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.ezschedule.admin.databinding.FragmentServicesBinding
+import com.ezschedule.admin.databinding.ViewServiceBottomSheetBinding
 import com.ezschedule.admin.presenter.adapter.ServicesAdapter
 import com.ezschedule.admin.presenter.viewmodel.ServicesViewModel
 import com.ezschedule.network.domain.presentation.ServicePresentation
 import com.ezschedule.network.domain.presentation.TenantPresentation
 import com.ezschedule.network.domain.presentation.TenantServicePresentation
-import com.ezschedule.utils.CustomBottomSheetCallback
 import com.ezschedule.utils.SharedPreferencesManager
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ServicesFragment : Fragment() {
     private lateinit var binding: FragmentServicesBinding
+    private lateinit var bottomSheetBinding: ViewServiceBottomSheetBinding
     private val viewModel by viewModel<ServicesViewModel>()
     private lateinit var user: TenantPresentation
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,10 +40,11 @@ class ServicesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getServiceList(user.idCondominium)
         setOnClick()
+        setSearchView()
         setupLoading(true)
     }
 
-    private fun setOnClick() = with(binding){
+    private fun setOnClick() = with(binding) {
         fragBtnService.setOnClickListener {
             viewModel.getTenantsList(user.idCondominium)
         }
@@ -57,25 +60,6 @@ class ServicesFragment : Fragment() {
         }
     }
 
-    private fun setUpBottomSheetContent(tenants: List<TenantServicePresentation>) =
-        with(binding.includeServiceBottomSheet) {
-            if (tenants.isNotEmpty()) {
-                fragRvService.adapter = ServicesAdapter(
-                    tenants = tenants,
-                    context = requireContext()
-                )
-            }else{
-                fragRvService.visibility = View.INVISIBLE
-                tvNoResidents.isVisible = true
-            }
-            BottomSheetBehavior.from(this.root).apply {
-                addBottomSheetCallback(CustomBottomSheetCallback())
-                state = BottomSheetBehavior.STATE_EXPANDED
-                peekHeight = 100
-            }
-            root.isVisible = true
-        }
-
     private fun setUpContent(services: List<ServicePresentation>) = with(binding) {
         if (services.isNotEmpty()) {
             fragRvService.adapter = ServicesAdapter(
@@ -90,8 +74,94 @@ class ServicesFragment : Fragment() {
         }
     }
 
+    private fun setUpBottomSheetContent(tenants: List<TenantServicePresentation>) {
+        bottomSheetBinding = ViewServiceBottomSheetBinding.inflate(layoutInflater)
+        val dialog = BottomSheetDialog(requireContext())
+
+        with(bottomSheetBinding) {
+            if (tenants.isNotEmpty()) {
+                fragRvService.adapter = ServicesAdapter(
+                    tenants = tenants,
+                    context = requireContext()
+                )
+                setBottomSheetSearchView()
+                fragRvService.isVisible = true
+                tvNoResidents.isVisible = false
+            } else {
+                fragRvService.visibility = View.INVISIBLE
+                tvNoResidents.isVisible = true
+            }
+
+            dialog.setContentView(root)
+            dialog.show()
+        }
+    }
+
     private fun setupLoading(isVisible: Boolean) = with(binding) {
         includeLoading.root.isVisible = isVisible
+    }
+
+    private fun setSearchView() = with(binding) {
+        fragSvService.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    val list = viewModel.servicesList.value!!.filter { service ->
+                        service.name.contains(query, true)
+                    }
+                    fragRvService.adapter =
+                        ServicesAdapter(
+                            services = list,
+                            context = requireContext()
+                        )
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    val list = viewModel.servicesList.value!!.filter { service ->
+                        service.name.contains(newText, true)
+                    }
+                    fragRvService.adapter = ServicesAdapter(
+                        services = list,
+                        context = requireContext()
+                    )
+                }
+                return false
+            }
+        })
+    }
+
+
+    private fun setBottomSheetSearchView() = with(bottomSheetBinding) {
+        fragSvService.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    val list = viewModel.tenantsList.value!!.filter { service ->
+                        service.name.contains(query, true)
+                    }
+                    fragRvService.adapter =
+                        ServicesAdapter(
+                            tenants = list,
+                            context = requireContext()
+                        )
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    val list = viewModel.tenantsList.value!!.filter { tenants ->
+                        tenants.name.contains(newText, true)
+                    }
+                    fragRvService.adapter = ServicesAdapter(
+                        tenants = list,
+                        context = requireContext()
+                    )
+                }
+                return false
+            }
+        })
     }
 
 }
