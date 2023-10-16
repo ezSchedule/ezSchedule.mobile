@@ -4,6 +4,7 @@ import com.ezschedule.network.data.api.ServicesEndpoint
 import com.ezschedule.network.data.ext.toResponse
 import com.ezschedule.network.data.network.handler.requestHandler
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
+import com.ezschedule.network.domain.data.ServiceRequest
 import com.ezschedule.network.domain.response.ServiceResponse
 import com.ezschedule.network.domain.response.TenantResponse
 
@@ -20,4 +21,11 @@ class ServiceRepository(private val endpoint: ServicesEndpoint) {
             endpoint.servicesList(id).toResponse()
         }
     }
+
+    suspend fun createService(service: ServiceRequest): ResultWrapper<Unit> {
+        return requestHandler {
+            endpoint.createService(service)
+        }
+    }
+
 }

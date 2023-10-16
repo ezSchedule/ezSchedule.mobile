@@ -3,7 +3,6 @@ package com.ezschedule.admin.presenter.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ezschedule.admin.R
@@ -14,10 +13,14 @@ import com.ezschedule.network.domain.presentation.TenantServicePresentation
 class ServicesAdapter(
     private val services: List<ServicePresentation> = emptyList(),
     private val tenants: List<TenantServicePresentation> = emptyList(),
-    private val context: Context
+    private val context: Context,
+    val itemClicked: ((Int) -> Unit?)? = null
 ) : RecyclerView.Adapter<ServicesAdapter.ViewHolder>() {
 
-    val listOfSelectedItems = arrayListOf<Int>()
+
+    private var selectedPos = RecyclerView.NO_POSITION
+    private var viewHolderList = ArrayList<ViewHolder>()
+    private var onItemClickListener: ((Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -26,6 +29,7 @@ class ServicesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        viewHolderList.add(holder)
         holder.bind()
     }
 
@@ -46,14 +50,13 @@ class ServicesAdapter(
                 Glide.with(context)
                     .load(tenantsData().image)
                     .into(ivService)
-                itemView.setOnClickListener{
-                    itemView.isSelected = true
-                    if(itemView.isSelected){
-                        itemView.setBackgroundResource(R.drawable.item_rounded_secondary)
-                    }else{
-                        itemView.setBackgroundResource(R.drawable.item_rounded)
+                itemView.setOnClickListener {
+                    if (selectedPos >= 0) {
+                        viewHolderList[selectedPos].itemView.setBackgroundResource(R.drawable.item_rounded)
                     }
-                    listOfSelectedItems.add(adapterPosition)
+                    selectedPos = adapterPosition
+                    itemView.setBackgroundResource(R.drawable.item_rounded_secondary)
+                    itemClicked?.let { it(selectedPos) }
                 }
             } else {
                 tvServiceName.text = serviceData().name
@@ -62,6 +65,10 @@ class ServicesAdapter(
                     .load(serviceData().image)
                     .into(ivService)
             }
+        }
+
+        fun setOnItemClickListener(listener: (Int) -> Unit) {
+            onItemClickListener = listener
         }
 
         private fun serviceData() = services[adapterPosition]

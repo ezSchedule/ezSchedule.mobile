@@ -4,6 +4,7 @@ import android.content.Context
 import com.ezschedule.admin.data.repository.ScheduleRepository
 import com.ezschedule.admin.data.repository.ServiceRepository
 import com.ezschedule.admin.domain.useCase.CalendarUseCase
+import com.ezschedule.admin.domain.useCase.CreateServiceUseCase
 import com.ezschedule.admin.domain.useCase.DashboardUseCase
 import com.ezschedule.admin.domain.useCase.GetServiceListUseCase
 import com.ezschedule.admin.domain.useCase.GetTenantsListUseCase
@@ -49,21 +50,22 @@ val moduleMain = module {
     factory { SaloonRepository(get()) }
     factory { ServiceRepository(get()) }
 
-    factory { LoginUseCase(get()) }
-    factory { LogoutUseCase(get()) }
     factory { CalendarUseCase(get()) }
+    factory { CreateSaloonUseCase(get()) }
+    factory { CreateServiceUseCase(get()) }
+    factory { DashboardUseCase(get()) }
     factory { GetTenantSettingsUseCase(get()) }
     factory { GetCondominiumSettingsUseCase(get()) }
     factory { GetTenantsListUseCase(get()) }
     factory { GetServiceListUseCase(get()) }
+    factory { LoginUseCase(get()) }
+    factory { LogoutUseCase(get()) }
     factory { UpdateTenantSettingsUseCase(get()) }
-    factory { CreateSaloonUseCase(get()) }
-    factory { DashboardUseCase(get()) }
 
     viewModel { TenantViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }
     viewModel { CalendarViewModel(get()) }
     viewModel { SettingsViewModel(get(), get(), get(), get()) }
-    viewModel { ServicesViewModel(get(), get()) }
+    viewModel { ServicesViewModel(get(), get(), get()) }
     viewModel { DashboardViewModel(get()) }
 }

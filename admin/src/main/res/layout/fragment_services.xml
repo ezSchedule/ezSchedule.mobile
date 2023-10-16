@@ -57,7 +57,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_margin="@dimen/spacing_large"
-            android:text="@string/frag_services_btn_desc"
+            android:text="@string/frag_services_btn_plus"
             android:textAppearance="@style/ButtonAppearance"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

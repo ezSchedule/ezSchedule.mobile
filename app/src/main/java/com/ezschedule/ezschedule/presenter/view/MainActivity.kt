@@ -1,7 +1,9 @@
 package com.ezschedule.ezschedule.presenter.view
 
+import android.content.ContentValues.TAG
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.appcompat.app.AlertDialog
@@ -15,9 +17,13 @@ import com.ezschedule.ezschedule.R
 import com.ezschedule.ezschedule.databinding.ActivityMainBinding
 import com.ezschedule.ezschedule.presenter.utils.TokenManager
 import com.ezschedule.ezschedule.presenter.viewModel.MainViewModel
-import com.ezschedule.utils.ResourceWrapper
+import com.ezschedule.network.domain.data.PostData
 import com.ezschedule.utils.SharedPreferencesManager
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +39,34 @@ class MainActivity : AppCompatActivity() {
         setupObservers()
         setupPopupMenu()
         setupOnClickMenu()
+
+        val db: FirebaseFirestore = Firebase.firestore
+
+        db.collection("conversations")
+            .whereEqualTo("id_condominium", 2)
+            .addSnapshotListener { value, e ->
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e)
+                    return@addSnapshotListener
+                }
+
+                val cities = ArrayList<PostData>()
+                for (doc in value!!) {
+                    val timeStamp = doc.get("date_time_post") as Timestamp
+
+                    val post = PostData(
+                        dateTimePost = timeStamp.toDate(),
+                        idCondominium = doc.get("id_condominium") as Long,
+                        isEdited = doc.get("is_edited") as Boolean,
+                        textTitle = "",
+                        textContent = doc.get("text_content") as String,
+                        typeMessage = doc.get("type_message") as String
+                    )
+                    cities.add(post)
+                }
+                Log.d(TAG, "Current cites in CA: $cities")
+            }
+
     }
 
     override fun onStart() {

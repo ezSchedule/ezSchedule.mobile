@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -11,10 +13,13 @@ import com.ezschedule.admin.databinding.FragmentServicesBinding
 import com.ezschedule.admin.databinding.ViewServiceBottomSheetBinding
 import com.ezschedule.admin.presenter.adapter.ServicesAdapter
 import com.ezschedule.admin.presenter.viewmodel.ServicesViewModel
+import com.ezschedule.network.domain.data.ServiceRequest
+import com.ezschedule.network.domain.data.ServiceTenant
 import com.ezschedule.network.domain.presentation.ServicePresentation
 import com.ezschedule.network.domain.presentation.TenantPresentation
 import com.ezschedule.network.domain.presentation.TenantServicePresentation
 import com.ezschedule.utils.SharedPreferencesManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -23,6 +28,7 @@ class ServicesFragment : Fragment() {
     private lateinit var bottomSheetBinding: ViewServiceBottomSheetBinding
     private val viewModel by viewModel<ServicesViewModel>()
     private lateinit var user: TenantPresentation
+    private lateinit var dialog:BottomSheetDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         user = SharedPreferencesManager(requireContext()).getInfo()
@@ -58,6 +64,11 @@ class ServicesFragment : Fragment() {
             setUpContent(it)
             setupLoading(false)
         }
+        viewModel.serviceCreated.observe(this){
+            Toast.makeText(requireContext(),"Serviço criado com sucesso",Toast.LENGTH_SHORT).show()
+            dialog?.let { it.dismiss() }
+            viewModel.getServiceList(user.idCondominium)
+        }
     }
 
     private fun setUpContent(services: List<ServicePresentation>) = with(binding) {
@@ -76,14 +87,28 @@ class ServicesFragment : Fragment() {
 
     private fun setUpBottomSheetContent(tenants: List<TenantServicePresentation>) {
         bottomSheetBinding = ViewServiceBottomSheetBinding.inflate(layoutInflater)
-        val dialog = BottomSheetDialog(requireContext())
+        dialog = BottomSheetDialog(requireContext())
+        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
         with(bottomSheetBinding) {
             if (tenants.isNotEmpty()) {
-                fragRvService.adapter = ServicesAdapter(
+                val adapter = ServicesAdapter(
                     tenants = tenants,
                     context = requireContext()
-                )
+                ) { position ->
+                    btnAddService.setOnClickListener {
+                        viewModel.createService(
+                            ServiceRequest(
+                                serviceName = edtNameNewService.text.toString().trim(),
+                                tenant = ServiceTenant(
+                                    id = tenants[position].id
+                                )
+                            )
+                        )
+                    }
+
+                }
+                fragRvService.adapter = adapter
                 setBottomSheetSearchView()
                 fragRvService.isVisible = true
                 tvNoResidents.isVisible = false
@@ -91,7 +116,6 @@ class ServicesFragment : Fragment() {
                 fragRvService.visibility = View.INVISIBLE
                 tvNoResidents.isVisible = true
             }
-
             dialog.setContentView(root)
             dialog.show()
         }
