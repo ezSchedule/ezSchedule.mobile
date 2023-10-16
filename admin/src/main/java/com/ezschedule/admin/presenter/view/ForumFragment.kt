@@ -18,6 +18,7 @@ import com.ezschedule.admin.presenter.adapter.PostAdapter
 import com.ezschedule.admin.presenter.viewmodel.ForumViewModel
 import com.ezschedule.network.domain.data.PostData
 import com.ezschedule.network.domain.presentation.PostPresentation
+import com.ezschedule.network.domain.presentation.TenantPresentation
 import com.ezschedule.utils.SharedPreferencesManager
 import com.google.firebase.Timestamp
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,6 +27,7 @@ import java.util.Date
 class ForumFragment : Fragment() {
     private lateinit var binding: FragmentForumBinding
     private lateinit var typeMessage: String
+    private lateinit var sharedPreferences: TenantPresentation
     private val viewModel by viewModel<ForumViewModel>()
 
     override fun onCreateView(
@@ -38,8 +40,9 @@ class ForumFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        sharedPreferences = SharedPreferencesManager(requireContext()).getInfo()
         typeMessage = getString(R.string.frag_forum_btn_communicate)
-        viewModel.getAllPosts(SharedPreferencesManager(requireContext()).getInfo().idCondominium)
+        viewModel.getAllPosts(sharedPreferences.idCondominium)
         setupLoading(true)
         setupObservers()
         setupClick()
@@ -91,7 +94,7 @@ class ForumFragment : Fragment() {
                 viewModel.createPost(
                     PostData(
                         dateTimePost = Timestamp(Date()),
-                        idCondominium = SharedPreferencesManager(requireContext()).getInfo().idCondominium.toLong(),
+                        idCondominium = sharedPreferences.idCondominium.toLong(),
                         isEdited = false,
                         textContent = fragForumEtText.text.toString(),
                         typeMessage = typeMessage
