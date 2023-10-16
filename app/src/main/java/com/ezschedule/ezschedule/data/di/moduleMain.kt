@@ -5,7 +5,9 @@ import com.ezschedule.admin.domain.useCase.DashboardUseCase
 import com.ezschedule.admin.presenter.viewmodel.DashboardViewModel
 import com.ezschedule.admin.data.repository.ScheduleRepository
 import com.ezschedule.admin.domain.useCase.CalendarUseCase
+import com.ezschedule.admin.domain.useCase.ForumUseCase
 import com.ezschedule.admin.presenter.viewmodel.CalendarViewModel
+import com.ezschedule.admin.presenter.viewmodel.ForumViewModel
 import com.ezschedule.ezschedule.data.repository.CondominiumRepository
 import com.ezschedule.ezschedule.data.repository.SaloonRepository
 import com.ezschedule.ezschedule.data.repository.TenantRepository
@@ -50,10 +52,12 @@ val moduleMain = module {
     factory { UpdateTenantSettingsUseCase(get()) }
     factory { CreateSaloonUseCase(get()) }
     factory { DashboardUseCase(get()) }
+    factory { ForumUseCase() }
 
     viewModel { TenantViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }
     viewModel { CalendarViewModel(get()) }
     viewModel { SettingsViewModel(get(), get(), get(), get()) }
     viewModel { DashboardViewModel(get()) }
+    viewModel { ForumViewModel(get()) }
 }

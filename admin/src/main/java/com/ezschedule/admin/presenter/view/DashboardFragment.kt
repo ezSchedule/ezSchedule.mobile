@@ -139,9 +139,9 @@ class DashboardFragment : Fragment() {
             setDrawValues(false)
         }
 
-    private fun setupLoading(isLoading: Boolean) {
-        binding.fragDashClChart.isVisible = !isLoading
-        binding.includeLoading.root.apply {
+    private fun setupLoading(isLoading: Boolean) = with(binding) {
+        fragDashClChart.isVisible = isLoading.not()
+        includeLoading.apply {
             isVisible = isLoading
             setBackgroundColor(Color.TRANSPARENT)
         }
