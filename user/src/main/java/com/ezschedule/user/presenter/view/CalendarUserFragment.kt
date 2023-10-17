@@ -1,19 +1,19 @@
-package com.sptech.user.presenter.view
+package com.ezschedule.user.presenter.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.sptech.user.databinding.FragmentForumUserBinding
+import com.sptech.user.databinding.FragmentCalendarUserBinding
 
-class ForumUserFragment : Fragment() {
-    private lateinit var binding: FragmentForumUserBinding
+class CalendarUserFragment : Fragment() {
+    private lateinit var binding: FragmentCalendarUserBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = FragmentForumUserBinding.inflate(inflater, container, false)
+        binding = FragmentCalendarUserBinding.inflate(inflater, container, false)
         return binding.root
     }
 }

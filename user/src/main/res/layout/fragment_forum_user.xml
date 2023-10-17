@@ -4,14 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/include_forum_chat"
+        layout="@layout/view_forum_chat_user" />
+
     <TextView
+        android:id="@+id/frag_forum_tv_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Forum User"
-        android:textAppearance="@style/TitleAppearance"
+        android:text="@string/frag_forum_tv_empty"
+        android:textColor="@color/colorVariant"
+        android:textSize="@dimen/size_standard"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/include_loading"
+        layout="@layout/view_progress_loading"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

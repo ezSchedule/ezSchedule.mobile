@@ -1,4 +1,4 @@
-package com.sptech.user.presenter.view
+package com.ezschedule.user.presenter.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
