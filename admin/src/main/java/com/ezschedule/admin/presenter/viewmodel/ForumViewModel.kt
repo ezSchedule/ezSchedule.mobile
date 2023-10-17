@@ -3,7 +3,6 @@ package com.ezschedule.admin.presenter.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ezschedule.admin.R
 import com.ezschedule.admin.domain.useCase.ForumUseCase
 import com.ezschedule.network.data.ext.toObject
 import com.ezschedule.network.domain.data.PostData
@@ -52,11 +51,14 @@ class ForumViewModel(
     }
 
     fun getTypeMessage(isCommunication: Boolean) =
-        if (isCommunication) R.string.frag_forum_btn_communicate
-        else R.string.frag_forum_btn_urgent
+        if (isCommunication) POST_COMMUNICATE
+        else POST_URGENT
 
     companion object {
         private const val POST_ID = "idCondominium"
         private const val POST_DATE = "dateTimePost"
+
+        private const val POST_COMMUNICATE = "Communicate"
+        private const val POST_URGENT = "Urgent"
     }
 }
