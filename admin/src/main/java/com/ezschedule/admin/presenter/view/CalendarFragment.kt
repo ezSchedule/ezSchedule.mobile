@@ -169,7 +169,7 @@ class CalendarFragment : Fragment() {
         cvCalendar.isVisible = !isLoading
         fragCalendarBtnCalendar.isVisible = !isLoading
         fragCalendarBtnEvents.isVisible = !isLoading
-        includeLoading.root.apply {
+        includeLoading.apply {
             isVisible = isLoading
             setBackgroundColor(Color.TRANSPARENT)
         }

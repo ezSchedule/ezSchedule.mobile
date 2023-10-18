@@ -1,17 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/include_forum_chat"
+        layout="@layout/view_forum_chat" />
+
+    <include
+        android:id="@+id/include_forum_create_post"
+        layout="@layout/view_forum_create_post"
+        android:visibility="gone" />
+
     <TextView
+        android:id="@+id/frag_forum_tv_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Forum"
-        android:textSize="48sp"
+        android:text="@string/frag_forum_tv_empty"
+        android:textColor="@color/colorVariant"
+        android:textSize="@dimen/size_standard"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/frag_forum_btn_add"
+        style="@style/FloatingActionButtonEzSchedule"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="@dimen/spacing_small"
+        android:layout_marginBottom="@dimen/spacing_small"
+        android:background="@null"
+        android:clickable="true"
+        android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+    <include
+        android:id="@+id/include_loading"
+        layout="@layout/view_progress_loading"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

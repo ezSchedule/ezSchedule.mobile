@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/frag_forum_ib_previous"
+        style="@style/ImageButtonEzSchedule"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:contentDescription="@string/frag_forum_ib_previous"
+        android:src="@drawable/ic_previous"
+        app:layout_constraintEnd_toStartOf="@id/frag_forum_ib_send"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <ImageButton
+        android:id="@+id/frag_forum_ib_send"
+        style="@style/ImageButtonEzSchedule"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:contentDescription="@string/frag_forum_ib_send"
+        android:src="@drawable/ic_send"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/frag_forum_ib_previous"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frag_forum_ib_previous" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/frag_forum_til_text"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginBottom="@dimen/spacing_tiny"
+        android:hint="@string/frag_forum_et_hint"
+        app:counterEnabled="true"
+        app:counterMaxLength="100"
+        app:layout_constraintBottom_toTopOf="@id/frag_forum_btn_communication"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/frag_forum_et_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:maxLength="100"
+            android:textSize="@dimen/size_small" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/frag_forum_btn_communication"
+        style="@style/ButtonEzSchedule"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:enabled="false"
+        android:text="@string/frag_forum_btn_communicate"
+        android:textAppearance="@style/ButtonAppearance"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/frag_forum_btn_urgent"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <Button
+        android:id="@+id/frag_forum_btn_urgent"
+        style="@style/ButtonEzSchedule"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:text="@string/frag_forum_btn_urgent"
+        android:textAppearance="@style/ButtonAppearance"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/frag_forum_btn_communication"
+        app:layout_constraintWidth_percent="0.4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

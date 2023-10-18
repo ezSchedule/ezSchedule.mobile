@@ -4,11 +4,13 @@ import android.content.Context
 import com.ezschedule.admin.data.repository.ScheduleRepository
 import com.ezschedule.admin.data.repository.ServiceRepository
 import com.ezschedule.admin.domain.useCase.CalendarUseCase
+import com.ezschedule.admin.domain.useCase.ForumUseCase
 import com.ezschedule.admin.domain.useCase.CreateServiceUseCase
 import com.ezschedule.admin.domain.useCase.DashboardUseCase
 import com.ezschedule.admin.domain.useCase.GetServiceListUseCase
 import com.ezschedule.admin.domain.useCase.GetTenantsListUseCase
 import com.ezschedule.admin.presenter.viewmodel.CalendarViewModel
+import com.ezschedule.admin.presenter.viewmodel.ForumViewModel
 import com.ezschedule.admin.presenter.viewmodel.DashboardViewModel
 import com.ezschedule.admin.presenter.viewmodel.ServicesViewModel
 import com.ezschedule.ezschedule.data.repository.CondominiumRepository
@@ -61,6 +63,9 @@ val moduleMain = module {
     factory { LoginUseCase(get()) }
     factory { LogoutUseCase(get()) }
     factory { UpdateTenantSettingsUseCase(get()) }
+    factory { CreateSaloonUseCase(get()) }
+    factory { DashboardUseCase(get()) }
+    factory { ForumUseCase() }
 
     viewModel { TenantViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }
@@ -68,4 +73,5 @@ val moduleMain = module {
     viewModel { SettingsViewModel(get(), get(), get(), get()) }
     viewModel { ServicesViewModel(get(), get(), get()) }
     viewModel { DashboardViewModel(get()) }
+    viewModel { ForumViewModel(get()) }
 }
