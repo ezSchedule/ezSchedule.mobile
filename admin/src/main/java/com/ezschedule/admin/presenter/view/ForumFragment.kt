@@ -12,7 +12,6 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ezschedule.admin.R
 import com.ezschedule.admin.databinding.FragmentForumBinding
 import com.ezschedule.admin.presenter.adapter.PostAdapter
 import com.ezschedule.admin.presenter.viewmodel.ForumViewModel
@@ -41,7 +40,7 @@ class ForumFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         sharedPreferences = SharedPreferencesManager(requireContext()).getInfo()
-        typeMessage = getString(R.string.frag_forum_btn_communicate)
+        typeMessage = viewModel.getTypeMessage(isCommunication = true)
         viewModel.getAllPosts(sharedPreferences.idCondominium)
         setupLoading(true)
         setupObservers()
@@ -126,7 +125,7 @@ class ForumFragment : Fragment() {
     }
 
     private fun changeTypePost(isCommunication: Boolean) = with(binding.includeForumCreatePost) {
-        typeMessage = getString(viewModel.getTypeMessage(isCommunication))
+        typeMessage = viewModel.getTypeMessage(isCommunication)
         fragForumBtnCommunication.isEnabled = isCommunication.not()
         fragForumBtnUrgent.isEnabled = isCommunication
     }

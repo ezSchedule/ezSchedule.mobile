@@ -1,4 +1,4 @@
-package com.sptech.user
+package com.ezschedule.user
 
 import junit.framework.Assert.assertEquals
 import org.junit.Test

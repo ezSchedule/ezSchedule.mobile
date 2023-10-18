@@ -113,11 +113,10 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun setupLoading(isVisible: Boolean) {
-        binding.includeLoading.isVisible = isVisible
-        view?.let {
-            requireContext().hideKeyboard(it)
-        }
+    private fun setupLoading(isLoading: Boolean) {
+        binding.includeLoading.isVisible = isLoading
+        binding.clLogin.isVisible = isLoading.not()
+        view?.let { requireContext().hideKeyboard(it) }
     }
 
     private fun Context.hideKeyboard(view: View) {
