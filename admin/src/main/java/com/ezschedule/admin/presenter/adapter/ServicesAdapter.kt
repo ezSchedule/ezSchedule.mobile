@@ -20,7 +20,6 @@ class ServicesAdapter(
 
     private var selectedPos = RecyclerView.NO_POSITION
     private var viewHolderList = ArrayList<ViewHolder>()
-    private var onItemClickListener: ((Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -65,10 +64,6 @@ class ServicesAdapter(
                     .load(serviceData().image)
                     .into(ivService)
             }
-        }
-
-        fun setOnItemClickListener(listener: (Int) -> Unit) {
-            onItemClickListener = listener
         }
 
         private fun serviceData() = services[adapterPosition]
