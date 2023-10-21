@@ -56,6 +56,7 @@ val moduleMain = module {
     factory { CreateSaloonUseCase(get()) }
     factory { CreateServiceUseCase(get()) }
     factory { DashboardUseCase(get()) }
+    factory { ForumUseCase() }
     factory { GetTenantSettingsUseCase(get()) }
     factory { GetCondominiumSettingsUseCase(get()) }
     factory { GetTenantsListUseCase(get()) }
@@ -63,9 +64,6 @@ val moduleMain = module {
     factory { LoginUseCase(get()) }
     factory { LogoutUseCase(get()) }
     factory { UpdateTenantSettingsUseCase(get()) }
-    factory { CreateSaloonUseCase(get()) }
-    factory { DashboardUseCase(get()) }
-    factory { ForumUseCase() }
 
     viewModel { TenantViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }
