@@ -1,22 +1,20 @@
-package com.ezschedule.admin.presenter.viewmodel
+package com.ezschedule.user.presenter.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ezschedule.admin.domain.useCase.ForumUseCase
 import com.ezschedule.network.data.ext.toObject
-import com.ezschedule.network.domain.data.PostData
 import com.ezschedule.network.domain.presentation.PostPresentation
+import com.ezschedule.user.domain.useCase.ForumUserUseCase
 import com.google.firebase.firestore.Query
+import com.sptech.user.R
 
-class ForumViewModel(
-    private val useCase: ForumUseCase
-) : ViewModel() {
+class ForumUserViewModel(private val useCase: ForumUserUseCase) : ViewModel() {
     private var _posts = MutableLiveData<List<PostPresentation>>()
     val posts: LiveData<List<PostPresentation>> = _posts
 
-    private var _postCreated = MutableLiveData<Unit>()
-    val postCreated: LiveData<Unit> = _postCreated
+    private var _filteredPosts = MutableLiveData<List<PostPresentation>>()
+    val filteredPosts: LiveData<List<PostPresentation>> = _filteredPosts
 
     private var _empty = MutableLiveData<Unit>()
     val empty: LiveData<Unit> = _empty
@@ -40,19 +38,33 @@ class ForumViewModel(
             }
     }
 
-    fun createPost(post: PostData) {
-        useCase.execute().add(post)
-            .addOnSuccessListener {
-                _postCreated.postValue(Unit)
-            }
-            .addOnFailureListener {
-                _error.postValue(it)
-            }
+    fun verifyButton(id: Int) {
+        when (id) {
+            R.id.frag_forum_btn_communicate -> getFilteredPosts(POST_COMMUNICATE)
+            R.id.frag_forum_btn_all -> _posts.postValue(posts.value)
+            R.id.frag_forum_btn_urgent -> getFilteredPosts(POST_URGENT)
+        }
     }
 
-    fun getTypeMessage(isCommunication: Boolean) =
-        if (isCommunication) POST_COMMUNICATE
-        else POST_URGENT
+    fun setUnselectedColor(id: Int, behavior: (id: Int) -> Unit) {
+        arrayListOf(
+            R.id.frag_forum_btn_communicate, R.id.frag_forum_btn_all, R.id.frag_forum_btn_urgent
+        ).map {
+            if (it != id) behavior(it)
+        }
+    }
+
+    private fun getFilteredPosts(type: String) {
+        val filteredList = posts.value!!.mapNotNull {
+            it.takeIf { it.type == type }
+        }
+
+        when {
+            filteredList.isEmpty() -> _empty.postValue(Unit)
+
+            else -> _filteredPosts.postValue(filteredList)
+        }
+    }
 
     companion object {
         private const val POST_ID = "idCondominium"

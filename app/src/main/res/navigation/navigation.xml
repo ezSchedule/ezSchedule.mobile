@@ -53,31 +53,31 @@
 
     <fragment
         android:id="@+id/calendarUserFragment"
-        android:name="com.sptech.user.presenter.view.CalendarUserFragment"
+        android:name="com.ezschedule.user.presenter.view.CalendarUserFragment"
         android:label="CalendarUserFragment"
         tools:layout="@layout/fragment_calendar_user" />
 
     <fragment
         android:id="@+id/scheduleUserFragment"
-        android:name="com.sptech.user.presenter.view.ScheduleUserFragment"
+        android:name="com.ezschedule.user.presenter.view.ScheduleUserFragment"
         android:label="ScheduleUserFragment"
         tools:layout="@layout/fragment_schedule_user" />
 
     <fragment
         android:id="@+id/historyUserFragment"
-        android:name="com.sptech.user.presenter.view.HistoryUserFragment"
+        android:name="com.ezschedule.user.presenter.view.HistoryUserFragment"
         android:label="HistoryUserFragment"
         tools:layout="@layout/fragment_history_user" />
 
     <fragment
         android:id="@+id/servicesUserFragment"
-        android:name="com.sptech.user.presenter.view.ServicesUserFragment"
+        android:name="com.ezschedule.user.presenter.view.ServicesUserFragment"
         android:label="ServicesUserFragment"
         tools:layout="@layout/fragment_services_user" />
 
     <fragment
         android:id="@+id/forumUserFragment"
-        android:name="com.sptech.user.presenter.view.ForumUserFragment"
+        android:name="com.ezschedule.user.presenter.view.ForumUserFragment"
         android:label="ForumUserFragment"
         tools:layout="@layout/fragment_forum_user"/>
 
