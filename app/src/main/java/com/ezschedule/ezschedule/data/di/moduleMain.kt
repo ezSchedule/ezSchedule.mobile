@@ -42,11 +42,10 @@ val moduleMain = module {
 
     factory { ResourceWrapper(get() as Context) }
 
-    factory { get<NetworkServiceFactory>().createNetworkService<TenantEndpoint>() }
-    factory { get<NetworkServiceFactory>().createNetworkService<CalendarEndpoint>() }
-    factory { get<NetworkServiceFactory>().createNetworkService<CondominiumEndpoint>() }
-    factory { get<NetworkServiceFactory>().createNetworkService<SaloonEndpoint>() }
-    factory { get<NetworkServiceFactory>().createNetworkService<ServicesEndpoint>() }
+    factory { get<NetworkServiceFactory>().createNetworkService<TenantEndpoint>(get() as Context) }
+    factory { get<NetworkServiceFactory>().createNetworkService<CalendarEndpoint>(get() as Context) }
+    factory { get<NetworkServiceFactory>().createNetworkService<CondominiumEndpoint>(get() as Context) }
+    factory { get<NetworkServiceFactory>().createNetworkService<SaloonEndpoint>(get() as Context) }
 
     factory { TenantRepository(get()) }
     factory { ScheduleRepository(get()) }
@@ -54,7 +53,12 @@ val moduleMain = module {
     factory { SaloonRepository(get()) }
     factory { ServiceRepository(get()) }
 
+    factory { LoginUseCase(get()) }
+    factory { LogoutUseCase(get()) }
     factory { CalendarUseCase(get()) }
+    factory { GetTenantSettingsUseCase(get()) }
+    factory { GetCondominiumSettingsUseCase(get()) }
+    factory { UpdateTenantSettingsUseCase(get()) }
     factory { CreateSaloonUseCase(get()) }
     factory { CreateServiceUseCase(get()) }
     factory { DashboardUseCase(get()) }
