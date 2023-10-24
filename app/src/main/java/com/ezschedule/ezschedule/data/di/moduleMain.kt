@@ -36,10 +36,10 @@ val moduleMain = module {
 
     factory { ResourceWrapper(get() as Context) }
 
-    factory { get<NetworkServiceFactory>().createNetworkService<TenantEndpoint>() }
-    factory { get<NetworkServiceFactory>().createNetworkService<CalendarEndpoint>() }
-    factory { get<NetworkServiceFactory>().createNetworkService<CondominiumEndpoint>() }
-    factory { get<NetworkServiceFactory>().createNetworkService<SaloonEndpoint>() }
+    factory { get<NetworkServiceFactory>().createNetworkService<TenantEndpoint>(get() as Context) }
+    factory { get<NetworkServiceFactory>().createNetworkService<CalendarEndpoint>(get() as Context) }
+    factory { get<NetworkServiceFactory>().createNetworkService<CondominiumEndpoint>(get() as Context) }
+    factory { get<NetworkServiceFactory>().createNetworkService<SaloonEndpoint>(get() as Context) }
 
     factory { TenantRepository(get()) }
     factory { ScheduleRepository(get()) }
