@@ -2,17 +2,12 @@ package com.ezschedule.ezschedule.data.di
 
 import android.content.Context
 import com.ezschedule.admin.data.repository.ScheduleRepository
-import com.ezschedule.admin.data.repository.ServiceRepository
 import com.ezschedule.admin.domain.useCase.CalendarUseCase
-import com.ezschedule.admin.domain.useCase.CreateServiceUseCase
 import com.ezschedule.admin.domain.useCase.DashboardUseCase
 import com.ezschedule.admin.domain.useCase.ForumUseCase
-import com.ezschedule.admin.domain.useCase.GetServiceListUseCase
-import com.ezschedule.admin.domain.useCase.GetTenantsListUseCase
 import com.ezschedule.admin.presenter.viewmodel.CalendarViewModel
 import com.ezschedule.admin.presenter.viewmodel.DashboardViewModel
 import com.ezschedule.admin.presenter.viewmodel.ForumViewModel
-import com.ezschedule.admin.presenter.viewmodel.ServicesViewModel
 import com.ezschedule.ezschedule.data.repository.CondominiumRepository
 import com.ezschedule.ezschedule.data.repository.SaloonRepository
 import com.ezschedule.ezschedule.data.repository.TenantRepository
@@ -28,7 +23,6 @@ import com.ezschedule.ezschedule.presenter.viewModel.TenantViewModel
 import com.ezschedule.network.data.api.CalendarEndpoint
 import com.ezschedule.network.data.api.CondominiumEndpoint
 import com.ezschedule.network.data.api.SaloonEndpoint
-import com.ezschedule.network.data.api.ServicesEndpoint
 import com.ezschedule.network.data.api.TenantEndpoint
 import com.ezschedule.network.data.network.NetworkServiceFactory
 import com.ezschedule.user.domain.useCase.ForumUserUseCase
@@ -42,11 +36,10 @@ val moduleMain = module {
 
     factory { ResourceWrapper(get() as Context) }
 
-    factory { get<NetworkServiceFactory>().createNetworkService<TenantEndpoint>() }
-    factory { get<NetworkServiceFactory>().createNetworkService<CalendarEndpoint>() }
-    factory { get<NetworkServiceFactory>().createNetworkService<CondominiumEndpoint>() }
-    factory { get<NetworkServiceFactory>().createNetworkService<SaloonEndpoint>() }
-    factory { get<NetworkServiceFactory>().createNetworkService<ServicesEndpoint>() }
+    factory { get<NetworkServiceFactory>().createNetworkService<TenantEndpoint>(get() as Context) }
+    factory { get<NetworkServiceFactory>().createNetworkService<CalendarEndpoint>(get() as Context) }
+    factory { get<NetworkServiceFactory>().createNetworkService<CondominiumEndpoint>(get() as Context) }
+    factory { get<NetworkServiceFactory>().createNetworkService<SaloonEndpoint>(get() as Context) }
 
     factory { TenantRepository(get()) }
     factory { ScheduleRepository(get()) }
