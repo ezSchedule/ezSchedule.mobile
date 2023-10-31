@@ -2,4 +2,11 @@
 <resources>
     <!-- Forum Screen -->
     <string name="frag_forum_tv_empty">Nenhum post encontrado</string>
+
+    <!-- Service Screen -->
+    <string name="frag_services_sv_hint">Buscar…</string>
+    <string name="frag_services_label_apt">Nº Apartamento</string>
+    <string name="frag_services_label_block">Bloco</string>
+    <string name="frag_services_label_phone">Telefone</string>
+    <string name="frag_services_tv_empty">Nenhum serviço encontrado</string>
 </resources>
