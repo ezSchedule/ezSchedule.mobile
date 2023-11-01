@@ -46,6 +46,7 @@ val moduleMain = module {
     factory { get<NetworkServiceFactory>().createNetworkService<CalendarEndpoint>(get() as Context) }
     factory { get<NetworkServiceFactory>().createNetworkService<CondominiumEndpoint>(get() as Context) }
     factory { get<NetworkServiceFactory>().createNetworkService<SaloonEndpoint>(get() as Context) }
+    factory { get<NetworkServiceFactory>().createNetworkService<ServicesEndpoint>(get() as Context) }
 
     factory { TenantRepository(get()) }
     factory { ScheduleRepository(get()) }
@@ -64,13 +65,8 @@ val moduleMain = module {
     factory { DashboardUseCase(get()) }
     factory { ForumUseCase() }
     factory { ForumUserUseCase() }
-    factory { GetTenantSettingsUseCase(get()) }
-    factory { GetCondominiumSettingsUseCase(get()) }
     factory { GetTenantsListUseCase(get()) }
     factory { GetServiceListUseCase(get()) }
-    factory { LoginUseCase(get()) }
-    factory { LogoutUseCase(get()) }
-    factory { UpdateTenantSettingsUseCase(get()) }
 
     viewModel { TenantViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }
