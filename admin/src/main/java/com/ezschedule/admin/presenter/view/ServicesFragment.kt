@@ -11,6 +11,9 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.activityViewModels
+import com.ezschedule.admin.R
 import com.ezschedule.admin.databinding.FragmentServicesBinding
 import com.ezschedule.admin.databinding.ViewServiceBottomSheetBinding
 import com.ezschedule.admin.presenter.adapter.ServicesAdapter
@@ -22,14 +25,15 @@ import com.ezschedule.network.domain.presentation.TenantPresentation
 import com.ezschedule.network.domain.presentation.TenantServicePresentation
 import com.ezschedule.utils.SharedPreferencesManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ServicesFragment : Fragment() {
     private lateinit var binding: FragmentServicesBinding
     private lateinit var bottomSheetBinding: ViewServiceBottomSheetBinding
-    private val viewModel by viewModel<ServicesViewModel>()
+    private val viewModel by sharedViewModel<ServicesViewModel>()
     private lateinit var user: TenantPresentation
-    private lateinit var dialog: BottomSheetDialog
+    private lateinit var dialog: ServicesBottomSheetFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         user = SharedPreferencesManager(requireContext()).getInfo()
@@ -65,13 +69,7 @@ class ServicesFragment : Fragment() {
             setUpContent(it)
             setupLoading(false)
         }
-        viewModel.serviceCreated.observe(this) {
-            Toast.makeText(requireContext(), "Serviço criado com sucesso", Toast.LENGTH_SHORT)
-                .show()
-            dialog.dismiss()
-            val inputMethodManager =
-                requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMethodManager.hideSoftInputFromWindow(requireView().windowToken, 0)
+        viewModel.serviceCreated.observe(this){
             viewModel.getServiceList(user.idCondominium)
         }
     }
@@ -91,39 +89,42 @@ class ServicesFragment : Fragment() {
     }
 
     private fun setUpBottomSheetContent(tenants: List<TenantServicePresentation>) {
-        bottomSheetBinding = ViewServiceBottomSheetBinding.inflate(layoutInflater)
-        dialog = BottomSheetDialog(requireContext())
-        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-
-        with(bottomSheetBinding) {
-            if (tenants.isNotEmpty()) {
-                val adapter = ServicesAdapter(
-                    tenants = tenants,
-                    context = requireContext()
-                ) { position ->
-                    btnAddService.setOnClickListener {
-                        viewModel.createService(
-                            ServiceRequest(
-                                serviceName = edtNameNewService.text.toString().trim(),
-                                tenant = ServiceTenant(
-                                    id = tenants[position].id
-                                )
-                            )
-                        )
-                    }
-
-                }
-                fragRvService.adapter = adapter
-                setBottomSheetSearchView()
-                fragRvService.isVisible = true
-                tvNoResidents.isVisible = false
-            } else {
-                fragRvService.visibility = View.INVISIBLE
-                tvNoResidents.isVisible = true
-            }
-            dialog.setContentView(root)
-            dialog.show()
-        }
+        dialog = ServicesBottomSheetFragment(tenants)
+        dialog.show(parentFragmentManager,dialog.tag)
+//
+//        bottomSheetBinding = ViewServiceBottomSheetBinding.inflate(layoutInflater)
+//        dialog = BottomSheetDialog(requireContext())
+//        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+//
+//        with(bottomSheetBinding) {
+//            if (tenants.isNotEmpty()) {
+//                val adapter = ServicesAdapter(
+//                    tenants = tenants,
+//                    context = requireContext()
+//                ) { position ->
+//                    btnAddService.setOnClickListener {
+//                        viewModel.createService(
+//                            ServiceRequest(
+//                                serviceName = edtNameNewService.text.toString().trim(),
+//                                tenant = ServiceTenant(
+//                                    id = tenants[position].id
+//                                )
+//                            )
+//                        )
+//                    }
+//
+//                }
+//                fragRvService.adapter = adapter
+//                setBottomSheetSearchView()
+//                fragRvService.isVisible = true
+//                tvNoResidents.isVisible = false
+//            } else {
+//                fragRvService.visibility = View.INVISIBLE
+//                tvNoResidents.isVisible = true
+//            }
+//            dialog.setContentView(root)
+//            dialog.show()
+//        }
     }
 
     private fun setupLoading(isVisible: Boolean) = with(binding) {
