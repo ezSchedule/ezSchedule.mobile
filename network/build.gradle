@@ -40,6 +40,9 @@ dependencies {
     def firebase_version = '32.3.1'
     api(platform("com.google.firebase:firebase-bom:$firebase_version"))
     api("com.google.firebase:firebase-firestore-ktx")
+    api("com.google.firebase:firebase-messaging-ktx")
+    api("com.google.firebase:firebase-inappmessaging-display-ktx")
+    api("com.google.firebase:firebase-analytics-ktx")
 
     def retrofit_version = '2.9.0'
     api "com.squareup.retrofit2:retrofit:$retrofit_version"
