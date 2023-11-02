@@ -2,4 +2,8 @@
 <resources>
     <!-- Forum Screen -->
     <string name="frag_forum_tv_empty">Nenhum post encontrado</string>
+
+    <!-- Schedules Screen -->
+    <string name="frag_schedule_tv_whole_day">O dia todo</string>
+    <string name="frag_schedule_tv_people_value">%d Convidados</string>
 </resources>
