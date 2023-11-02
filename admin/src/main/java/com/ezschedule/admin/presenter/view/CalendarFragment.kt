@@ -73,6 +73,7 @@ class CalendarFragment : Fragment() {
         }
         error.observe(viewLifecycleOwner) {
             Log.i("ERROR", it.message.toString())
+            setEventOnDate(date = "01/01/1999 12:00", getColorEvent(isCanceled = false))
             setupLoading(false)
         }
     }

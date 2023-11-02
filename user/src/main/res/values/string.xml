@@ -3,6 +3,13 @@
     <!-- Forum Screen -->
     <string name="frag_forum_tv_empty">No posts found</string>
 
+    <!-- Service Screen -->
+    <string name="frag_services_sv_hint">Search…</string>
+    <string name="frag_services_label_apt">Apartment No.</string>
+    <string name="frag_services_label_block">Block</string>
+    <string name="frag_services_label_phone">Phone</string>
+    <string name="frag_services_tv_empty">No services found</string>
+
     <!-- Schedules Screen -->
     <string name="frag_schedule_tv_whole_day">The whole day</string>
     <string name="frag_schedule_tv_people_value">%d Guests</string>
