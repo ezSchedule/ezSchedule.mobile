@@ -20,12 +20,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-open class ServicesBottomSheetFragment(
-    val tenants: List<TenantServicePresentation>
-) : BottomSheetDialogFragment() {
+open class ServicesBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: ViewServiceBottomSheetBinding
     private val viewModel by sharedViewModel<ServicesViewModel>()
-
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog =  super.onCreateDialog(savedInstanceState)
@@ -35,20 +32,22 @@ open class ServicesBottomSheetFragment(
             val bottomSheet = it as BottomSheetDialog
             bottomSheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
-        setContent()
         setObserver()
         return dialog
     }
+
     private fun setObserver() {
         viewModel.serviceCreated.observe(this) {
             Toast.makeText(requireContext(), "Serviço criado com sucesso", Toast.LENGTH_SHORT)
                 .show()
             this.dismiss()
         }
+        viewModel.tenantsList.observe(this){
+            setContent(it)
+        }
     }
 
-
-    fun setContent() = with(binding) {
+    fun setContent(tenants:List<TenantServicePresentation>) = with(binding) {
         if (tenants.isNotEmpty()) {
             val adapter = ServicesAdapter(
                 tenants = tenants,
