@@ -182,7 +182,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setupLoading(isVisible: Boolean) {
-        binding.includeLoading.root.isVisible = isVisible
+        binding.includeLoading.isVisible = isVisible
     }
 
     private fun updateTenant() = with(binding.includeSettingsProfile) {

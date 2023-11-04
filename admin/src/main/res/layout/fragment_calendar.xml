@@ -183,7 +183,7 @@
 
     <include
         android:id="@+id/include_loading"
-        layout="@layout/view_loading"
+        layout="@layout/view_progress_loading"
         android:visibility="gone" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

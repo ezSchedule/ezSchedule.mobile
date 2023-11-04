@@ -1,29 +1,36 @@
 package com.ezschedule.admin.presenter.view
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.ezschedule.admin.R
 import com.ezschedule.admin.databinding.FragmentDashboardBinding
 import com.ezschedule.admin.presenter.adapter.EventsAdapter
 import com.ezschedule.admin.presenter.utils.CustomMarkerView
 import com.ezschedule.admin.presenter.utils.CustomXValueFormatter
+import com.ezschedule.admin.presenter.viewmodel.DashboardViewModel
 import com.ezschedule.network.R.color.black
 import com.ezschedule.network.R.color.gray_opacity
 import com.ezschedule.network.R.color.white
 import com.ezschedule.network.domain.presentation.ChartPresentation
 import com.ezschedule.utils.ResourceWrapper
+import com.ezschedule.utils.SharedPreferencesManager
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DashboardFragment : Fragment() {
     private lateinit var binding: FragmentDashboardBinding
+    private val viewModel by viewModel<DashboardViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -34,72 +41,27 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupChart(getData())
-        setupRecyclerView(getData())
+        viewModel.getChartData(SharedPreferencesManager(requireContext()).getInfo().idCondominium)
+        setupLoading(true)
+        setupObservers()
     }
 
-    private fun getData() = listOf(
-        ChartPresentation(
-            month = 1,
-            events = 3,
-            people = 54
-        ),
-        ChartPresentation(
-            month = 2,
-            events = 6,
-            people = 45
-        ),
-        ChartPresentation(
-            month = 3,
-            events = 2,
-            people = 54
-        ),
-        ChartPresentation(
-            month = 4,
-            events = 12,
-            people = 32
-        ),
-        ChartPresentation(
-            month = 5,
-            events = 3,
-            people = 32
-        ),
-        ChartPresentation(
-            month = 6,
-            events = 2,
-            people = 12
-        ),
-        ChartPresentation(
-            month = 7,
-            events = 2,
-            people = 34
-        ),
-        ChartPresentation(
-            month = 8,
-            events = 3,
-            people = 21
-        ),
-        ChartPresentation(
-            month = 9,
-            events = 2,
-            people = 45
-        ),
-        ChartPresentation(
-            month = 10,
-            events = null,
-            people = null
-        ),
-        ChartPresentation(
-            month = 11,
-            events = null,
-            people = null
-        ),
-        ChartPresentation(
-            month = 12,
-            events = null,
-            people = null
-        ),
-    )
+    private fun setupObservers() = with(viewModel) {
+        chartData.observe(viewLifecycleOwner) {
+            setupChart(it)
+            setupRecyclerView(it)
+            setupLoading(false)
+        }
+        empty.observe(viewLifecycleOwner) {
+            setupChart(ChartPresentation.getDataEmptyList())
+            setupRecyclerView(ChartPresentation.getDataEmptyList())
+            setupLoading(false)
+        }
+        error.observe(viewLifecycleOwner) {
+            setupLoading(false)
+            Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+        }
+    }
 
     private fun setupRecyclerView(historyList: List<ChartPresentation>) {
         binding.fragDashRvEvents.adapter =
@@ -176,4 +138,12 @@ class DashboardFragment : Fragment() {
             setDrawHorizontalHighlightIndicator(false)
             setDrawValues(false)
         }
+
+    private fun setupLoading(isLoading: Boolean) = with(binding) {
+        fragDashClChart.isVisible = isLoading.not()
+        includeLoading.apply {
+            isVisible = isLoading
+            setBackgroundColor(Color.TRANSPARENT)
+        }
+    }
 }

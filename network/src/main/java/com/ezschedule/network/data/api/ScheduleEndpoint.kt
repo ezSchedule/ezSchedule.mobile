@@ -1,5 +1,6 @@
 package com.ezschedule.network.data.api
 
+import com.ezschedule.network.domain.data.ChartData
 import com.ezschedule.network.domain.data.ScheduleData
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -12,4 +13,7 @@ interface ScheduleEndpoint {
 
     @POST("schedules/")
     suspend fun sendCanceledDay(@Body schedule: ScheduleData)
+
+    @GET("schedules/findSchedule/v2/{id}")
+    suspend fun getChartData(@Path("id") id: Int): List<ChartData>
 }
