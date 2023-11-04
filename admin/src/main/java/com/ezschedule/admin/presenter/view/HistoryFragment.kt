@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import com.ezschedule.admin.databinding.FragmentHistoryBinding
 import com.ezschedule.admin.presenter.adapter.HistoryAdapter
 import com.ezschedule.admin.presenter.viewmodel.HistoryViewModel
-import com.ezschedule.network.domain.response.ScheduleResponse
 import com.ezschedule.utils.SharedPreferencesManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -23,7 +22,6 @@ class HistoryFragment : Fragment() {
         viewmodel.setUser(SharedPreferencesManager(requireContext()).getInfo())
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -33,7 +31,7 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setOnclick()
+        isLoading(true)
     }
 
     private fun setObservers() {
@@ -44,42 +42,22 @@ class HistoryFragment : Fragment() {
         viewmodel.scheduleList.observe(this) {
             if (it.isEmpty()) {
                 isThereContent(false)
-            } else {
-                isThereContent(true)
-                binding.fragRvHistory.adapter = HistoryAdapter(it, false)
-            }
-        }
-    }
 
-    private fun setOnclick() = with(binding) {
-        fragBtnRequestsHistory.setOnClickListener {
-            it.isEnabled = false
-            fragBtnPaymentsHistory.isEnabled = true
-            val testlist = emptyList<ScheduleResponse>()
-            if (testlist.isEmpty()) {
-                isThereContent(false)
             } else {
-                fragRvHistory.adapter = HistoryAdapter(testlist, true)
                 isThereContent(true)
+                binding.fragRvHistory.adapter = HistoryAdapter(it)
             }
-            fragRvHistory.adapter = HistoryAdapter(emptyList(), true)
-        }
-        fragBtnPaymentsHistory.setOnClickListener {
-            it.isEnabled = false
-            fragBtnRequestsHistory.isEnabled = true
-            if (viewmodel.scheduleList.value!!.isEmpty()) {
-                isThereContent(false)
-            } else {
-                fragRvHistory.adapter =
-                    HistoryAdapter(viewmodel.scheduleList.value!!, false)
-                isThereContent(true)
-            }
+            isLoading(false)
         }
     }
 
     private fun isThereContent(thereIS: Boolean) = with(binding) {
         fragRvHistory.isVisible = thereIS
         fragHistoryTvNoPayments.isVisible = !thereIS
+    }
+
+    private fun isLoading(loading: Boolean) = with(binding) {
+        viewLoading.root.isVisible = loading
     }
 
 }
