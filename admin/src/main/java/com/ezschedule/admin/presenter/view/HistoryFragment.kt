@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.ezschedule.admin.databinding.FragmentHistoryBinding
@@ -32,6 +33,7 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isLoading(true)
+        setSearchView()
     }
 
     private fun setObservers() {
@@ -57,7 +59,32 @@ class HistoryFragment : Fragment() {
     }
 
     private fun isLoading(loading: Boolean) = with(binding) {
-        viewLoading.root.isVisible = loading
+        viewLoading.isVisible = loading
+    }
+
+
+    private fun setSearchView() = with(binding) {
+        fragHistorySvHistory.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    val list = viewmodel.scheduleList.value!!.filter { service ->
+                        service.name.contains(query, true)
+                    }
+                    fragRvHistory.adapter = HistoryAdapter(list)
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    val list = viewmodel.scheduleList.value!!.filter { service ->
+                        service.name.contains(newText, true)
+                    }
+                    fragRvHistory.adapter = HistoryAdapter(list)
+                }
+                return false
+            }
+        })
     }
 
 }
