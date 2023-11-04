@@ -3,14 +3,19 @@ package com.ezschedule.admin.presenter.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ezschedule.admin.domain.useCase.ForumUseCase
+import com.ezschedule.admin.domain.useCase.SendNotificationUseCase
 import com.ezschedule.network.data.ext.toObject
+import com.ezschedule.network.domain.data.NotificationRequest
 import com.ezschedule.network.domain.data.PostData
 import com.ezschedule.network.domain.presentation.PostPresentation
 import com.google.firebase.firestore.Query
+import kotlinx.coroutines.launch
 
 class ForumViewModel(
-    private val useCase: ForumUseCase
+    private val useCase: ForumUseCase,
+    private val sendNotification: SendNotificationUseCase
 ) : ViewModel() {
     private var _posts = MutableLiveData<List<PostPresentation>>()
     val posts: LiveData<List<PostPresentation>> = _posts
@@ -44,10 +49,21 @@ class ForumViewModel(
         useCase.execute().add(post)
             .addOnSuccessListener {
                 _postCreated.postValue(Unit)
+               send(post)
             }
             .addOnFailureListener {
                 _error.postValue(it)
             }
+    }
+
+    fun send(post: PostData) = viewModelScope.launch {
+        val notification = NotificationRequest(
+            post.idCondominium,
+            post.isEdited,
+            post.textContent,
+            post.typeMessage
+        )
+        sendNotification(notification)
     }
 
     fun getTypeMessage(isCommunication: Boolean) =
