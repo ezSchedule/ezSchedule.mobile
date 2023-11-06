@@ -30,7 +30,7 @@ class ForumViewModel(
     val error: LiveData<Exception> = _error
 
     fun getAllPosts(id: Int) {
-        useCase.execute().whereEqualTo(POST_ID, id)
+        useCase.execute("conversations-$id")
             .orderBy(POST_DATE, Query.Direction.ASCENDING)
             .addSnapshotListener { value, e ->
                 when (val response = value?.toObject()) {
@@ -46,10 +46,10 @@ class ForumViewModel(
     }
 
     fun createPost(post: PostData) {
-        useCase.execute().add(post)
+        useCase.execute("conversations-" + post.idCondominium).add(post)
             .addOnSuccessListener {
                 _postCreated.postValue(Unit)
-               send(post)
+                send(post)
             }
             .addOnFailureListener {
                 _error.postValue(it)
@@ -71,7 +71,6 @@ class ForumViewModel(
         else POST_URGENT
 
     companion object {
-        private const val POST_ID = "idCondominium"
         private const val POST_DATE = "dateTimePost"
 
         private const val POST_COMMUNICATE = "Communicate"
