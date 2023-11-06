@@ -46,8 +46,8 @@ class MainActivity : AppCompatActivity() {
                 setupDialogLogout(email)
             }
             viewModel.validateIsAdmin(user.isAdmin)
-            Firebase.messaging.subscribeToTopic("conversations-${user.idCondominium}")
         }
+        Firebase.messaging.subscribeToTopic("conversations-${user.idCondominium}")
     }
 
     private fun setupDialogLogout(email: String) {
