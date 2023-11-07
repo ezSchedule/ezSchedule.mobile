@@ -2,12 +2,17 @@ package com.ezschedule.ezschedule.data.di
 
 import android.content.Context
 import com.ezschedule.admin.data.repository.ScheduleRepository
+import com.ezschedule.admin.data.repository.ServiceRepository
 import com.ezschedule.admin.domain.useCase.CalendarUseCase
+import com.ezschedule.admin.domain.useCase.CreateServiceUseCase
 import com.ezschedule.admin.domain.useCase.DashboardUseCase
 import com.ezschedule.admin.domain.useCase.ForumUseCase
+import com.ezschedule.admin.domain.useCase.GetServiceListUseCase
+import com.ezschedule.admin.domain.useCase.GetTenantsListUseCase
 import com.ezschedule.admin.presenter.viewmodel.CalendarViewModel
 import com.ezschedule.admin.presenter.viewmodel.DashboardViewModel
 import com.ezschedule.admin.presenter.viewmodel.ForumViewModel
+import com.ezschedule.admin.presenter.viewmodel.ServicesViewModel
 import com.ezschedule.ezschedule.data.repository.CondominiumRepository
 import com.ezschedule.admin.data.repository.NotificationRepository
 import com.ezschedule.ezschedule.data.repository.SaloonRepository
@@ -26,6 +31,7 @@ import com.ezschedule.network.data.api.CalendarEndpoint
 import com.ezschedule.network.data.api.CondominiumEndpoint
 import com.ezschedule.network.data.api.NotificationEndpoint
 import com.ezschedule.network.data.api.SaloonEndpoint
+import com.ezschedule.network.data.api.ServicesEndpoint
 import com.ezschedule.network.data.api.TenantEndpoint
 import com.ezschedule.network.data.network.NetworkServiceFactory
 import com.ezschedule.user.domain.useCase.ForumUserUseCase
@@ -44,12 +50,14 @@ val moduleMain = module {
     factory { get<NetworkServiceFactory>().createNetworkService<CondominiumEndpoint>(get() as Context) }
     factory { get<NetworkServiceFactory>().createNetworkService<SaloonEndpoint>(get() as Context) }
     factory { get<NetworkServiceFactory>().createNetworkService<NotificationEndpoint>(get() as Context) }
+    factory { get<NetworkServiceFactory>().createNetworkService<ServicesEndpoint>(get() as Context) }
 
     factory { TenantRepository(get()) }
     factory { ScheduleRepository(get()) }
     factory { CondominiumRepository(get()) }
     factory { SaloonRepository(get()) }
     factory { NotificationRepository(get()) }
+    factory { ServiceRepository(get()) }
 
     factory { SendNotificationUseCase(get()) }
     factory { LoginUseCase(get()) }
@@ -59,14 +67,18 @@ val moduleMain = module {
     factory { GetCondominiumSettingsUseCase(get()) }
     factory { UpdateTenantSettingsUseCase(get()) }
     factory { CreateSaloonUseCase(get()) }
+    factory { CreateServiceUseCase(get()) }
     factory { DashboardUseCase(get()) }
     factory { ForumUseCase() }
     factory { ForumUserUseCase() }
+    factory { GetTenantsListUseCase(get()) }
+    factory { GetServiceListUseCase(get()) }
 
     viewModel { TenantViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }
     viewModel { CalendarViewModel(get()) }
     viewModel { SettingsViewModel(get(), get(), get(), get()) }
+    viewModel { ServicesViewModel(get(), get(), get()) }
     viewModel { DashboardViewModel(get()) }
     viewModel { ForumViewModel(get(),get()) }
     viewModel { ForumUserViewModel(get()) }
