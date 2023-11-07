@@ -8,13 +8,14 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ezschedule.network.domain.presentation.ServicePresentation
+import com.ezschedule.network.domain.presentation.ServiceUserPresentation
 import com.sptech.user.databinding.AdapterServiceUserBinding
 
 @Suppress("UNCHECKED_CAST")
 class ServicesAdapterUser(
-    private val dataList: List<ServicePresentation>,
+    private val dataList: List<ServiceUserPresentation>,
     private val context: Context,
-    private val onClick: (ServicePresentation) -> Unit
+    private val onClick: (ServiceUserPresentation) -> Unit
 ) : RecyclerView.Adapter<ServicesAdapterUser.ViewHolder>(), Filterable {
 
     private var driverFiltered = dataList
@@ -59,7 +60,7 @@ class ServicesAdapterUser(
     private val driverFilter = object : Filter() {
         override fun performFiltering(constraint: CharSequence?): FilterResults {
             val text = constraint?.toString().orEmpty()
-            val resultList = ArrayList<ServicePresentation>()
+            val resultList = ArrayList<ServiceUserPresentation>()
 
             if (text.isEmpty()) resultList.addAll(dataList)
             else dataList.forEach { item ->
@@ -75,12 +76,12 @@ class ServicesAdapterUser(
         override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
             setNewData(
                 if (results?.values == null) emptyList()
-                else results.values as List<ServicePresentation>
+                else results.values as List<ServiceUserPresentation>
             )
         }
     }
 
-    fun setNewData(filteredList: List<ServicePresentation>) {
+    fun setNewData(filteredList: List<ServiceUserPresentation>) {
         driverFiltered = filteredList.orEmpty()
         notifyDataSetChanged()
     }

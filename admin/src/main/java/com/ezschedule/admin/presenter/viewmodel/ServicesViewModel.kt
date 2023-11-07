@@ -27,6 +27,8 @@ class ServicesViewModel(
     private var _servicesList = MutableLiveData<List<ServicePresentation>>()
     val servicesList: LiveData<List<ServicePresentation>> = _servicesList
 
+    private var _servicesEmpty = MutableLiveData<Unit>()
+    val servicesEmpty: LiveData<Unit> = _servicesEmpty
 
     private var _serviceCreated = MutableLiveData<Unit>()
     val serviceCreated: LiveData<Unit> = _serviceCreated
@@ -41,7 +43,13 @@ class ServicesViewModel(
 
     fun getServiceList(id: Int) = viewModelScope.launch {
         when (val response = getServiceListUseCase(id)) {
-            is ResultWrapper.Success -> _servicesList.postValue(response.content.map { it.toPresentation() })
+            is ResultWrapper.Success -> response.content.toPresentationSimple().let {
+                when {
+                    it.isEmpty() -> _servicesEmpty.postValue(Unit)
+                    else -> _servicesList.postValue(it)
+                }
+            }
+
             is ResultWrapper.Error -> Log.d("ERROR", "${response.error}")
         }
     }
