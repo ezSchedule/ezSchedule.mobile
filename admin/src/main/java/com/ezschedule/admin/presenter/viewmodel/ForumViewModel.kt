@@ -3,14 +3,20 @@ package com.ezschedule.admin.presenter.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ezschedule.admin.domain.useCase.ForumUseCase
+import com.ezschedule.admin.domain.useCase.SendNotificationUseCase
 import com.ezschedule.network.data.ext.toObject
+import com.ezschedule.network.domain.data.CondominiumRequest
+import com.ezschedule.network.domain.data.NotificationRequest
 import com.ezschedule.network.domain.data.PostData
 import com.ezschedule.network.domain.presentation.PostPresentation
 import com.google.firebase.firestore.Query
+import kotlinx.coroutines.launch
 
 class ForumViewModel(
-    private val useCase: ForumUseCase
+    private val useCase: ForumUseCase,
+    private val sendNotification: SendNotificationUseCase
 ) : ViewModel() {
     private var _posts = MutableLiveData<List<PostPresentation>>()
     val posts: LiveData<List<PostPresentation>> = _posts
@@ -25,7 +31,7 @@ class ForumViewModel(
     val error: LiveData<Exception> = _error
 
     fun getAllPosts(id: Int) {
-        useCase.execute().whereEqualTo(POST_ID, id)
+        useCase.execute("conversations-$id")
             .orderBy(POST_DATE, Query.Direction.ASCENDING)
             .addSnapshotListener { value, e ->
                 when (val response = value?.toObject()) {
@@ -41,13 +47,24 @@ class ForumViewModel(
     }
 
     fun createPost(post: PostData) {
-        useCase.execute().add(post)
+        useCase.execute("conversations-" + post.idCondominium).add(post)
             .addOnSuccessListener {
                 _postCreated.postValue(Unit)
+                send(post)
             }
             .addOnFailureListener {
                 _error.postValue(it)
             }
+    }
+
+    fun send(post: PostData) = viewModelScope.launch {
+        val notification = NotificationRequest(
+            CondominiumRequest(post.idCondominium!!.toInt()),
+            post.isEdited,
+            post.textContent,
+            post.typeMessage
+        )
+        sendNotification(notification)
     }
 
     fun getTypeMessage(isCommunication: Boolean) =
@@ -55,7 +72,6 @@ class ForumViewModel(
         else POST_URGENT
 
     companion object {
-        private const val POST_ID = "idCondominium"
         private const val POST_DATE = "dateTimePost"
 
         private const val POST_COMMUNICATE = "Communicate"

@@ -23,7 +23,7 @@ class ForumUserViewModel(private val useCase: ForumUserUseCase) : ViewModel() {
     val error: LiveData<Exception> = _error
 
     fun getAllPosts(id: Int) {
-        useCase.execute().whereEqualTo(POST_ID, id)
+        useCase.execute("conversations-$id")
             .orderBy(POST_DATE, Query.Direction.ASCENDING)
             .addSnapshotListener { value, e ->
                 when (val response = value?.toObject()) {
@@ -67,7 +67,6 @@ class ForumUserViewModel(private val useCase: ForumUserUseCase) : ViewModel() {
     }
 
     companion object {
-        private const val POST_ID = "idCondominium"
         private const val POST_DATE = "dateTimePost"
 
         private const val POST_COMMUNICATE = "Communicate"

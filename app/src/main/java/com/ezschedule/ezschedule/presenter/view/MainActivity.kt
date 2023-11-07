@@ -15,8 +15,11 @@ import com.ezschedule.ezschedule.R
 import com.ezschedule.ezschedule.databinding.ActivityMainBinding
 import com.ezschedule.ezschedule.presenter.utils.TokenManager
 import com.ezschedule.ezschedule.presenter.viewModel.MainViewModel
+import com.ezschedule.network.domain.presentation.TenantPresentation
 import com.ezschedule.utils.SharedPreferencesManager
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -24,10 +27,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var popupMenu: PopupMenu
     private val viewModel by viewModel<MainViewModel>()
+    private lateinit var user: TenantPresentation
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        user = SharedPreferencesManager(this).getInfo()
         setContentView(binding.root)
         setupObservers()
         setupPopupMenu()
@@ -40,8 +45,9 @@ class MainActivity : AppCompatActivity() {
             TokenManager(this).decoded(token) { email ->
                 setupDialogLogout(email)
             }
-            viewModel.validateIsAdmin(SharedPreferencesManager(this).getInfo().isAdmin)
+            viewModel.validateIsAdmin(user.isAdmin)
         }
+        Firebase.messaging.subscribeToTopic("conversations-${user.idCondominium}")
     }
 
     private fun setupDialogLogout(email: String) {
