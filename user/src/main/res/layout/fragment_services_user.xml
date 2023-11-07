@@ -49,6 +49,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/gp_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="sv_service, rv_service" />
+
     <include
         android:id="@+id/include_loading"
         layout="@layout/view_progress_loading"

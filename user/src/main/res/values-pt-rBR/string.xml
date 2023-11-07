@@ -8,5 +8,5 @@
     <string name="frag_services_label_apt">Nº Apartamento</string>
     <string name="frag_services_label_block">Bloco</string>
     <string name="frag_services_label_phone">Telefone</string>
-    <string name="frag_services_tv_empty">Nenhum serviço encontrado</string>
+    <string name="frag_services_tv_empty">Nenhum serviço encontrado.</string>
 </resources>

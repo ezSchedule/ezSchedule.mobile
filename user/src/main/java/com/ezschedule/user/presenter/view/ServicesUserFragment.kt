@@ -8,20 +8,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
-import com.ezschedule.network.domain.presentation.ServicePresentation
+import com.ezschedule.network.domain.presentation.ServiceUserPresentation
 import com.ezschedule.user.presenter.adapter.ServicesAdapterUser
+import com.ezschedule.user.presenter.viewModel.ServiceUserViewModel
+import com.ezschedule.utils.SharedPreferencesManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.sptech.user.databinding.FragmentServicesUserBinding
 import com.sptech.user.databinding.ViewServiceUserBottomSheetBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ServicesUserFragment : Fragment() {
     private lateinit var binding: FragmentServicesUserBinding
     private lateinit var bottomSheetBinding: ViewServiceUserBottomSheetBinding
     private lateinit var dialog: BottomSheetDialog
+    private val viewModel by viewModel<ServiceUserViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -33,11 +38,25 @@ class ServicesUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dialog = BottomSheetDialog(requireContext())
-        setupRecyclerView()
+        viewModel.getServices(SharedPreferencesManager(requireContext()).getInfo().idCondominium)
+        setupLoading(true)
+        setupObservers()
     }
 
-    private fun setupRecyclerView() {
-        val adapter = ServicesAdapterUser(getData(), requireContext()) {
+    private fun setupObservers() = with(viewModel) {
+        services.observe(viewLifecycleOwner) {
+            setupRecyclerView(it)
+            setupEmpty(false)
+            setupLoading(false)
+        }
+        empty.observe(viewLifecycleOwner) {
+            setupLoading(false)
+            setupEmpty(true)
+        }
+    }
+
+    private fun setupRecyclerView(services: List<ServiceUserPresentation>) {
+        val adapter = ServicesAdapterUser(services, requireContext()) {
             setupBottomSheet()
             displayUserBottomSheet(it)
         }
@@ -62,28 +81,28 @@ class ServicesUserFragment : Fragment() {
         })
     }
 
-    private fun displayUserBottomSheet(serviceData: ServicePresentation) =
+    private fun displayUserBottomSheet(serviceData: ServiceUserPresentation) =
         with(bottomSheetBinding) {
             Glide.with(requireContext())
                 .load(serviceData.image)
                 .apply(RequestOptions.bitmapTransform(CircleCrop()))
                 .into(ivIconUser)
             tvNameUser.text = serviceData.userName
-            etValueApartmentNumber.setText("12")
-            etValueBlock.setText("1A")
-            etValuePhone.setText(serviceData.userNumber)
+            etValueApartmentNumber.setText(serviceData.apartmentNumber)
+            etValueBlock.setText(serviceData.block)
+            etValuePhone.setText(serviceData.phone)
             ivIconWhatsapp.setOnClickListener {
                 openWhatsapp(serviceData)
             }
         }
 
-    private fun openWhatsapp(serviceData: ServicePresentation) {
+    private fun openWhatsapp(serviceData: ServiceUserPresentation) {
         try {
             requireContext().startActivity(
                 Intent().apply {
                     action = Intent.ACTION_VIEW
                     data =
-                        Uri.parse("https://api.whatsapp.com/send?phone=${serviceData.userNumber}")
+                        Uri.parse("https://api.whatsapp.com/send?phone=${serviceData.phone}")
                     setPackage("com.whatsapp")
                 }
             )
@@ -97,42 +116,13 @@ class ServicesUserFragment : Fragment() {
         }
     }
 
-    private fun getData() = listOf(
-        ServicePresentation(
-            image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFPX3If-y5nLhFyA3Qg5CDZCoxkJR6gAbngw&usqp=CAU",
-            name = "Desenvolvedor",
-            userName = "Vinícius Almeida",
-            userNumber = "95780-6515"
-        ),
-        ServicePresentation(
-            image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFPX3If-y5nLhFyA3Qg5CDZCoxkJR6gAbngw&usqp=CAU",
-            name = "UI/UX",
-            userName = "Charles",
-            userNumber = "95881-9026"
-        ),
-        ServicePresentation(
-            image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFPX3If-y5nLhFyA3Qg5CDZCoxkJR6gAbngw&usqp=CAU",
-            name = "Carpinteiro",
-            userName = "Shu",
-            userNumber = "95163-1129"
-        ),
-        ServicePresentation(
-            image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFPX3If-y5nLhFyA3Qg5CDZCoxkJR6gAbngw&usqp=CAU",
-            name = "QA",
-            userName = "Andrew",
-            userNumber = "96176-9026"
-        ),
-        ServicePresentation(
-            image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFPX3If-y5nLhFyA3Qg5CDZCoxkJR6gAbngw&usqp=CAU",
-            name = "DevOps",
-            userName = "Greg",
-            userNumber = "95655-8187"
-        ),
-        ServicePresentation(
-            image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFPX3If-y5nLhFyA3Qg5CDZCoxkJR6gAbngw&usqp=CAU",
-            name = "Desenvolvedor Android",
-            userName = "Endryl",
-            userNumber = "94251-8747"
-        )
-    )
+    private fun setupLoading(isLoading: Boolean) = with(binding) {
+        includeLoading.isVisible = isLoading
+        gpLayout.isVisible = isLoading.not()
+    }
+
+    private fun setupEmpty(isEmpty: Boolean) = with(binding) {
+        tvEmpty.isVisible = isEmpty
+        gpLayout.isVisible = isEmpty.not()
+    }
 }
