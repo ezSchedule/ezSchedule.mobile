@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.bumptech.glide.request.RequestOptions
 import com.ezschedule.admin.databinding.AdapterServiceBinding
 import com.ezschedule.network.domain.presentation.ServicePresentation
 
@@ -31,11 +29,11 @@ class ServicesAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind() = with(binding) {
+            tvServiceName.text = serviceData().name
+            tvServiceUser.text = serviceData().userName
             Glide.with(context)
                 .load(serviceData().image)
                 .into(ivService)
-            tvServiceName.text = serviceData().name
-            tvServiceUser.text = serviceData().userName
         }
 
         private fun serviceData() = services[adapterPosition]
