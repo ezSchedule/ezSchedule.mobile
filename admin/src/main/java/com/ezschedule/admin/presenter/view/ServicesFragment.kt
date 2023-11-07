@@ -1,21 +1,15 @@
 package com.ezschedule.admin.presenter.view
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.activityViewModels
-import com.ezschedule.admin.R
 import com.ezschedule.admin.databinding.FragmentServicesBinding
-import com.ezschedule.admin.databinding.ViewServiceBottomSheetBinding
+import com.ezschedule.admin.presenter.adapter.AddTenantsServicesAdapter
 import com.ezschedule.admin.presenter.adapter.ServicesAdapter
 import com.ezschedule.admin.presenter.viewmodel.ServicesViewModel
 import com.ezschedule.network.domain.data.ServiceRequest
@@ -24,13 +18,11 @@ import com.ezschedule.network.domain.presentation.ServicePresentation
 import com.ezschedule.network.domain.presentation.TenantPresentation
 import com.ezschedule.network.domain.presentation.TenantServicePresentation
 import com.ezschedule.utils.SharedPreferencesManager
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ServicesFragment : Fragment() {
     private lateinit var binding: FragmentServicesBinding
-    private val viewModel by sharedViewModel<ServicesViewModel>()
+    private val viewModel by viewModel<ServicesViewModel>()
     private lateinit var user: TenantPresentation
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,17 +48,23 @@ class ServicesFragment : Fragment() {
     private fun setOnClick() = with(binding) {
         fragBtnService.setOnClickListener {
             viewModel.getTenantsList(user.idCondominium)
-            showBottomSheet()
         }
     }
 
     private fun setObservers() {
+        viewModel.tenantsList.observe(this) {
+            showViewAddService(it)
+        }
+
         viewModel.servicesList.observe(this) {
             setUpContent(it)
             setupLoading(false)
         }
-        viewModel.serviceCreated.observe(this){
+        viewModel.serviceCreated.observe(this) {
+            Toast.makeText(requireContext(), "Serviço criado com sucesso", Toast.LENGTH_SHORT)
+                .show()
             viewModel.getServiceList(user.idCondominium)
+            viewVisibility(true)
         }
     }
 
@@ -88,10 +86,23 @@ class ServicesFragment : Fragment() {
         includeLoading.isVisible = isVisible
     }
 
-    private fun showBottomSheet(){
-        val dialog = ServicesBottomSheetFragment()
-        dialog.show(parentFragmentManager,dialog.tag)
-    }
+    private fun showViewAddService(tenants: List<TenantServicePresentation>) =
+        with(binding.includeAddService) {
+            viewVisibility(false)
+            if (tenants.isNotEmpty()) {
+                val adapter = addAdapter(tenants)
+                fragServicesBtnBack.setOnClickListener {
+                    viewVisibility(true)
+                }
+                fragRvService.adapter = adapter
+                setViewAddService()
+                fragRvService.isVisible = true
+                tvNoResidents.isVisible = false
+            } else {
+                fragRvService.visibility = View.INVISIBLE
+                tvNoResidents.isVisible = true
+            }
+        }
 
     private fun setSearchView() = with(binding) {
         fragSvService.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -122,6 +133,54 @@ class ServicesFragment : Fragment() {
                 return false
             }
         })
+    }
+
+    private fun setViewAddService() = with(binding.includeAddService) {
+        fragSvService.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    val list = viewModel.tenantsList.value!!.filter { service ->
+                        service.name.contains(query, true)
+                    }
+                    fragRvService.adapter = addAdapter(list)
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    val list = viewModel.tenantsList.value!!.filter { tenants ->
+                        tenants.name.contains(newText, true)
+                    }
+                    fragRvService.adapter = addAdapter(list)
+                }
+                return false
+            }
+        })
+    }
+
+    private fun viewVisibility(isVisible: Boolean) {
+        binding.fragClService.isVisible = isVisible
+        binding.includeAddService.root.isVisible = !isVisible
+    }
+
+    private fun addAdapter(tenants: List<TenantServicePresentation>): AddTenantsServicesAdapter {
+        return AddTenantsServicesAdapter(
+            tenants = tenants,
+            context = requireContext()
+        ) { position ->
+            binding.includeAddService.btnAddService.setOnClickListener {
+                viewModel.createService(
+                    ServiceRequest(
+                        serviceName = binding.includeAddService.edtNameNewService.text.toString()
+                            .trim(),
+                        tenant = ServiceTenant(
+                            id = tenants[position].id
+                        )
+                    )
+                )
+            }
+        }
     }
 
 }
