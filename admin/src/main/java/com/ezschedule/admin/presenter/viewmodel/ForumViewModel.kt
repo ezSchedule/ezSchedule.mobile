@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.ezschedule.admin.domain.useCase.ForumUseCase
 import com.ezschedule.admin.domain.useCase.SendNotificationUseCase
 import com.ezschedule.network.data.ext.toObject
+import com.ezschedule.network.domain.data.CondominiumRequest
 import com.ezschedule.network.domain.data.NotificationRequest
 import com.ezschedule.network.domain.data.PostData
 import com.ezschedule.network.domain.presentation.PostPresentation
@@ -58,7 +59,7 @@ class ForumViewModel(
 
     fun send(post: PostData) = viewModelScope.launch {
         val notification = NotificationRequest(
-            post.idCondominium,
+            CondominiumRequest(post.idCondominium!!.toInt()),
             post.isEdited,
             post.textContent,
             post.typeMessage
