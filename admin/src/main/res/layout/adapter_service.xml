@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/spacing_large"
-    android:clickable="true"
-    android:background="@drawable/item_rounded">
+    android:background="@drawable/item_rounded"
+    android:clickable="true">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_service_item"
@@ -29,25 +29,33 @@
 
     <TextView
         android:id="@+id/tv_service_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_small"
         android:layout_marginTop="@dimen/spacing_tiny"
         android:layout_marginBottom="@dimen/spacing_micro"
+        android:ellipsize="end"
+        android:lines="1"
         android:textColor="@color/black"
         android:textSize="@dimen/size_standard"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/card_service_item"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Service name" />
 
     <TextView
         android:id="@+id/tv_service_user"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_small"
+        android:ellipsize="end"
+        android:lines="1"
         android:textColor="@color/gray"
         android:textSize="@dimen/size_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/card_service_item"
         app:layout_constraintTop_toBottomOf="@id/tv_service_name"
         tools:text="Vinicius Almeida" />

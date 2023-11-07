@@ -15,7 +15,6 @@ import com.ezschedule.network.domain.data.SaloonRequest
 import com.ezschedule.network.domain.data.TenantUpdateRequest
 import com.ezschedule.network.domain.presentation.TenantSettingsPresentation
 import kotlinx.coroutines.launch
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
 class SettingsViewModel(
@@ -40,8 +39,8 @@ class SettingsViewModel(
     private var _updateIsComplete = MutableLiveData<Unit>()
     val updateIsComplete: LiveData<Unit> = _updateIsComplete
 
-    private var _imgHolder = MutableLiveData<Map<String,RequestBody>>()
-    val imgHolder: LiveData<Map<String,RequestBody>> = _imgHolder
+    private var _imgHolder = MutableLiveData<Map<String, RequestBody>>()
+    val imgHolder: LiveData<Map<String, RequestBody>> = _imgHolder
 
     private var _saloonCreated = MutableLiveData<Unit>()
     val saloonCreated: LiveData<Unit> = _saloonCreated
@@ -92,15 +91,15 @@ class SettingsViewModel(
         }
     }
 
-    fun updateImg(img: Map<String,RequestBody>) {
+    fun updateImg(img: Map<String, RequestBody>) {
         _imgHolder.postValue(img)
     }
 
-    fun createSaloon(saloon:SaloonRequest){
+    fun createSaloon(saloon: SaloonRequest) {
         viewModelScope.launch {
-            when(createSaloonUseCase(saloon)){
+            when (createSaloonUseCase(saloon)) {
                 is ResultWrapper.Success -> _saloonCreated.value = Unit
-                is ResultWrapper.Error -> Log.d("Error","erro na criação de saloon")
+                is ResultWrapper.Error -> Log.d("Error", "erro na criação de saloon")
             }
         }
     }
