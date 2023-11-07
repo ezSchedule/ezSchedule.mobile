@@ -30,7 +30,7 @@
             android:id="@+id/frag_services_tv_no_services"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/frag_service_text_no_service_found"
+            android:text="@string/frag_services_tv_empty"
             android:textSize="@dimen/size_small"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/spacing_none"
             android:layout_marginHorizontal="@dimen/spacing_large"
-            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginVertical="@dimen/spacing_large"
             android:clipToPadding="false"
             android:visibility="invisible"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -64,7 +64,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/frag_rv_service"
             app:layout_constraintWidth_percent="0.4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -72,7 +71,7 @@
     <include
         android:id="@+id/include_add_service"
         layout="@layout/view_add_service"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <include
         android:id="@+id/include_loading"

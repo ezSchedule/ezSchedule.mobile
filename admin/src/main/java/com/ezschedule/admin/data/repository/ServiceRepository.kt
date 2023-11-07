@@ -5,7 +5,7 @@ import com.ezschedule.network.data.ext.toResponse
 import com.ezschedule.network.data.network.handler.requestHandler
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.data.ServiceRequest
-import com.ezschedule.network.domain.response.ServiceResponse
+import com.ezschedule.network.domain.response.ServicesResponse
 import com.ezschedule.network.domain.response.TenantResponse
 
 class ServiceRepository(private val endpoint: ServicesEndpoint) {
@@ -16,7 +16,7 @@ class ServiceRepository(private val endpoint: ServicesEndpoint) {
         }
     }
 
-    suspend fun getServicesList(id: Int): ResultWrapper<List<ServiceResponse>> {
+    suspend fun getServicesList(id: Int): ResultWrapper<ServicesResponse> {
         return requestHandler {
             endpoint.servicesList(id).toResponse()
         }
