@@ -55,9 +55,13 @@ class ServicesFragment : Fragment() {
         viewModel.tenantsList.observe(this) {
             showViewAddService(it)
         }
-
         viewModel.servicesList.observe(this) {
             setUpContent(it)
+            setEmptyList(false)
+            setupLoading(false)
+        }
+        viewModel.servicesEmpty.observe(this) {
+            setEmptyList(true)
             setupLoading(false)
         }
         viewModel.serviceCreated.observe(this) {
@@ -157,6 +161,11 @@ class ServicesFragment : Fragment() {
                 return false
             }
         })
+    }
+
+    private fun setEmptyList(isEmpty: Boolean) = with(binding) {
+        fragRvService.isVisible = isEmpty.not()
+        fragServicesTvNoServices.isVisible = isEmpty
     }
 
     private fun viewVisibility(isVisible: Boolean) {

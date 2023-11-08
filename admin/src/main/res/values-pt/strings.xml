@@ -2,8 +2,9 @@
 <resources>
     <!-- Services Screen -->
     <string name="frag_services_btn_desc">adicionar</string>
-    <string name="frag_services_sv_hint">Buscar...</string>
-    <string name="frag_tv_title">Adicionar</string>
+    <string name="frag_services_sv_hint">Buscar…</string>
+    <string name="frag_services_tv_title">Adicionar</string>
+    <string name="frag_services_tv_empty">Nenhum serviço encontrado.</string>
 
     <!-- History Screen -->
     <string name="frag_history_atv_hint">Buscar…</string>

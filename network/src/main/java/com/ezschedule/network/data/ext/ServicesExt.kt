@@ -1,12 +1,14 @@
 package com.ezschedule.network.data.ext
 
 import com.ezschedule.network.domain.data.ServiceData
-import com.ezschedule.network.domain.data.TenantServiceData
-import com.ezschedule.network.domain.presentation.TenantServicePresentation
 import com.ezschedule.network.domain.response.ServiceResponse
-import com.ezschedule.network.domain.response.TenantResponse
+import com.ezschedule.network.domain.response.ServicesResponse
 
-fun List<ServiceData>.toResponse() = this.map { it.toResponse() }
+fun List<ServiceData>.toResponse() = ServicesResponse(
+    results = this.map {
+        it.toResponse()
+    }
+)
 
 fun ServiceData.toResponse() = ServiceResponse(
     serviceId = id,
@@ -14,8 +16,9 @@ fun ServiceData.toResponse() = ServiceResponse(
     tenantId = tenant.id,
     tenantName = tenant.name,
     tenantImage = tenant.image ?: "",
-    tenantPhoneNumber = tenant.phoneNumber
-
+    tenantPhoneNumber = tenant.phoneNumber,
+    tenantBlock = tenant.residentsBlock,
+    tenantApartmentNumber = tenant.apartmentNumber.toString()
 )
 
 
