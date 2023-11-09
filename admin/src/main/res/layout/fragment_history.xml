@@ -45,6 +45,7 @@
         android:id="@+id/frag_history_tv_no_payments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         android:layout_marginHorizontal="@dimen/spacing_small"
         android:text="@string/frag_history_text_no_payments"
         android:textSize="@dimen/size_small"
