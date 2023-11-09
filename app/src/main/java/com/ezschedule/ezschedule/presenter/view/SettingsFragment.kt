@@ -35,6 +35,7 @@ class SettingsFragment : Fragment() {
     private val viewModel by viewModel<SettingsViewModel>()
     private lateinit var userInfo: TenantPresentation
     private lateinit var dialog: BottomSheetDialog
+    private var isOnInclude = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,8 +117,17 @@ class SettingsFragment : Fragment() {
 
     private fun setupButtonClick() = with(binding) {
         fragSettingsBtnBack.setOnClickListener {
-            findNavController().popBackStack()
-            activity.displayLoginItems(isVisible = true)
+            if (isOnInclude) {
+                fragSettingsBtnSave.isVisible = false
+                fragSettingsBtnBack.isVisible = true
+                includeSettingsProfile.root.isVisible = false
+                includeSettingsCondominium.root.isVisible = false
+                includeSettingsHome.root.isVisible = true
+                isOnInclude = false
+            }else{
+                findNavController().popBackStack()
+                activity.displayLoginItems(isVisible = true)
+            }
         }
         fragSettingsBtnSave.setOnClickListener {
             updateTenant()
@@ -146,6 +156,7 @@ class SettingsFragment : Fragment() {
         }
         binding.fragSettingsGroupButtons.isVisible = true
         root.isVisible = true
+        isOnInclude = true
         setupLoading(false)
     }
 
@@ -160,6 +171,7 @@ class SettingsFragment : Fragment() {
         }
         binding.fragSettingsBtnBack.isVisible = true
         root.isVisible = true
+        isOnInclude = true
         setupLoading(false)
     }
 
@@ -218,7 +230,7 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    private fun setPickUpMedia(){
+    private fun setPickUpMedia() {
         pickUpMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
             it?.let {
                 Glide.with(requireContext())
