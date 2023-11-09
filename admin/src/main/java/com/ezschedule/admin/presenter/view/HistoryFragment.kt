@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.ezschedule.admin.databinding.FragmentHistoryBinding
 import com.ezschedule.admin.presenter.adapter.HistoryAdapter
 import com.ezschedule.admin.presenter.viewmodel.HistoryViewModel
+import com.ezschedule.network.domain.response.ScheduleResponse
 import com.ezschedule.utils.SharedPreferencesManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -47,7 +48,7 @@ class HistoryFragment : Fragment() {
 
             } else {
                 isThereContent(true)
-                binding.fragRvHistory.adapter = HistoryAdapter(it)
+                binding.fragRvHistory.adapter = setAdapter(it)
             }
             isLoading(false)
         }
@@ -70,7 +71,7 @@ class HistoryFragment : Fragment() {
                     val list = viewmodel.scheduleList.value!!.filter { service ->
                         service.name.contains(query, true)
                     }
-                    fragRvHistory.adapter = HistoryAdapter(list)
+                    fragRvHistory.adapter = setAdapter(list)
                 }
                 return false
             }
@@ -80,11 +81,17 @@ class HistoryFragment : Fragment() {
                     val list = viewmodel.scheduleList.value!!.filter { service ->
                         service.name.contains(newText, true)
                     }
-                    fragRvHistory.adapter = HistoryAdapter(list)
+                    fragRvHistory.adapter = setAdapter(list)
                 }
                 return false
             }
         })
+    }
+
+    private fun setAdapter(scheduleList: List<ScheduleResponse>): HistoryAdapter {
+        return HistoryAdapter(scheduleList) { schedule ->
+            HistoryBottomSheetFragment(schedule).show(childFragmentManager, "LOL")
+        }
     }
 
 }

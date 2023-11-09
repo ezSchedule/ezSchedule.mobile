@@ -3,12 +3,15 @@ package com.ezschedule.admin.presenter.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.ezschedule.admin.databinding.AdapterHistoryBinding
+import com.ezschedule.admin.presenter.view.HistoryBottomSheetFragment
 import com.ezschedule.network.domain.response.ScheduleResponse
 
 class HistoryAdapter(
-    private val histories: List<ScheduleResponse>
+    private val histories: List<ScheduleResponse>,
+    private val bottomSheet: ((ScheduleResponse) -> Unit)
 ) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
@@ -31,13 +34,11 @@ class HistoryAdapter(
             tvHistoryName.text = historyData().name
             tvHistorySaloonName.text = historyData().nameSalon
             tvHistorySaloonValue.text = historyData().priceSalon.toString()
+            fragHistoryImgAccept.isVisible = !historyData().isCanceled
+            fragHistoryImgError.isVisible = historyData().isCanceled
 
-            if (!historyData().isCanceled) {
-                fragHistoryImgAccept.visibility = View.GONE
-                fragHistoryImgError.visibility = View.VISIBLE
-            } else {
-                fragHistoryImgAccept.visibility = View.VISIBLE
-                fragHistoryImgError.visibility = View.GONE
+            itemView.setOnClickListener{
+              bottomSheet(historyData())
             }
 
         }
