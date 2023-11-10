@@ -13,4 +13,14 @@
     <!-- Schedules Screen -->
     <string name="frag_schedule_tv_whole_day">The whole day</string>
     <string name="frag_schedule_tv_people_value">%d Guests</string>
+    <string name="frag_schedule_tv_add" translatable="false">+</string>
+    <string name="frag_schedule_btn_back">Button back</string>
+    <string name="frag_schedule_btn_next">Next</string>
+    <string name="frag_schedule_tv_title_new_date">New Date</string>
+    <string name="frag_schedule_edt_label_event_name">Event name</string>
+    <string name="frag_schedule_edt_label_event_type">Event type</string>
+    <string name="frag_schedule_edt_label_event_date">Event date</string>
+    <string name="frag_schedule_edt_label_saloon">Choose saloon</string>
+    <string name="frag_schedule_edt_label_quantity_guests">Quantity guests</string>
+    <string name="frag_schedule_edt_label_value">Value: </string>
 </resources>

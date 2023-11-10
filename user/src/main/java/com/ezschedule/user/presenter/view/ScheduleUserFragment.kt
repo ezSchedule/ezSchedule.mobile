@@ -4,17 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.ezschedule.network.domain.presentation.SchedulesPresentation
 import com.ezschedule.user.presenter.adapter.SchedulesAdapter
+import com.ezschedule.user.presenter.viewModel.ScheduleUserViewModel
+import com.ezschedule.utils.SharedPreferencesManager
 import com.sptech.user.databinding.FragmentScheduleUserBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.abs
 
 class ScheduleUserFragment : Fragment() {
     private lateinit var binding: FragmentScheduleUserBinding
+    private val viewModel by viewModel<ScheduleUserViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -25,12 +31,31 @@ class ScheduleUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupViewPager()
+        viewModel.getSchedules(SharedPreferencesManager(requireContext()).getInfo().id)
+        setupLoading(true)
+        setupObservers()
     }
 
-    private fun setupViewPager() {
+    private fun setupObservers() = with(viewModel) {
+        schedules.observe(viewLifecycleOwner) {
+            setupViewPager(it)
+            setupLoading(false)
+        }
+        empty.observe(viewLifecycleOwner) {
+            setupLoading(false)
+            Toast.makeText(requireContext(), "Empty", Toast.LENGTH_LONG).show()
+        }
+        error.observe(viewLifecycleOwner) {
+            setupLoading(false)
+            Toast.makeText(requireContext(), "Error", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun setupViewPager(list: List<SchedulesPresentation>) {
         binding.vpSchedules.apply {
-            adapter = SchedulesAdapter(getData(), requireContext())
+            adapter = SchedulesAdapter(list, requireContext()) {
+                Toast.makeText(requireContext(), "Add", Toast.LENGTH_LONG).show()
+            }
             offscreenPageLimit = 2
             clipChildren = false
             clipToPadding = false
@@ -44,24 +69,8 @@ class ScheduleUserFragment : Fragment() {
         }
     }
 
-    private fun getData() = listOf(
-        SchedulesPresentation(
-            salon = "Salão Magnólia",
-            event = "Aniversário Carol",
-            date = "Segunda, 13 de Março",
-            peoples = 120
-        ),
-        SchedulesPresentation(
-            salon = "Salão Magnólia",
-            event = "Aniversário Cassandra",
-            date = "Terça, 14 de Março",
-            peoples = 105
-        ),
-        SchedulesPresentation(
-            salon = "Salão Magnólia",
-            event = "Aniversário Morgana",
-            date = "Quarta, 15 de Março",
-            peoples = 90
-        ),
-    )
+    private fun setupLoading(isLoading: Boolean) = with(binding) {
+        includeLoading.isVisible = isLoading
+        vpSchedules.isVisible = isLoading.not()
+    }
 }

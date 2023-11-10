@@ -16,4 +16,7 @@ interface CalendarEndpoint {
 
     @GET("schedules/findSchedule/v2/{id}")
     suspend fun getChartData(@Path("id") id: Int): List<ChartData>
+
+    @GET("schedules/tenant/{id}")
+    suspend fun getSchedulesTenant(@Path("id") id: Int): List<ScheduleData>
 }

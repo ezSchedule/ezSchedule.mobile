@@ -34,10 +34,13 @@ import com.ezschedule.network.data.api.SaloonEndpoint
 import com.ezschedule.network.data.api.ServicesEndpoint
 import com.ezschedule.network.data.api.TenantEndpoint
 import com.ezschedule.network.data.network.NetworkServiceFactory
+import com.ezschedule.user.data.repository.ScheduleUserRepository
 import com.ezschedule.user.data.repository.ServiceUserRepository
 import com.ezschedule.user.domain.useCase.ForumUserUseCase
+import com.ezschedule.user.domain.useCase.ScheduleUserUseCase
 import com.ezschedule.user.domain.useCase.ServiceUserUseCase
 import com.ezschedule.user.presenter.viewModel.ForumUserViewModel
+import com.ezschedule.user.presenter.viewModel.ScheduleUserViewModel
 import com.ezschedule.user.presenter.viewModel.ServiceUserViewModel
 import com.ezschedule.utils.ResourceWrapper
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -62,6 +65,7 @@ val moduleMain = module {
     factory { NotificationRepository(get()) }
     factory { ServiceRepository(get()) }
     factory { ServiceUserRepository(get()) }
+    factory { ScheduleUserRepository(get()) }
 
     factory { SendNotificationUseCase(get()) }
     factory { LoginUseCase(get()) }
@@ -78,6 +82,7 @@ val moduleMain = module {
     factory { ServiceUserUseCase(get()) }
     factory { GetTenantsListUseCase(get()) }
     factory { GetServiceListUseCase(get()) }
+    factory { ScheduleUserUseCase(get()) }
 
     viewModel { TenantViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }
@@ -88,4 +93,5 @@ val moduleMain = module {
     viewModel { ForumViewModel(get(), get()) }
     viewModel { ServiceUserViewModel(get()) }
     viewModel { ForumUserViewModel(get()) }
+    viewModel { ScheduleUserViewModel(get()) }
 }
