@@ -6,11 +6,11 @@ plugins {
 
 android {
     namespace 'com.ezschedule.network'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         minSdk 26
-        targetSdk 33
+        targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -33,9 +33,20 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
+    def core_version = '1.8.0'
+    api "androidx.core:core-ktx:$core_version"
+
+    def appcompat_version = '1.6.1'
+    api "androidx.appcompat:appcompat:$appcompat_version"
+
+    def constraint_version = '2.1.4'
+    api "androidx.constraintlayout:constraintlayout:$constraint_version"
+
+    def runtime_version = '2.8.1'
+    api "androidx.work:work-runtime-ktx:$runtime_version"
+
+    def material_version = '1.10.0'
+    api "com.google.android.material:material:$material_version"
 
     def firebase_version = '32.3.1'
     api(platform("com.google.firebase:firebase-bom:$firebase_version"))
@@ -68,7 +79,20 @@ dependencies {
     def chart_version = '3.1.0'
     api "com.github.PhilJay:MPAndroidChart:$chart_version"
 
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    /* dependencies unit test */
+
+    def junit_version = '4.13.2'
+    testApi "junit:junit:$junit_version"
+
+    testApi "io.insert-koin:koin-test:$koin_version"
+
+    def mockk_version = '1.13.2'
+    testApi "io.mockk:mockk:$mockk_version"
+
+    def rule_version = '2.2.0'
+    testApi "androidx.arch.core:core-testing:$rule_version"
+
+    def coroutines_version = '1.6.4'
+    testApi "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+
 }
