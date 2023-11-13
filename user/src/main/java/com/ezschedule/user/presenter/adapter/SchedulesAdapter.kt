@@ -16,7 +16,8 @@ class SchedulesAdapter(
     private val onCLick: () -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun getItemViewType(position: Int) = if (position == 1) TYPE_ADD else TYPE_SCHEDULE
+    override fun getItemViewType(position: Int) =
+        if (itemCount == 0 || position == (itemCount - 1)) TYPE_ADD else TYPE_SCHEDULE
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == TYPE_ADD) ViewHolderAdd(
