@@ -117,7 +117,7 @@ class SettingsFragment : Fragment() {
 
     private fun setupButtonClick() = with(binding) {
         fragSettingsBtnBack.setOnClickListener {
-            if (isOnInclude) {
+            if (isOnInclude && userInfo.isAdmin) {
                 fragSettingsBtnSave.isVisible = false
                 fragSettingsBtnBack.isVisible = true
                 includeSettingsProfile.root.isVisible = false

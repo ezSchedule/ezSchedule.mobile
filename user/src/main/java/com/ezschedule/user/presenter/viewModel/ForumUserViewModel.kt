@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ezschedule.network.data.ext.toObject
 import com.ezschedule.network.domain.presentation.PostPresentation
-import com.ezschedule.user.domain.useCase.ForumUserUseCase
+import com.ezschedule.user.domain.useCase.FirestoreUserUseCase
 import com.google.firebase.firestore.Query
 import com.sptech.user.R
 
-class ForumUserViewModel(private val useCase: ForumUserUseCase) : ViewModel() {
+class ForumUserViewModel(private val useCase: FirestoreUserUseCase) : ViewModel() {
     private var _posts = MutableLiveData<List<PostPresentation>>()
     val posts: LiveData<List<PostPresentation>> = _posts
 
@@ -23,7 +23,7 @@ class ForumUserViewModel(private val useCase: ForumUserUseCase) : ViewModel() {
     val error: LiveData<Exception> = _error
 
     fun getAllPosts(id: Int) {
-        useCase.execute("conversations-$id")
+        useCase("conversations-$id")
             .orderBy(POST_DATE, Query.Direction.ASCENDING)
             .addSnapshotListener { value, e ->
                 when (val response = value?.toObject()) {

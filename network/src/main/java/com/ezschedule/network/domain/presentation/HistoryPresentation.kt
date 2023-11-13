@@ -1,5 +1,7 @@
 package com.ezschedule.network.domain.presentation
 
+import com.google.firebase.Timestamp
+
 data class HistoryPresentation(
     val id: String?,
     val invoiceNumber: String?,
@@ -7,6 +9,7 @@ data class HistoryPresentation(
     val paymentStatus: String?,
     val productName: String?,
     val condominiumId: Int?,
+    val paymentDate: Timestamp?,
     val saloon: SaloonHistoryPresentation,
     val schedule: ScheduleHistoryPresentation,
     val tenant: TenantHistoryPresentation

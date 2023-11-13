@@ -9,6 +9,7 @@ data class HistoryData(
     val paymentStatus: String?,
     val productName: String?,
     val condominiumId: Int?,
+    val paymentDate: Timestamp?,
     val saloon: SaloonHistoryData,
     val schedule: ScheduleHistoryData,
     val tenant: TenantHistoryData

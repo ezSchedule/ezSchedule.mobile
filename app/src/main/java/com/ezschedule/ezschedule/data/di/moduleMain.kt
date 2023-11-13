@@ -37,9 +37,10 @@ import com.ezschedule.network.data.api.ServicesEndpoint
 import com.ezschedule.network.data.api.TenantEndpoint
 import com.ezschedule.network.data.network.NetworkServiceFactory
 import com.ezschedule.user.data.repository.ServiceUserRepository
-import com.ezschedule.user.domain.useCase.ForumUserUseCase
+import com.ezschedule.user.domain.useCase.FirestoreUserUseCase
 import com.ezschedule.user.domain.useCase.ServiceUserUseCase
 import com.ezschedule.user.presenter.viewModel.ForumUserViewModel
+import com.ezschedule.user.presenter.viewModel.HistoryUserViewModel
 import com.ezschedule.user.presenter.viewModel.ServiceUserViewModel
 import com.ezschedule.utils.ResourceWrapper
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -76,11 +77,12 @@ val moduleMain = module {
     factory { CreateServiceUseCase(get()) }
     factory { DashboardUseCase(get()) }
     factory { ForumUseCase() }
-    factory { ForumUserUseCase() }
+    factory { FirestoreUserUseCase() }
     factory { ServiceUserUseCase(get()) }
     factory { GetTenantsListUseCase(get()) }
     factory { GetServiceListUseCase(get()) }
     factory { HistoryUseCase() }
+    factory { HistoryUserViewModel(get()) }
 
     viewModel { TenantViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }

@@ -1,17 +1,18 @@
-package com.ezschedule.admin.presenter.view
+package com.ezschedule.user.presenter.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ezschedule.admin.R
-import com.ezschedule.admin.databinding.ViewHistoryBottomSheetBinding
 import com.ezschedule.network.domain.presentation.HistoryPresentation
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.sptech.user.R
+import com.sptech.user.databinding.ViewHistoryBottomSheetBinding
 import java.time.LocalDateTime
 import java.time.ZoneId
 
-class HistoryBottomSheetFragment(val history: HistoryPresentation) : BottomSheetDialogFragment() {
+class HistoryUserBottomSheetFragment(val history: HistoryPresentation) :
+    BottomSheetDialogFragment() {
 
     private lateinit var binding: ViewHistoryBottomSheetBinding
     override fun onCreateView(
@@ -43,8 +44,11 @@ class HistoryBottomSheetFragment(val history: HistoryPresentation) : BottomSheet
         tvEventCategory.text = history.schedule.typeEvent
         tvEventBlock.text = history.saloon.blockEvent
         tvEventPrice.text = "R$${history.saloon.saloonPrice}"
-        val date = LocalDateTime.ofInstant(history.paymentDate?.toDate()?.toInstant(),ZoneId.systemDefault()).toString()
-        tvEventData.text = date.substring(0,date.indexOf(".")).replace("T"," ").replace("-","/")
+        val date = LocalDateTime.ofInstant(
+            history.paymentDate?.toDate()?.toInstant(),
+            ZoneId.systemDefault()
+        ).toString()
+        tvEventData.text = date.substring(0, date.indexOf(".")).replace("T", " ").replace("-", "/")
     }
 
 }

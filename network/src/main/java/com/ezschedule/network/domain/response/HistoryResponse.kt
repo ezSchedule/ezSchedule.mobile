@@ -15,6 +15,7 @@ data class HistoryResponse(
     val paymentStatus: String?,
     val productName: String?,
     val condominiumId: Int?,
+    val paymentDate: Timestamp?,
     val saloon: SaloonHistoryResponse,
     val schedule: ScheduleHistoryResponse,
     val tenant: TenantHistoryResponse
@@ -28,6 +29,7 @@ data class HistoryResponse(
         paymentStatus = paymentStatus,
         productName = productName,
         condominiumId = condominiumId,
+        paymentDate = paymentDate,
         saloon = SaloonHistoryPresentation(
             id = saloon.id,
             name = saloon.name,
