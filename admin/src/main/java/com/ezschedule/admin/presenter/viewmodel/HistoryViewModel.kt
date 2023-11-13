@@ -4,33 +4,45 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.ezschedule.admin.domain.useCase.CalendarUseCase
-import com.ezschedule.network.data.network.wrapper.ResultWrapper
+import com.ezschedule.admin.domain.useCase.HistoryUseCase
+import com.ezschedule.network.data.ext.toHistory
+import com.ezschedule.network.domain.presentation.HistoryPresentation
 import com.ezschedule.network.domain.presentation.TenantPresentation
-import com.ezschedule.network.domain.response.ScheduleResponse
-import kotlinx.coroutines.launch
 
 class HistoryViewModel(
-    private val calendarUseCase: CalendarUseCase
+    private val historyUseCase: HistoryUseCase
 ) : ViewModel() {
 
-    private var _scheduleList = MutableLiveData<List<ScheduleResponse>>()
-    val scheduleList: LiveData<List<ScheduleResponse>> = _scheduleList
+    private var _historyList = MutableLiveData<List<HistoryPresentation>>()
+    val historyList: LiveData<List<HistoryPresentation>> = _historyList
+
+    private var _empty = MutableLiveData<Unit>()
+    val empty: LiveData<Unit> = _empty
+
+    private var _error = MutableLiveData<Exception>()
+    val error: LiveData<Exception> = _error
+
 
     private var _user = MutableLiveData<TenantPresentation>()
     val user: LiveData<TenantPresentation> = _user
 
-    fun setUser(user:TenantPresentation) = _user.postValue(user)
+    fun setUser(user: TenantPresentation) = _user.postValue(user)
 
-    fun getUserPayments() = viewModelScope.launch {
-        when (val response = calendarUseCase.execute(user.value!!.idCondominium)) {
-            is ResultWrapper.Success -> {
-                _scheduleList.postValue(response.content.schedules)
+    fun getAllPaymentsByCondominium(id: Int) {
+        historyUseCase("reports-$id")
+            .addSnapshotListener { value, e ->
+                when (val response = value?.toHistory()) {
+                    null -> _error.postValue(e)
+
+                    else -> when {
+                        response.isEmpty() -> _empty.postValue(Unit)
+
+                        else -> {
+                            Log.d("FIREBAS", "${value?.toHistory()}")
+                            _historyList.postValue(response.map { it.toPresentation() })
+                        }
+                    }
+                }
             }
-
-            is ResultWrapper.Error -> Log.d("ERROR", "${response.error}")
-        }
     }
-
 }

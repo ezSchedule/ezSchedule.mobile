@@ -1,17 +1,15 @@
 package com.ezschedule.admin.presenter.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.ezschedule.admin.databinding.AdapterHistoryBinding
-import com.ezschedule.admin.presenter.view.HistoryBottomSheetFragment
-import com.ezschedule.network.domain.response.ScheduleResponse
+import com.ezschedule.network.domain.presentation.HistoryPresentation
 
 class HistoryAdapter(
-    private val histories: List<ScheduleResponse>,
-    private val bottomSheet: ((ScheduleResponse) -> Unit)
+    private val histories: List<HistoryPresentation>,
+    private val bottomSheet: ((HistoryPresentation) -> Unit)
 ) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
@@ -31,16 +29,15 @@ class HistoryAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind() = with(binding) {
-            tvHistoryName.text = historyData().name
-            tvHistorySaloonName.text = historyData().nameSalon
-            tvHistorySaloonValue.text = historyData().priceSalon.toString()
-            fragHistoryImgAccept.isVisible = !historyData().isCanceled
-            fragHistoryImgError.isVisible = historyData().isCanceled
+            tvHistoryName.text = historyData().productName
+            tvHistorySaloonName.text = historyData().saloon.name
+            tvHistorySaloonValue.text = "R$${historyData().saloon.saloonPrice}"
+            fragHistoryImgAccept.isVisible = !historyData().schedule.isCanceled!!
+            fragHistoryImgError.isVisible = historyData().schedule.isCanceled == true
 
-            itemView.setOnClickListener{
-              bottomSheet(historyData())
+            itemView.setOnClickListener {
+                bottomSheet(historyData())
             }
-
         }
 
         private fun historyData() = histories[adapterPosition]

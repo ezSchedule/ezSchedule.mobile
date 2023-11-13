@@ -10,6 +10,7 @@ import com.ezschedule.admin.domain.useCase.DashboardUseCase
 import com.ezschedule.admin.domain.useCase.ForumUseCase
 import com.ezschedule.admin.domain.useCase.GetServiceListUseCase
 import com.ezschedule.admin.domain.useCase.GetTenantsListUseCase
+import com.ezschedule.admin.domain.useCase.HistoryUseCase
 import com.ezschedule.admin.domain.useCase.SendNotificationUseCase
 import com.ezschedule.admin.presenter.viewmodel.CalendarViewModel
 import com.ezschedule.admin.presenter.viewmodel.DashboardViewModel
@@ -79,6 +80,7 @@ val moduleMain = module {
     factory { ServiceUserUseCase(get()) }
     factory { GetTenantsListUseCase(get()) }
     factory { GetServiceListUseCase(get()) }
+    factory { HistoryUseCase() }
 
     viewModel { TenantViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }

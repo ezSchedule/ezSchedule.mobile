@@ -1,6 +1,7 @@
 package com.ezschedule.admin.presenter.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import androidx.fragment.app.Fragment
 import com.ezschedule.admin.databinding.FragmentHistoryBinding
 import com.ezschedule.admin.presenter.adapter.HistoryAdapter
 import com.ezschedule.admin.presenter.viewmodel.HistoryViewModel
-import com.ezschedule.network.domain.response.ScheduleResponse
+import com.ezschedule.network.domain.presentation.HistoryPresentation
 import com.ezschedule.utils.SharedPreferencesManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -37,20 +38,25 @@ class HistoryFragment : Fragment() {
         setSearchView()
     }
 
-    private fun setObservers() {
-        viewmodel.user.observe(this) {
-            viewmodel.getUserPayments()
+    private fun setObservers() = with(viewmodel) {
+        user.observe(this@HistoryFragment) {
+            getAllPaymentsByCondominium(it.idCondominium)
         }
 
-        viewmodel.scheduleList.observe(this) {
-            if (it.isEmpty()) {
-                isThereContent(false)
-
-            } else {
-                isThereContent(true)
-                binding.fragRvHistory.adapter = setAdapter(it)
-            }
+        historyList.observe(this@HistoryFragment) {
+            isThereContent(true)
+            binding.fragRvHistory.adapter = setAdapter(it)
             isLoading(false)
+        }
+
+        empty.observe(this@HistoryFragment) {
+            isThereContent(false)
+            isLoading(false)
+        }
+        error.observe(this@HistoryFragment){
+            isThereContent(false)
+            isLoading(false)
+            Log.d("ERROR","error na requisição de histórico")
         }
     }
 
@@ -68,8 +74,8 @@ class HistoryFragment : Fragment() {
         fragHistorySvHistory.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
-                    val list = viewmodel.scheduleList.value!!.filter { service ->
-                        service.name.contains(query, true)
+                    val list = viewmodel.historyList.value!!.filter { history ->
+                        history.tenant.name?.contains(query, true) ?: false
                     }
                     fragRvHistory.adapter = setAdapter(list)
                 }
@@ -78,8 +84,8 @@ class HistoryFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let {
-                    val list = viewmodel.scheduleList.value!!.filter { service ->
-                        service.name.contains(newText, true)
+                    val list = viewmodel.historyList.value!!.filter { history ->
+                        history.tenant.name?.contains(newText, true) ?: false
                     }
                     fragRvHistory.adapter = setAdapter(list)
                 }
@@ -88,9 +94,9 @@ class HistoryFragment : Fragment() {
         })
     }
 
-    private fun setAdapter(scheduleList: List<ScheduleResponse>): HistoryAdapter {
-        return HistoryAdapter(scheduleList) { schedule ->
-            HistoryBottomSheetFragment(schedule).show(childFragmentManager, "LOL")
+    private fun setAdapter(historyList: List<HistoryPresentation>): HistoryAdapter {
+        return HistoryAdapter(historyList) { history ->
+            HistoryBottomSheetFragment(history).show(childFragmentManager, "BottomSheet")
         }
     }
 
