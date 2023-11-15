@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomBottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemIconTint">@drawable/bottom_nav_item_icon_color</item>
+        <item name="itemTextColor">@android:color/transparent</item>
+        <item name="itemIconSize">40dp</item>
+    </style>
+</resources>

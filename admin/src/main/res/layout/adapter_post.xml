@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/frag_forum_tv_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:textAppearance="@style/TitleAppearance"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1 de janeiro" />
+
+    <View
+        android:id="@+id/frag_forum_view_post"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_item_chat"
+        app:layout_constraintBottom_toBottomOf="@id/frag_forum_tv_content"
+        app:layout_constraintEnd_toEndOf="@id/frag_forum_tv_content"
+        app:layout_constraintStart_toStartOf="@id/frag_forum_tv_content"
+        app:layout_constraintTop_toTopOf="@id/frag_forum_tv_content" />
+
+    <TextView
+        android:id="@+id/frag_forum_tv_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:padding="@dimen/spacing_standard"
+        android:textAppearance="@style/SubTitleAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frag_forum_tv_date"
+        tools:text="Manutenção ar condicionado \n\ntestando o negcio aqui como ele funciona dai preciso colocar bastante texto pra entender como ele tá ficando lá no layout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_lower"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:scaleType="centerCrop"
+        android:src="@drawable/lower"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/TitleAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:text="@string/bottom_sheet_settings_title"
+        android:textAlignment="center"
+        android:textSize="@dimen/size_standard"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_lower" />
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_standard"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:background="@drawable/bg_search_view"
+        android:hint="@string/bottom_sheet_settings_hint_name"
+        android:inputType="textWebEditText"
+        android:padding="@dimen/spacing_small"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+
+    <EditText
+        android:id="@+id/et_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_standard"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:background="@drawable/bg_search_view"
+        android:hint="@string/bottom_sheet_settings_hint_price"
+        android:inputType="numberDecimal"
+        android:padding="@dimen/spacing_small"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_name" />
+
+
+    <TextView
+        android:id="@+id/tv_saloon_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_standard"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:text="@string/bottom_sheet_settings_desc"
+        android:textAlignment="center"
+        android:textSize="@dimen/size_standard"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/et_saloon_number"
+        app:layout_constraintEnd_toStartOf="@id/et_saloon_number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_price" />
+
+
+    <EditText
+        android:id="@+id/et_saloon_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_standard"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:background="@drawable/bg_search_view"
+        android:hint="@string/bottom_sheet_settings_hint_saloon_number"
+        android:inputType="textWebEditText"
+        android:padding="@dimen/spacing_small"
+        android:textSize="@dimen/size_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_saloon_number"
+        app:layout_constraintTop_toBottomOf="@id/et_price"
+        tools:ignore="TextFields" />
+
+    <Button
+        android:id="@+id/bs_btn"
+        style="@style/ButtonEzSchedule"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="@dimen/spacing_largeX"
+        android:layout_marginBottom="@dimen/spacing_standard"
+        android:padding="0dp"
+        android:text="@string/bottom_sheet_settings_btn"
+        android:textAppearance="@style/ButtonAppearance"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_saloon_number"
+        app:layout_constraintWidth_percent="0.38" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

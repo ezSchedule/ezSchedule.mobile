@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <ImageView
+        android:id="@+id/iv_lower"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:scaleType="centerCrop"
+        android:src="@drawable/lower"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/iv_icon_user"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="@dimen/spacing_hugeXX"
+        android:background="@drawable/badge_user"
+        android:src="@drawable/baseline_user"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_name_user"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:gravity="center"
+        android:lines="2"
+        android:textAppearance="@style/TitleAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_icon_user"
+        tools:text="Endryl Fiorotti" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/md_first"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_user" />
+
+    <TextView
+        android:id="@+id/tv_label_apartment_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:text="@string/frag_services_label_apt"
+        android:textColor="@color/colorVariant"
+        android:textSize="@dimen/size_small"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/md_first" />
+
+    <EditText
+        android:id="@+id/et_value_apartment_number"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:background="@null"
+        android:gravity="center|end"
+        android:inputType="none"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_small"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/md_second"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_label_apartment_number"
+        app:layout_constraintTop_toBottomOf="@id/md_first"
+        tools:ignore="Autofill,LabelFor,TextFields"
+        tools:text="44" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/md_second"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_label_apartment_number" />
+
+    <TextView
+        android:id="@+id/tv_label_block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:text="@string/frag_services_label_block"
+        android:textColor="@color/colorVariant"
+        android:textSize="@dimen/size_small"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/md_second" />
+
+    <EditText
+        android:id="@+id/et_value_block"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:background="@null"
+        android:gravity="center|end"
+        android:inputType="none"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_small"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/md_third"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_label_block"
+        app:layout_constraintTop_toBottomOf="@id/md_second"
+        tools:ignore="Autofill,LabelFor,TextFields"
+        tools:text="1A" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/md_third"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_label_block" />
+
+    <TextView
+        android:id="@+id/tv_label_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:text="@string/frag_services_label_phone"
+        android:textColor="@color/colorVariant"
+        android:textSize="@dimen/size_small"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/md_third" />
+
+    <EditText
+        android:id="@+id/et_value_phone"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:background="@null"
+        android:gravity="center|end"
+        android:inputType="none"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_small"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/md_fourth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_label_phone"
+        app:layout_constraintTop_toBottomOf="@id/md_third"
+        tools:ignore="Autofill,LabelFor,TextFields"
+        tools:text="(11) 90000-0000" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/md_fourth"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_label_phone" />
+
+    <ImageView
+        android:id="@+id/iv_icon_whatsapp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="@dimen/spacing_hugeXX"
+        android:layout_marginBottom="@dimen/spacing_huge"
+        android:background="@drawable/bg_icon_whatsapp"
+        android:src="@drawable/ic_whatsapp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/md_fourth"
+        tools:ignore="ContentDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/calendarUserFragment"
+        android:icon="@drawable/ic_calendar"
+        android:title="@string/frag_calendar_name" />
+
+    <item
+        android:id="@+id/servicesUserFragment"
+        android:icon="@drawable/ic_services"
+        android:title="@string/frag_services_name" />
+
+    <item
+        android:id="@+id/scheduleUserFragment"
+        android:icon="@drawable/ic_calendar_clock"
+        android:title="@string/frag_schedule_name" />
+
+    <item
+        android:id="@+id/historyUserFragment"
+        android:icon="@drawable/ic_finance"
+        android:title="@string/frag_payments_name" />
+
+    <item
+        android:id="@+id/forumUserFragment"
+        android:icon="@drawable/ic_posts"
+        android:title="@string/frag_forum_name" />
+</menu>

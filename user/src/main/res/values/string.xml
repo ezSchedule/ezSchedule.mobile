@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Forum Screen -->
+    <string name="frag_forum_tv_empty">No posts found</string>
+
+    <!-- Service Screen -->
+    <string name="frag_services_sv_hint">Search…</string>
+    <string name="frag_services_label_apt">Apartment No.</string>
+    <string name="frag_services_label_block">Block</string>
+    <string name="frag_services_label_phone">Phone</string>
+    <string name="frag_services_tv_empty">No service has been found</string>
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/view_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/frag_calendar_name"
+            app:titleMarginStart="@dimen/spacing_large"
+            app:titleTextAppearance="@style/TitleAppearance" />
+
+        <ImageView
+            android:id="@+id/iv_user"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:background="@drawable/badge_user"
+            android:scaleType="centerCrop"
+            android:src="@drawable/baseline_user"
+            app:layout_constraintBottom_toBottomOf="@id/view_toolbar"
+            app:layout_constraintEnd_toEndOf="@id/view_toolbar"
+            app:layout_constraintTop_toTopOf="@id/view_toolbar"
+            tools:ignore="ContentDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.appbar.AppBarLayout>

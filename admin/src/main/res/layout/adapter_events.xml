@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_name_tenant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:textAppearance="@style/TitleAppearance"
+        android:textSize="@dimen/size_standard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Sandra Maria" />
+
+    <TextView
+        android:id="@+id/tv_label_salon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/spacing_micro"
+        android:text="@string/frag_calendar_tv_salon_label"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/tv_content_salon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_tenant" />
+
+    <TextView
+        android:id="@+id/tv_label_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/spacing_micro"
+        android:text="@string/frag_calendar_tv_date_label"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_label_salon" />
+
+    <TextView
+        android:id="@+id/tv_content_salon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/tv_label_salon"
+        app:layout_constraintStart_toEndOf="@id/tv_label_salon"
+        app:layout_constraintTop_toTopOf="@id/tv_label_salon"
+        tools:text="Magnólia" />
+
+    <TextView
+        android:id="@+id/tv_content_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/tv_label_value"
+        app:layout_constraintStart_toEndOf="@id/tv_label_value"
+        app:layout_constraintTop_toTopOf="@id/tv_label_value"
+        tools:text="27/09/2023 11:59" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_label_value" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

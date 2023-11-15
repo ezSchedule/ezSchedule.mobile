@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/frag_forum_group_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:singleSelection="true">
+
+        <Button
+            android:id="@+id/frag_forum_btn_communicate"
+            style="@style/IconOnlyButtonEzSchedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/light_green_bg"
+            app:backgroundTintMode="src_atop"
+            app:icon="@drawable/ic_communicate" />
+
+        <Button
+            android:id="@+id/frag_forum_btn_all"
+            style="@style/IconOnlyButtonEzSchedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/colorPrimary"
+            app:icon="@drawable/ic_all" />
+
+        <Button
+            android:id="@+id/frag_forum_btn_urgent"
+            style="@style/IconOnlyButtonEzSchedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/light_green_bg"
+            app:backgroundTintMode="src_atop"
+            app:icon="@drawable/ic_urgent" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <include
+        android:id="@+id/include_forum_chat"
+        layout="@layout/view_forum_chat_user"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginVertical="@dimen/spacing_large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frag_forum_group_buttons" />
+
+    <TextView
+        android:id="@+id/frag_forum_tv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/frag_forum_tv_empty"
+        android:textColor="@color/colorVariant"
+        android:textSize="@dimen/size_standard"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/include_loading"
+        layout="@layout/view_progress_loading"
+        android:visibility="gone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

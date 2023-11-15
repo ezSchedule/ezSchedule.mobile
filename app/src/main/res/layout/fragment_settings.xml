@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/frag_settings_btn_back"
+        style="@style/ImageButtonEzSchedule"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:contentDescription="@string/frag_settings_btn_previous"
+        android:src="@drawable/ic_previous"
+        app:layout_constraintEnd_toStartOf="@id/frag_settings_btn_save"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <Button
+        android:id="@+id/frag_settings_btn_save"
+        style="@style/ButtonEzSchedule"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginEnd="@dimen/spacing_small"
+        android:padding="0dp"
+        android:text="@string/frag_settings_btn_save"
+        android:textAppearance="@style/ButtonAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/frag_settings_btn_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.38" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/frag_settings_group_buttons"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:constraint_referenced_ids="frag_settings_btn_back, frag_settings_btn_save" />
+
+    <include
+        android:id="@+id/include_settings_home"
+        layout="@layout/view_settings_home" />
+
+    <include
+        android:id="@+id/include_settings_profile"
+        layout="@layout/view_settings_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frag_settings_btn_save" />
+
+    <include
+        android:id="@+id/include_settings_condominium"
+        layout="@layout/view_settings_condominium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frag_settings_btn_back" />
+
+    <include
+        android:id="@+id/include_loading"
+        layout="@layout/view_progress_loading"
+        android:visibility="gone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

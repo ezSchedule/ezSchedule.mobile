@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EzSchedule</string>
+
+    <!-- Screen name -->
+    <string name="frag_calendar_name">Eventos</string>
+    <string name="frag_dashboard_name">2023</string>
+    <string name="frag_services_name">Serviços</string>
+    <string name="frag_payments_name">Histórico</string>
+    <string name="frag_forum_name">Posts</string>
+    <string name="frag_settings_name">Configurações</string>
+    <string name="frag_schedule_name">Agendado</string>
+    <string name="frag_not_found_name">Não encontrado</string>
+
+    <!-- Toolbar image -->
+    <string name="toolbar_image_base_url">https://ezscheduleusersimages.blob.core.windows.net/ezschedules/%s</string>
+
+    <!-- Menu Popup -->
+    <string name="bt_logout">Sair</string>
+    <string name="bt_settings">Configurações</string>
+    <string name="bt_logout_error">Houve algum erro</string>
+
+    <!-- Logout Dialog -->
+    <string name="dialog_logout_tv_title">Deslogado</string>
+    <string name="dialog_logout_tv_description">Caro usuário, sua sessão expirou</string>
+    <string name="dialog_logout_btn_confirm">Confirmar</string>
+
+    <!-- Login Screen -->
+    <string name="frag_login_tv_title_login">Entrar</string>
+    <string name="frag_login_btn_login">Entrar</string>
+    <string name="frag_login_tv_forgot_password">Esqueci minha senha</string>
+    <string name="frag_login_edt_hint_email">Email</string>
+    <string name="frag_login_edt_hint_password">Senha</string>
+    <string name="frag_login_edt_email_error">Email inválido</string>
+    <string name="frag_login_client_exception">Usuário não encontrado</string>
+    <string name="frag_login_server_exception">Erro de servidor</string>
+    <string name="frag_login_unknown_exception">Erro desconhecido</string>
+
+    <!-- Settings Screen -->
+    <string name="frag_settings_btn_previous">Tela anterior</string>
+    <string name="frag_settings_btn_save">Salvar</string>
+    <string name="bottom_sheet_settings_title">Adicionar Salão</string>
+    <string name="bottom_sheet_settings_hint_name">Nome</string>
+    <string name="bottom_sheet_settings_hint_price">Valor</string>
+    <string name="bottom_sheet_settings_desc">Bloco</string>
+    <string name="bottom_sheet_settings_hint_saloon_number">Numero/Letra</string>
+    <string name="bottom_sheet_settings_btn">Salvar</string>
+</resources>
