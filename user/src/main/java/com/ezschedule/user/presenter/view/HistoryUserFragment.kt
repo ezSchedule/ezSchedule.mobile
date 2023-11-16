@@ -19,12 +19,6 @@ class HistoryUserFragment : Fragment() {
     private lateinit var binding: FragmentHistoryUserBinding
     private val viewmodel by viewModel<HistoryUserViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setObservers()
-        viewmodel.setUser(SharedPreferencesManager(requireContext()).getInfo())
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -34,26 +28,28 @@ class HistoryUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setObservers()
+        viewmodel.setUser(SharedPreferencesManager(requireContext()).getInfo())
         isLoading(true)
         setSearchView()
     }
 
     private fun setObservers() = with(viewmodel) {
-        user.observe(this@HistoryUserFragment) {
+        user.observe(viewLifecycleOwner) {
             getAllPaymentsByTenant(it.id)
         }
 
-        historyList.observe(this@HistoryUserFragment) {
+        historyList.observe(viewLifecycleOwner) {
             isThereContent(true)
             binding.fragRvHistory.adapter = setAdapter(it)
             isLoading(false)
         }
 
-        empty.observe(this@HistoryUserFragment) {
+        empty.observe(viewLifecycleOwner) {
             isThereContent(false)
             isLoading(false)
         }
-        error.observe(this@HistoryUserFragment) {
+        error.observe(viewLifecycleOwner) {
             isThereContent(false)
             isLoading(false)
             Log.d("ERROR", "error na requisição de histórico")
@@ -74,20 +70,24 @@ class HistoryUserFragment : Fragment() {
         fragHistorySvHistory.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
-                    val list = viewmodel.historyList.value!!.filter { history ->
-                        history.tenant.name?.contains(query, true) ?: false
+                    viewmodel.historyList.value?.let {
+                        it.filter { history ->
+                            history.tenant.name?.contains(query, true) ?: false
+                        }
+                        fragRvHistory.adapter = setAdapter(it)
                     }
-                    fragRvHistory.adapter = setAdapter(list)
                 }
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let {
-                    val list = viewmodel.historyList.value!!.filter { history ->
-                        history.tenant.name?.contains(newText, true) ?: false
+                    viewmodel.historyList.value?.let {
+                        it.filter { history ->
+                            history.tenant.name?.contains(newText, true) ?: false
+                        }
+                        fragRvHistory.adapter = setAdapter(it)
                     }
-                    fragRvHistory.adapter = setAdapter(list)
                 }
                 return false
             }
