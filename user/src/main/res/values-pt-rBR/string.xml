@@ -22,4 +22,8 @@
     <string name="frag_schedule_edt_label_saloon">Escolher salão</string>
     <string name="frag_schedule_edt_label_quantity_guests">Quantidade de convidados</string>
     <string name="frag_schedule_edt_label_value">Valor: </string>
+    <string name="frag_schedule_tv_pix">Pix</string>
+    <string name="frag_schedule_iv_description">QR Code</string>
+    <string name="frag_schedule_btn_cancel">Cancelar</string>
+    <string name="frag_schedule_text_copied">Texto copiado para a área de transferência</string>
 </resources>

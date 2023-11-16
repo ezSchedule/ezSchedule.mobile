@@ -14,6 +14,7 @@ import com.ezschedule.network.domain.presentation.SchedulesPresentation
 import com.ezschedule.user.presenter.adapter.SchedulesAdapter
 import com.ezschedule.user.presenter.viewModel.ScheduleUserViewModel
 import com.ezschedule.utils.SharedPreferencesManager
+import com.sptech.user.R
 import com.sptech.user.databinding.FragmentScheduleUserBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.abs
@@ -54,7 +55,9 @@ class ScheduleUserFragment : Fragment() {
     private fun setupViewPager(list: List<SchedulesPresentation>) {
         binding.vpSchedules.apply {
             adapter = SchedulesAdapter(list, requireContext()) {
-                Toast.makeText(requireContext(), "Add", Toast.LENGTH_LONG).show()
+                childFragmentManager.beginTransaction()
+                    .replace(R.id.fl_container_new_date, NewDateFragment())
+                    .commit()
             }
             offscreenPageLimit = 2
             clipChildren = false

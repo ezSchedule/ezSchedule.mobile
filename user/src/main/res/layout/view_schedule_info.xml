@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            style="@style/ImageButtonEzSchedule"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:contentDescription="@string/frag_schedule_btn_back"
+            android:src="@drawable/ic_previous"
+            app:layout_constraintEnd_toStartOf="@id/btn_next"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.4" />
+
+        <Button
+            android:id="@+id/btn_next"
+            style="@style/ButtonEzSchedule"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:padding="0dp"
+            android:text="@string/frag_schedule_btn_next"
+            android:textAppearance="@style/ButtonAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/btn_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.38" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:gravity="center"
+            android:text="@string/frag_schedule_tv_title_new_date"
+            android:textAppearance="@style/TitleAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_back" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_event_name"
+            style="@style/InputLayoutAppearance"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title">
+
+            <EditText
+                android:id="@+id/edt_event_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/frag_schedule_edt_label_event_name"
+                android:inputType="text"
+                android:paddingLeft="@dimen/spacing_small"
+                android:textAppearance="@style/InputAppearance"
+                tools:ignore="Autofill" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_event_type"
+            style="@style/InputLayoutAppearance"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_large"
+            app:endIconMode="dropdown_menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_event_name">
+
+            <AutoCompleteTextView
+                android:id="@+id/ac_event_type"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/frag_schedule_edt_label_event_type"
+                android:inputType="none"
+                android:labelFor="@id/til_event_type"
+                android:paddingLeft="@dimen/spacing_small"
+                android:textAppearance="@style/InputAppearance"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_event_date"
+            style="@style/InputLayoutAppearance"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_large"
+            app:endIconDrawable="@drawable/ic_calendar_24"
+            app:endIconMode="custom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_event_type">
+
+            <EditText
+                android:id="@+id/edt_event_date"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/frag_schedule_edt_label_event_date"
+                android:inputType="date"
+                android:paddingLeft="@dimen/spacing_small"
+                android:textAppearance="@style/InputAppearance"
+                tools:ignore="Autofill" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_saloon"
+            style="@style/InputLayoutAppearance"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_large"
+            app:endIconMode="dropdown_menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_event_date">
+
+            <AutoCompleteTextView
+                android:id="@+id/ac_saloon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/frag_schedule_edt_label_saloon"
+                android:inputType="none"
+                android:labelFor="@id/til_saloon"
+                android:paddingLeft="@dimen/spacing_small"
+                android:textAppearance="@style/InputAppearance"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_quantity_guests"
+            style="@style/InputLayoutAppearance"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_saloon">
+
+            <EditText
+                android:id="@+id/edt_quantity_guests"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/frag_schedule_edt_label_quantity_guests"
+                android:inputType="number"
+                android:paddingLeft="@dimen/spacing_small"
+                android:textAppearance="@style/InputAppearance"
+                tools:ignore="Autofill" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/view_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            android:layout_marginVertical="@dimen/spacing_large"
+            android:background="@drawable/bg_value_schedule"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_quantity_guests">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_small"
+                android:layout_weight="2"
+                android:text="@string/frag_schedule_edt_label_value"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/size_standard"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_value_saloon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_small"
+                android:layout_weight="1"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/size_standard"
+                android:textStyle="bold"
+                tools:text="R$90,00" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -23,4 +23,8 @@
     <string name="frag_schedule_edt_label_saloon">Choose saloon</string>
     <string name="frag_schedule_edt_label_quantity_guests">Quantity guests</string>
     <string name="frag_schedule_edt_label_value">Value: </string>
+    <string name="frag_schedule_tv_pix">Pix</string>
+    <string name="frag_schedule_iv_description">QR Code</string>
+    <string name="frag_schedule_btn_cancel">Cancel</string>
+    <string name="frag_schedule_text_copied">Text copied to clipboard!</string>
 </resources>
