@@ -33,6 +33,7 @@
     <string name="frag_calendar_tv_legend_today">Today\'s day</string>
     <string name="frag_calendar_tv_legend_canceled">Canceled</string>
     <string name="frag_calendar_tv_list_empty">No events have been scheduled</string>
+    <string name="frag_calendar_tv_input_blank">The field cannot be empty</string>
 
     <!-- Dashboard Screen -->
     <string name="frag_dashboard_tv_title">Annual Statistics</string>
