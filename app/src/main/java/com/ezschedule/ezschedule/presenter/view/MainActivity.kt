@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setImageUser(imageView: ImageView) {
-        viewModel.getImage(SharedPreferencesManager(this).getInfo().image)?.let {
+        viewModel.getImage(user.image)?.let {
             Glide.with(this)
                 .load(it)
                 .apply(RequestOptions.bitmapTransform(CircleCrop()))
