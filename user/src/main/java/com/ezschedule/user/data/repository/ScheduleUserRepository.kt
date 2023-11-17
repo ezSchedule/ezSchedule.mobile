@@ -12,4 +12,10 @@ class ScheduleUserRepository(private val endpoint: CalendarEndpoint) {
             endpoint.getSchedulesTenant(id).toResponse()
         }
     }
+
+    suspend fun getSchedulesCancellations(id: Int): ResultWrapper<SchedulesResponse> {
+        return requestHandler {
+            endpoint.getSchedules(id).toResponse()
+        }
+    }
 }

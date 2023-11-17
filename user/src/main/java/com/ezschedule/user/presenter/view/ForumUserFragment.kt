@@ -88,10 +88,7 @@ class ForumUserFragment : Fragment() {
     private fun setupLoading(isLoading: Boolean) = with(binding) {
         includeForumChat.root.isVisible = isLoading.not()
         fragForumGroupButtons.isVisible = isLoading.not()
-        includeLoading.apply {
-            isVisible = isLoading
-            setBackgroundColor(Color.TRANSPARENT)
-        }
+        includeLoading.isVisible = isLoading
     }
 
     private fun setBackgroundColor(id: Int, color: Int) {
