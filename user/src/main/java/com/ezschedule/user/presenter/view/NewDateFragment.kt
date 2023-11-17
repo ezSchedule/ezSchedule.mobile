@@ -1,13 +1,14 @@
 package com.ezschedule.user.presenter.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.ezschedule.network.domain.data.SalonData
+import com.ezschedule.network.domain.data.ScheduleRequest
 import com.ezschedule.user.presenter.viewModel.NewDateViewModel
 import com.ezschedule.utils.SharedPreferencesManager
 import com.sptech.user.R
@@ -20,6 +21,8 @@ import java.util.Locale
 class NewDateFragment : Fragment() {
     private lateinit var binding: FragmentNewDateBinding
     private val viewModel by viewModel<NewDateViewModel>()
+    private var saloonPos = -1
+
     private val date by lazy {
         arguments?.getLong(DATE)
     }
@@ -42,9 +45,8 @@ class NewDateFragment : Fragment() {
         date?.let {
             formatterData(Date(it))
         }
+        viewModel.getUser(SharedPreferencesManager(requireContext()).getInfo().id)
 
-        viewModel.user = SharedPreferencesManager(requireContext()).getInfo()
-        viewModel.getSaloon()
     }
 
     override fun onDestroy() {
@@ -55,32 +57,26 @@ class NewDateFragment : Fragment() {
     fun formatterData(date: Date) =
         setDate(SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(date))
 
-    private fun setObservers() = with(viewModel) {
-        saloon.observe(viewLifecycleOwner) {
-            setupSalonAdapter(it)
-        }
-        empty.observe(viewLifecycleOwner) {
-
-        }
-    }
-
-    private fun setupSalonAdapter(it: List<SalonData>) {
-        val saloonNameList = arrayListOf<String>()
-        it.forEach { saloonData -> saloonNameList.add(saloonData.name) }
-        val adapter = ArrayAdapter(
-            requireContext(), R.layout.adapter_auto_complete_new_date, saloonNameList
-        )
-        binding.includeInfo.acSaloon.setAdapter(adapter)
-        binding.includeInfo.acSaloon.setOnItemClickListener { _, _, i, _ ->
-            binding.includeInfo.tvValueSaloon.text = String.format("R$%.2f", it[i].price)
-        }
-    }
-
     private fun setupClickOnInfoScreen() = with(binding.includeInfo) {
         btnBack.setOnClickListener {
             onDestroy()
         }
         btnNext.setOnClickListener {
+            val date = edtEventDate.text.toString().split("/")
+            val newDate = "${date[2]}-${date[1]}-${date[0]}T00:00:00.000"
+            Log.d("works", "$newDate")
+
+            val scheduleRequest = ScheduleRequest(
+                nameEvent = edtEventName.text.toString(),
+                typeEvent = acEventType.text.toString(),
+                dateEvent = newDate,
+                isCanceled = 0,
+                totalNumberGuests = edtQuantityGuests.text.toString().toInt(),
+                saloon = viewModel.saloon.value!![saloonPos],
+                tenant = viewModel.userData.value!!.toTenantScheduleRequest()
+            )
+
+            viewModel.createSchedule(scheduleRequest)
             setupLayout(false)
         }
     }
@@ -88,6 +84,26 @@ class NewDateFragment : Fragment() {
     private fun setupClickOnPaymentScreen() = with(binding.includePayment) {
         btnCancel.setOnClickListener {
             setupLayout(true)
+        }
+    }
+
+    private fun setObservers() = with(viewModel) {
+        userData.observe(viewLifecycleOwner) {
+            viewModel.getSaloon()
+        }
+
+        saloon.observe(viewLifecycleOwner) {
+            val saloonNameList = arrayListOf<String>()
+            it.forEach { saloonData -> saloonNameList.add(saloonData.name) }
+            val adapter = ArrayAdapter(
+                requireContext(), R.layout.adapter_auto_complete_new_date, saloonNameList
+            )
+            binding.includeInfo.acSaloon.setAdapter(adapter)
+            binding.includeInfo.acSaloon.setOnItemClickListener { adapterView, view, i, l ->
+                saloonPos = i
+                binding.includeInfo.tvValueSaloon.text =
+                    String.format("R$%.2f", it[saloonPos].price)
+            }
         }
     }
 
@@ -117,3 +133,4 @@ class NewDateFragment : Fragment() {
         const val DATE = "date"
     }
 }
+

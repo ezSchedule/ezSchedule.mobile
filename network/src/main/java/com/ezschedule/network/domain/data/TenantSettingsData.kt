@@ -3,6 +3,7 @@ package com.ezschedule.network.domain.data
 import com.google.gson.annotations.SerializedName
 
 data class TenantSettingsData(
+    val id: Int,
     val name: String,
     val email: String,
     val cpf: String,
@@ -13,5 +14,6 @@ data class TenantSettingsData(
     @SerializedName("nameBlobImage")
     val image: String?,
     @SerializedName("authenticated")
-    val isAuthenticated: Boolean
+    val isAuthenticated: Boolean,
+    val condominium: CondominiumRequest
 )

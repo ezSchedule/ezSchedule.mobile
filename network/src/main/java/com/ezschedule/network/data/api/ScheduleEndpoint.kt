@@ -2,12 +2,13 @@ package com.ezschedule.network.data.api
 
 import com.ezschedule.network.domain.data.ChartData
 import com.ezschedule.network.domain.data.ScheduleData
+import com.ezschedule.network.domain.data.ScheduleRequest
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 
-interface CalendarEndpoint {
+interface ScheduleEndpoint {
     @GET("schedules/condominium/{id}")
     suspend fun getSchedules(@Path("id") id: Int): List<ScheduleData>
 
@@ -19,4 +20,7 @@ interface CalendarEndpoint {
 
     @GET("schedules/tenant/{id}")
     suspend fun getSchedulesTenant(@Path("id") id: Int): List<ScheduleData>
+
+    @POST("schedules/")
+    suspend fun createSchedule(@Body schedule: ScheduleRequest)
 }
