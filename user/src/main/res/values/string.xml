@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Calendar Screen -->
+    <string name="frag_calendar_tv_legend_marked">Marked</string>
+    <string name="frag_calendar_tv_legend_today">Today\'s day</string>
+    <string name="frag_calendar_tv_legend_canceled">Canceled</string>
+
     <!-- Forum Screen -->
     <string name="frag_forum_tv_empty">No posts found</string>
 

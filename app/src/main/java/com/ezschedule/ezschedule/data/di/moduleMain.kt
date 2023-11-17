@@ -36,9 +36,11 @@ import com.ezschedule.network.data.api.TenantEndpoint
 import com.ezschedule.network.data.network.NetworkServiceFactory
 import com.ezschedule.user.data.repository.ScheduleUserRepository
 import com.ezschedule.user.data.repository.ServiceUserRepository
+import com.ezschedule.user.domain.useCase.CalendarUserUseCase
 import com.ezschedule.user.domain.useCase.ForumUserUseCase
 import com.ezschedule.user.domain.useCase.ScheduleUserUseCase
 import com.ezschedule.user.domain.useCase.ServiceUserUseCase
+import com.ezschedule.user.presenter.viewModel.CalendarUserViewModel
 import com.ezschedule.user.presenter.viewModel.ForumUserViewModel
 import com.ezschedule.user.presenter.viewModel.ScheduleUserViewModel
 import com.ezschedule.user.presenter.viewModel.ServiceUserViewModel
@@ -83,6 +85,7 @@ val moduleMain = module {
     factory { GetTenantsListUseCase(get()) }
     factory { GetServiceListUseCase(get()) }
     factory { ScheduleUserUseCase(get()) }
+    factory { CalendarUserUseCase(get()) }
 
     viewModel { TenantViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }
@@ -94,4 +97,5 @@ val moduleMain = module {
     viewModel { ServiceUserViewModel(get()) }
     viewModel { ForumUserViewModel(get()) }
     viewModel { ScheduleUserViewModel(get()) }
+    viewModel { CalendarUserViewModel(get()) }
 }

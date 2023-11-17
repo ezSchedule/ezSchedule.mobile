@@ -1,18 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_calendar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Calendar User"
-        android:textAppearance="@style/TitleAppearance"
+        android:layout_margin="@dimen/spacing_large"
+        android:backgroundTint="@color/colorPrimary"
+        android:elevation="@dimen/spacing_large"
+        app:cardCornerRadius="@dimen/corners_tiny"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.squareup.timessquare.CalendarPickerView
+                android:id="@+id/cpv_calendar"
+                android:layout_width="match_parent"
+                android:layout_height="316dp"
+                android:background="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tsquare_dayBackground="@color/colorPrimary"
+                app:tsquare_dividerColor="@android:color/transparent"
+                app:tsquare_headerTextColor="@color/black"
+                app:tsquare_titleTextColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_marked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:drawablePadding="@dimen/spacing_tiny"
+                android:gravity="center"
+                android:text="@string/frag_calendar_tv_legend_marked"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_legend"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_today"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cpv_calendar" />
+
+            <TextView
+                android:id="@+id/tv_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/spacing_tiny"
+                android:gravity="center"
+                android:text="@string/frag_calendar_tv_legend_today"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_legend"
+                app:drawableTint="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/tv_marked"
+                app:layout_constraintEnd_toStartOf="@id/tv_canceled"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/tv_marked"
+                app:layout_constraintTop_toTopOf="@id/tv_marked" />
+
+            <TextView
+                android:id="@+id/tv_canceled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/spacing_tiny"
+                android:gravity="center"
+                android:text="@string/frag_calendar_tv_legend_canceled"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_legend"
+                app:drawableTint="@color/red"
+                app:layout_constraintBottom_toBottomOf="@id/tv_marked"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/tv_today"
+                app:layout_constraintTop_toTopOf="@id/tv_marked" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:id="@+id/fl_container_new_date"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationZ="2dp" />
+
+    <include
+        android:id="@+id/include_loading"
+        layout="@layout/view_progress_loading"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

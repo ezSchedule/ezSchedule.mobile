@@ -14,8 +14,8 @@ import com.ezschedule.admin.R
 import com.ezschedule.admin.databinding.FragmentCalendarBinding
 import com.ezschedule.admin.databinding.ViewCalendarBottomSheetBinding
 import com.ezschedule.admin.presenter.adapter.CalendarEventsAdapter
-import com.ezschedule.admin.presenter.utils.CustomCalendarClick
-import com.ezschedule.admin.presenter.utils.CustomCalendarDecorator
+import com.ezschedule.utils.CustomCalendarClick
+import com.ezschedule.utils.CustomCalendarDecorator
 import com.ezschedule.admin.presenter.viewmodel.CalendarViewModel
 import com.ezschedule.network.domain.presentation.EventItemPresentation
 import com.ezschedule.utils.SharedPreferencesManager
