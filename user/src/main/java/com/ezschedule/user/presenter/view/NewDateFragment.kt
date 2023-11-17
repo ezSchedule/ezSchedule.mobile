@@ -7,17 +7,22 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.ezschedule.network.domain.data.SalonData
 import com.ezschedule.user.presenter.viewModel.NewDateViewModel
 import com.ezschedule.utils.SharedPreferencesManager
 import com.sptech.user.R
 import com.sptech.user.databinding.FragmentNewDateBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class NewDateFragment : Fragment() {
     private lateinit var binding: FragmentNewDateBinding
     private val viewModel by viewModel<NewDateViewModel>()
-    private lateinit var date: String
-
+    private val date by lazy {
+        arguments?.getLong(DATE)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -32,9 +37,12 @@ class NewDateFragment : Fragment() {
         setupClickOnInfoScreen()
         setupClickOnPaymentScreen()
         setEventTypeAdapter()
-        arguments?.getString("DATE")?.let {
-            date = it
+        setupDatePicker()
+
+        date?.let {
+            formatterData(Date(it))
         }
+
         viewModel.user = SharedPreferencesManager(requireContext()).getInfo()
         viewModel.getSaloon()
     }
@@ -42,6 +50,30 @@ class NewDateFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         parentFragmentManager.beginTransaction().remove(this).commitAllowingStateLoss()
+    }
+
+    fun formatterData(date: Date) =
+        setDate(SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(date))
+
+    private fun setObservers() = with(viewModel) {
+        saloon.observe(viewLifecycleOwner) {
+            setupSalonAdapter(it)
+        }
+        empty.observe(viewLifecycleOwner) {
+
+        }
+    }
+
+    private fun setupSalonAdapter(it: List<SalonData>) {
+        val saloonNameList = arrayListOf<String>()
+        it.forEach { saloonData -> saloonNameList.add(saloonData.name) }
+        val adapter = ArrayAdapter(
+            requireContext(), R.layout.adapter_auto_complete_new_date, saloonNameList
+        )
+        binding.includeInfo.acSaloon.setAdapter(adapter)
+        binding.includeInfo.acSaloon.setOnItemClickListener { _, _, i, _ ->
+            binding.includeInfo.tvValueSaloon.text = String.format("R$%.2f", it[i].price)
+        }
     }
 
     private fun setupClickOnInfoScreen() = with(binding.includeInfo) {
@@ -59,23 +91,14 @@ class NewDateFragment : Fragment() {
         }
     }
 
-    private fun setObservers() = with(viewModel) {
-        saloon.observe(viewLifecycleOwner) {
-            val saloonNameList = arrayListOf<String>()
-            it.forEach { saloonData -> saloonNameList.add(saloonData.name) }
-            val adapter = ArrayAdapter(
-                requireContext(), R.layout.adapter_auto_complete_new_date, saloonNameList
-            )
-            binding.includeInfo.acSaloon.setAdapter(adapter)
-            binding.includeInfo.acSaloon.setOnItemClickListener { adapterView, view, i, l ->
-                binding.includeInfo.tvValueSaloon.text = String.format("R$%.2f", it[i].price)
-            }
+    private fun setupDatePicker() {
+        binding.includeInfo.edtEventDate.setOnClickListener {
+            DatePickerFragment().show(childFragmentManager, "datePicker")
         }
+    }
 
-        empty.observe(viewLifecycleOwner) {
-
-        }
-
+    private fun setDate(date: String) {
+        binding.includeInfo.edtEventDate.setText(date)
     }
 
     private fun setupLayout(isInfoScreen: Boolean) = binding.apply {
@@ -88,5 +111,9 @@ class NewDateFragment : Fragment() {
         val adapter =
             ArrayAdapter(requireContext(), R.layout.adapter_auto_complete_new_date, arrayString)
         includeInfo.acEventType.setAdapter(adapter)
+    }
+
+    private companion object {
+        const val DATE = "date"
     }
 }

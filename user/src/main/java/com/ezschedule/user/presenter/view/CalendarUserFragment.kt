@@ -85,7 +85,7 @@ class CalendarUserFragment : Fragment() {
             it?.let { date ->
                 childFragmentManager.beginTransaction().replace(
                     R.id.fl_container_new_date,
-                    NewDateFragment().apply { arguments = bundleOf(DATE to date.toString()) }
+                    NewDateFragment().apply { arguments = bundleOf(DATE to date.time) }
                 ).commit()
             }
         })
@@ -98,12 +98,11 @@ class CalendarUserFragment : Fragment() {
 
     private fun convertToDate(date: String) =
         SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(
-            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
-                SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).parse(date) ?: ""
-            )
+            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                .format(SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).parse(date) ?: "")
         )!!
 
     private companion object {
-        const val DATE = "DATE"
+        const val DATE = "date"
     }
 }

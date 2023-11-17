@@ -122,6 +122,7 @@
                 android:id="@+id/edt_event_date"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:focusable="false"
                 android:hint="@string/frag_schedule_edt_label_event_date"
                 android:inputType="date"
                 android:paddingLeft="@dimen/spacing_small"
