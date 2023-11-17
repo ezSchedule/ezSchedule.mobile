@@ -32,4 +32,18 @@
     <string name="frag_schedule_iv_description">QR Code</string>
     <string name="frag_schedule_btn_cancel">Cancel</string>
     <string name="frag_schedule_text_copied">Text copied to clipboard!</string>
+
+
+    <!-- New Date Screen   -->
+    <array name="list_events">
+        <item>Birthday</item>
+        <item>Party</item>
+        <item>Lecture</item>
+        <item>Meeting</item>
+        <item>Fitness</item>
+        <item>Others</item>
+    </array>
+
+
+
 </resources>

@@ -85,6 +85,7 @@
             android:layout_marginHorizontal="@dimen/spacing_large"
             android:layout_marginTop="@dimen/spacing_large"
             app:endIconMode="dropdown_menu"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/til_event_name">
@@ -93,6 +94,8 @@
                 android:id="@+id/ac_event_type"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:dropDownAnchor="@id/ac_event_type"
+                android:dropDownHeight="160dp"
                 android:hint="@string/frag_schedule_edt_label_event_type"
                 android:inputType="none"
                 android:labelFor="@id/til_event_type"
@@ -135,6 +138,7 @@
             android:layout_marginHorizontal="@dimen/spacing_large"
             android:layout_marginTop="@dimen/spacing_large"
             app:endIconMode="dropdown_menu"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/til_event_date">
@@ -143,6 +147,7 @@
                 android:id="@+id/ac_saloon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:dropDownHeight="160dp"
                 android:hint="@string/frag_schedule_edt_label_saloon"
                 android:inputType="none"
                 android:labelFor="@id/til_saloon"
@@ -169,6 +174,7 @@
                 android:layout_height="match_parent"
                 android:hint="@string/frag_schedule_edt_label_quantity_guests"
                 android:inputType="number"
+                android:maxLength="2"
                 android:paddingLeft="@dimen/spacing_small"
                 android:textAppearance="@style/InputAppearance"
                 tools:ignore="Autofill" />

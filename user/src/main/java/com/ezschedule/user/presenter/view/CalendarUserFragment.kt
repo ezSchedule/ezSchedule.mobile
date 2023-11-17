@@ -85,7 +85,7 @@ class CalendarUserFragment : Fragment() {
             it?.let { date ->
                 childFragmentManager.beginTransaction().replace(
                     R.id.fl_container_new_date,
-                    NewDateFragment().apply { arguments = bundleOf(DATE to date) }
+                    NewDateFragment().apply { arguments = bundleOf(DATE to date.toString()) }
                 ).commit()
             }
         })
