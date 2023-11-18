@@ -5,7 +5,9 @@ import com.ezschedule.network.data.ext.toResponse
 import com.ezschedule.network.data.network.handler.requestHandler
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.data.ScheduleRequest
+import com.ezschedule.network.domain.response.ReportResponse
 import com.ezschedule.network.domain.response.SchedulesResponse
+import com.google.gson.JsonObject
 
 class ScheduleUserRepository(private val endpoint: ScheduleEndpoint) {
     suspend fun getSchedules(id: Int): ResultWrapper<SchedulesResponse> {
@@ -21,7 +23,7 @@ class ScheduleUserRepository(private val endpoint: ScheduleEndpoint) {
     }
 
 
-    suspend fun createSchedule(scheduleRequest: ScheduleRequest): ResultWrapper<Unit> {
+    suspend fun createSchedule(scheduleRequest: ScheduleRequest): ResultWrapper<ReportResponse> {
         return requestHandler {
             endpoint.createSchedule(scheduleRequest)
         }

@@ -1,13 +1,16 @@
 package com.ezschedule.user.presenter.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestOptions
+import com.ezschedule.network.domain.data.PixRequest
 import com.ezschedule.network.domain.data.ScheduleRequest
 import com.ezschedule.user.presenter.viewModel.NewDateViewModel
 import com.ezschedule.utils.SharedPreferencesManager
@@ -61,10 +64,10 @@ class NewDateFragment : Fragment() {
         btnBack.setOnClickListener {
             onDestroy()
         }
+
         btnNext.setOnClickListener {
             val date = edtEventDate.text.toString().split("/")
             val newDate = "${date[2]}-${date[1]}-${date[0]}T00:00:00.000"
-            Log.d("works", "$newDate")
 
             val scheduleRequest = ScheduleRequest(
                 nameEvent = edtEventName.text.toString(),
@@ -77,7 +80,7 @@ class NewDateFragment : Fragment() {
             )
 
             viewModel.createSchedule(scheduleRequest)
-            setupLayout(false)
+            setLoading(true)
         }
     }
 
@@ -105,6 +108,32 @@ class NewDateFragment : Fragment() {
                     String.format("R$%.2f", it[saloonPos].price)
             }
         }
+        scheduleCreated.observe(viewLifecycleOwner) { report ->
+            var pix: PixRequest
+            with(viewModel) {
+                pix = PixRequest(
+                    userData.value!!.name,
+                    userData.value!!.cpf,
+                    String.format("%.2f", report.saloon.saloonPrice).replace(",", "."),
+                    report.productName,
+                    report.condominiumId
+                )
+            }
+            viewModel.createPixRequest(pix)
+        }
+        pixCreated.observe(viewLifecycleOwner) { pixResponse ->
+            scheduleCreated.value!!.id = pixResponse.id
+
+            viewModel.createReport(scheduleCreated.value!!)
+
+            binding.includePayment.tvValueSaloon.text = String.format("%.2f", scheduleCreated.value!!.saloon.saloonPrice).replace(",", ".")
+            binding.includePayment.tvCode.text = pixResponse.qrcode
+            Glide.with(requireActivity())
+                .load(pixResponse.imageQrcode)
+                .into(binding.includePayment.ivQrCode)
+            setLoading(false)
+            setupLayout(false)
+        }
     }
 
     private fun setupDatePicker() {
@@ -127,6 +156,10 @@ class NewDateFragment : Fragment() {
         val adapter =
             ArrayAdapter(requireContext(), R.layout.adapter_auto_complete_new_date, arrayString)
         includeInfo.acEventType.setAdapter(adapter)
+    }
+
+    private fun setLoading(isLoading: Boolean) = with(binding) {
+        includeLoading.isVisible = isLoading
     }
 
     private companion object {

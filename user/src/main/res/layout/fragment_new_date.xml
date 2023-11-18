@@ -13,4 +13,9 @@
         layout="@layout/view_schedule_payment"
         android:visibility="gone" />
 
+    <include
+        android:id="@+id/include_loading"
+        layout="@layout/view_progress_loading"
+        android:visibility="gone"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
