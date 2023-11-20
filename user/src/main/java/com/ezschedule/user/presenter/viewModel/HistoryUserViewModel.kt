@@ -1,16 +1,16 @@
 package com.ezschedule.user.presenter.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ezschedule.network.data.ext.toHistory
 import com.ezschedule.network.domain.presentation.HistoryPresentation
 import com.ezschedule.network.domain.presentation.TenantPresentation
-import com.ezschedule.user.domain.useCase.FirestoreUserUseCase
-import com.google.firebase.firestore.Query
+import com.ezschedule.user.domain.useCase.FirestoreUseCase
 
 class HistoryUserViewModel(
-    private val historyUseCase: FirestoreUserUseCase
+    private val historyUseCase: FirestoreUseCase
 ) : ViewModel() {
 
     private var _historyList = MutableLiveData<List<HistoryPresentation>>()
@@ -28,15 +28,19 @@ class HistoryUserViewModel(
 
     fun setUser(user: TenantPresentation) = _user.postValue(user)
 
-    fun getAllPaymentsByTenant(id: Int) {
-        historyUseCase("reports-$id")
-            .whereEqualTo("tenant.id","$id")
+    fun getAllPaymentsByTenant(idCondominium: Int, idTenant: Int) {
+        historyUseCase("reports-$idCondominium")
+            .whereEqualTo("tenant.id", idTenant)
             .addSnapshotListener { value, e ->
                 when (val response = value?.toHistory()) {
                     null -> _error.postValue(e)
 
                     else -> when {
-                        response.isEmpty() -> _empty.postValue(Unit)
+
+                        response.isEmpty() -> {
+                            _empty.postValue(Unit)
+                            Log.d("empty", "$response")
+                        }
 
                         else -> _historyList.postValue(response.map { it.toPresentation() })
 

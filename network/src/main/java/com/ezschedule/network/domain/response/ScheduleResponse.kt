@@ -1,6 +1,7 @@
 package com.ezschedule.network.domain.response
 
 import com.ezschedule.network.domain.presentation.EventItemPresentation
+import com.ezschedule.network.domain.presentation.SchedulesPresentation
 
 data class ScheduleResponse(
     val id: Int,
@@ -22,5 +23,12 @@ data class ScheduleResponse(
         nameEvent = name,
         nameTenant = nameTenant,
         nameSalon = nameSalon
+    )
+
+    fun toSchedulePresentation() = SchedulesPresentation(
+        salon = nameSalon ?: "",
+        event = name,
+        date = date,
+        peoples = numberGuests
     )
 }

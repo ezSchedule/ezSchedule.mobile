@@ -6,4 +6,8 @@ data class SchedulesResponse(
     fun toEventsPresentation() = schedules.map {
         it.toEventPresentation()
     }
+
+    fun toSchedulesPresentation() = schedules.map {
+        it.toSchedulePresentation()
+    }
 }

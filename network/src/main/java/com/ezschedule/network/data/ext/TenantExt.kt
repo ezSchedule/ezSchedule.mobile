@@ -23,7 +23,7 @@ fun TenantData.toResponse() = TenantResponse(
 )
 
 fun TenantSettingsData.toResponse() = TenantResponse(
-    id = 0,
+    id = id,
     name = name,
     email = email,
     cpf = cpf,
@@ -35,7 +35,7 @@ fun TenantSettingsData.toResponse() = TenantResponse(
     isAuthenticated = isAuthenticated,
     isAdmin = isAdmin == 1,
     tokenJWT = "",
-    idCondominium = 0
+    idCondominium = condominium.id
 )
 
 fun TenantServiceData.toResponse() = TenantResponse(

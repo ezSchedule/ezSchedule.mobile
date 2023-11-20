@@ -2,7 +2,6 @@ package com.ezschedule.admin.presenter.view
 
 import android.app.Activity
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -112,10 +111,7 @@ class ForumFragment : Fragment() {
     private fun setupLoading(isLoading: Boolean) = with(binding) {
         includeForumChat.root.isVisible = isLoading.not()
         fragForumBtnAdd.isVisible = isLoading.not()
-        includeLoading.apply {
-            isVisible = isLoading
-            setBackgroundColor(Color.TRANSPARENT)
-        }
+        includeLoading.isVisible = isLoading
     }
 
     private fun changeScreen(isCreating: Boolean) = with(binding) {

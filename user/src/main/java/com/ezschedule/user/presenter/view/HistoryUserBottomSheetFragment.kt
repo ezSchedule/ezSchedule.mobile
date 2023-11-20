@@ -19,7 +19,7 @@ class HistoryUserBottomSheetFragment(val history: HistoryPresentation) :
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = ViewHistoryBottomSheetBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -39,7 +39,7 @@ class HistoryUserBottomSheetFragment(val history: HistoryPresentation) :
         }
         tvTenantName.text = history.tenant.name
         tvTenantUnit.text = history.tenant.unit
-        tvTenantApartment.text = history.tenant.apartmentNumber
+        tvTenantApartment.text = history.tenant.apartmentNumber.toString()
         tvTenantPhone.text = history.tenant.phoneNumber
         tvEventCategory.text = history.schedule.typeEvent
         tvEventBlock.text = history.saloon.blockEvent

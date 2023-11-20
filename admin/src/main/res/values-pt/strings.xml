@@ -31,6 +31,7 @@
     <string name="frag_calendar_tv_legend_today">Dia de hoje</string>
     <string name="frag_calendar_tv_legend_canceled">Cancelados</string>
     <string name="frag_calendar_tv_list_empty">Nenhum evento foi marcado</string>
+    <string name="frag_calendar_tv_input_blank">O campo não pode estar vazio</string>
 
     <!-- Dashboard Screen -->
     <string name="frag_dashboard_tv_title">Estátistica Anual</string>

@@ -36,7 +36,7 @@ class HistoryUserFragment : Fragment() {
 
     private fun setObservers() = with(viewmodel) {
         user.observe(viewLifecycleOwner) {
-            getAllPaymentsByTenant(it.id)
+            getAllPaymentsByTenant(it.idCondominium,it.id)
         }
 
         historyList.observe(viewLifecycleOwner) {
@@ -47,6 +47,7 @@ class HistoryUserFragment : Fragment() {
 
         empty.observe(viewLifecycleOwner) {
             isThereContent(false)
+            Log.d("empty","sem conteudo em histórico")
             isLoading(false)
         }
         error.observe(viewLifecycleOwner) {

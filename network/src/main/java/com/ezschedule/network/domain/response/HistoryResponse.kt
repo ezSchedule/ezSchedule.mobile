@@ -5,8 +5,6 @@ import com.ezschedule.network.domain.presentation.SaloonHistoryPresentation
 import com.ezschedule.network.domain.presentation.ScheduleHistoryPresentation
 import com.ezschedule.network.domain.presentation.TenantHistoryPresentation
 import com.google.firebase.Timestamp
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 data class HistoryResponse(
     val id: String?,
@@ -20,8 +18,6 @@ data class HistoryResponse(
     val schedule: ScheduleHistoryResponse,
     val tenant: TenantHistoryResponse
 ) {
-    private val dateFormat = SimpleDateFormat("d 'de' MMMM", Locale.getDefault())
-
     fun toPresentation() = HistoryPresentation(
         id = id,
         invoiceNumber = invoiceNumber,
@@ -42,7 +38,7 @@ data class HistoryResponse(
             typeEvent = schedule.typeEvent,
             totalNumberGuests = schedule.totalNumberGuests,
             isCanceled = schedule.isCanceled,
-            dateEvent = dateFormat.format(schedule.dateEvent.toDate())
+            dateEvent = schedule.dateEvent
         ),
         tenant = TenantHistoryPresentation(
             id = tenant.id,
@@ -69,7 +65,7 @@ data class ScheduleHistoryResponse(
     val typeEvent: String?,
     val totalNumberGuests: Int?,
     val isCanceled: Boolean?,
-    val dateEvent: Timestamp
+    val dateEvent: String
 )
 
 data class TenantHistoryResponse(
@@ -77,5 +73,5 @@ data class TenantHistoryResponse(
     val name: String?,
     val phoneNumber: String?,
     val unit: String?,
-    val apartmentNumber: String?
+    val apartmentNumber: Long?
 )

@@ -28,7 +28,7 @@ data class ScheduleHistoryData(
     val typeEvent: String?,
     val totalNumberGuests: Int?,
     val isCanceled: Boolean?,
-    val dateEvent: Timestamp?
+    val dateEvent: String?
 )
 
 data class TenantHistoryData(
@@ -36,5 +36,5 @@ data class TenantHistoryData(
     val name: String?,
     val phoneNumber: String?,
     val unit: String?,
-    val apartmentNumber: String?
+    val apartmentNumber: Long?
 )

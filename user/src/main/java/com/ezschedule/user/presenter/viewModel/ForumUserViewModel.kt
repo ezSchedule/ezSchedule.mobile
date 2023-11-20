@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ezschedule.network.data.ext.toObject
 import com.ezschedule.network.domain.presentation.PostPresentation
-import com.ezschedule.user.domain.useCase.FirestoreUserUseCase
+import com.ezschedule.user.domain.useCase.FirestoreUseCase
 import com.google.firebase.firestore.Query
 import com.sptech.user.R
 
-class ForumUserViewModel(private val useCase: FirestoreUserUseCase) : ViewModel() {
+class ForumUserViewModel(private val useCase: FirestoreUseCase) : ViewModel() {
     private var _posts = MutableLiveData<List<PostPresentation>>()
     val posts: LiveData<List<PostPresentation>> = _posts
 

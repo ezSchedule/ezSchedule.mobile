@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Calendar Screen -->
+    <string name="frag_calendar_tv_legend_marked">Marked</string>
+    <string name="frag_calendar_tv_legend_today">Today\'s day</string>
+    <string name="frag_calendar_tv_legend_canceled">Canceled</string>
+
     <!-- Forum Screen -->
     <string name="frag_forum_tv_empty">No posts found</string>
 
@@ -9,4 +14,36 @@
     <string name="frag_services_label_block">Block</string>
     <string name="frag_services_label_phone">Phone</string>
     <string name="frag_services_tv_empty">No service has been found</string>
+
+    <!-- Schedules Screen -->
+    <string name="frag_schedule_tv_whole_day">The whole day</string>
+    <string name="frag_schedule_tv_people_value">%d Guests</string>
+    <string name="frag_schedule_tv_add" translatable="false">+</string>
+    <string name="frag_schedule_btn_back">Button back</string>
+    <string name="frag_schedule_btn_next">Next</string>
+    <string name="frag_schedule_tv_title_new_date">New Date</string>
+    <string name="frag_schedule_edt_label_event_name">Event name</string>
+    <string name="frag_schedule_edt_label_event_type">Event type</string>
+    <string name="frag_schedule_edt_label_event_date">Event date</string>
+    <string name="frag_schedule_edt_label_saloon">Choose saloon</string>
+    <string name="frag_schedule_edt_label_quantity_guests">Quantity guests</string>
+    <string name="frag_schedule_edt_label_value">Value: </string>
+    <string name="frag_schedule_tv_pix">Pix</string>
+    <string name="frag_schedule_iv_description">QR Code</string>
+    <string name="frag_schedule_btn_cancel">Cancel</string>
+    <string name="frag_schedule_text_copied">Text copied to clipboard!</string>
+
+
+    <!-- New Date Screen   -->
+    <array name="list_events">
+        <item>Birthday</item>
+        <item>Party</item>
+        <item>Lecture</item>
+        <item>Meeting</item>
+        <item>Fitness</item>
+        <item>Others</item>
+    </array>
+
+
+
 </resources>

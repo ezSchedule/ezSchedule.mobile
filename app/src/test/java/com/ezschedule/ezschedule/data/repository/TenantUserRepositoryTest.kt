@@ -19,7 +19,7 @@ import org.junit.Test
 import retrofit2.HttpException
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class TenantRepositoryTest : CoroutineViewModelTest() {
+class TenantUserRepositoryTest : CoroutineViewModelTest() {
     private lateinit var endpoint: TenantEndpoint
     private lateinit var repository: TenantRepository
 

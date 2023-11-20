@@ -29,7 +29,7 @@ class HistoryAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind() = with(binding) {
-            tvHistoryName.text = historyData().productName
+            tvHistoryName.text = historyData().tenant.name
             tvHistorySaloonName.text = historyData().saloon.name
             tvHistorySaloonValue.text = "R$${historyData().saloon.saloonPrice}"
             fragHistoryImgAccept.isVisible = !historyData().schedule.isCanceled!!

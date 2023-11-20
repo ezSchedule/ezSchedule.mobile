@@ -25,6 +25,25 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="ButtonEzScheduleCancel" parent="TextAppearance.AppCompat.Widget.Button">
+        <item name="android:background">@drawable/bg_btn_ezschedule_red</item>
+        <item name="android:elevation">@dimen/spacing_large</item>
+        <item name="android:color">@color/black</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/size_small</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">@dimen/size_none</item>
+    </style>
+
+    <style name="InputLayoutAppearance" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxCornerRadiusBottomEnd">@dimen/corners_tiny</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/corners_tiny</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/corners_tiny</item>
+        <item name="boxCornerRadiusTopStart">@dimen/corners_tiny</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+    </style>
+
     <style name="InputAppearance">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/size_small</item>

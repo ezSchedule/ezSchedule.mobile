@@ -1,5 +1,7 @@
 package com.ezschedule.network.domain.response
 
+import com.ezschedule.network.domain.data.CondominiumRequest
+import com.ezschedule.network.domain.data.TenantScheduleRequest
 import com.ezschedule.network.domain.presentation.TenantPresentation
 import com.ezschedule.network.domain.presentation.TenantSettingsPresentation
 
@@ -38,5 +40,14 @@ data class TenantResponse(
         phoneNumber = phoneNumber,
         email = email,
         image = image
+    )
+
+    fun toTenantScheduleRequest() = TenantScheduleRequest(
+        id = id,
+        name = name,
+        residentsBlock = residentsBlock,
+        apartmentNumber = apartmentNumber,
+        phoneNumber = phoneNumber,
+        condominium = CondominiumRequest(idCondominium)
     )
 }

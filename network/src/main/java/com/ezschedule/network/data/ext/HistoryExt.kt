@@ -1,12 +1,10 @@
 package com.ezschedule.network.data.ext
 
 import com.ezschedule.network.domain.data.HistoryData
-import com.ezschedule.network.domain.data.PostData
 import com.ezschedule.network.domain.data.SaloonHistoryData
 import com.ezschedule.network.domain.data.ScheduleHistoryData
 import com.ezschedule.network.domain.data.TenantHistoryData
 import com.ezschedule.network.domain.response.HistoryResponse
-import com.ezschedule.network.domain.response.PostResponse
 import com.ezschedule.network.domain.response.SaloonHistoryResponse
 import com.ezschedule.network.domain.response.ScheduleHistoryResponse
 import com.ezschedule.network.domain.response.TenantHistoryResponse
@@ -30,7 +28,7 @@ fun QueryDocumentSnapshot.toHistoryObject() = HistoryData(
     saloon = SaloonHistoryData(
         id = this.getLong("saloon.id")?.toInt(),
         name = this.getString("saloon.name"),
-        saloonPrice = this.getString("saloon.saloonPrice"),
+        saloonPrice = this.getDouble("saloon.saloonPrice").toString(),
         blockEvent = this.getString("saloon.blockEvent")
     ),
     schedule = ScheduleHistoryData(
@@ -39,14 +37,14 @@ fun QueryDocumentSnapshot.toHistoryObject() = HistoryData(
         typeEvent = this.getString("schedule.typeEvent"),
         totalNumberGuests = this.getLong("schedule.totalNumberGuests")?.toInt(),
         isCanceled = this.getBoolean("schedule.isCanceled"),
-        dateEvent = this.getTimestamp("schedule.dateEvent")
+        dateEvent = this.getString("schedule.dateEvent")
     ),
     tenant = TenantHistoryData(
         id = this.getLong("tenant.id")?.toInt(),
         name = this.getString("tenant.name"),
         phoneNumber = this.getString("tenant.phoneNumber"),
         unit = this.getString("tenant.unit"),
-        apartmentNumber = this.getString("tenant.apartmentNumber")
+        apartmentNumber = this.getLong("tenant.apartmentNumber")
     )
 )
 
@@ -74,13 +72,13 @@ fun HistoryData.toHistoryResponse() = HistoryResponse(
         typeEvent = schedule.typeEvent ?: "",
         totalNumberGuests = schedule.totalNumberGuests ?: 0,
         isCanceled = schedule.isCanceled ?: true,
-        dateEvent = schedule.dateEvent ?: Timestamp(Date())
+        dateEvent = schedule.dateEvent ?: ""
     ),
     tenant = TenantHistoryResponse(
         id = tenant.id ?: 0,
         name = tenant.name ?: "",
         phoneNumber = tenant.phoneNumber ?: "",
         unit = tenant.unit ?: "",
-        apartmentNumber = tenant.apartmentNumber ?: ""
+        apartmentNumber = tenant.apartmentNumber ?: 0
     )
 )

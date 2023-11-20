@@ -31,16 +31,30 @@ import com.ezschedule.ezschedule.presenter.viewModel.SettingsViewModel
 import com.ezschedule.ezschedule.presenter.viewModel.TenantViewModel
 import com.ezschedule.network.data.api.CondominiumEndpoint
 import com.ezschedule.network.data.api.NotificationEndpoint
+import com.ezschedule.network.data.api.PixEndpoint
 import com.ezschedule.network.data.api.SaloonEndpoint
 import com.ezschedule.network.data.api.ScheduleEndpoint
 import com.ezschedule.network.data.api.ServicesEndpoint
 import com.ezschedule.network.data.api.TenantEndpoint
 import com.ezschedule.network.data.network.NetworkServiceFactory
+import com.ezschedule.user.data.repository.PixRepository
+import com.ezschedule.user.data.repository.SaloonUserRepository
+import com.ezschedule.user.data.repository.ScheduleUserRepository
 import com.ezschedule.user.data.repository.ServiceUserRepository
-import com.ezschedule.user.domain.useCase.FirestoreUserUseCase
+import com.ezschedule.user.data.repository.TenantUserRepository
+import com.ezschedule.user.domain.useCase.CalendarUserUseCase
+import com.ezschedule.user.domain.useCase.CreateScheduleUseCase
+import com.ezschedule.user.domain.useCase.FirestoreUseCase
+import com.ezschedule.user.domain.useCase.GetSaloonUseCase
+import com.ezschedule.user.domain.useCase.GetTenantByIdUseCase
+import com.ezschedule.user.domain.useCase.PixUseCase
+import com.ezschedule.user.domain.useCase.ScheduleUserUseCase
 import com.ezschedule.user.domain.useCase.ServiceUserUseCase
+import com.ezschedule.user.presenter.viewModel.CalendarUserViewModel
 import com.ezschedule.user.presenter.viewModel.ForumUserViewModel
 import com.ezschedule.user.presenter.viewModel.HistoryUserViewModel
+import com.ezschedule.user.presenter.viewModel.NewDateViewModel
+import com.ezschedule.user.presenter.viewModel.ScheduleUserViewModel
 import com.ezschedule.user.presenter.viewModel.ServiceUserViewModel
 import com.ezschedule.utils.ResourceWrapper
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -57,6 +71,7 @@ val moduleMain = module {
     factory { get<NetworkServiceFactory>().createNetworkService<SaloonEndpoint>(get() as Context) }
     factory { get<NetworkServiceFactory>().createNetworkService<NotificationEndpoint>(get() as Context) }
     factory { get<NetworkServiceFactory>().createNetworkService<ServicesEndpoint>(get() as Context) }
+    factory { get<NetworkServiceFactory>().createNetworkService<PixEndpoint>(get() as Context) }
 
     factory { TenantRepository(get()) }
     factory { ScheduleRepository(get()) }
@@ -65,6 +80,10 @@ val moduleMain = module {
     factory { NotificationRepository(get()) }
     factory { ServiceRepository(get()) }
     factory { ServiceUserRepository(get()) }
+    factory { ScheduleUserRepository(get()) }
+    factory { SaloonUserRepository(get()) }
+    factory { TenantUserRepository(get()) }
+    factory { PixRepository(get()) }
 
     factory { SendNotificationUseCase(get()) }
     factory { LoginUseCase(get()) }
@@ -76,13 +95,19 @@ val moduleMain = module {
     factory { CreateSaloonUseCase(get()) }
     factory { CreateServiceUseCase(get()) }
     factory { DashboardUseCase(get()) }
+    factory { FirestoreUseCase() }
     factory { ForumUseCase() }
-    factory { FirestoreUserUseCase() }
     factory { ServiceUserUseCase(get()) }
     factory { GetTenantsListUseCase(get()) }
     factory { GetServiceListUseCase(get()) }
     factory { HistoryUseCase() }
     factory { HistoryUserViewModel(get()) }
+    factory { ScheduleUserUseCase(get()) }
+    factory { CalendarUserUseCase(get()) }
+    factory { GetSaloonUseCase(get()) }
+    factory { CreateScheduleUseCase(get()) }
+    factory { GetTenantByIdUseCase(get()) }
+    factory { PixUseCase(get()) }
 
     viewModel { TenantViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }
@@ -93,5 +118,8 @@ val moduleMain = module {
     viewModel { ForumViewModel(get(), get()) }
     viewModel { ServiceUserViewModel(get()) }
     viewModel { ForumUserViewModel(get()) }
+    viewModel { ScheduleUserViewModel(get()) }
+    viewModel { CalendarUserViewModel(get()) }
+    viewModel { NewDateViewModel(get(), get(), get(), get(), get()) }
     viewModel { HistoryViewModel(get()) }
 }

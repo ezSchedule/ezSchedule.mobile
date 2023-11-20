@@ -36,5 +36,5 @@ data class TenantHistoryPresentation(
     val name: String?,
     val phoneNumber: String?,
     val unit: String?,
-    val apartmentNumber: String?
+    val apartmentNumber: Long?
 )

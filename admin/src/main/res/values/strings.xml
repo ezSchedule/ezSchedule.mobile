@@ -33,6 +33,7 @@
     <string name="frag_calendar_tv_legend_today">Today\'s day</string>
     <string name="frag_calendar_tv_legend_canceled">Canceled</string>
     <string name="frag_calendar_tv_list_empty">No events have been scheduled</string>
+    <string name="frag_calendar_tv_input_blank">The field cannot be empty</string>
 
     <!-- Dashboard Screen -->
     <string name="frag_dashboard_tv_title">Annual Statistics</string>
@@ -86,4 +87,5 @@
     <string name="frag_settings_text_salons">Salons</string>
     <string name="frag_settings_btn_add_salons">Add salons +</string>
     <string name="frag_history_text_no_payments">No requests have been found</string>
+    <string name="frag_service_text_no_service_found">No services have been found</string>
 </resources>

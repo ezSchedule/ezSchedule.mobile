@@ -124,7 +124,7 @@ class SettingsFragment : Fragment() {
                 includeSettingsCondominium.root.isVisible = false
                 includeSettingsHome.root.isVisible = true
                 isOnInclude = false
-            }else{
+            } else {
                 findNavController().popBackStack()
                 activity.displayLoginItems(isVisible = true)
             }
