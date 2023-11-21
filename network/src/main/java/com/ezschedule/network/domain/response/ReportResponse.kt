@@ -6,6 +6,8 @@ data class ReportResponse(
     val paymentStatus: String,
     val invoiceNumber: String,
     val condominiumId: Int,
+    var qrCode: String,
+    var imageQrcode: String,
     val saloon: SaloonReportResponse,
     val tenant: TenantReportResponse,
     val schedule: ScheduleReportResponse

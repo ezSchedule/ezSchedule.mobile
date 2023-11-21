@@ -121,6 +121,9 @@ class NewDateFragment : Fragment() {
         }
         pixCreated.observe(viewLifecycleOwner) { pixResponse ->
             scheduleCreated.value!!.id = pixResponse.id
+            scheduleCreated.value!!.imageQrcode = pixResponse.imageQrcode
+            scheduleCreated.value!!.qrCode = pixResponse.qrcode
+
 
             viewModel.createReport(scheduleCreated.value!!)
 
