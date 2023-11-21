@@ -11,7 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.time.LocalDateTime
 import java.time.ZoneId
 
-class HistoryBottomSheetFragment(val history: HistoryPresentation) : BottomSheetDialogFragment() {
+class HistoryBottomSheetFragment(private val history: HistoryPresentation) : BottomSheetDialogFragment() {
 
     private lateinit var binding: ViewHistoryBottomSheetBinding
     override fun onCreateView(
@@ -43,8 +43,11 @@ class HistoryBottomSheetFragment(val history: HistoryPresentation) : BottomSheet
         tvEventCategory.text = history.schedule.typeEvent
         tvEventBlock.text = history.saloon.blockEvent
         tvEventPrice.text = "R$${history.saloon.saloonPrice}"
-        val date = LocalDateTime.ofInstant(history.paymentDate?.toDate()?.toInstant(),ZoneId.systemDefault()).toString()
-        tvEventData.text = date.substring(0,date.indexOf(".")).replace("T"," ").replace("-","/")
+        val date = LocalDateTime.ofInstant(
+            history.paymentDate?.toDate()?.toInstant(),
+            ZoneId.systemDefault()
+        ).toString()
+        tvEventData.text = date.substring(0, date.indexOf(".")).replace("T", " ").replace("-", "/")
     }
 
 }

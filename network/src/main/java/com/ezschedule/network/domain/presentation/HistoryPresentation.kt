@@ -18,7 +18,7 @@ data class HistoryPresentation(
 data class SaloonHistoryPresentation(
     val id: Int?,
     val name: String?,
-    val saloonPrice: String?,
+    val saloonPrice: Double?,
     val blockEvent: String?
 )
 

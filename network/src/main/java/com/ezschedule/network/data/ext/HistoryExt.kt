@@ -28,7 +28,7 @@ fun QueryDocumentSnapshot.toHistoryObject() = HistoryData(
     saloon = SaloonHistoryData(
         id = this.getLong("saloon.id")?.toInt(),
         name = this.getString("saloon.name"),
-        saloonPrice = this.getDouble("saloon.saloonPrice").toString(),
+        saloonPrice = this.getDouble("saloon.saloonPrice"),
         blockEvent = this.getString("saloon.blockEvent")
     ),
     schedule = ScheduleHistoryData(
@@ -63,7 +63,7 @@ fun HistoryData.toHistoryResponse() = HistoryResponse(
     saloon = SaloonHistoryResponse(
         id = saloon.id ?: 0,
         name = saloon.name ?: "",
-        saloonPrice = saloon.saloonPrice ?: "",
+        saloonPrice = saloon.saloonPrice ?:  0.0,
         blockEvent = saloon.blockEvent ?: ""
     ),
     schedule = ScheduleHistoryResponse(

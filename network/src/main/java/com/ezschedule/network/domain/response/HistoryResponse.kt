@@ -55,7 +55,7 @@ data class HistoryResponse(
 data class SaloonHistoryResponse(
     val id: Int?,
     val name: String?,
-    val saloonPrice: String?,
+    val saloonPrice: Double?,
     val blockEvent: String?
 )
 
