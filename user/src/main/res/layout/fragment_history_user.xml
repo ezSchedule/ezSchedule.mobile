@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/frag_history_sv_history"
-        tools:listitem="@layout/adapter_history" />
+        tools:listitem="@layout/adapter_user_history" />
 
     <TextView
         android:id="@+id/frag_history_tv_no_payments"

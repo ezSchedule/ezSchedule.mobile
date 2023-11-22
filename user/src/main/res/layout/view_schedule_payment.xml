@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/iv_qr_code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginHorizontal="@dimen/spacing_huge"
         android:adjustViewBounds="true"
         android:contentDescription="@string/frag_schedule_iv_description"
@@ -54,9 +54,9 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:lines="1"
+            android:text="ASJFBYSAVFSAVSAVDSAIVDSAYTVDSAITDYVSADSADVSATDJSAJ"
             android:textColor="@color/black"
-            android:textSize="@dimen/size_small"
-            android:text="ASJFBYSAVFSAVSAVDSAIVDSAYTVDSAITDYVSADSADVSATDJSAJ" />
+            android:textSize="@dimen/size_small" />
 
         <ImageButton
             android:id="@+id/ib_clipboard"
@@ -98,6 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_small"
             android:layout_weight="1"
+            android:gravity="center"
             android:textColor="@color/gray"
             android:textSize="@dimen/size_standard"
             android:textStyle="bold"
@@ -113,6 +114,7 @@
         android:layout_marginBottom="@dimen/spacing_large"
         android:text="@string/frag_schedule_btn_cancel"
         android:textAppearance="@style/ButtonAppearance"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

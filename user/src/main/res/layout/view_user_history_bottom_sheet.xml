@@ -20,7 +20,7 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_status_payment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_standard"
@@ -39,7 +39,7 @@
         android:src="@drawable/correct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_status_payment"
         tools:ignore="ContentDescription" />
 
     <com.google.android.material.divider.MaterialDivider
@@ -269,5 +269,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_label_event_price"
         tools:text="R$110,00" />
+
+    <Button
+        android:id="@+id/btn_payment_pix"
+        style="@style/ButtonEzSchedule"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginVertical="@dimen/spacing_standard"
+        android:text="@string/frag_history_btn_pix"
+        android:textAppearance="@style/ButtonAppearance"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_label_event_price"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tv_status_payment,iv_payment_status,md_divider,tv_label_tenant_name,
+        tv_tenant_name,tv_label_tenant_unit,tv_tenant_unit,tv_label_event_block,tv_event_block,
+        tv_label_tenant_apartment,tv_tenant_apartment,tv_label_tenant_phone,tv_tenant_phone,
+        tv_label_event_category,tv_event_category,tv_label_event_data,tv_event_data,
+        md_divider_secondary,tv_label_event_price,tv_event_price, btn_payment_pix" />
+
+    <include
+        android:id="@+id/include_pix"
+        layout="@layout/view_schedule_payment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/iv_lower" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

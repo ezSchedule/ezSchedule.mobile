@@ -16,14 +16,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.Timestamp
 import com.sptech.user.R
 import com.sptech.user.databinding.FragmentHistoryUserBinding
-import com.sptech.user.databinding.ViewHistoryBottomSheetBinding
+import com.sptech.user.databinding.ViewUserHistoryBottomSheetBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDateTime
 import java.time.ZoneId
 
 class HistoryUserFragment : Fragment() {
     private lateinit var binding: FragmentHistoryUserBinding
-    private lateinit var bottomSheetBinding: ViewHistoryBottomSheetBinding
+    private lateinit var bottomSheetBinding: ViewUserHistoryBottomSheetBinding
     private val viewModel by viewModel<HistoryUserViewModel>()
     private val dialog: BottomSheetDialog by lazy {
         BottomSheetDialog(requireContext())
@@ -104,14 +104,14 @@ class HistoryUserFragment : Fragment() {
     }
 
     private fun setAdapter(historyList: List<HistoryPresentation>): HistoryUserAdapter {
-        return HistoryUserAdapter(historyList) { history ->
+        return HistoryUserAdapter(historyList, requireContext()) { history ->
             setupBottomSheet()
             displayInfoBottomSheet(history)
         }
     }
 
     private fun setupBottomSheet() {
-        bottomSheetBinding = ViewHistoryBottomSheetBinding.inflate(layoutInflater)
+        bottomSheetBinding = ViewUserHistoryBottomSheetBinding.inflate(layoutInflater)
         dialog.setContentView(bottomSheetBinding.root)
         dialog.show()
     }
@@ -119,10 +119,10 @@ class HistoryUserFragment : Fragment() {
     private fun displayInfoBottomSheet(history: HistoryPresentation) = with(bottomSheetBinding) {
         history.schedule.isCanceled?.let {
             if (it.not()) {
-                tvTitle.text = "Pagamento Efetuado"
+                tvStatusPayment.text = getString(R.string.frag_history_payment_made)
                 ivPaymentStatus.setImageResource(R.drawable.correct)
             } else {
-                tvTitle.text = "Pagamento Pendente"
+                tvStatusPayment.text = getString(R.string.frag_history_payment_pending)
                 ivPaymentStatus.setImageResource(R.drawable.error)
             }
         }
@@ -134,6 +134,9 @@ class HistoryUserFragment : Fragment() {
         tvEventBlock.text = history.saloon.blockEvent
         tvEventPrice.text = getString(R.string.frag_history_tv_value, history.saloon.saloonPrice)
         tvEventData.text = formattedDate(history.paymentDate)
+        btnPaymentPix.setOnClickListener {
+            displayPaymentScreen()
+        }
     }
 
     private fun formattedDate(paymentDate: Timestamp?): String {
@@ -142,5 +145,11 @@ class HistoryUserFragment : Fragment() {
         return date.substring(0, date.indexOf("."))
             .replace("T", " ")
             .replace("-", "/")
+    }
+
+    private fun displayPaymentScreen() = with(bottomSheetBinding) {
+        includePix.root.isVisible = true
+        includePix.btnCancel.isVisible = false
+        groupInfo.isVisible = false
     }
 }
