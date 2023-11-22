@@ -78,19 +78,22 @@ class SettingsFragment : Fragment() {
 
         tenantSettings.observe(viewLifecycleOwner) {
             setupLayoutProfile()
-            val updatedUser = viewModel.tenantSettings.value!!
 
-            SharedPreferencesManager(requireContext()).saveInfo(
-                TenantPresentation(
-                    id = userInfo.id,
-                    email = updatedUser.email,
-                    name = updatedUser.fullName,
-                    image = updatedUser.image ?: "",
-                    isAdmin = userInfo.isAdmin,
-                    tokenJWT = userInfo.tokenJWT,
-                    idCondominium = userInfo.idCondominium
+            with(SharedPreferencesManager(requireContext())) {
+                saveInfo(
+                    TenantPresentation(
+                        id = userInfo.id,
+                        email = it.email,
+                        name = it.fullName,
+                        image = it.image ?: "",
+                        isAdmin = userInfo.isAdmin,
+                        tokenJWT = userInfo.tokenJWT,
+                        idCondominium = userInfo.idCondominium
+                    )
                 )
-            )
+
+                userInfo = getInfo()
+            }
         }
 
         condominiumSettings.observe(viewLifecycleOwner) {
@@ -105,6 +108,7 @@ class SettingsFragment : Fragment() {
             ).show()
             setupLoading(true)
             viewModel.getTenantInfo(userInfo.id)
+            activity.setImageUser(userInfo.image)
         }
 
         viewModel.saloonCreated.observe(viewLifecycleOwner) {

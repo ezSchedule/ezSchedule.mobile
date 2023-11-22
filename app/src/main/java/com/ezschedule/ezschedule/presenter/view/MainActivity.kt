@@ -2,6 +2,7 @@ package com.ezschedule.ezschedule.presenter.view
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.appcompat.app.AlertDialog
@@ -65,7 +66,6 @@ class MainActivity : AppCompatActivity() {
         with(binding) {
             bottomNavigation.isVisible = isVisible
             includeToolbar.root.isVisible = isVisible
-            setImageUser(includeToolbar.ivUser)
         }
     }
 
@@ -130,12 +130,13 @@ class MainActivity : AppCompatActivity() {
             .navigate(navigationId)
     }
 
-    private fun setImageUser(imageView: ImageView) {
-        viewModel.getImage(user.image)?.let {
+    fun setImageUser(image: String?) {
+        Log.i("IMAGE", image ?: "")
+        image?.let {
             Glide.with(this)
                 .load(it)
                 .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                .into(imageView)
+                .into(binding.includeToolbar.ivUser)
         }
     }
 
@@ -144,6 +145,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        super.onBackPressed()
         finish()
     }
 
