@@ -12,12 +12,22 @@ import com.ezschedule.network.domain.presentation.HistoryPresentation
 import com.ezschedule.user.presenter.adapter.HistoryUserAdapter
 import com.ezschedule.user.presenter.viewModel.HistoryUserViewModel
 import com.ezschedule.utils.SharedPreferencesManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.Timestamp
+import com.sptech.user.R
 import com.sptech.user.databinding.FragmentHistoryUserBinding
+import com.sptech.user.databinding.ViewHistoryBottomSheetBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.time.LocalDateTime
+import java.time.ZoneId
 
 class HistoryUserFragment : Fragment() {
     private lateinit var binding: FragmentHistoryUserBinding
-    private val viewmodel by viewModel<HistoryUserViewModel>()
+    private lateinit var bottomSheetBinding: ViewHistoryBottomSheetBinding
+    private val viewModel by viewModel<HistoryUserViewModel>()
+    private val dialog: BottomSheetDialog by lazy {
+        BottomSheetDialog(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -29,25 +39,22 @@ class HistoryUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setObservers()
-        viewmodel.setUser(SharedPreferencesManager(requireContext()).getInfo())
         isLoading(true)
         setSearchView()
     }
 
-    private fun setObservers() = with(viewmodel) {
+    private fun setObservers() = with(viewModel) {
         user.observe(viewLifecycleOwner) {
-            getAllPaymentsByTenant(it.idCondominium,it.id)
+            getAllPaymentsByTenant(it.idCondominium, it.id)
         }
-
         historyList.observe(viewLifecycleOwner) {
             isThereContent(true)
             binding.fragRvHistory.adapter = setAdapter(it)
             isLoading(false)
         }
-
         empty.observe(viewLifecycleOwner) {
             isThereContent(false)
-            Log.d("empty","sem conteudo em histórico")
+            Log.d("empty", "sem conteudo em histórico")
             isLoading(false)
         }
         error.observe(viewLifecycleOwner) {
@@ -55,6 +62,8 @@ class HistoryUserFragment : Fragment() {
             isLoading(false)
             Log.d("ERROR", "error na requisição de histórico")
         }
+
+        viewModel.setUser(SharedPreferencesManager(requireContext()).getInfo())
     }
 
     private fun isThereContent(thereIS: Boolean) = with(binding) {
@@ -66,12 +75,11 @@ class HistoryUserFragment : Fragment() {
         viewLoading.isVisible = loading
     }
 
-
     private fun setSearchView() = with(binding) {
         fragHistorySvHistory.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
-                    viewmodel.historyList.value?.let {
+                    viewModel.historyList.value?.let {
                         it.filter { history ->
                             history.tenant.name?.contains(query, true) ?: false
                         }
@@ -83,7 +91,7 @@ class HistoryUserFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let {
-                    viewmodel.historyList.value?.let {
+                    viewModel.historyList.value?.let {
                         it.filter { history ->
                             history.tenant.name?.contains(newText, true) ?: false
                         }
@@ -97,7 +105,42 @@ class HistoryUserFragment : Fragment() {
 
     private fun setAdapter(historyList: List<HistoryPresentation>): HistoryUserAdapter {
         return HistoryUserAdapter(historyList) { history ->
-            HistoryUserBottomSheetFragment(history).show(childFragmentManager, "BottomSheet")
+            setupBottomSheet()
+            displayInfoBottomSheet(history)
         }
+    }
+
+    private fun setupBottomSheet() {
+        bottomSheetBinding = ViewHistoryBottomSheetBinding.inflate(layoutInflater)
+        dialog.setContentView(bottomSheetBinding.root)
+        dialog.show()
+    }
+
+    private fun displayInfoBottomSheet(history: HistoryPresentation) = with(bottomSheetBinding) {
+        history.schedule.isCanceled?.let {
+            if (it.not()) {
+                tvTitle.text = "Pagamento Efetuado"
+                ivPaymentStatus.setImageResource(R.drawable.correct)
+            } else {
+                tvTitle.text = "Pagamento Pendente"
+                ivPaymentStatus.setImageResource(R.drawable.error)
+            }
+        }
+        tvTenantName.text = history.tenant.name
+        tvTenantUnit.text = history.tenant.unit
+        tvTenantApartment.text = history.tenant.apartmentNumber.toString()
+        tvTenantPhone.text = history.tenant.phoneNumber
+        tvEventCategory.text = history.schedule.typeEvent
+        tvEventBlock.text = history.saloon.blockEvent
+        tvEventPrice.text = getString(R.string.frag_history_tv_value, history.saloon.saloonPrice)
+        tvEventData.text = formattedDate(history.paymentDate)
+    }
+
+    private fun formattedDate(paymentDate: Timestamp?): String {
+        val date = LocalDateTime
+            .ofInstant(paymentDate?.toDate()?.toInstant(), ZoneId.systemDefault()).toString()
+        return date.substring(0, date.indexOf("."))
+            .replace("T", " ")
+            .replace("-", "/")
     }
 }

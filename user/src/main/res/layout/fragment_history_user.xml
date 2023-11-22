@@ -32,8 +32,7 @@
         android:scrollbarStyle="outsideInset"
         android:scrollbarThumbVertical="@color/light_gray"
         android:scrollbars="vertical"
-        android:visibility="invisible"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,10 +43,10 @@
         android:id="@+id/frag_history_tv_no_payments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
         android:layout_marginHorizontal="@dimen/spacing_small"
         android:text="@string/frag_user_history_no_requests"
         android:textSize="@dimen/size_small"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,9 +55,6 @@
     <include
         android:id="@+id/view_loading"
         layout="@layout/view_progress_loading"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

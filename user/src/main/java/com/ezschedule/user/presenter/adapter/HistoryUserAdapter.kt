@@ -10,8 +10,7 @@ import com.sptech.user.databinding.AdapterHistoryBinding
 class HistoryUserAdapter(
     private val histories: List<HistoryPresentation>,
     private val bottomSheet: ((HistoryPresentation) -> Unit)
-) :
-    RecyclerView.Adapter<HistoryUserAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<HistoryUserAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -28,16 +27,18 @@ class HistoryUserAdapter(
     inner class ViewHolder(private val binding: AdapterHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind() = with(binding) {
-            tvHistoryName.text = historyData().tenant.name
-            tvHistorySaloonName.text = historyData().saloon.name
-            tvHistorySaloonValue.text = "R$${historyData().saloon.saloonPrice}"
-            fragHistoryImgAccept.isVisible = !historyData().schedule.isCanceled!!
-            fragHistoryImgError.isVisible = historyData().schedule.isCanceled == true
-
+        init {
             itemView.setOnClickListener {
                 bottomSheet(historyData())
             }
+        }
+
+        fun bind() = with(binding) {
+            tvHistoryName.text = historyData().tenant.name
+            tvHistorySaloonName.text = historyData().saloon.name
+            tvHistorySaloonValue.text = historyData().saloon.saloonPrice.toString()
+            fragHistoryImgAccept.isVisible = !historyData().schedule.isCanceled!!
+            fragHistoryImgError.isVisible = historyData().schedule.isCanceled == true
         }
 
         private fun historyData() = histories[adapterPosition]

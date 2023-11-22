@@ -32,8 +32,25 @@
     <string name="frag_schedule_iv_description">QR Code</string>
     <string name="frag_schedule_btn_cancel">Cancel</string>
     <string name="frag_schedule_text_copied">Text copied to clipboard!</string>
-
-
+    
+    <!-- History Screen -->
+    <string name="frag_user_history_no_requests">No requests have been found</string>
+    <string name="frag_history_payment_made">Payment made</string>
+    <string name="frag_history_accept_img_desc">Image accept</string>
+    <string name="frag_history_error_img_desc">Image error</string>
+    <string name="frag_history_payment_pending">Payment pending</string>
+    <string name="frag_history_tv_label_saloon">Saloon:</string>
+    <string name="frag_history_tv_label_name">Tenant name</string>
+    <string name="frag_history_tv_label_block">Tenant block</string>
+    <string name="frag_history_tv_label_apartment">Apartment No.</string>
+    <string name="frag_history_tv_label_phone">Phone</string>
+    <string name="frag_history_tv_label_category">Category</string>
+    <string name="frag_history_tv_label_event_block">Event block</string>
+    <string name="frag_history_tv_label_date">Date</string>
+    <string name="frag_history_tv_label_value">Value</string>
+    <string name="frag_history_tv_value">R$%.2f</string>
+    <string name="frag_history_btn_pix">Pix</string>
+    
     <!-- New Date Screen   -->
     <array name="list_events">
         <item>Birthday</item>
@@ -43,7 +60,5 @@
         <item>Fitness</item>
         <item>Others</item>
     </array>
-
-
-
+    
 </resources>

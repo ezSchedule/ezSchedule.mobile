@@ -14,7 +14,6 @@
     <string name="frag_services_label_block">Bloco</string>
     <string name="frag_services_label_phone">Telefone</string>
     <string name="frag_services_tv_empty">Nenhum serviço encontrado.</string>
-    <string name="frag_user_history_no_requests">Nenhum pagamento encontrado.</string>
 
     <!-- Schedules Screen -->
     <string name="frag_schedule_tv_whole_day">O dia todo</string>
@@ -32,4 +31,22 @@
     <string name="frag_schedule_iv_description">QR Code</string>
     <string name="frag_schedule_btn_cancel">Cancelar</string>
     <string name="frag_schedule_text_copied">Texto copiado para a área de transferência</string>
+
+    <!-- History Screen -->
+    <string name="frag_user_history_no_requests">Nenhum pagamento encontrado.</string>
+    <string name="frag_history_payment_made">Pagamento efetuado</string>
+    <string name="frag_history_accept_img_desc">Imagem aceito</string>
+    <string name="frag_history_error_img_desc">Imagem erro</string>
+    <string name="frag_history_payment_pending">Pagamento pendente</string>
+    <string name="frag_history_tv_label_saloon">Salão:</string>
+    <string name="frag_history_tv_label_name">Nome do morador</string>
+    <string name="frag_history_tv_label_block">Bloco do morador</string>
+    <string name="frag_history_tv_label_apartment">Nº Apartamento</string>
+    <string name="frag_history_tv_label_phone">Telefone</string>
+    <string name="frag_history_tv_label_category">Categoria</string>
+    <string name="frag_history_tv_label_event_block">Bloco do evento</string>
+    <string name="frag_history_tv_label_date">Data</string>
+    <string name="frag_history_tv_label_value">Valor</string>
+    <string name="frag_history_tv_value">R$%.2f</string>
+    <string name="frag_history_btn_pix">Pix</string>
 </resources>

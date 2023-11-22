@@ -24,7 +24,7 @@ class NewDateViewModel(
     private val createScheduleUseCase: CreateScheduleUseCase,
     private val getTenantByIdUseCase: GetTenantByIdUseCase,
     private val pixUseCase: PixUseCase,
-    private val firestore: FirestoreUseCase
+    private val fireStore: FirestoreUseCase
 ) : ViewModel() {
 
     private val _userData = MutableLiveData<TenantResponse>()
@@ -45,12 +45,10 @@ class NewDateViewModel(
     fun getUser(id: Int) = viewModelScope.launch {
         when (val response = getTenantByIdUseCase(id)) {
 
-            is ResultWrapper.Success -> _userData.postValue(response.content!!)
+            is ResultWrapper.Success -> response.content.let { _userData.postValue(it) }
 
-            is ResultWrapper.Error -> Log.d(
-                "Error",
-                "erro na requisição de usuario ${response.error}"
-            )
+            is ResultWrapper.Error ->
+                Log.d("Error", "erro na requisição de usuario ${response.error}")
         }
     }
 
@@ -61,37 +59,31 @@ class NewDateViewModel(
                 if (it.isEmpty()) _empty.postValue(Unit) else _saloon.postValue(it)
             }
 
-            is ResultWrapper.Error -> Log.d(
-                "Error",
-                "erro na requisição de histórico ${response.error}"
-            )
+            is ResultWrapper.Error ->
+                Log.d("Error", "erro na requisição de histórico ${response.error}")
         }
     }
 
     fun createSchedule(schedule: ScheduleRequest) = viewModelScope.launch {
         when (val response = createScheduleUseCase(schedule)) {
-            is ResultWrapper.Success -> _scheduleCreated.postValue(response.content!!)
-            is ResultWrapper.Error -> Log.d(
-                "Error",
-                "erro na criação de schedule ${response.error}"
-            )
+            is ResultWrapper.Success -> response.content.let { _scheduleCreated.postValue(it) }
 
+            is ResultWrapper.Error ->
+                Log.d("Error", "erro na criação de schedule ${response.error}")
         }
     }
 
     fun createPixRequest(pix: PixRequest) = viewModelScope.launch {
         when (val response = pixUseCase(pix)) {
-            is ResultWrapper.Success -> _pixCreated.postValue(response.content!!)
-            is ResultWrapper.Error -> Log.d(
-                "Error",
-                "erro na criação do pix ${response.error}"
-            )
+            is ResultWrapper.Success -> response.content.let { _pixCreated.postValue(it) }
 
+            is ResultWrapper.Error ->
+                Log.d("Error", "erro na criação do pix ${response.error}")
         }
     }
 
     fun createReport(report: ReportResponse) {
-        firestore("reports-${report.condominiumId}").add(report)
+        fireStore("reports-${report.condominiumId}").add(report)
             .addOnSuccessListener { Log.d("FIRESTORE", "Documento criado com sucesso") }
             .addOnFailureListener { Log.d("FIRESTORE", "requisição ao firestore falhou") }
     }
