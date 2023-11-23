@@ -42,6 +42,15 @@ class NewDateViewModel(
     private val _pixCreated = MutableLiveData<PixResponse>()
     val pixCreated: LiveData<PixResponse> = _pixCreated
 
+    private val _areFieldsFilledIn = MutableLiveData<Boolean>()
+    val areFieldsFilledIn: LiveData<Boolean> = _areFieldsFilledIn
+
+    private var areNameFilled: Boolean = false
+    private var areTypeFilled: Boolean = false
+    private var areDateFilled: Boolean = false
+    private var areSaloonFilled: Boolean = false
+    private var areQuantityFilled: Boolean = false
+
     fun getUser(id: Int) = viewModelScope.launch {
         when (val response = getTenantByIdUseCase(id)) {
 
@@ -86,6 +95,36 @@ class NewDateViewModel(
         fireStore("reports-${report.condominiumId}").add(report)
             .addOnSuccessListener { Log.d("FIRESTORE", "Documento criado com sucesso") }
             .addOnFailureListener { Log.d("FIRESTORE", "requisição ao firestore falhou") }
+    }
+
+    fun verifyName(name: String) {
+        areNameFilled = name.isNotBlank()
+        verifyFields()
+    }
+
+    fun verifyType(type: String) {
+        areTypeFilled = type.isNotBlank()
+        verifyFields()
+    }
+
+    fun verifyDate(date: String) {
+        areDateFilled = date.isNotBlank()
+        verifyFields()
+    }
+
+    fun verifySaloon(saloon: String) {
+        areSaloonFilled = saloon.isNotBlank()
+        verifyFields()
+    }
+
+    fun verifyQuantity(quantity: String) {
+        areQuantityFilled = (quantity.isNotBlank()) && (quantity.toInt() > 0)
+        verifyFields()
+    }
+
+    private fun verifyFields() {
+        _areFieldsFilledIn
+            .postValue(areNameFilled && areTypeFilled && areDateFilled && areSaloonFilled && areQuantityFilled)
     }
 
 }

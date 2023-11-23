@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.ezschedule.network.domain.data.PixRequest
@@ -42,12 +43,12 @@ class NewDateFragment : Fragment() {
         setupClickOnPaymentScreen()
         setEventTypeAdapter()
         setupDatePicker()
+        verifyFields()
 
         date?.let {
             formatterData(Date(it))
         }
         viewModel.getUser(SharedPreferencesManager(requireContext()).getInfo().id)
-
     }
 
     override fun onDestroy() {
@@ -92,7 +93,6 @@ class NewDateFragment : Fragment() {
         userData.observe(viewLifecycleOwner) {
             viewModel.getSaloon()
         }
-
         saloon.observe(viewLifecycleOwner) {
             val saloonNameList = arrayListOf<String>()
             it.forEach { saloonData -> saloonNameList.add(saloonData.name) }
@@ -136,6 +136,9 @@ class NewDateFragment : Fragment() {
             setLoading(false)
             setupLayout(false)
         }
+        areFieldsFilledIn.observe(viewLifecycleOwner) {
+            binding.includeInfo.btnNext.isEnabled = it
+        }
     }
 
     private fun setupDatePicker() {
@@ -146,6 +149,24 @@ class NewDateFragment : Fragment() {
 
     private fun setDate(date: String) {
         binding.includeInfo.edtEventDate.setText(date)
+    }
+
+    private fun verifyFields() = with(binding.includeInfo) {
+        edtEventName.doOnTextChanged { text, _, _, _ ->
+            viewModel.verifyName(text.toString())
+        }
+        acEventType.doOnTextChanged { text, _, _, _ ->
+            viewModel.verifyType(text.toString())
+        }
+        edtEventDate.doOnTextChanged { text, _, _, _ ->
+            viewModel.verifyDate(text.toString())
+        }
+        acSaloon.doOnTextChanged { text, _, _, _ ->
+            viewModel.verifySaloon(text.toString())
+        }
+        edtQuantityGuests.doOnTextChanged { text, _, _, _ ->
+            viewModel.verifyQuantity(text.toString())
+        }
     }
 
     private fun setupLayout(isInfoScreen: Boolean) = binding.apply {
