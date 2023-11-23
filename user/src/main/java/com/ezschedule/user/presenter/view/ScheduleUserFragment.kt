@@ -85,5 +85,6 @@ class ScheduleUserFragment : Fragment() {
     private fun setupLoading(isLoading: Boolean) = with(binding) {
         includeLoading.isVisible = isLoading
         vpSchedules.isVisible = isLoading.not()
+        btnFinal.isVisible = isLoading.not()
     }
 }
