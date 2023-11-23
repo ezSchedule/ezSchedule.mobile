@@ -14,10 +14,10 @@ import com.ezschedule.admin.R
 import com.ezschedule.admin.databinding.FragmentCalendarBinding
 import com.ezschedule.admin.databinding.ViewCalendarBottomSheetBinding
 import com.ezschedule.admin.presenter.adapter.CalendarEventsAdapter
-import com.ezschedule.utils.CustomCalendarClick
-import com.ezschedule.utils.CustomCalendarDecorator
 import com.ezschedule.admin.presenter.viewmodel.CalendarViewModel
 import com.ezschedule.network.domain.presentation.EventItemPresentation
+import com.ezschedule.utils.CustomCalendarClick
+import com.ezschedule.utils.CustomCalendarDecorator
 import com.ezschedule.utils.SharedPreferencesManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
@@ -65,9 +65,9 @@ class CalendarFragment : Fragment() {
             setupLoading(false)
         }
         emptyList.observe(viewLifecycleOwner) {
-            setupLoading(isLoading = false)
-            setEventOnDate(date = "01/01/1999 12:00", getColorEvent(isCanceled = false))
             binding.fragCalendarTvListEmpty.isVisible = true
+            setEventOnDate(date = "01/01/1999 12:00", getColorEvent(isCanceled = false))
+            setupLoading(false)
         }
         error.observe(viewLifecycleOwner) {
             Log.i("ERROR", it.message.toString())

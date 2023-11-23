@@ -2,7 +2,6 @@ package com.ezschedule.ezschedule.presenter.view
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.PopupMenu
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity

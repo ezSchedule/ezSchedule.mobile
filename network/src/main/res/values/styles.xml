@@ -59,7 +59,7 @@
 
     <style name="FloatingActionButtonEzSchedule" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="android:background">@drawable/bg_floating_button</item>
-        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:backgroundTint">@color/white</item>
     </style>
 
     <style name="IconOnlyButtonEzSchedule" parent="Widget.Material3.Button.OutlinedButton">

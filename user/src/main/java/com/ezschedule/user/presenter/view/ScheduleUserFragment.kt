@@ -40,6 +40,7 @@ class ScheduleUserFragment : Fragment() {
     private fun setupObservers() = with(viewModel) {
         schedules.observe(viewLifecycleOwner) {
             setupViewPager(it)
+            setupClickFloatingButton(it.size.inc())
             setupLoading(false)
         }
         empty.observe(viewLifecycleOwner) {
@@ -69,6 +70,12 @@ class ScheduleUserFragment : Fragment() {
                     page.scaleY = 0.85f + (1 - abs(position)) * 0.14f
                 }
             })
+        }
+    }
+
+    private fun setupClickFloatingButton(size: Int) {
+        binding.btnFinal.setOnClickListener {
+            binding.vpSchedules.currentItem = size
         }
     }
 
