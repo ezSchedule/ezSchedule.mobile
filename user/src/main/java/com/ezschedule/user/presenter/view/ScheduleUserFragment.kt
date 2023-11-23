@@ -39,17 +39,20 @@ class ScheduleUserFragment : Fragment() {
 
     private fun setupObservers() = with(viewModel) {
         schedules.observe(viewLifecycleOwner) {
+            binding.btnFinal.isVisible = true
             setupViewPager(it)
             setupClickFloatingButton(it.size.inc())
             setupLoading(false)
         }
         empty.observe(viewLifecycleOwner) {
-            setupLoading(false)
+            binding.btnFinal.isVisible = false
             Toast.makeText(requireContext(), "Empty", Toast.LENGTH_LONG).show()
+            setupLoading(false)
         }
         error.observe(viewLifecycleOwner) {
-            setupLoading(false)
+            binding.btnFinal.isVisible = false
             Toast.makeText(requireContext(), "Error", Toast.LENGTH_LONG).show()
+            setupLoading(false)
         }
     }
 
