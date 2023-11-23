@@ -46,10 +46,14 @@ class HistoryUserFragment : Fragment() {
     private fun setObservers() = with(viewModel) {
         user.observe(viewLifecycleOwner) {
             getAllPaymentsByTenant(it.idCondominium, it.id)
+            binding.swipeRefresh.setOnRefreshListener {
+                getAllPaymentsByTenant(it.idCondominium, it.id)
+            }
         }
         historyList.observe(viewLifecycleOwner) {
             isThereContent(true)
             binding.fragRvHistory.adapter = setAdapter(it)
+            binding.swipeRefresh.isRefreshing = false
             isLoading(false)
         }
         empty.observe(viewLifecycleOwner) {
