@@ -49,4 +49,15 @@
     <string name="frag_history_tv_label_value">Valor</string>
     <string name="frag_history_tv_value">R$%.2f</string>
     <string name="frag_history_btn_pix">Pix</string>
+
+    <!-- New Date Screen   -->
+    <array name="list_events">
+        <item>Aniversário</item>
+        <item>Festa</item>
+        <item>Palestra</item>
+        <item>Encontro</item>
+        <item>Fitness</item>
+        <item>Outros</item>
+    </array>
+
 </resources>

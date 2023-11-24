@@ -9,11 +9,12 @@ import com.google.firebase.Timestamp
 data class HistoryResponse(
     val id: String?,
     val invoiceNumber: String?,
-    val category: String?,
     val paymentStatus: String?,
     val productName: String?,
+    val qrCode:String?,
+    val imageQrcode:String?,
     val condominiumId: Int?,
-    val paymentDate: Timestamp?,
+    val paymentDate: String?,
     val saloon: SaloonHistoryResponse,
     val schedule: ScheduleHistoryResponse,
     val tenant: TenantHistoryResponse
@@ -21,9 +22,10 @@ data class HistoryResponse(
     fun toPresentation() = HistoryPresentation(
         id = id,
         invoiceNumber = invoiceNumber,
-        category = category,
         paymentStatus = paymentStatus,
         productName = productName,
+        qrCode = qrCode,
+        imageQrcode = imageQrcode,
         condominiumId = condominiumId,
         paymentDate = paymentDate,
         saloon = SaloonHistoryPresentation(

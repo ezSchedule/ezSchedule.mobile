@@ -1,6 +1,5 @@
 package com.ezschedule.admin.presenter.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,7 +29,7 @@ class HistoryViewModel(
 
     fun getAllPaymentsByCondominium(id: Int) {
         historyUseCase("reports-$id")
-            .whereEqualTo("condominiumId",id)
+            .whereEqualTo("condominiumId", id)
             .addSnapshotListener { value, e ->
                 when (val response = value?.toHistory()) {
                     null -> _error.postValue(e)

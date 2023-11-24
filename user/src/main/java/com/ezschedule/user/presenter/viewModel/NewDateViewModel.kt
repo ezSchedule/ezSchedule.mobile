@@ -92,7 +92,7 @@ class NewDateViewModel(
     }
 
     fun createReport(report: ReportResponse) {
-        fireStore("reports-${report.condominiumId}").add(report)
+        fireStore("reports-${report.condominiumId}").document(report.id).set(report)
             .addOnSuccessListener { Log.d("FIRESTORE", "Documento criado com sucesso") }
             .addOnFailureListener { Log.d("FIRESTORE", "requisição ao firestore falhou") }
     }

@@ -1,15 +1,14 @@
 package com.ezschedule.network.domain.presentation
 
-import com.google.firebase.Timestamp
-
 data class HistoryPresentation(
     val id: String?,
-    val invoiceNumber: String?,
-    val category: String?,
-    val paymentStatus: String?,
+    var invoiceNumber: String?,
+    var paymentStatus: String?,
     val productName: String?,
+    val qrCode:String?,
+    val imageQrcode:String?,
     val condominiumId: Int?,
-    val paymentDate: Timestamp?,
+    var paymentDate: String?,
     val saloon: SaloonHistoryPresentation,
     val schedule: ScheduleHistoryPresentation,
     val tenant: TenantHistoryPresentation

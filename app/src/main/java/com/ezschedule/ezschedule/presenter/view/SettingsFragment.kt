@@ -86,6 +86,7 @@ class SettingsFragment : Fragment() {
                         email = it.email,
                         name = it.fullName,
                         image = it.image ?: "",
+                        cpf = it.cpf,
                         isAdmin = userInfo.isAdmin,
                         tokenJWT = userInfo.tokenJWT,
                         idCondominium = userInfo.idCondominium

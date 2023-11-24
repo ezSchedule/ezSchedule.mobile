@@ -43,11 +43,7 @@ class HistoryBottomSheetFragment(private val history: HistoryPresentation) : Bot
         tvEventCategory.text = history.schedule.typeEvent
         tvEventBlock.text = history.saloon.blockEvent
         tvEventPrice.text = "R$${history.saloon.saloonPrice}"
-        val date = LocalDateTime.ofInstant(
-            history.paymentDate?.toDate()?.toInstant(),
-            ZoneId.systemDefault()
-        ).toString()
-        tvEventData.text = date.substring(0, date.indexOf(".")).replace("T", " ").replace("-", "/")
+        tvEventData.text = ""
     }
 
 }

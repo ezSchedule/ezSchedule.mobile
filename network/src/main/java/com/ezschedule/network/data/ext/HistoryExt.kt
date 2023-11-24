@@ -8,10 +8,8 @@ import com.ezschedule.network.domain.response.HistoryResponse
 import com.ezschedule.network.domain.response.SaloonHistoryResponse
 import com.ezschedule.network.domain.response.ScheduleHistoryResponse
 import com.ezschedule.network.domain.response.TenantHistoryResponse
-import com.google.firebase.Timestamp
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
-import java.util.Date
 
 fun QuerySnapshot.toHistory() = this.map {
     it.toHistoryObject()
@@ -20,11 +18,12 @@ fun QuerySnapshot.toHistory() = this.map {
 fun QueryDocumentSnapshot.toHistoryObject() = HistoryData(
     id = this.getString("id"),
     invoiceNumber = this.getString("invoiceNumber"),
-    category = this.getString("category"),
     paymentStatus = this.getString("paymentStatus"),
     productName = this.getString("productName"),
+    qrCode = this.getString("qrCode"),
+    imageQrcode = this.getString("imageQrcode"),
     condominiumId = this.getLong("condominiumId")?.toInt(),
-    paymentDate = this.getTimestamp("paymentDate"),
+    paymentDate = this.getString("paymentDate"),
     saloon = SaloonHistoryData(
         id = this.getLong("saloon.id")?.toInt(),
         name = this.getString("saloon.name"),
@@ -55,15 +54,16 @@ fun List<HistoryData>.toHistoryResponse() = this.map {
 fun HistoryData.toHistoryResponse() = HistoryResponse(
     id = id ?: "",
     invoiceNumber = invoiceNumber ?: "",
-    category = category ?: "",
     paymentStatus = paymentStatus ?: "",
     productName = productName ?: "",
+    qrCode = qrCode ?: "",
+    imageQrcode = imageQrcode ?: "",
     condominiumId = condominiumId ?: 0,
-    paymentDate = paymentDate ?: Timestamp(Date()),
+    paymentDate = paymentDate,
     saloon = SaloonHistoryResponse(
         id = saloon.id ?: 0,
         name = saloon.name ?: "",
-        saloonPrice = saloon.saloonPrice ?:  0.0,
+        saloonPrice = saloon.saloonPrice ?: 0.0,
         blockEvent = saloon.blockEvent ?: ""
     ),
     schedule = ScheduleHistoryResponse(

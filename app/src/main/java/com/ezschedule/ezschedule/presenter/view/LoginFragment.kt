@@ -77,6 +77,7 @@ class LoginFragment : Fragment() {
                 email = it.email,
                 name = it.name,
                 image = it.image,
+                cpf = it.cpf,
                 isAdmin = it.isAdmin,
                 tokenJWT = it.tokenJWT,
                 idCondominium = it.idCondominium

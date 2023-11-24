@@ -45,6 +45,7 @@ import com.ezschedule.user.data.repository.TenantUserRepository
 import com.ezschedule.user.domain.useCase.CalendarUserUseCase
 import com.ezschedule.user.domain.useCase.CreateScheduleUseCase
 import com.ezschedule.user.domain.useCase.FirestoreUseCase
+import com.ezschedule.user.domain.useCase.GetAllPixAttempts
 import com.ezschedule.user.domain.useCase.GetSaloonUseCase
 import com.ezschedule.user.domain.useCase.GetTenantByIdUseCase
 import com.ezschedule.user.domain.useCase.PixUseCase
@@ -101,13 +102,14 @@ val moduleMain = module {
     factory { GetTenantsListUseCase(get()) }
     factory { GetServiceListUseCase(get()) }
     factory { HistoryUseCase() }
-    factory { HistoryUserViewModel(get()) }
+    factory { HistoryUserViewModel(get(), get(), get()) }
     factory { ScheduleUserUseCase(get()) }
     factory { CalendarUserUseCase(get()) }
     factory { GetSaloonUseCase(get()) }
     factory { CreateScheduleUseCase(get()) }
     factory { GetTenantByIdUseCase(get()) }
     factory { PixUseCase(get()) }
+    factory { GetAllPixAttempts(get()) }
 
     viewModel { TenantViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }

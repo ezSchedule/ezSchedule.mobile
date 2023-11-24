@@ -1,5 +1,6 @@
 package com.ezschedule.user.presenter.view
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,18 +9,18 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestOptions
 import com.ezschedule.network.domain.presentation.HistoryPresentation
 import com.ezschedule.user.presenter.adapter.HistoryUserAdapter
 import com.ezschedule.user.presenter.viewModel.HistoryUserViewModel
 import com.ezschedule.utils.SharedPreferencesManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.Timestamp
 import com.sptech.user.R
 import com.sptech.user.databinding.FragmentHistoryUserBinding
 import com.sptech.user.databinding.ViewUserHistoryBottomSheetBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.time.LocalDateTime
-import java.time.ZoneId
 
 class HistoryUserFragment : Fragment() {
     private lateinit var binding: FragmentHistoryUserBinding
@@ -47,7 +48,7 @@ class HistoryUserFragment : Fragment() {
         user.observe(viewLifecycleOwner) {
             getAllPaymentsByTenant(it.idCondominium, it.id)
             binding.swipeRefresh.setOnRefreshListener {
-                getAllPaymentsByTenant(it.idCondominium, it.id)
+                getAllPixAttemps(it.cpf)
             }
         }
         historyList.observe(viewLifecycleOwner) {
@@ -56,6 +57,12 @@ class HistoryUserFragment : Fragment() {
             binding.swipeRefresh.isRefreshing = false
             isLoading(false)
         }
+
+        pixAttempts.observe(viewLifecycleOwner) {
+            binding.swipeRefresh.isRefreshing = false
+            updateHistoryWPixInfo()
+        }
+
         empty.observe(viewLifecycleOwner) {
             isThereContent(false)
             Log.d("empty", "sem conteudo em histórico")
@@ -84,10 +91,11 @@ class HistoryUserFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
                     viewModel.historyList.value?.let {
-                        it.filter { history ->
+                        val list = it.filter { history ->
                             history.tenant.name?.contains(query, true) ?: false
                         }
-                        fragRvHistory.adapter = setAdapter(it)
+
+                        fragRvHistory.adapter = setAdapter(list)
                     }
                 }
                 return false
@@ -96,10 +104,10 @@ class HistoryUserFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let {
                     viewModel.historyList.value?.let {
-                        it.filter { history ->
+                        val list = it.filter { history ->
                             history.tenant.name?.contains(newText, true) ?: false
                         }
-                        fragRvHistory.adapter = setAdapter(it)
+                        fragRvHistory.adapter = setAdapter(list)
                     }
                 }
                 return false
@@ -121,13 +129,18 @@ class HistoryUserFragment : Fragment() {
     }
 
     private fun displayInfoBottomSheet(history: HistoryPresentation) = with(bottomSheetBinding) {
-        history.schedule.isCanceled?.let {
-            if (it.not()) {
+        history.paymentStatus.equals("PAGO").let {
+            if (it) {
                 tvStatusPayment.text = getString(R.string.frag_history_payment_made)
                 ivPaymentStatus.setImageResource(R.drawable.correct)
+                btnPaymentPix.isVisible = false
             } else {
                 tvStatusPayment.text = getString(R.string.frag_history_payment_pending)
                 ivPaymentStatus.setImageResource(R.drawable.error)
+                btnPaymentPix.isVisible = true
+                btnPaymentPix.setOnClickListener {
+                    displayPaymentScreen(history)
+                }
             }
         }
         tvTenantName.text = history.tenant.name
@@ -136,23 +149,18 @@ class HistoryUserFragment : Fragment() {
         tvTenantPhone.text = history.tenant.phoneNumber
         tvEventCategory.text = history.schedule.typeEvent
         tvEventBlock.text = history.saloon.blockEvent
-        tvEventPrice.text = getString(R.string.frag_history_tv_value, history.saloon.saloonPrice)
-        tvEventData.text = formattedDate(history.paymentDate)
-        btnPaymentPix.setOnClickListener {
-            displayPaymentScreen()
-        }
+        tvEventPrice.text = "R$${history.saloon.saloonPrice}"
+        tvEventData.text = history.paymentDate?.substring(0, 19)?.replace("T", " ")
+
     }
 
-    private fun formattedDate(paymentDate: Timestamp?): String {
-        val date = LocalDateTime
-            .ofInstant(paymentDate?.toDate()?.toInstant(), ZoneId.systemDefault()).toString()
-        return date.substring(0, date.indexOf("."))
-            .replace("T", " ")
-            .replace("-", "/")
-    }
-
-    private fun displayPaymentScreen() = with(bottomSheetBinding) {
+    private fun displayPaymentScreen(history: HistoryPresentation) = with(bottomSheetBinding) {
         includePix.root.isVisible = true
+        Glide.with(requireContext())
+            .load(history.imageQrcode)
+            .into(includePix.ivQrCode)
+        includePix.tvCode.text = history.qrCode
+        includePix.tvValueSaloon.text = "R$${history.saloon.saloonPrice}"
         includePix.btnCancel.isVisible = false
         groupInfo.isVisible = false
     }
