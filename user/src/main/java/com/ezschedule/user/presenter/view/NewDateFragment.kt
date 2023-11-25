@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -67,18 +68,7 @@ class NewDateFragment : Fragment() {
         btnNext.setOnClickListener {
             val date = edtEventDate.text.toString().split("/")
             val newDate = "${date[2]}-${date[1]}-${date[0]}T00:00:00.000"
-
-            val scheduleRequest = ScheduleRequest(
-                nameEvent = edtEventName.text.toString(),
-                typeEvent = acEventType.text.toString(),
-                dateEvent = newDate,
-                isCanceled = 0,
-                totalNumberGuests = edtQuantityGuests.text.toString().toInt(),
-                saloon = viewModel.saloon.value!![saloonPos],
-                tenant = viewModel.userData.value!!.toTenantScheduleRequest()
-            )
-
-            viewModel.createSchedule(scheduleRequest)
+            viewModel.validateSchedule(newDate)
             setLoading(true)
         }
     }
@@ -106,6 +96,30 @@ class NewDateFragment : Fragment() {
                     String.format("R$%.2f", it[saloonPos].price)
             }
         }
+
+        isScheduleValid.observe(viewLifecycleOwner) {
+            if (it.not()) {
+                with(binding.includeInfo) {
+                    val date = edtEventDate.text.toString().split("/")
+                    val newDate = "${date[2]}-${date[1]}-${date[0]}T00:00:00.000"
+
+                    val scheduleRequest = ScheduleRequest(
+                        nameEvent = edtEventName.text.toString(),
+                        typeEvent = acEventType.text.toString(),
+                        dateEvent = newDate,
+                        isCanceled = 0,
+                        totalNumberGuests = edtQuantityGuests.text.toString().toInt(),
+                        saloon = viewModel.saloon.value!![saloonPos],
+                        tenant = viewModel.userData.value!!.toTenantScheduleRequest()
+                    )
+                    viewModel.createSchedule(scheduleRequest)
+                }
+            } else {
+                setLoading(false)
+                Toast.makeText(context, "Esta data já foi agendada!!", Toast.LENGTH_LONG).show()
+            }
+        }
+
         scheduleCreated.observe(viewLifecycleOwner) { report ->
             var pix: PixRequest
             with(viewModel) {

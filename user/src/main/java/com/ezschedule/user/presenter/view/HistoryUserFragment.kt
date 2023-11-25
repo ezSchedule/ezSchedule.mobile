@@ -1,6 +1,5 @@
 package com.ezschedule.user.presenter.view
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,8 +9,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.bumptech.glide.request.RequestOptions
 import com.ezschedule.network.domain.presentation.HistoryPresentation
 import com.ezschedule.user.presenter.adapter.HistoryUserAdapter
 import com.ezschedule.user.presenter.viewModel.HistoryUserViewModel
@@ -138,7 +135,8 @@ class HistoryUserFragment : Fragment() {
                 tvStatusPayment.text = getString(R.string.frag_history_payment_pending)
                 ivPaymentStatus.setImageResource(R.drawable.error)
                 btnPaymentPix.isVisible = true
-                btnPaymentPix.setOnClickListener {
+                btnPaymentPix.setOnClickListener { view ->
+                    view.isVisible = false
                     displayPaymentScreen(history)
                 }
             }
@@ -149,7 +147,8 @@ class HistoryUserFragment : Fragment() {
         tvTenantPhone.text = history.tenant.phoneNumber
         tvEventCategory.text = history.schedule.typeEvent
         tvEventBlock.text = history.saloon.blockEvent
-        tvEventPrice.text = "R$${history.saloon.saloonPrice}"
+        tvEventPrice.text =
+            getString(R.string.frag_history_tv_value_currency, history.saloon.saloonPrice)
         tvEventData.text = history.paymentDate?.substring(0, 19)?.replace("T", " ")
 
     }
@@ -160,7 +159,8 @@ class HistoryUserFragment : Fragment() {
             .load(history.imageQrcode)
             .into(includePix.ivQrCode)
         includePix.tvCode.text = history.qrCode
-        includePix.tvValueSaloon.text = "R$${history.saloon.saloonPrice}"
+        includePix.tvValueSaloon.text =
+            getString(R.string.frag_history_tv_value_currency, history.saloon.saloonPrice)
         includePix.btnCancel.isVisible = false
         groupInfo.isVisible = false
     }

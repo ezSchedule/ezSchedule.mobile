@@ -17,6 +17,7 @@ import com.ezschedule.user.domain.useCase.FirestoreUseCase
 import com.ezschedule.user.domain.useCase.GetSaloonUseCase
 import com.ezschedule.user.domain.useCase.GetTenantByIdUseCase
 import com.ezschedule.user.domain.useCase.PixUseCase
+import com.ezschedule.user.domain.useCase.ValidateScheduleUseCase
 import kotlinx.coroutines.launch
 
 class NewDateViewModel(
@@ -24,7 +25,8 @@ class NewDateViewModel(
     private val createScheduleUseCase: CreateScheduleUseCase,
     private val getTenantByIdUseCase: GetTenantByIdUseCase,
     private val pixUseCase: PixUseCase,
-    private val fireStore: FirestoreUseCase
+    private val fireStore: FirestoreUseCase,
+    private val validateScheduleUseCase: ValidateScheduleUseCase
 ) : ViewModel() {
 
     private val _userData = MutableLiveData<TenantResponse>()
@@ -41,6 +43,9 @@ class NewDateViewModel(
 
     private val _pixCreated = MutableLiveData<PixResponse>()
     val pixCreated: LiveData<PixResponse> = _pixCreated
+
+    private val _isScheduleValid = MutableLiveData<Boolean>()
+    val isScheduleValid: LiveData<Boolean> = _isScheduleValid
 
     private val _areFieldsFilledIn = MutableLiveData<Boolean>()
     val areFieldsFilledIn: LiveData<Boolean> = _areFieldsFilledIn
@@ -70,6 +75,15 @@ class NewDateViewModel(
 
             is ResultWrapper.Error ->
                 Log.d("Error", "erro na requisição de histórico ${response.error}")
+        }
+    }
+
+    fun validateSchedule(date: String) = viewModelScope.launch {
+        when (val response = validateScheduleUseCase(date)) {
+
+            is ResultWrapper.Success -> response.content.let { _isScheduleValid.postValue(it) }
+
+            is ResultWrapper.Error -> Log.d("Error", "erro na validação de schedule ${response.error}")
         }
     }
 

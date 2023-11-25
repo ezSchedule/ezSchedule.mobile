@@ -51,6 +51,7 @@ import com.ezschedule.user.domain.useCase.GetTenantByIdUseCase
 import com.ezschedule.user.domain.useCase.PixUseCase
 import com.ezschedule.user.domain.useCase.ScheduleUserUseCase
 import com.ezschedule.user.domain.useCase.ServiceUserUseCase
+import com.ezschedule.user.domain.useCase.ValidateScheduleUseCase
 import com.ezschedule.user.presenter.viewModel.CalendarUserViewModel
 import com.ezschedule.user.presenter.viewModel.ForumUserViewModel
 import com.ezschedule.user.presenter.viewModel.HistoryUserViewModel
@@ -110,6 +111,7 @@ val moduleMain = module {
     factory { GetTenantByIdUseCase(get()) }
     factory { PixUseCase(get()) }
     factory { GetAllPixAttempts(get()) }
+    factory { ValidateScheduleUseCase(get()) }
 
     viewModel { TenantViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }
@@ -122,6 +124,6 @@ val moduleMain = module {
     viewModel { ForumUserViewModel(get()) }
     viewModel { ScheduleUserViewModel(get()) }
     viewModel { CalendarUserViewModel(get()) }
-    viewModel { NewDateViewModel(get(), get(), get(), get(), get()) }
+    viewModel { NewDateViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { HistoryViewModel(get()) }
 }

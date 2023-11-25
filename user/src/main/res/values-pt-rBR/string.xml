@@ -47,7 +47,7 @@
     <string name="frag_history_tv_label_event_block">Bloco do evento</string>
     <string name="frag_history_tv_label_date">Data</string>
     <string name="frag_history_tv_label_value">Valor</string>
-    <string name="frag_history_tv_value">R$%.2f</string>
+    <string name="frag_history_tv_value_currency">R$%.2f</string>
     <string name="frag_history_btn_pix">Pix</string>
 
     <!-- New Date Screen   -->

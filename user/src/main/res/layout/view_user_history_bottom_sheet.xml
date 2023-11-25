@@ -254,8 +254,10 @@
         android:textAppearance="@style/SubTitleAppearance"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/btn_payment_pix"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/md_divider_secondary" />
+        app:layout_constraintTop_toBottomOf="@id/md_divider_secondary"
+        app:layout_goneMarginBottom="@dimen/spacing_standard" />
 
     <TextView
         android:id="@+id/tv_event_price"
@@ -292,7 +294,7 @@
         tv_tenant_name,tv_label_tenant_unit,tv_tenant_unit,tv_label_event_block,tv_event_block,
         tv_label_tenant_apartment,tv_tenant_apartment,tv_label_tenant_phone,tv_tenant_phone,
         tv_label_event_category,tv_event_category,tv_label_event_data,tv_event_data,
-        md_divider_secondary,tv_label_event_price,tv_event_price, btn_payment_pix" />
+        md_divider_secondary,tv_label_event_price,tv_event_price" />
 
     <include
         android:id="@+id/include_pix"

@@ -24,4 +24,7 @@ interface ScheduleEndpoint {
 
     @POST("schedules")
     suspend fun createSchedule(@Body schedule: ScheduleRequest): ReportResponse
+
+    @GET("schedules/validate/{dateEvent}")
+    suspend fun haveBeenSchedules(@Path("dateEvent") date: String): Boolean
 }

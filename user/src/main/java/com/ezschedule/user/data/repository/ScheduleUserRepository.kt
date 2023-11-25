@@ -21,10 +21,16 @@ class ScheduleUserRepository(private val endpoint: ScheduleEndpoint) {
         }
     }
 
-
     suspend fun createSchedule(scheduleRequest: ScheduleRequest): ResultWrapper<ReportResponse> {
         return requestHandler {
             endpoint.createSchedule(scheduleRequest)
         }
     }
+
+    suspend fun haveBeenScheduled(date: String): ResultWrapper<Boolean> {
+        return requestHandler {
+            endpoint.haveBeenSchedules(date)
+        }
+    }
+
 }
