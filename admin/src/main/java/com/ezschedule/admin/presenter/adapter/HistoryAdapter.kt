@@ -1,14 +1,17 @@
 package com.ezschedule.admin.presenter.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.ezschedule.admin.R
 import com.ezschedule.admin.databinding.AdapterHistoryBinding
 import com.ezschedule.network.domain.presentation.HistoryPresentation
 
 class HistoryAdapter(
     private val histories: List<HistoryPresentation>,
+    private val context: Context,
     private val bottomSheet: ((HistoryPresentation) -> Unit)
 ) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
@@ -31,9 +34,9 @@ class HistoryAdapter(
         fun bind() = with(binding) {
             tvHistoryName.text = historyData().tenant.name
             tvHistorySaloonName.text = historyData().saloon.name
-            tvHistorySaloonValue.text = "R$${historyData().saloon.saloonPrice}"
-            fragHistoryImgAccept.isVisible = !historyData().schedule.isCanceled!!
-            fragHistoryImgError.isVisible = historyData().schedule.isCanceled == true
+            tvHistorySaloonValue.text = context.getString(R.string.frag_history_tv_value_currency,historyData().saloon.saloonPrice)
+            fragHistoryImgAccept.isVisible = historyData().paymentStatus.equals("PAGO")
+            fragHistoryImgError.isVisible = !historyData().paymentStatus.equals("PAGO")
 
             itemView.setOnClickListener {
                 bottomSheet(historyData())

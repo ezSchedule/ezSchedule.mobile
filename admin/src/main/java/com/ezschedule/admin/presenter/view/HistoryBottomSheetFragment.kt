@@ -8,10 +8,9 @@ import com.ezschedule.admin.R
 import com.ezschedule.admin.databinding.ViewHistoryBottomSheetBinding
 import com.ezschedule.network.domain.presentation.HistoryPresentation
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import java.time.LocalDateTime
-import java.time.ZoneId
 
-class HistoryBottomSheetFragment(private val history: HistoryPresentation) : BottomSheetDialogFragment() {
+class HistoryBottomSheetFragment(private val history: HistoryPresentation) :
+    BottomSheetDialogFragment() {
 
     private lateinit var binding: ViewHistoryBottomSheetBinding
     override fun onCreateView(
@@ -29,11 +28,11 @@ class HistoryBottomSheetFragment(private val history: HistoryPresentation) : Bot
     }
 
     private fun setContent() = with(binding) {
-        if (!history.schedule.isCanceled!!) {
-            tvTitle.text = "Pagamento Efetuado"
+        if (history.paymentStatus.equals("PAGO")) {
+            tvTitle.text = getString(R.string.frag_history_payment_made)
             ivPaymentStatus.setImageResource(R.drawable.correct)
         } else {
-            tvTitle.text = "Pagamento Pendente"
+            tvTitle.text = getString(R.string.frag_history_payment_pending)
             ivPaymentStatus.setImageResource(R.drawable.error)
         }
         tvTenantName.text = history.tenant.name
@@ -42,8 +41,8 @@ class HistoryBottomSheetFragment(private val history: HistoryPresentation) : Bot
         tvTenantPhone.text = history.tenant.phoneNumber
         tvEventCategory.text = history.schedule.typeEvent
         tvEventBlock.text = history.saloon.blockEvent
-        tvEventPrice.text = "R$${history.saloon.saloonPrice}"
-        tvEventData.text = ""
+        tvEventPrice.text = context?.getString(R.string.frag_history_tv_value_currency, history.saloon.saloonPrice)
+        tvEventData.text =  history.paymentDate?.substring(0, 19)?.replace("T", " ")
     }
 
 }

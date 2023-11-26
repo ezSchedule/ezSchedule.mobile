@@ -11,12 +11,13 @@ import com.ezschedule.network.domain.data.PixCobData
 import com.ezschedule.network.domain.presentation.HistoryPresentation
 import com.ezschedule.network.domain.presentation.TenantPresentation
 import com.ezschedule.user.domain.useCase.FirestoreUseCase
-import com.ezschedule.user.domain.useCase.GetAllPixAttempts
+import com.ezschedule.user.domain.useCase.UserGetAllPixAttempts
+import com.google.firebase.firestore.Query
 import kotlinx.coroutines.launch
 
 class HistoryUserViewModel(
     private val historyUseCase: FirestoreUseCase,
-    private val getAllPixAttempts: GetAllPixAttempts,
+    private val userGetAllPixAttempts: UserGetAllPixAttempts,
     private val firestoreUseCase: FirestoreUseCase
 ) : ViewModel() {
 
@@ -40,6 +41,7 @@ class HistoryUserViewModel(
     fun getAllPaymentsByTenant(idCondominium: Int, idTenant: Int) {
         historyUseCase("reports-$idCondominium")
             .whereEqualTo("tenant.id", idTenant)
+            .orderBy("paymentDate", Query.Direction.DESCENDING)
             .addSnapshotListener { value, e ->
                 when (val response = value?.toHistory()) {
                     null -> _error.postValue(e)
@@ -59,7 +61,7 @@ class HistoryUserViewModel(
     }
 
     fun getAllPixAttemps(tenantCpf: String) = viewModelScope.launch {
-        when (val response = getAllPixAttempts(tenantCpf)) {
+        when (val response = userGetAllPixAttempts(tenantCpf)) {
             is ResultWrapper.Success -> _pixAttempts.postValue(response.content.cobs)
             is ResultWrapper.Error -> Log.d(
                 "ERROR",

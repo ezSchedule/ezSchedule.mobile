@@ -2,12 +2,14 @@ package com.ezschedule.ezschedule.data.di
 
 import android.content.Context
 import com.ezschedule.admin.data.repository.NotificationRepository
+import com.ezschedule.admin.data.repository.PixRepository
 import com.ezschedule.admin.data.repository.ScheduleRepository
 import com.ezschedule.admin.data.repository.ServiceRepository
 import com.ezschedule.admin.domain.useCase.CalendarUseCase
 import com.ezschedule.admin.domain.useCase.CreateServiceUseCase
 import com.ezschedule.admin.domain.useCase.DashboardUseCase
 import com.ezschedule.admin.domain.useCase.ForumUseCase
+import com.ezschedule.admin.domain.useCase.GetAllPixAttempts
 import com.ezschedule.admin.domain.useCase.GetServiceListUseCase
 import com.ezschedule.admin.domain.useCase.GetTenantsListUseCase
 import com.ezschedule.admin.domain.useCase.HistoryUseCase
@@ -37,7 +39,7 @@ import com.ezschedule.network.data.api.ScheduleEndpoint
 import com.ezschedule.network.data.api.ServicesEndpoint
 import com.ezschedule.network.data.api.TenantEndpoint
 import com.ezschedule.network.data.network.NetworkServiceFactory
-import com.ezschedule.user.data.repository.PixRepository
+import com.ezschedule.user.data.repository.PixUserRepository
 import com.ezschedule.user.data.repository.SaloonUserRepository
 import com.ezschedule.user.data.repository.ScheduleUserRepository
 import com.ezschedule.user.data.repository.ServiceUserRepository
@@ -45,12 +47,12 @@ import com.ezschedule.user.data.repository.TenantUserRepository
 import com.ezschedule.user.domain.useCase.CalendarUserUseCase
 import com.ezschedule.user.domain.useCase.CreateScheduleUseCase
 import com.ezschedule.user.domain.useCase.FirestoreUseCase
-import com.ezschedule.user.domain.useCase.GetAllPixAttempts
 import com.ezschedule.user.domain.useCase.GetSaloonUseCase
 import com.ezschedule.user.domain.useCase.GetTenantByIdUseCase
 import com.ezschedule.user.domain.useCase.PixUseCase
 import com.ezschedule.user.domain.useCase.ScheduleUserUseCase
 import com.ezschedule.user.domain.useCase.ServiceUserUseCase
+import com.ezschedule.user.domain.useCase.UserGetAllPixAttempts
 import com.ezschedule.user.domain.useCase.ValidateScheduleUseCase
 import com.ezschedule.user.presenter.viewModel.CalendarUserViewModel
 import com.ezschedule.user.presenter.viewModel.ForumUserViewModel
@@ -85,6 +87,7 @@ val moduleMain = module {
     factory { ScheduleUserRepository(get()) }
     factory { SaloonUserRepository(get()) }
     factory { TenantUserRepository(get()) }
+    factory { PixUserRepository(get()) }
     factory { PixRepository(get()) }
 
     factory { SendNotificationUseCase(get()) }
@@ -110,8 +113,9 @@ val moduleMain = module {
     factory { CreateScheduleUseCase(get()) }
     factory { GetTenantByIdUseCase(get()) }
     factory { PixUseCase(get()) }
-    factory { GetAllPixAttempts(get()) }
+    factory { UserGetAllPixAttempts(get()) }
     factory { ValidateScheduleUseCase(get()) }
+    factory { GetAllPixAttempts(get()) }
 
     viewModel { TenantViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get()) }
@@ -125,5 +129,5 @@ val moduleMain = module {
     viewModel { ScheduleUserViewModel(get()) }
     viewModel { CalendarUserViewModel(get()) }
     viewModel { NewDateViewModel(get(), get(), get(), get(), get(), get()) }
-    viewModel { HistoryViewModel(get()) }
+    viewModel { HistoryViewModel(get(), get()) }
 }

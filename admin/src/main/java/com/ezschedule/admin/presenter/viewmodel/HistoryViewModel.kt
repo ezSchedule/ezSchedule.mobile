@@ -1,19 +1,30 @@
 package com.ezschedule.admin.presenter.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.ezschedule.admin.domain.useCase.GetAllPixAttempts
 import com.ezschedule.admin.domain.useCase.HistoryUseCase
 import com.ezschedule.network.data.ext.toHistory
+import com.ezschedule.network.data.network.wrapper.ResultWrapper
+import com.ezschedule.network.domain.data.PixCobData
 import com.ezschedule.network.domain.presentation.HistoryPresentation
 import com.ezschedule.network.domain.presentation.TenantPresentation
+import com.google.firebase.firestore.Query
+import kotlinx.coroutines.launch
 
 class HistoryViewModel(
-    private val historyUseCase: HistoryUseCase
+    private val historyUseCase: HistoryUseCase,
+    private val getAllPixAttempts: GetAllPixAttempts,
 ) : ViewModel() {
 
     private var _historyList = MutableLiveData<List<HistoryPresentation>>()
     val historyList: LiveData<List<HistoryPresentation>> = _historyList
+
+    private var _pixAttempts = MutableLiveData<List<PixCobData>>()
+    val pixAttempts: LiveData<List<PixCobData>> = _pixAttempts
 
     private var _empty = MutableLiveData<Unit>()
     val empty: LiveData<Unit> = _empty
@@ -30,6 +41,7 @@ class HistoryViewModel(
     fun getAllPaymentsByCondominium(id: Int) {
         historyUseCase("reports-$id")
             .whereEqualTo("condominiumId", id)
+            .orderBy("paymentDate",Query.Direction.DESCENDING)
             .addSnapshotListener { value, e ->
                 when (val response = value?.toHistory()) {
                     null -> _error.postValue(e)
@@ -42,5 +54,34 @@ class HistoryViewModel(
                     }
                 }
             }
+    }
+
+    fun getAllPixAttemps() = viewModelScope.launch {
+        when (val response = getAllPixAttempts()) {
+            is ResultWrapper.Success -> _pixAttempts.postValue(response.content.cobs)
+            is ResultWrapper.Error -> Log.d(
+                "ERROR",
+                "erro na requisição de todos pagamentos ${response.error}"
+            )
+
+        }
+    }
+
+    fun updateHistoryWPixInfo() {
+        val historyList = historyList.value?.filter { it.paymentStatus.equals("ATIVO") }
+        val pixList = pixAttempts.value?.filter { it.status.equals("CONCLUIDA") }
+
+        historyList?.forEach { history ->
+            pixList?.forEach { pix ->
+                if (history.id.equals(pix.txid)) {
+                    history.paymentStatus = "PAGO"
+                    history.paymentDate = pix.pix?.get(0)?.horario
+                    history.invoiceNumber = pix.pix?.get(0)?.endToEndId
+                    historyUseCase("reports-${user.value?.idCondominium}").document(pix.txid)
+                        .set(history)
+                    Log.d("PIX","${pix.txid} foi atualizado")
+                }
+            }
+        }
     }
 }

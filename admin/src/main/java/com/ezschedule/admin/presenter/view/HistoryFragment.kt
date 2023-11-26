@@ -19,12 +19,6 @@ class HistoryFragment : Fragment() {
     private lateinit var binding: FragmentHistoryBinding
     private val viewmodel by viewModel<HistoryViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setObservers()
-        viewmodel.setUser(SharedPreferencesManager(requireContext()).getInfo())
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -34,29 +28,40 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setObservers()
+        viewmodel.setUser(SharedPreferencesManager(requireContext()).getInfo())
         isLoading(true)
         setSearchView()
     }
 
+
     private fun setObservers() = with(viewmodel) {
-        user.observe(this@HistoryFragment) {
+        user.observe(viewLifecycleOwner) {
             getAllPaymentsByCondominium(it.idCondominium)
+            binding.swipeRefresh.setOnRefreshListener {
+                getAllPixAttemps()
+            }
         }
 
-        historyList.observe(this@HistoryFragment) {
+        historyList.observe(viewLifecycleOwner) {
             isThereContent(true)
             binding.fragRvHistory.adapter = setAdapter(it)
             isLoading(false)
         }
 
-        empty.observe(this@HistoryFragment) {
+        pixAttempts.observe(viewLifecycleOwner) {
+            binding.swipeRefresh.isRefreshing = false
+            updateHistoryWPixInfo()
+        }
+
+        empty.observe(viewLifecycleOwner) {
             isThereContent(false)
             isLoading(false)
         }
-        error.observe(this@HistoryFragment){
+        error.observe(viewLifecycleOwner) {
             isThereContent(false)
             isLoading(false)
-            Log.d("ERROR","error na requisição de histórico")
+            Log.d("ERROR", "error na requisição de histórico $it")
         }
     }
 
@@ -95,7 +100,7 @@ class HistoryFragment : Fragment() {
     }
 
     private fun setAdapter(historyList: List<HistoryPresentation>): HistoryAdapter {
-        return HistoryAdapter(historyList) { history ->
+        return HistoryAdapter(historyList, requireContext()) { history ->
             HistoryBottomSheetFragment(history).show(childFragmentManager, "BottomSheet")
         }
     }

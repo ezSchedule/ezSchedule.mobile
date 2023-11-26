@@ -78,4 +78,7 @@
     <string name="frag_history_text_no_payments">Nenhuma solicitação encontrada</string>
     <string name="frag_service_text_no_service_found">Nenhum serviço encontrado</string>
     <string name="frag_services_et_hint">Digite o serviço...</string>
+    <string name="frag_history_tv_value_currency">R$%.2f</string>
+    <string name="frag_history_payment_made">Pagamento Efetuado</string>
+    <string name="frag_history_payment_pending">Pagamento Pendente</string>
 </resources>

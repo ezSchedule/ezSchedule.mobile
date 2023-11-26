@@ -7,7 +7,7 @@ import com.ezschedule.network.domain.data.PixData
 import com.ezschedule.network.domain.data.PixRequest
 import com.ezschedule.network.domain.response.PixResponse
 
-class PixRepository(private val endpoint: PixEndpoint) {
+class PixUserRepository(private val endpoint: PixEndpoint) {
     suspend fun getPix(pix: PixRequest): ResultWrapper<PixResponse> {
         return requestHandler {
             endpoint.getPix(pix)
@@ -16,7 +16,7 @@ class PixRepository(private val endpoint: PixEndpoint) {
 
     suspend fun getAllPixAttempts(cpf: String): ResultWrapper<PixData> {
         return requestHandler {
-            endpoint.getAllPixAttempts(cpf)
+            endpoint.getAllUserPixAttempts(cpf)
         }
     }
 }

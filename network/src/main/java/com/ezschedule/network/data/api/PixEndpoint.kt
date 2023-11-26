@@ -13,6 +13,9 @@ interface PixEndpoint {
     suspend fun getPix(@Body pix: PixRequest): PixResponse
 
     @GET("pix/list/{cpf}")
-    suspend fun getAllPixAttempts(@Path("cpf") cpf: String): PixData
+    suspend fun getAllUserPixAttempts(@Path("cpf") cpf: String): PixData
+
+    @GET("pix/list")
+    suspend fun getAllPixAttempts(): PixData
 
 }
