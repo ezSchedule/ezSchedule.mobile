@@ -45,9 +45,9 @@ class ScheduleUserFragment : Fragment() {
             setupLoading(false)
         }
         empty.observe(viewLifecycleOwner) {
-            binding.btnFinal.isVisible = false
-            Toast.makeText(requireContext(), "Empty", Toast.LENGTH_LONG).show()
+            setupViewPager(emptyList())
             setupLoading(false)
+            binding.btnFinal.isVisible = false
         }
         error.observe(viewLifecycleOwner) {
             binding.btnFinal.isVisible = false
