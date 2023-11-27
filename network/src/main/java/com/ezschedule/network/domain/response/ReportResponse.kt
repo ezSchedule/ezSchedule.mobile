@@ -4,6 +4,7 @@ data class ReportResponse(
     var id: String,
     val productName: String,
     val paymentStatus: String,
+    var paymentDate: String,
     val invoiceNumber: String,
     val condominiumId: Int,
     var qrCode: String,

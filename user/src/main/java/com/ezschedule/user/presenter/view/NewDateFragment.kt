@@ -137,6 +137,7 @@ class NewDateFragment : Fragment() {
             scheduleCreated.value!!.id = pixResponse.id
             scheduleCreated.value!!.imageQrcode = pixResponse.imageQrcode
             scheduleCreated.value!!.qrCode = pixResponse.qrcode
+            scheduleCreated.value!!.paymentDate = ""
 
 
             viewModel.createReport(scheduleCreated.value!!)
