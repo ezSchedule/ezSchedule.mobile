@@ -1,11 +1,14 @@
 package com.ezschedule.user.presenter.view
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -20,6 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
 
 class NewDateFragment : Fragment() {
     private lateinit var binding: FragmentNewDateBinding
@@ -76,6 +80,11 @@ class NewDateFragment : Fragment() {
     private fun setupClickOnPaymentScreen() = with(binding.includePayment) {
         btnCancel.setOnClickListener {
             setupLayout(true)
+        }
+        ibClipboard.setOnClickListener {
+            val clipboard = getSystemService(requireContext(), ClipboardManager::class.java)
+            val clip = ClipData.newPlainText("label", tvCode.text)
+            clipboard?.setPrimaryClip(clip)
         }
     }
 
