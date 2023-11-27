@@ -1,6 +1,5 @@
 package com.ezschedule.admin.presenter.view
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -141,9 +140,6 @@ class DashboardFragment : Fragment() {
 
     private fun setupLoading(isLoading: Boolean) = with(binding) {
         fragDashClChart.isVisible = isLoading.not()
-        includeLoading.apply {
-            isVisible = isLoading
-            setBackgroundColor(Color.TRANSPARENT)
-        }
+        includeLoading.isVisible = isLoading
     }
 }

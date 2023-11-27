@@ -26,6 +26,12 @@ class CalendarViewModel(private val useCase: CalendarUseCase) : ViewModel() {
     private var _error = MutableLiveData<Exception>()
     val error: LiveData<Exception> = _error
 
+    private var _notBlank = MutableLiveData<Unit>()
+    val notBlank: LiveData<Unit> = _notBlank
+
+    private var _blank = MutableLiveData<Unit>()
+    val blank: LiveData<Unit> = _blank
+
     fun getEvents(idCondominium: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             when (val response = useCase.execute(idCondominium)) {
@@ -43,7 +49,17 @@ class CalendarViewModel(private val useCase: CalendarUseCase) : ViewModel() {
         }
     }
 
-    fun sendCancelDay(schedule: ScheduleData) {
+    fun getColorEvent(isCanceled: Boolean) = if (isCanceled) red else light_white
+
+    fun verifyField(text: String, date: String, id: Int) {
+        if (text.isBlank()) _blank.value = Unit
+        else {
+            _notBlank.value = Unit
+            sendCancelDay(ScheduleData.cancelDay(reason = text, date = date, idTenant = id))
+        }
+    }
+
+    private fun sendCancelDay(schedule: ScheduleData) {
         viewModelScope.launch(Dispatchers.IO) {
             when (val response = useCase.cancelDate(schedule)) {
                 is ResultWrapper.Success -> _successfulCancellation.postValue(Unit)
@@ -52,6 +68,4 @@ class CalendarViewModel(private val useCase: CalendarUseCase) : ViewModel() {
             }
         }
     }
-
-    fun getColorEvent(isCanceled: Boolean) = if (isCanceled) red else light_white
 }

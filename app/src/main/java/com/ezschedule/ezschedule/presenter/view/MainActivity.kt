@@ -2,7 +2,6 @@ package com.ezschedule.ezschedule.presenter.view
 
 import android.os.Build
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +14,6 @@ import com.ezschedule.ezschedule.R
 import com.ezschedule.ezschedule.databinding.ActivityMainBinding
 import com.ezschedule.ezschedule.presenter.utils.TokenManager
 import com.ezschedule.ezschedule.presenter.viewModel.MainViewModel
-import com.ezschedule.network.domain.presentation.TenantPresentation
 import com.ezschedule.utils.SharedPreferencesManager
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.ktx.Firebase
@@ -27,12 +25,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var popupMenu: PopupMenu
     private val viewModel by viewModel<MainViewModel>()
-    private lateinit var user: TenantPresentation
+    private val user by lazy {
+        SharedPreferencesManager(this).getInfo()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        user = SharedPreferencesManager(this).getInfo()
         setContentView(binding.root)
         setupObservers()
         setupPopupMenu()
@@ -41,11 +40,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        TokenManager(this).getToken()?.let { token ->
-            TokenManager(this).decoded(token) { email ->
-                setupDialogLogout(email)
+        with(TokenManager(this)) {
+            getToken()?.let { token ->
+                decoded(token) { email ->
+                    setupDialogLogout(email)
+                }
+                viewModel.validateIsAdmin(user.isAdmin)
+                setImageUser(user.image)
             }
-            viewModel.validateIsAdmin(user.isAdmin)
         }
         Firebase.messaging.subscribeToTopic("conversations-${user.idCondominium}")
     }
@@ -65,7 +67,6 @@ class MainActivity : AppCompatActivity() {
         with(binding) {
             bottomNavigation.isVisible = isVisible
             includeToolbar.root.isVisible = isVisible
-            setImageUser(includeToolbar.ivUser)
         }
     }
 
@@ -130,12 +131,12 @@ class MainActivity : AppCompatActivity() {
             .navigate(navigationId)
     }
 
-    private fun setImageUser(imageView: ImageView) {
-        viewModel.getImage(SharedPreferencesManager(this).getInfo().image)?.let {
+    fun setImageUser(image: String?) {
+        image?.let {
             Glide.with(this)
                 .load(it)
                 .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                .into(imageView)
+                .into(binding.includeToolbar.ivUser)
         }
     }
 
@@ -144,6 +145,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        super.onBackPressed()
         finish()
     }
 

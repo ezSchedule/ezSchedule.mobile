@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Calendar Screen -->
+    <string name="frag_calendar_tv_legend_marked">Marcados</string>
+    <string name="frag_calendar_tv_legend_today">Dia de hoje</string>
+    <string name="frag_calendar_tv_legend_canceled">Cancelados</string>
+
     <!-- Forum Screen -->
     <string name="frag_forum_tv_empty">Nenhum post encontrado</string>
 
@@ -9,4 +14,50 @@
     <string name="frag_services_label_block">Bloco</string>
     <string name="frag_services_label_phone">Telefone</string>
     <string name="frag_services_tv_empty">Nenhum serviço encontrado.</string>
+
+    <!-- Schedules Screen -->
+    <string name="frag_schedule_tv_whole_day">O dia todo</string>
+    <string name="frag_schedule_tv_people_value">%d Convidados</string>
+    <string name="frag_schedule_btn_back">Botão voltar</string>
+    <string name="frag_schedule_btn_next">Próximo</string>
+    <string name="frag_schedule_tv_title_new_date">Nova data</string>
+    <string name="frag_schedule_edt_label_event_name">Nome do evento</string>
+    <string name="frag_schedule_edt_label_event_type">Tipo de evento</string>
+    <string name="frag_schedule_edt_label_event_date">Data do evento</string>
+    <string name="frag_schedule_edt_label_saloon">Escolher salão</string>
+    <string name="frag_schedule_edt_label_quantity_guests">Quantidade de convidados</string>
+    <string name="frag_schedule_edt_label_value">Valor: </string>
+    <string name="frag_schedule_tv_pix">Pix</string>
+    <string name="frag_schedule_iv_description">QR Code</string>
+    <string name="frag_schedule_btn_cancel">Cancelar</string>
+    <string name="frag_schedule_text_copied">Texto copiado para a área de transferência</string>
+
+    <!-- History Screen -->
+    <string name="frag_user_history_no_requests">Nenhum pagamento encontrado.</string>
+    <string name="frag_history_payment_made">Pagamento efetuado</string>
+    <string name="frag_history_accept_img_desc">Imagem aceito</string>
+    <string name="frag_history_error_img_desc">Imagem erro</string>
+    <string name="frag_history_payment_pending">Pagamento pendente</string>
+    <string name="frag_history_tv_label_saloon">Salão:</string>
+    <string name="frag_history_tv_label_name">Nome do morador</string>
+    <string name="frag_history_tv_label_block">Bloco do morador</string>
+    <string name="frag_history_tv_label_apartment">Nº Apartamento</string>
+    <string name="frag_history_tv_label_phone">Telefone</string>
+    <string name="frag_history_tv_label_category">Categoria</string>
+    <string name="frag_history_tv_label_event_block">Bloco do evento</string>
+    <string name="frag_history_tv_label_date">Data</string>
+    <string name="frag_history_tv_label_value">Valor</string>
+    <string name="frag_history_tv_value_currency">R$%.2f</string>
+    <string name="frag_history_btn_pix">Pix</string>
+
+    <!-- New Date Screen   -->
+    <array name="list_events">
+        <item>Aniversário</item>
+        <item>Festa</item>
+        <item>Palestra</item>
+        <item>Encontro</item>
+        <item>Fitness</item>
+        <item>Outros</item>
+    </array>
+
 </resources>

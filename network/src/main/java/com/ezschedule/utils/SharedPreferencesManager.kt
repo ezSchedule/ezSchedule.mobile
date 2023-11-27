@@ -13,6 +13,7 @@ class SharedPreferencesManager(context: Context) {
         editor.putString(USER_EMAIL, tenant.email)
         editor.putString(USER_NAME, tenant.name)
         editor.putString(USER_IMAGE, tenant.image)
+        editor.putString(USER_CPF, tenant.cpf)
         editor.putBoolean(USER_IS_ADMIN, tenant.isAdmin)
         editor.putString(USER_TOKEN, tenant.tokenJWT)
         editor.putInt(USER_ID_CONDOMINIUM, tenant.idCondominium)
@@ -24,6 +25,7 @@ class SharedPreferencesManager(context: Context) {
         email = prefs.getString(USER_EMAIL, null) ?: "",
         name = prefs.getString(USER_NAME, null) ?: "",
         image = prefs.getString(USER_IMAGE, null) ?: "",
+        cpf = prefs.getString(USER_CPF, null) ?: "",
         isAdmin = prefs.getBoolean(USER_IS_ADMIN, false),
         tokenJWT = prefs.getString(USER_TOKEN, null) ?: "",
         idCondominium = prefs.getInt(USER_ID_CONDOMINIUM, 0)
@@ -34,6 +36,7 @@ class SharedPreferencesManager(context: Context) {
         editor.remove(USER_ID)
         editor.remove(USER_EMAIL)
         editor.remove(USER_NAME)
+        editor.remove(USER_CPF)
         editor.remove(USER_IMAGE)
         editor.remove(USER_ID_CONDOMINIUM)
         editor.remove(USER_IS_ADMIN)
@@ -49,5 +52,6 @@ class SharedPreferencesManager(context: Context) {
         private const val USER_IMAGE = "user_image"
         private const val USER_IS_ADMIN = "user_is_admin"
         private const val USER_ID_CONDOMINIUM = "user_id_condominium"
+        private const val USER_CPF = "user_cpf"
     }
 }

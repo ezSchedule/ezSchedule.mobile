@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_item_schedule">
+
+    <TextView
+        android:id="@+id/tv_name_salon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_huge"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:gravity="center"
+        android:textAppearance="@style/TitleAppearance"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_largeX"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Salão Magnólia" />
+
+    <TextView
+        android:id="@+id/tv_name_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_large"
+        android:gravity="center"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_large"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_salon"
+        tools:text="Festa da Gaby" />
+
+    <ImageView
+        android:id="@+id/iv_icon_clock"
+        android:layout_width="@dimen/size_large"
+        android:layout_height="@dimen/size_large"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_huge"
+        android:src="@drawable/ic_clock"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_event"
+        app:tint="@color/gray"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_period_event"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:maxLines="2"
+        android:text="@string/frag_schedule_tv_whole_day"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_standard"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/iv_icon_clock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_icon_clock"
+        app:layout_constraintTop_toTopOf="@id/iv_icon_clock" />
+
+    <ImageView
+        android:id="@+id/iv_icon_calendar"
+        android:layout_width="@dimen/size_large"
+        android:layout_height="@dimen/size_large"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:src="@drawable/ic_calendar"
+        app:layout_constraintBottom_toTopOf="@id/iv_icon_people"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_icon_clock"
+        app:tint="@color/gray"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_date_event"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:maxLines="2"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_standard"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/iv_icon_calendar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_icon_calendar"
+        app:layout_constraintTop_toTopOf="@id/iv_icon_calendar"
+        tools:text="Segunda, 13 de Março" />
+
+    <ImageView
+        android:id="@+id/iv_icon_people"
+        android:layout_width="@dimen/size_large"
+        android:layout_height="@dimen/size_large"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginBottom="@dimen/spacing_huge"
+        android:src="@drawable/ic_people"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="@color/gray"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_people_event"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:maxLines="2"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size_standard"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/iv_icon_people"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_icon_people"
+        app:layout_constraintTop_toTopOf="@id/iv_icon_people"
+        tools:text="21 Convidados." />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

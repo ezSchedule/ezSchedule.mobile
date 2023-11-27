@@ -2,10 +2,7 @@ package com.ezschedule.network.data.api
 
 import com.ezschedule.network.domain.data.ServiceData
 import com.ezschedule.network.domain.data.ServiceRequest
-import com.ezschedule.network.domain.data.TenantData
 import com.ezschedule.network.domain.data.TenantServiceData
-import com.ezschedule.network.domain.presentation.ServicePresentation
-import com.ezschedule.network.domain.response.TenantResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

@@ -1,4 +1,4 @@
-package com.ezschedule.admin.presenter.utils
+package com.ezschedule.utils
 
 import com.squareup.timessquare.CalendarPickerView.OnDateSelectedListener
 import java.util.Date
