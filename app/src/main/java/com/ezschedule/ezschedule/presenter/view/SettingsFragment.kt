@@ -35,6 +35,7 @@ class SettingsFragment : Fragment() {
     private val viewModel by viewModel<SettingsViewModel>()
     private lateinit var userInfo: TenantPresentation
     private lateinit var dialog: BottomSheetDialog
+    private var isOnInclude = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,19 +78,23 @@ class SettingsFragment : Fragment() {
 
         tenantSettings.observe(viewLifecycleOwner) {
             setupLayoutProfile()
-            val updatedUser = viewModel.tenantSettings.value!!
 
-            SharedPreferencesManager(requireContext()).saveInfo(
-                TenantPresentation(
-                    id = userInfo.id,
-                    email = updatedUser.email,
-                    name = updatedUser.fullName,
-                    image = updatedUser.image ?: "",
-                    isAdmin = userInfo.isAdmin,
-                    tokenJWT = userInfo.tokenJWT,
-                    idCondominium = userInfo.idCondominium
+            with(SharedPreferencesManager(requireContext())) {
+                saveInfo(
+                    TenantPresentation(
+                        id = userInfo.id,
+                        email = it.email,
+                        name = it.fullName,
+                        image = it.image ?: "",
+                        cpf = it.cpf,
+                        isAdmin = userInfo.isAdmin,
+                        tokenJWT = userInfo.tokenJWT,
+                        idCondominium = userInfo.idCondominium
+                    )
                 )
-            )
+
+                userInfo = getInfo()
+            }
         }
 
         condominiumSettings.observe(viewLifecycleOwner) {
@@ -104,6 +109,7 @@ class SettingsFragment : Fragment() {
             ).show()
             setupLoading(true)
             viewModel.getTenantInfo(userInfo.id)
+            activity.setImageUser(userInfo.image)
         }
 
         viewModel.saloonCreated.observe(viewLifecycleOwner) {
@@ -116,8 +122,17 @@ class SettingsFragment : Fragment() {
 
     private fun setupButtonClick() = with(binding) {
         fragSettingsBtnBack.setOnClickListener {
-            findNavController().popBackStack()
-            activity.displayLoginItems(isVisible = true)
+            if (isOnInclude && userInfo.isAdmin) {
+                fragSettingsBtnSave.isVisible = false
+                fragSettingsBtnBack.isVisible = true
+                includeSettingsProfile.root.isVisible = false
+                includeSettingsCondominium.root.isVisible = false
+                includeSettingsHome.root.isVisible = true
+                isOnInclude = false
+            } else {
+                findNavController().popBackStack()
+                activity.displayLoginItems(isVisible = true)
+            }
         }
         fragSettingsBtnSave.setOnClickListener {
             updateTenant()
@@ -146,6 +161,7 @@ class SettingsFragment : Fragment() {
         }
         binding.fragSettingsGroupButtons.isVisible = true
         root.isVisible = true
+        isOnInclude = true
         setupLoading(false)
     }
 
@@ -160,6 +176,7 @@ class SettingsFragment : Fragment() {
         }
         binding.fragSettingsBtnBack.isVisible = true
         root.isVisible = true
+        isOnInclude = true
         setupLoading(false)
     }
 
@@ -218,7 +235,7 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    private fun setPickUpMedia(){
+    private fun setPickUpMedia() {
         pickUpMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
             it?.let {
                 Glide.with(requireContext())

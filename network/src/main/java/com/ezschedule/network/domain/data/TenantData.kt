@@ -19,7 +19,7 @@ data class TenantData(
     val apartmentNumber: Int?,
     @SerializedName("phoneNumber")
     val phoneNumber: String?,
-    @SerializedName("nameBlobImage")
+    @SerializedName("image")
     val image: String?,
     @SerializedName("isAuthenticated")
     val isAuthenticated: Boolean?,

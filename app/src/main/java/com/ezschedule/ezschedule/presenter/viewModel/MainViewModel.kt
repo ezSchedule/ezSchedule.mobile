@@ -44,11 +44,6 @@ class MainViewModel(
         else -> logoutTenant(email)
     }
 
-    fun getImage(image: String): String? {
-        if (image.isNotEmpty()) return image
-        return null
-    }
-
     fun validateIsAdmin(admin: Boolean) {
         if (admin) _setLocationAndMenu.value = Pair(R.id.action_to_calendar, R.menu.menu_admin)
         else _setLocationAndMenu.value = Pair(R.id.action_to_calendar_user, R.menu.menu_user)

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground">
+
+    <include
+        android:id="@+id/include_info"
+        layout="@layout/view_schedule_info" />
+
+    <include
+        android:id="@+id/include_payment"
+        layout="@layout/view_schedule_payment"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/include_loading"
+        layout="@layout/view_progress_loading"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

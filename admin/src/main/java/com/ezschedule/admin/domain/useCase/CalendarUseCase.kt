@@ -6,11 +6,8 @@ import com.ezschedule.network.domain.data.ScheduleData
 import com.ezschedule.network.domain.response.SchedulesResponse
 
 class CalendarUseCase(private val repository: ScheduleRepository) {
-    suspend fun execute(id: Int): ResultWrapper<SchedulesResponse> {
-        return repository.getSchedules(id)
-    }
+    suspend fun execute(id: Int): ResultWrapper<SchedulesResponse> = repository.getSchedules(id)
 
-    suspend fun cancelDate(schedule: ScheduleData): ResultWrapper<Unit> {
-        return repository.sendCanceledDay(schedule)
-    }
+    suspend fun cancelDate(schedule: ScheduleData): ResultWrapper<Unit> =
+        repository.sendCanceledDay(schedule)
 }

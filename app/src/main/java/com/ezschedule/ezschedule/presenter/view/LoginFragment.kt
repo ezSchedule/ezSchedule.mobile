@@ -46,6 +46,7 @@ class LoginFragment : Fragment() {
             loginSuccess.observe(viewLifecycleOwner) {
                 savingInfoSharedPref(it)
                 validateIsAdmin(it.isAdmin)
+                activity.setImageUser(it.image)
             }
             setLocationAndMenu.observe(viewLifecycleOwner) {
                 findNavController().navigate(it.first)
@@ -76,6 +77,7 @@ class LoginFragment : Fragment() {
                 email = it.email,
                 name = it.name,
                 image = it.image,
+                cpf = it.cpf,
                 isAdmin = it.isAdmin,
                 tokenJWT = it.tokenJWT,
                 idCondominium = it.idCondominium

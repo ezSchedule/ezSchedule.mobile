@@ -1,7 +1,6 @@
 package com.ezschedule.user.presenter.view
 
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -88,10 +87,7 @@ class ForumUserFragment : Fragment() {
     private fun setupLoading(isLoading: Boolean) = with(binding) {
         includeForumChat.root.isVisible = isLoading.not()
         fragForumGroupButtons.isVisible = isLoading.not()
-        includeLoading.apply {
-            isVisible = isLoading
-            setBackgroundColor(Color.TRANSPARENT)
-        }
+        includeLoading.isVisible = isLoading
     }
 
     private fun setBackgroundColor(id: Int, color: Int) {

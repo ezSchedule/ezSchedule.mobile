@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_ezschedule"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <ImageView
+        android:id="@+id/iv_lower"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:scaleType="centerCrop"
+        android:src="@drawable/lower"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_status_payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_standard"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_large"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/iv_lower"
+        tools:text="Pagamento Efetuado" />
+
+    <ImageView
+        android:id="@+id/iv_payment_status"
+        android:layout_width="48dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="@dimen/spacing_standard"
+        android:src="@drawable/correct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_status_payment"
+        tools:ignore="ContentDescription" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/md_divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_payment_status" />
+
+    <TextView
+        android:id="@+id/tv_label_tenant_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/size_small"
+        android:text="@string/frag_history_tv_label_name"
+        android:textAppearance="@style/SubTitleAppearance"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/md_divider" />
+
+    <TextView
+        android:id="@+id/tv_tenant_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/size_small"
+        android:textColor="@color/grayVariant"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/md_divider"
+        tools:text="Travis Scott" />
+
+    <TextView
+        android:id="@+id/tv_label_tenant_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/size_small"
+        android:text="@string/frag_history_tv_label_block"
+        android:textAppearance="@style/SubTitleAppearance"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_label_tenant_name" />
+
+    <TextView
+        android:id="@+id/tv_tenant_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/size_small"
+        android:textColor="@color/grayVariant"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tenant_name"
+        tools:text="2B" />
+
+    <TextView
+        android:id="@+id/tv_label_tenant_apartment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/size_small"
+        android:text="@string/frag_history_tv_label_apartment"
+        android:textAppearance="@style/SubTitleAppearance"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_label_tenant_unit" />
+
+    <TextView
+        android:id="@+id/tv_tenant_apartment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/size_small"
+        android:textColor="@color/grayVariant"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tenant_unit"
+        tools:text="28" />
+
+    <TextView
+        android:id="@+id/tv_label_tenant_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/size_small"
+        android:text="@string/frag_history_tv_label_phone"
+        android:textAppearance="@style/SubTitleAppearance"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tenant_apartment" />
+
+    <TextView
+        android:id="@+id/tv_tenant_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/size_small"
+        android:textColor="@color/grayVariant"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tenant_apartment"
+        tools:text="11 955555550" />
+
+    <TextView
+        android:id="@+id/tv_label_event_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/size_small"
+        android:text="@string/frag_history_tv_label_category"
+        android:textAppearance="@style/SubTitleAppearance"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_label_tenant_phone" />
+
+    <TextView
+        android:id="@+id/tv_event_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/size_small"
+        android:textColor="@color/grayVariant"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tenant_phone"
+        tools:text="Aniversário" />
+
+    <TextView
+        android:id="@+id/tv_label_event_block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/size_small"
+        android:text="@string/frag_history_tv_label_event_block"
+        android:textAppearance="@style/SubTitleAppearance"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_label_event_category" />
+
+    <TextView
+        android:id="@+id/tv_event_block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/size_small"
+        android:textColor="@color/grayVariant"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_event_category"
+        tools:text="3C" />
+
+    <TextView
+        android:id="@+id/tv_label_event_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/size_small"
+        android:text="@string/frag_history_tv_label_date"
+        android:textAppearance="@style/SubTitleAppearance"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_label_event_block" />
+
+    <TextView
+        android:id="@+id/tv_event_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/size_small"
+        android:textColor="@color/grayVariant"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_event_block"
+        tools:text="28/03" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/md_divider_secondary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_label_event_data" />
+
+    <TextView
+        android:id="@+id/tv_label_event_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_standard"
+        android:text="@string/frag_history_tv_label_value"
+        android:textAppearance="@style/SubTitleAppearance"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/btn_payment_pix"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/md_divider_secondary"
+        app:layout_goneMarginBottom="@dimen/spacing_standard" />
+
+    <TextView
+        android:id="@+id/tv_event_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:textColor="@color/grayVariant"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tv_label_event_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_label_event_price"
+        tools:text="R$110,00" />
+
+    <Button
+        android:id="@+id/btn_payment_pix"
+        style="@style/ButtonEzSchedule"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginVertical="@dimen/spacing_standard"
+        android:text="@string/frag_history_btn_pix"
+        android:textAppearance="@style/ButtonAppearance"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_label_event_price"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tv_status_payment,iv_payment_status,md_divider,tv_label_tenant_name,
+        tv_tenant_name,tv_label_tenant_unit,tv_tenant_unit,tv_label_event_block,tv_event_block,
+        tv_label_tenant_apartment,tv_tenant_apartment,tv_label_tenant_phone,tv_tenant_phone,
+        tv_label_event_category,tv_event_category,tv_label_event_data,tv_event_data,
+        md_divider_secondary,tv_label_event_price,tv_event_price" />
+
+    <include
+        android:id="@+id/include_pix"
+        layout="@layout/view_schedule_payment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/iv_lower" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
