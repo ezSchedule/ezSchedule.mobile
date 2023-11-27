@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:text="@string/frag_services_tv_empty"
             android:textSize="@dimen/size_small"
+            android:textColor="@color/colorVariant"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
