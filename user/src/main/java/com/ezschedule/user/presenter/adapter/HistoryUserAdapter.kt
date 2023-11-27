@@ -37,7 +37,7 @@ class HistoryUserAdapter(
         }
 
         fun bind() = with(binding) {
-            tvHistoryName.text = historyData().tenant.name
+            tvHistoryName.text = historyData().schedule.nameEvent
             tvHistorySaloonName.text = historyData().saloon.name
             tvHistorySaloonValue.text = context.getString(R.string.frag_history_tv_value_currency,historyData().saloon.saloonPrice)
             fragHistoryImgAccept.isVisible = historyData().paymentStatus.equals("PAGO")
