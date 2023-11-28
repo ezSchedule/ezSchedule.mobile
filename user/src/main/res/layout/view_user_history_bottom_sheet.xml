@@ -67,14 +67,18 @@
 
     <TextView
         android:id="@+id/tv_tenant_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_large"
         android:layout_marginTop="@dimen/size_small"
+        android:ellipsize="end"
+        android:gravity="end"
+        android:lines="1"
         android:textColor="@color/grayVariant"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_label_tenant_name"
         app:layout_constraintTop_toBottomOf="@id/md_divider"
         tools:text="Travis Scott" />
 
