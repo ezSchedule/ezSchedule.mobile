@@ -69,7 +69,7 @@ class HistoryViewModel(
 
     fun updateHistoryWPixInfo() {
         val historyList = historyList.value?.filter { it.paymentStatus.equals("ATIVO") }
-        val pixList = pixAttempts.value?.filter { it.status.equals("CONCLUIDA") }
+        val pixList = pixAttempts.value?.filter { it.status == "CONCLUIDA" }
 
         historyList?.forEach { history ->
             pixList?.forEach { pix ->

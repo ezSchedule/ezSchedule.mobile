@@ -118,11 +118,11 @@ class ServicesUserFragment : Fragment() {
 
     private fun setupLoading(isLoading: Boolean) = with(binding) {
         includeLoading.isVisible = isLoading
-        gpLayout.isVisible = isLoading.not()
+        rvService.isVisible = isLoading.not()
     }
 
     private fun setupEmpty(isEmpty: Boolean) = with(binding) {
         tvEmpty.isVisible = isEmpty
-        gpLayout.isVisible = isEmpty.not()
+        rvService.isVisible = isEmpty.not()
     }
 }

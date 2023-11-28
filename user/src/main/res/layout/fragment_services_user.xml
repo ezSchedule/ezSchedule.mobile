@@ -15,7 +15,6 @@
         android:textSize="@dimen/size_small"
         android:textStyle="bold"
         app:iconifiedByDefault="false"
-        app:layout_constraintBottom_toTopOf="@id/rv_service"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -42,18 +41,12 @@
         android:layout_height="wrap_content"
         android:text="@string/frag_services_tv_empty"
         android:textColor="@color/colorVariant"
-        android:textSize="@dimen/size_standard"
+        android:textSize="@dimen/size_small"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/gp_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="sv_service, rv_service" />
 
     <include
         android:id="@+id/include_loading"

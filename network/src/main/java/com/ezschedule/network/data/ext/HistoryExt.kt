@@ -68,7 +68,7 @@ fun HistoryData.toHistoryResponse() = HistoryResponse(
     ),
     schedule = ScheduleHistoryResponse(
         id = schedule.id ?: 0,
-        nameEvent = schedule.typeEvent ?: "",
+        nameEvent = schedule.nameEvent ?: "",
         typeEvent = schedule.typeEvent ?: "",
         totalNumberGuests = schedule.totalNumberGuests ?: 0,
         isCanceled = schedule.isCanceled ?: true,

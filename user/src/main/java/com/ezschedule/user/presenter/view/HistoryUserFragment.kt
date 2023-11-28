@@ -149,8 +149,11 @@ class HistoryUserFragment : Fragment() {
         tvEventBlock.text = history.saloon.blockEvent
         tvEventPrice.text =
             getString(R.string.frag_history_tv_value_currency, history.saloon.saloonPrice)
-        tvEventData.text = history.paymentDate?.substring(0, 19)?.replace("T", " ")
-
+        history.paymentDate?.isNotEmpty()?.let {
+            if (it) {
+                tvEventData.text = history.paymentDate?.substring(0, 19)?.replace("T", " ")
+            }
+        }
     }
 
     private fun displayPaymentScreen(history: HistoryPresentation) = with(bottomSheetBinding) {
