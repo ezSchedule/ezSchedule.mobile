@@ -4,15 +4,14 @@ import com.ezschedule.network.domain.presentation.HistoryPresentation
 import com.ezschedule.network.domain.presentation.SaloonHistoryPresentation
 import com.ezschedule.network.domain.presentation.ScheduleHistoryPresentation
 import com.ezschedule.network.domain.presentation.TenantHistoryPresentation
-import com.google.firebase.Timestamp
 
 data class HistoryResponse(
     val id: String?,
     val invoiceNumber: String?,
     val paymentStatus: String?,
     val productName: String?,
-    val qrCode:String?,
-    val imageQrcode:String?,
+    val qrCode: String?,
+    val imageQrcode: String?,
     val condominiumId: Int?,
     val paymentDate: String?,
     val saloon: SaloonHistoryResponse,
