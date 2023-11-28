@@ -10,8 +10,8 @@ import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.data.PixCobData
 import com.ezschedule.network.domain.presentation.HistoryPresentation
 import com.ezschedule.network.domain.presentation.TenantPresentation
-import com.ezschedule.user.domain.useCase.FirestoreUseCase
-import com.ezschedule.user.domain.useCase.UserGetAllPixAttempts
+import com.ezschedule.network.domain.useCase.firebase.FirestoreUseCase
+import com.ezschedule.network.domain.useCase.pix.UserGetAllPixAttempts
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.launch
 
@@ -73,7 +73,7 @@ class HistoryUserViewModel(
 
     fun updateHistoryWPixInfo() {
             val historyList = historyList.value?.filter { it.paymentStatus.equals("ATIVO") }
-            val pixList = pixAttempts.value?.filter { it.status.equals("CONCLUIDA") }
+            val pixList = pixAttempts.value?.filter { it.status == "CONCLUIDA" }
 
             historyList?.forEach { history ->
                 pixList?.forEach { pix ->

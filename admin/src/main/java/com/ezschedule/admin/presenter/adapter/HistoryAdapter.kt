@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.ezschedule.admin.R
+import com.ezschedule.network.R
 import com.ezschedule.admin.databinding.AdapterHistoryBinding
 import com.ezschedule.network.domain.presentation.HistoryPresentation
 

@@ -12,12 +12,12 @@ import com.ezschedule.network.domain.data.ScheduleRequest
 import com.ezschedule.network.domain.response.PixResponse
 import com.ezschedule.network.domain.response.ReportResponse
 import com.ezschedule.network.domain.response.TenantResponse
-import com.ezschedule.user.domain.useCase.CreateScheduleUseCase
-import com.ezschedule.user.domain.useCase.FirestoreUseCase
-import com.ezschedule.user.domain.useCase.GetSaloonUseCase
-import com.ezschedule.user.domain.useCase.GetTenantByIdUseCase
-import com.ezschedule.user.domain.useCase.PixUseCase
-import com.ezschedule.user.domain.useCase.ValidateScheduleUseCase
+import com.ezschedule.network.domain.useCase.schedule.CreateScheduleUseCase
+import com.ezschedule.network.domain.useCase.firebase.FirestoreUseCase
+import com.ezschedule.network.domain.useCase.saloon.GetSaloonUseCase
+import com.ezschedule.network.domain.useCase.tenant.GetTenantByIdUseCase
+import com.ezschedule.network.domain.useCase.pix.PixUseCase
+import com.ezschedule.network.domain.useCase.schedule.ValidateScheduleUseCase
 import kotlinx.coroutines.launch
 
 class NewDateViewModel(

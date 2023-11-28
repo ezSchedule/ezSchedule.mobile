@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ezschedule.network.data.ext.toObject
 import com.ezschedule.network.domain.presentation.PostPresentation
-import com.ezschedule.user.domain.useCase.FirestoreUseCase
+import com.ezschedule.network.domain.useCase.firebase.FirestoreUseCase
 import com.google.firebase.firestore.Query
 import com.sptech.user.R
 

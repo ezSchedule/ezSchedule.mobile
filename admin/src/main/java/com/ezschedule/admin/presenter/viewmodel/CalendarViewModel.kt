@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ezschedule.admin.domain.useCase.CalendarUseCase
+import com.ezschedule.network.domain.useCase.schedule.CalendarUseCase
 import com.ezschedule.network.R.color.light_white
 import com.ezschedule.network.R.color.red
 import com.ezschedule.network.data.network.wrapper.ResultWrapper

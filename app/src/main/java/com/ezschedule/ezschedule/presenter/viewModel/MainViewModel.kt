@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ezschedule.ezschedule.R
-import com.ezschedule.ezschedule.domain.useCase.LogoutUseCase
+import com.ezschedule.network.domain.useCase.tenant.LogoutUseCase
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.utils.ResourceWrapper
 import kotlinx.coroutines.Dispatchers
@@ -28,14 +28,14 @@ class MainViewModel(
     val error: LiveData<String> = _error
 
     fun getTitleScreen(id: Int) = when (id) {
-        R.id.calendarFragment, R.id.calendarUserFragment -> R.string.frag_calendar_name
-        R.id.dashboardFragment -> R.string.frag_dashboard_name
-        R.id.scheduleUserFragment -> R.string.frag_schedule_name
-        R.id.servicesFragment, R.id.servicesUserFragment -> R.string.frag_services_name
-        R.id.paymentFragment, R.id.historyUserFragment -> R.string.frag_payments_name
-        R.id.forumFragment, R.id.forumUserFragment -> R.string.frag_forum_name
-        R.id.settingsFragment -> R.string.frag_settings_name
-        else -> R.string.frag_not_found_name
+        R.id.calendarFragment, R.id.calendarUserFragment -> com.ezschedule.network.R.string.frag_calendar_name
+        R.id.dashboardFragment -> com.ezschedule.network.R.string.frag_dashboard_name
+        R.id.scheduleUserFragment -> com.ezschedule.network.R.string.frag_schedule_name
+        R.id.servicesFragment, R.id.servicesUserFragment -> com.ezschedule.network.R.string.frag_services_name
+        R.id.paymentFragment, R.id.historyUserFragment -> com.ezschedule.network.R.string.frag_payments_name
+        R.id.forumFragment, R.id.forumUserFragment -> com.ezschedule.network.R.string.frag_forum_name
+        R.id.settingsFragment -> com.ezschedule.network.R.string.frag_settings_name
+        else -> com.ezschedule.network.R.string.frag_not_found_name
     }
 
     fun getMenuAction(id: Int, email: String) = when (id) {
@@ -54,7 +54,7 @@ class MainViewModel(
             when (useCase.execute(email)) {
                 is ResultWrapper.Success -> _setLogoutAction.postValue(Unit)
 
-                is ResultWrapper.Error -> resourceWrapper.getString(R.string.bt_logout_error)
+                is ResultWrapper.Error -> resourceWrapper.getString(com.ezschedule.network.R.string.bt_logout_error)
             }
         }
     }

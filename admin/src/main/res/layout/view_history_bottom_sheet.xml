@@ -38,7 +38,8 @@
         android:src="@drawable/correct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:ignore="ContentDescription" />
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/md_divider"
@@ -56,27 +57,29 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_large"
         android:layout_marginTop="@dimen/size_small"
-        android:text="Nome do morador"
+        android:text="@string/frag_history_tv_label_name"
         android:textAppearance="@style/SubTitleAppearance"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/md_divider" />
 
-
     <TextView
         android:id="@+id/tv_tenant_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_large"
         android:layout_marginTop="@dimen/size_small"
+        android:ellipsize="end"
+        android:gravity="end"
+        android:lines="1"
         android:textColor="@color/grayVariant"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_label_tenant_name"
         app:layout_constraintTop_toBottomOf="@id/md_divider"
         tools:text="Travis Scott" />
-
 
     <TextView
         android:id="@+id/tv_label_tenant_unit"
@@ -84,13 +87,12 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_large"
         android:layout_marginTop="@dimen/size_small"
-        android:text="Bloco do morador"
+        android:text="@string/frag_history_tv_label_block"
         android:textAppearance="@style/SubTitleAppearance"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_label_tenant_name" />
-
 
     <TextView
         android:id="@+id/tv_tenant_unit"
@@ -105,20 +107,18 @@
         app:layout_constraintTop_toBottomOf="@id/tv_tenant_name"
         tools:text="2B" />
 
-
     <TextView
         android:id="@+id/tv_label_tenant_apartment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_large"
         android:layout_marginTop="@dimen/size_small"
-        android:text="N° Apartamento"
+        android:text="@string/frag_history_tv_label_apartment"
         android:textAppearance="@style/SubTitleAppearance"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_label_tenant_unit" />
-
 
     <TextView
         android:id="@+id/tv_tenant_apartment"
@@ -131,8 +131,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_tenant_unit"
-        tools:text="28" />
-
+        tools:text="44" />
 
     <TextView
         android:id="@+id/tv_label_tenant_phone"
@@ -140,13 +139,12 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_large"
         android:layout_marginTop="@dimen/size_small"
-        android:text="Celular"
+        android:text="@string/frag_history_tv_label_phone"
         android:textAppearance="@style/SubTitleAppearance"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_tenant_apartment" />
-
 
     <TextView
         android:id="@+id/tv_tenant_phone"
@@ -167,13 +165,12 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_large"
         android:layout_marginTop="@dimen/size_small"
-        android:text="Categoria"
+        android:text="@string/frag_history_tv_label_category"
         android:textAppearance="@style/SubTitleAppearance"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_label_tenant_phone" />
-
 
     <TextView
         android:id="@+id/tv_event_category"
@@ -188,20 +185,18 @@
         app:layout_constraintTop_toBottomOf="@id/tv_tenant_phone"
         tools:text="Aniversário" />
 
-
     <TextView
         android:id="@+id/tv_label_event_block"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_large"
         android:layout_marginTop="@dimen/size_small"
-        android:text="Bloco do evento"
+        android:text="@string/frag_history_tv_label_event_block"
         android:textAppearance="@style/SubTitleAppearance"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_label_event_category" />
-
 
     <TextView
         android:id="@+id/tv_event_block"
@@ -222,13 +217,12 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_large"
         android:layout_marginTop="@dimen/size_small"
-        android:text="Data"
+        android:text="@string/frag_history_tv_label_date"
         android:textAppearance="@style/SubTitleAppearance"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_label_event_block" />
-
 
     <TextView
         android:id="@+id/tv_event_data"
@@ -253,20 +247,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_label_event_data" />
 
-
     <TextView
         android:id="@+id/tv_label_event_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_large"
         android:layout_marginTop="@dimen/spacing_standard"
-        android:text="Valor"
+        android:text="@string/frag_history_tv_label_value"
         android:textAppearance="@style/SubTitleAppearance"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/md_divider_secondary" />
-
 
     <TextView
         android:id="@+id/tv_event_price"

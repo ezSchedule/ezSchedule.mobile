@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ezschedule.admin.R
 import com.ezschedule.admin.databinding.ViewHistoryBottomSheetBinding
+import com.ezschedule.network.R
 import com.ezschedule.network.domain.presentation.HistoryPresentation
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -41,8 +41,13 @@ class HistoryBottomSheetFragment(private val history: HistoryPresentation) :
         tvTenantPhone.text = history.tenant.phoneNumber
         tvEventCategory.text = history.schedule.typeEvent
         tvEventBlock.text = history.saloon.blockEvent
-        tvEventPrice.text = context?.getString(R.string.frag_history_tv_value_currency, history.saloon.saloonPrice)
-        tvEventData.text =  history.paymentDate?.substring(0, 19)?.replace("T", " ")
+        tvEventPrice.text =
+            context?.getString(R.string.frag_history_tv_value_currency, history.saloon.saloonPrice)
+        history.paymentDate?.isNotEmpty()?.let {
+            if (it) {
+                tvEventData.text = history.paymentDate?.substring(0, 19)?.replace("T", " ")
+            }
+        }
     }
 
 }

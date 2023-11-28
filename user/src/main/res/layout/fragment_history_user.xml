@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_small"
-        android:text="@string/frag_user_history_no_requests"
+        android:text="@string/frag_history_no_requests"
         android:textSize="@dimen/size_small"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"

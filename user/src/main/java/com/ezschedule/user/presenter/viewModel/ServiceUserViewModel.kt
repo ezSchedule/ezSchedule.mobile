@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.presentation.ServiceUserPresentation
-import com.ezschedule.user.domain.useCase.ServiceUserUseCase
+import com.ezschedule.network.domain.useCase.service.ServiceUserUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

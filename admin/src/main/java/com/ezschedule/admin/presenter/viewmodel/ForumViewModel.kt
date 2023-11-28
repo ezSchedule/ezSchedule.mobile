@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ezschedule.admin.domain.useCase.ForumUseCase
-import com.ezschedule.admin.domain.useCase.SendNotificationUseCase
+import com.ezschedule.network.domain.useCase.firebase.ForumUseCase
+import com.ezschedule.network.domain.useCase.notification.SendNotificationUseCase
 import com.ezschedule.network.data.ext.toObject
 import com.ezschedule.network.domain.data.CondominiumRequest
 import com.ezschedule.network.domain.data.NotificationRequest

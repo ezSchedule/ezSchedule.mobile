@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ezschedule.network.domain.presentation.SchedulesPresentation
-import com.sptech.user.R
+import com.ezschedule.network.R
 import com.sptech.user.databinding.AdapterAddScheduleBinding
 import com.sptech.user.databinding.AdapterScheduleBinding
 

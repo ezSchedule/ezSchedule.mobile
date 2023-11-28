@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ezschedule.admin.domain.useCase.GetAllPixAttempts
-import com.ezschedule.admin.domain.useCase.HistoryUseCase
+import com.ezschedule.network.domain.useCase.pix.GetAllPixAttempts
+import com.ezschedule.network.domain.useCase.firebase.HistoryUseCase
 import com.ezschedule.network.data.ext.toHistory
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.data.PixCobData

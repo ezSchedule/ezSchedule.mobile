@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.ezschedule.network.R
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.presentation.EventItemPresentation
-import com.ezschedule.user.domain.useCase.CalendarUserUseCase
+import com.ezschedule.network.domain.useCase.schedule.CalendarUserUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

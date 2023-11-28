@@ -1,10 +1,11 @@
 package com.ezschedule.ezschedule.domain.useCase
 
-import com.ezschedule.ezschedule.data.repository.TenantRepository
+import com.ezschedule.network.data.repository.TenantRepository
 import com.ezschedule.ezschedule.fixture.data.TenantRequestFixture
 import com.ezschedule.ezschedule.fixture.response.TenantResponseFixture
 import com.ezschedule.ezschedule.util.CoroutineViewModelTest
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
+import com.ezschedule.network.domain.useCase.tenant.LoginUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals

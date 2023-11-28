@@ -1,33 +1,31 @@
 package com.ezschedule.ezschedule.data.di
 
 import android.content.Context
-import com.ezschedule.admin.data.repository.NotificationRepository
-import com.ezschedule.admin.data.repository.PixRepository
-import com.ezschedule.admin.data.repository.ScheduleRepository
-import com.ezschedule.admin.data.repository.ServiceRepository
-import com.ezschedule.admin.domain.useCase.CalendarUseCase
-import com.ezschedule.admin.domain.useCase.CreateServiceUseCase
-import com.ezschedule.admin.domain.useCase.DashboardUseCase
-import com.ezschedule.admin.domain.useCase.ForumUseCase
-import com.ezschedule.admin.domain.useCase.GetAllPixAttempts
-import com.ezschedule.admin.domain.useCase.GetServiceListUseCase
-import com.ezschedule.admin.domain.useCase.GetTenantsListUseCase
-import com.ezschedule.admin.domain.useCase.HistoryUseCase
-import com.ezschedule.admin.domain.useCase.SendNotificationUseCase
+import com.ezschedule.network.data.repository.NotificationRepository
+import com.ezschedule.network.data.repository.ScheduleRepository
+import com.ezschedule.network.domain.useCase.schedule.CalendarUseCase
+import com.ezschedule.network.domain.useCase.service.CreateServiceUseCase
+import com.ezschedule.network.domain.useCase.schedule.DashboardUseCase
+import com.ezschedule.network.domain.useCase.firebase.ForumUseCase
+import com.ezschedule.network.domain.useCase.pix.GetAllPixAttempts
+import com.ezschedule.network.domain.useCase.service.GetServiceListUseCase
+import com.ezschedule.network.domain.useCase.service.GetTenantsListUseCase
+import com.ezschedule.network.domain.useCase.firebase.HistoryUseCase
+import com.ezschedule.network.domain.useCase.notification.SendNotificationUseCase
 import com.ezschedule.admin.presenter.viewmodel.CalendarViewModel
 import com.ezschedule.admin.presenter.viewmodel.DashboardViewModel
 import com.ezschedule.admin.presenter.viewmodel.ForumViewModel
 import com.ezschedule.admin.presenter.viewmodel.HistoryViewModel
 import com.ezschedule.admin.presenter.viewmodel.ServicesViewModel
-import com.ezschedule.ezschedule.data.repository.CondominiumRepository
-import com.ezschedule.ezschedule.data.repository.SaloonRepository
-import com.ezschedule.ezschedule.data.repository.TenantRepository
-import com.ezschedule.ezschedule.domain.useCase.CreateSaloonUseCase
-import com.ezschedule.ezschedule.domain.useCase.GetCondominiumSettingsUseCase
-import com.ezschedule.ezschedule.domain.useCase.GetTenantSettingsUseCase
-import com.ezschedule.ezschedule.domain.useCase.LoginUseCase
-import com.ezschedule.ezschedule.domain.useCase.LogoutUseCase
-import com.ezschedule.ezschedule.domain.useCase.UpdateTenantSettingsUseCase
+import com.ezschedule.network.data.repository.CondominiumRepository
+import com.ezschedule.network.data.repository.SaloonRepository
+import com.ezschedule.network.data.repository.TenantRepository
+import com.ezschedule.network.domain.useCase.saloon.CreateSaloonUseCase
+import com.ezschedule.network.domain.useCase.condominium.GetCondominiumSettingsUseCase
+import com.ezschedule.network.domain.useCase.tenant.GetTenantSettingsUseCase
+import com.ezschedule.network.domain.useCase.tenant.LoginUseCase
+import com.ezschedule.network.domain.useCase.tenant.LogoutUseCase
+import com.ezschedule.network.domain.useCase.tenant.UpdateTenantSettingsUseCase
 import com.ezschedule.ezschedule.presenter.viewModel.MainViewModel
 import com.ezschedule.ezschedule.presenter.viewModel.SettingsViewModel
 import com.ezschedule.ezschedule.presenter.viewModel.TenantViewModel
@@ -39,21 +37,18 @@ import com.ezschedule.network.data.api.ScheduleEndpoint
 import com.ezschedule.network.data.api.ServicesEndpoint
 import com.ezschedule.network.data.api.TenantEndpoint
 import com.ezschedule.network.data.network.NetworkServiceFactory
-import com.ezschedule.user.data.repository.PixUserRepository
-import com.ezschedule.user.data.repository.SaloonUserRepository
-import com.ezschedule.user.data.repository.ScheduleUserRepository
-import com.ezschedule.user.data.repository.ServiceUserRepository
-import com.ezschedule.user.data.repository.TenantUserRepository
-import com.ezschedule.user.domain.useCase.CalendarUserUseCase
-import com.ezschedule.user.domain.useCase.CreateScheduleUseCase
-import com.ezschedule.user.domain.useCase.FirestoreUseCase
-import com.ezschedule.user.domain.useCase.GetSaloonUseCase
-import com.ezschedule.user.domain.useCase.GetTenantByIdUseCase
-import com.ezschedule.user.domain.useCase.PixUseCase
-import com.ezschedule.user.domain.useCase.ScheduleUserUseCase
-import com.ezschedule.user.domain.useCase.ServiceUserUseCase
-import com.ezschedule.user.domain.useCase.UserGetAllPixAttempts
-import com.ezschedule.user.domain.useCase.ValidateScheduleUseCase
+import com.ezschedule.network.data.repository.PixRepository
+import com.ezschedule.network.data.repository.ServiceRepository
+import com.ezschedule.network.domain.useCase.schedule.CalendarUserUseCase
+import com.ezschedule.network.domain.useCase.schedule.CreateScheduleUseCase
+import com.ezschedule.network.domain.useCase.firebase.FirestoreUseCase
+import com.ezschedule.network.domain.useCase.saloon.GetSaloonUseCase
+import com.ezschedule.network.domain.useCase.tenant.GetTenantByIdUseCase
+import com.ezschedule.network.domain.useCase.pix.PixUseCase
+import com.ezschedule.network.domain.useCase.schedule.ScheduleUserUseCase
+import com.ezschedule.network.domain.useCase.service.ServiceUserUseCase
+import com.ezschedule.network.domain.useCase.pix.UserGetAllPixAttempts
+import com.ezschedule.network.domain.useCase.schedule.ValidateScheduleUseCase
 import com.ezschedule.user.presenter.viewModel.CalendarUserViewModel
 import com.ezschedule.user.presenter.viewModel.ForumUserViewModel
 import com.ezschedule.user.presenter.viewModel.HistoryUserViewModel
@@ -77,18 +72,13 @@ val moduleMain = module {
     factory { get<NetworkServiceFactory>().createNetworkService<ServicesEndpoint>(get() as Context) }
     factory { get<NetworkServiceFactory>().createNetworkService<PixEndpoint>(get() as Context) }
 
-    factory { TenantRepository(get()) }
-    factory { ScheduleRepository(get()) }
     factory { CondominiumRepository(get()) }
-    factory { SaloonRepository(get()) }
     factory { NotificationRepository(get()) }
-    factory { ServiceRepository(get()) }
-    factory { ServiceUserRepository(get()) }
-    factory { ScheduleUserRepository(get()) }
-    factory { SaloonUserRepository(get()) }
-    factory { TenantUserRepository(get()) }
-    factory { PixUserRepository(get()) }
     factory { PixRepository(get()) }
+    factory { SaloonRepository(get()) }
+    factory { ScheduleRepository(get()) }
+    factory { ServiceRepository(get()) }
+    factory { TenantRepository(get()) }
 
     factory { SendNotificationUseCase(get()) }
     factory { LoginUseCase(get()) }

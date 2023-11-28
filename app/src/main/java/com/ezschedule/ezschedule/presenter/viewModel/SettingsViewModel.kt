@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ezschedule.ezschedule.domain.useCase.CreateSaloonUseCase
-import com.ezschedule.ezschedule.domain.useCase.GetCondominiumSettingsUseCase
-import com.ezschedule.ezschedule.domain.useCase.GetTenantSettingsUseCase
-import com.ezschedule.ezschedule.domain.useCase.UpdateTenantSettingsUseCase
+import com.ezschedule.network.domain.useCase.saloon.CreateSaloonUseCase
+import com.ezschedule.network.domain.useCase.condominium.GetCondominiumSettingsUseCase
+import com.ezschedule.network.domain.useCase.tenant.GetTenantSettingsUseCase
+import com.ezschedule.network.domain.useCase.tenant.UpdateTenantSettingsUseCase
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.data.CondominiumSettingsData
 import com.ezschedule.network.domain.data.SaloonRequest

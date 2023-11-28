@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.ezschedule.admin.R
+import com.ezschedule.network.R
 import com.ezschedule.admin.databinding.FragmentDashboardBinding
 import com.ezschedule.admin.presenter.adapter.EventsAdapter
 import com.ezschedule.admin.presenter.utils.CustomMarkerView
@@ -70,7 +70,7 @@ class DashboardFragment : Fragment() {
     private fun setupChart(historyList: List<ChartPresentation>) {
         binding.fragDashChart.apply {
             data = setupLineDataSet(historyList)
-            marker = CustomMarkerView(requireContext(), R.layout.view_popup_chart)
+            marker = CustomMarkerView(requireContext(), com.ezschedule.admin.R.layout.view_popup_chart)
             description.isEnabled = false
             setScaleEnabled(false)
             setPinchZoom(false)

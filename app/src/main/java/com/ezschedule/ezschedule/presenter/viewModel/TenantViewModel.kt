@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ezschedule.ezschedule.R
-import com.ezschedule.ezschedule.domain.useCase.LoginUseCase
+import com.ezschedule.network.domain.useCase.tenant.LoginUseCase
 import com.ezschedule.utils.ResourceWrapper
 import com.ezschedule.ezschedule.presenter.utils.isValidEmail
 import com.ezschedule.network.data.network.exception.ClientException
@@ -62,15 +62,15 @@ class TenantViewModel(
                 is ResultWrapper.Error -> {
                     when (response.error) {
                         is ClientException -> _error.postValue(
-                            resourceWrapper.getString(R.string.frag_login_client_exception)
+                            resourceWrapper.getString(com.ezschedule.network.R.string.frag_login_client_exception)
                         )
 
                         is ServerException -> _error.postValue(
-                            resourceWrapper.getString(R.string.frag_login_server_exception)
+                            resourceWrapper.getString(com.ezschedule.network.R.string.frag_login_server_exception)
                         )
 
                         is UnknownResponseException -> _error.postValue(
-                            resourceWrapper.getString(R.string.frag_login_unknown_exception)
+                            resourceWrapper.getString(com.ezschedule.network.R.string.frag_login_unknown_exception)
                         )
                     }
                 }
@@ -85,7 +85,7 @@ class TenantViewModel(
 
     private fun validationEmail(email: String) {
         if (email.isValidEmail()) _setErrorEmail.postValue(EMPTY_STRING)
-        else _setErrorEmail.postValue(resourceWrapper.getString(R.string.frag_login_edt_email_error))
+        else _setErrorEmail.postValue(resourceWrapper.getString(com.ezschedule.network.R.string.frag_login_edt_email_error))
     }
 
     private fun setStatusButtonLogin() {

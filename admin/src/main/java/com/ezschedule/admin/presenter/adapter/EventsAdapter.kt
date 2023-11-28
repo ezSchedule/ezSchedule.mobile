@@ -3,7 +3,7 @@ package com.ezschedule.admin.presenter.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ezschedule.admin.R
+import com.ezschedule.network.R
 import com.ezschedule.admin.databinding.AdapterDashboardEventsBinding
 import com.ezschedule.admin.presenter.utils.EnumMonth
 import com.ezschedule.network.domain.presentation.ChartPresentation

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EzSchedule</string>
+
+    <!-- Screen name -->
+    <string name="frag_calendar_name">Eventos</string>
+    <string name="frag_dashboard_name">2023</string>
+    <string name="frag_services_name">Serviços</string>
+    <string name="frag_payments_name">Histórico</string>
+    <string name="frag_forum_name">Posts</string>
+    <string name="frag_settings_name">Configurações</string>
+    <string name="frag_schedule_name">Agendado</string>
+    <string name="frag_not_found_name">Não encontrado</string>
+
+    <!-- Toolbar image -->
+    <string name="toolbar_image_base_url">https://ezscheduleusersimages.blob.core.windows.net/ezschedules/%s</string>
+
+    <!-- Menu Popup -->
+    <string name="bt_logout">Sair</string>
+    <string name="bt_settings">Configurações</string>
+    <string name="bt_logout_error">Houve algum erro</string>
+
+    <!-- Logout Dialog -->
+    <string name="dialog_logout_tv_title">Deslogado</string>
+    <string name="dialog_logout_tv_description">Caro usuário, sua sessão expirou</string>
+    <string name="dialog_logout_btn_confirm">Confirmar</string>
+
+    <!-- Login Screen -->
+    <string name="frag_login_tv_title_login">Entrar</string>
+    <string name="frag_login_btn_login">Entrar</string>
+    <string name="frag_login_tv_forgot_password">Esqueci minha senha</string>
+    <string name="frag_login_edt_hint_email">Email</string>
+    <string name="frag_login_edt_hint_password">Senha</string>
+    <string name="frag_login_edt_email_error">Email inválido</string>
+    <string name="frag_login_client_exception">Usuário não encontrado</string>
+    <string name="frag_login_server_exception">Erro de servidor</string>
+    <string name="frag_login_unknown_exception">Erro desconhecido</string>
+
+    <!-- Calendar Screen -->
+    <string name="frag_calendar_btn_calendar">Calendario</string>
+    <string name="frag_calendar_btn_confirm">Confirmar</string>
+    <string name="frag_calendar_sv_search">Buscar…</string>
+    <string name="frag_calendar_btn_events">Eventos</string>
+    <string name="frag_calendar_tv_canceled_day">Cancelar dia</string>
+    <string name="frag_calendar_edt_reason">Motivo</string>
+    <string name="frag_calendar_tv_salon_label">Salão: </string>
+    <string name="frag_calendar_tv_date_label">Data: </string>
+    <string name="frag_calendar_tv_legend_marked">Marcados</string>
+    <string name="frag_calendar_tv_legend_today">Dia de hoje</string>
+    <string name="frag_calendar_tv_legend_canceled">Cancelados</string>
+    <string name="frag_calendar_tv_list_empty">Nenhum evento foi marcado</string>
+    <string name="frag_calendar_tv_input_blank">O campo não pode estar vazio</string>
+
+    <!-- Dashboard Screen -->
+    <string name="frag_dashboard_tv_title">Estátistica Anual</string>
+    <string name="frag_dashboard_label_events">Eventos</string>
+    <string name="frag_dashboard_label_people">Pessoas</string>
+    <string name="frag_dashboard_text_events">%4d Eventos</string>
+    <string name="frag_dashboard_text_people">%4d Pessoas</string>
+    <string name="frag_dashboard_month_january">Janeiro</string>
+    <string name="frag_dashboard_month_february">Fevereiro</string>
+    <string name="frag_dashboard_month_march">Março</string>
+    <string name="frag_dashboard_month_april">Abril</string>
+    <string name="frag_dashboard_month_may">Maio</string>
+    <string name="frag_dashboard_month_june">Junho</string>
+    <string name="frag_dashboard_month_july">Julho</string>
+    <string name="frag_dashboard_month_august">Agosto</string>
+    <string name="frag_dashboard_month_september">Setembro</string>
+    <string name="frag_dashboard_month_october">Outubro</string>
+    <string name="frag_dashboard_month_november">Novembro</string>
+    <string name="frag_dashboard_month_december">Dezembro</string>
+
+    <!-- Forum Screen -->
+    <string name="frag_forum_tv_empty">Nenhum post encontrado</string>
+    <string name="frag_forum_btn_communicate">Comunicado</string>
+    <string name="frag_forum_btn_urgent">Urgente</string>
+    <string name="frag_forum_et_hint">O que está acontecendo?</string>
+    <string name="frag_forum_ib_previous">Anterior</string>
+    <string name="frag_forum_ib_send">Enviar</string>
+
+    <!-- Service Screen -->
+    <string name="frag_services_sv_hint">Buscar…</string>
+    <string name="frag_services_label_apt">Nº Apartamento</string>
+    <string name="frag_services_label_block">Bloco</string>
+    <string name="frag_services_label_phone">Telefone</string>
+    <string name="frag_services_tv_empty">Nenhum serviço encontrado.</string>
+    <string name="frag_services_btn_desc">Adicionar</string>
+    <string name="frag_services_tv_title">Adicionar</string>
+    <string name="frag_services_et_hint">Digite o serviço…</string>
+
+    <!-- Schedules Screen -->
+    <string name="frag_schedule_tv_whole_day">O dia todo</string>
+    <string name="frag_schedule_tv_people_value">%d Convidados</string>
+    <string name="frag_schedule_btn_back">Botão voltar</string>
+    <string name="frag_schedule_btn_next">Próximo</string>
+    <string name="frag_schedule_tv_title_new_date">Nova data</string>
+    <string name="frag_schedule_edt_label_event_name">Nome do evento</string>
+    <string name="frag_schedule_edt_label_event_type">Tipo de evento</string>
+    <string name="frag_schedule_edt_label_event_date">Data do evento</string>
+    <string name="frag_schedule_edt_label_saloon">Escolher salão</string>
+    <string name="frag_schedule_edt_label_quantity_guests">Quantidade de convidados</string>
+    <string name="frag_schedule_edt_label_value">Valor: </string>
+    <string name="frag_schedule_tv_pix">Pix</string>
+    <string name="frag_schedule_iv_description">QR Code</string>
+    <string name="frag_schedule_btn_cancel">Cancelar</string>
+    <string name="frag_schedule_text_copied">Texto copiado para a área de transferência</string>
+
+    <!-- History Screen -->
+    <string name="frag_history_no_requests">Nenhum pagamento encontrado.</string>
+    <string name="frag_history_text_no_payments">Nenhuma solicitação encontrada</string>
+    <string name="frag_history_payment_made">Pagamento efetuado</string>
+    <string name="frag_history_payment_pending">Pagamento pendente</string>
+    <string name="frag_history_tv_label_saloon">Salão:</string>
+    <string name="frag_history_tv_label_name">Nome do morador</string>
+    <string name="frag_history_tv_label_block">Bloco do morador</string>
+    <string name="frag_history_tv_label_apartment">Nº Apartamento</string>
+    <string name="frag_history_tv_label_phone">Telefone</string>
+    <string name="frag_history_tv_label_category">Categoria</string>
+    <string name="frag_history_tv_label_event_block">Bloco do evento</string>
+    <string name="frag_history_tv_label_date">Data</string>
+    <string name="frag_history_tv_label_value">Valor</string>
+    <string name="frag_history_tv_value_currency">R$%.2f</string>
+    <string name="frag_history_btn_pix">Pix</string>
+    <string name="frag_history_atv_hint">Buscar…</string>
+    <string name="frag_history_btn_payments">Pagamentos</string>
+    <string name="frag_history_btn_requests">Pedidos</string>
+    <string name="frag_history_tv_saloon">Salão:</string>
+    <string name="frag_history_tv_value">Valor:</string>
+    <string name="frag_history_error_img_desc">pagamento não processado</string>
+    <string name="frag_history_accept_img_desc">pagamento processado</string>
+
+    <!-- New Date Screen   -->
+    <array name="list_events">
+        <item>Aniversário</item>
+        <item>Festa</item>
+        <item>Palestra</item>
+        <item>Encontro</item>
+        <item>Fitness</item>
+        <item>Outros</item>
+    </array>
+
+    <!-- Settings Screen -->
+    <string name="frag_settings_tv_title">O que deseja ajustar?</string>
+    <string name="frag_settings_btn_profile">Perfil</string>
+    <string name="frag_settings_btn_condo">Condomínio</string>
+    <string name="frag_settings_text_name">Nome</string>
+    <string name="frag_settings_text_surname">Sobrenome</string>
+    <string name="frag_settings_text_document">CPF</string>
+    <string name="frag_settings_text_apartment_number">N° Apartamento</string>
+    <string name="frag_settings_text_block">Bloco</string>
+    <string name="frag_settings_text_phone">Telefone</string>
+    <string name="frag_settings_text_email">Email</string>
+    <string name="frag_settings_text_residents">Moradores</string>
+    <string name="frag_settings_text_apartments">Apartamentos</string>
+    <string name="frag_settings_text_salons">Salões</string>
+    <string name="frag_settings_btn_add_salons">Adicionar salões +</string>
+
+    <string name="frag_settings_btn_previous">Tela anterior</string>
+    <string name="frag_settings_btn_save">Salvar</string>
+    <string name="bottom_sheet_settings_title">Adicionar Salão</string>
+    <string name="bottom_sheet_settings_hint_name">Nome</string>
+    <string name="bottom_sheet_settings_hint_price">Valor</string>
+    <string name="bottom_sheet_settings_desc">Bloco</string>
+    <string name="bottom_sheet_settings_hint_saloon_number">Número/Letra</string>
+    <string name="bottom_sheet_settings_btn">Salvar</string>
+</resources>

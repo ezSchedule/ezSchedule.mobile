@@ -24,9 +24,9 @@ class CustomMarkerView(
         var string = ""
         highlight?.let {
             string = if (it.dataSetIndex == 0)
-                context.getString(R.string.frag_dashboard_text_events, it.y.toInt())
+                context.getString(com.ezschedule.network.R.string.frag_dashboard_text_events, it.y.toInt())
             else
-                context.getString(R.string.frag_dashboard_text_people, it.y.toInt())
+                context.getString(com.ezschedule.network.R.string.frag_dashboard_text_people, it.y.toInt())
         }
 
         entry?.let {

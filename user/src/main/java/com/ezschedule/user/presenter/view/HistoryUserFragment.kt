@@ -14,7 +14,7 @@ import com.ezschedule.user.presenter.adapter.HistoryUserAdapter
 import com.ezschedule.user.presenter.viewModel.HistoryUserViewModel
 import com.ezschedule.utils.SharedPreferencesManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.sptech.user.R
+import com.ezschedule.network.R
 import com.sptech.user.databinding.FragmentHistoryUserBinding
 import com.sptech.user.databinding.ViewUserHistoryBottomSheetBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
