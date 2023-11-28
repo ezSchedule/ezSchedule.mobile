@@ -17,7 +17,7 @@ class NetworkServiceFactory {
             .addInterceptor(LoggingInterceptor(token))
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.0.115:8443/api/")
+            .baseUrl("https://ezschedule.sytes.net/api/")
             .addConverterFactory(GsonConverterFactory.create(Gson()))
             .client(client.build())
             .build()
