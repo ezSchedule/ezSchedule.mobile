@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ezschedule.admin.domain.useCase.CreateServiceUseCase
-import com.ezschedule.admin.domain.useCase.GetServiceListUseCase
-import com.ezschedule.admin.domain.useCase.GetTenantsListUseCase
+import com.ezschedule.network.domain.useCase.service.CreateServiceUseCase
+import com.ezschedule.network.domain.useCase.service.GetServiceListUseCase
+import com.ezschedule.network.domain.useCase.service.GetTenantsListUseCase
 import com.ezschedule.network.data.ext.toServicePresentation
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.data.ServiceRequest

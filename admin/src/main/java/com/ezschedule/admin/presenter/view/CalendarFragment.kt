@@ -10,7 +10,7 @@ import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.ezschedule.admin.R
+import com.ezschedule.network.R
 import com.ezschedule.admin.databinding.FragmentCalendarBinding
 import com.ezschedule.admin.databinding.ViewCalendarBottomSheetBinding
 import com.ezschedule.admin.presenter.adapter.CalendarEventsAdapter

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.ezschedule.network.domain.presentation.HistoryPresentation
-import com.sptech.user.R
+import com.ezschedule.network.R
 import com.sptech.user.databinding.AdapterUserHistoryBinding
 
 class HistoryUserAdapter(

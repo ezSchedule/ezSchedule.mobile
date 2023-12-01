@@ -1,6 +1,6 @@
 package com.ezschedule.ezschedule.presenter
 
-import com.ezschedule.ezschedule.domain.useCase.LoginUseCase
+import com.ezschedule.network.domain.useCase.tenant.LoginUseCase
 import com.ezschedule.ezschedule.fixture.data.TenantRequestFixture
 import com.ezschedule.ezschedule.fixture.presentation.TenantPresentationFixture
 import com.ezschedule.ezschedule.fixture.response.TenantResponseFixture

@@ -5,20 +5,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ezschedule.ezschedule.domain.useCase.CreateSaloonUseCase
-import com.ezschedule.ezschedule.domain.useCase.GetCondominiumSettingsUseCase
-import com.ezschedule.ezschedule.domain.useCase.GetTenantSettingsUseCase
-import com.ezschedule.ezschedule.domain.useCase.UpdateTenantSettingsUseCase
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.data.CondominiumSettingsData
 import com.ezschedule.network.domain.data.SaloonRequest
 import com.ezschedule.network.domain.data.TenantUpdateRequest
 import com.ezschedule.network.domain.presentation.TenantSettingsPresentation
+import com.ezschedule.network.domain.useCase.condominium.GetCondominiumSettingsUseCase
+import com.ezschedule.network.domain.useCase.saloon.CreateSaloonUseCase
+import com.ezschedule.network.domain.useCase.tenant.GetTenantByIdUseCase
+import com.ezschedule.network.domain.useCase.tenant.UpdateTenantSettingsUseCase
 import kotlinx.coroutines.launch
 import okhttp3.RequestBody
 
 class SettingsViewModel(
-    private val getTenantSettingsUseCase: GetTenantSettingsUseCase,
+    private val getTenantSettingsUseCase: GetTenantByIdUseCase,
     private val getCondominiumSettingsUseCase: GetCondominiumSettingsUseCase,
     private val updateTenantSettingsUseCase: UpdateTenantSettingsUseCase,
     private val createSaloonUseCase: CreateSaloonUseCase

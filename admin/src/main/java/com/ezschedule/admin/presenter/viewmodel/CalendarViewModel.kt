@@ -4,16 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ezschedule.admin.domain.useCase.CalendarUseCase
 import com.ezschedule.network.R.color.light_white
 import com.ezschedule.network.R.color.red
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.data.ScheduleData
 import com.ezschedule.network.domain.presentation.EventItemPresentation
+import com.ezschedule.network.domain.useCase.schedule.CancelDateUseCase
+import com.ezschedule.network.domain.useCase.schedule.GetSchedulesUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CalendarViewModel(private val useCase: CalendarUseCase) : ViewModel() {
+class CalendarViewModel(
+    private val getSchedulesUseCase: GetSchedulesUseCase,
+    private val cancelDateUseCase: CancelDateUseCase
+) : ViewModel() {
     private var _scheduleList = MutableLiveData<List<EventItemPresentation>>()
     val scheduleList: LiveData<List<EventItemPresentation>> = _scheduleList
 
@@ -34,7 +38,7 @@ class CalendarViewModel(private val useCase: CalendarUseCase) : ViewModel() {
 
     fun getEvents(idCondominium: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            when (val response = useCase.execute(idCondominium)) {
+            when (val response = getSchedulesUseCase(idCondominium)) {
                 is ResultWrapper.Success -> {
                     response.content.toEventsPresentation().let {
                         when {
@@ -61,7 +65,7 @@ class CalendarViewModel(private val useCase: CalendarUseCase) : ViewModel() {
 
     private fun sendCancelDay(schedule: ScheduleData) {
         viewModelScope.launch(Dispatchers.IO) {
-            when (val response = useCase.cancelDate(schedule)) {
+            when (val response = cancelDateUseCase(schedule)) {
                 is ResultWrapper.Success -> _successfulCancellation.postValue(Unit)
 
                 is ResultWrapper.Error -> _error.postValue(response.error)

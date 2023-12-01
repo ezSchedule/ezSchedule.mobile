@@ -7,6 +7,7 @@ import com.ezschedule.network.data.network.exception.ClientException
 import com.ezschedule.network.data.network.exception.ServerException
 import com.ezschedule.network.data.network.exception.UnknownResponseException
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
+import com.ezschedule.network.data.repository.TenantRepository
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every

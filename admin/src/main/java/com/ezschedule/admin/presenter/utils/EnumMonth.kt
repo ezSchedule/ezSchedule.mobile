@@ -1,6 +1,6 @@
 package com.ezschedule.admin.presenter.utils
 
-import com.ezschedule.admin.R
+import com.ezschedule.network.R
 
 enum class EnumMonth(
     private val number: Int,

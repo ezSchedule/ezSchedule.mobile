@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ezschedule.admin.domain.useCase.DashboardUseCase
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.presentation.ChartPresentation
+import com.ezschedule.network.domain.useCase.schedule.GetDashboardDataUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DashboardViewModel(private val useCase: DashboardUseCase) : ViewModel() {
+class DashboardViewModel(private val useCase: GetDashboardDataUseCase) : ViewModel() {
     private var _chartData = MutableLiveData<List<ChartPresentation>>()
     val chartData: LiveData<List<ChartPresentation>> = _chartData
 
@@ -22,7 +22,7 @@ class DashboardViewModel(private val useCase: DashboardUseCase) : ViewModel() {
 
     fun getChartData(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            when (val response = useCase.execute(id)) {
+            when (val response = useCase(id)) {
                 is ResultWrapper.Success -> {
                     response.content.toChartsPresentation().let {
                         when {

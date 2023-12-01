@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_marginBottom="12dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp">
 
     <TextView
         android:id="@+id/tv_history_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_medium_500"
-        android:text="@string/frag_history_tv_name"
         android:textColor="@color/colorVariant"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Endryl Fiorotti" />
 
     <TextView
         android:id="@+id/tv_history_saloon"
@@ -34,19 +35,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:fontFamily="@font/inter_regular_400"
-        android:text="@string/frag_history_saloon_name"
         android:textColor="@color/grayVariant"
         android:textSize="@dimen/size_small"
         app:layout_constraintStart_toEndOf="@id/tv_history_saloon"
-        app:layout_constraintTop_toBottomOf="@id/tv_history_name" />
+        app:layout_constraintTop_toBottomOf="@id/tv_history_name"
+        tools:text="Malásia" />
 
     <ImageView
         android:id="@+id/frag_history_img_accept"
         android:layout_width="40dp"
         android:layout_height="24dp"
         android:contentDescription="@string/frag_history_accept_img_desc"
-        android:visibility="gone"
         android:src="@drawable/correct"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_history_name" />
 
@@ -78,11 +79,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:fontFamily="@font/inter_regular_400"
-        android:text="@string/frag_history_tv_saloon_value"
         android:textColor="@color/grayVariant"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/tv_history_value"
-        app:layout_constraintTop_toBottomOf="@id/tv_history_saloon" />
+        app:layout_constraintTop_toBottomOf="@id/tv_history_saloon"
+        tools:text="R$100,00" />
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"

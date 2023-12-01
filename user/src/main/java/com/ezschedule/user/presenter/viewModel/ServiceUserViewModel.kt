@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.presentation.ServiceUserPresentation
-import com.ezschedule.user.domain.useCase.ServiceUserUseCase
+import com.ezschedule.network.domain.useCase.service.GetServiceListUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ServiceUserViewModel(private val useCase: ServiceUserUseCase) : ViewModel() {
+class ServiceUserViewModel(private val useCase: GetServiceListUseCase) : ViewModel() {
     private val _services = MutableLiveData<List<ServiceUserPresentation>>()
     val services: LiveData<List<ServiceUserPresentation>> = _services
 
@@ -21,7 +21,7 @@ class ServiceUserViewModel(private val useCase: ServiceUserUseCase) : ViewModel(
     val error: LiveData<Exception> = _error
 
     fun getServices(id: Int) = viewModelScope.launch(Dispatchers.IO) {
-        when (val response = useCase.execute(id)) {
+        when (val response = useCase(id)) {
             is ResultWrapper.Success -> response.content.toPresentation().let {
                 when {
                     it.isEmpty() -> _empty.postValue(Unit)

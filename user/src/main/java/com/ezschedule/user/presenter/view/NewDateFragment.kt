@@ -99,7 +99,7 @@ class NewDateFragment : Fragment() {
                 requireContext(), R.layout.adapter_auto_complete_new_date, saloonNameList
             )
             binding.includeInfo.acSaloon.setAdapter(adapter)
-            binding.includeInfo.acSaloon.setOnItemClickListener { adapterView, view, i, l ->
+            binding.includeInfo.acSaloon.setOnItemClickListener { _, _, i, _ ->
                 saloonPos = i
                 binding.includeInfo.tvValueSaloon.text =
                     String.format("R$%.2f", it[saloonPos].price)
@@ -199,7 +199,7 @@ class NewDateFragment : Fragment() {
     }
 
     private fun setEventTypeAdapter() = with(binding) {
-        val arrayString = resources.getStringArray(R.array.list_events)
+        val arrayString = resources.getStringArray(com.ezschedule.network.R.array.list_events)
         val adapter =
             ArrayAdapter(requireContext(), R.layout.adapter_auto_complete_new_date, arrayString)
         includeInfo.acEventType.setAdapter(adapter)

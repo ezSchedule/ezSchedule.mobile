@@ -54,9 +54,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupDialogLogout(email: String) {
         AlertDialog.Builder(this)
-            .setTitle(getString(R.string.dialog_logout_tv_title))
-            .setMessage(getString(R.string.dialog_logout_tv_description))
-            .setNeutralButton(getString(R.string.dialog_logout_btn_confirm)) { _, _ ->
+            .setTitle(getString(com.ezschedule.network.R.string.dialog_logout_tv_title))
+            .setMessage(getString(com.ezschedule.network.R.string.dialog_logout_tv_description))
+            .setNeutralButton(getString(com.ezschedule.network.R.string.dialog_logout_btn_confirm)) { _, _ ->
                 viewModel.logoutTenant(email)
             }
             .create()
