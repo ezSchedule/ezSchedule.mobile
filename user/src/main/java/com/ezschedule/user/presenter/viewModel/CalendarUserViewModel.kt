@@ -7,11 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.ezschedule.network.R
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.presentation.EventItemPresentation
-import com.ezschedule.network.domain.useCase.schedule.CalendarUserUseCase
+import com.ezschedule.network.domain.useCase.schedule.GetSchedulesCancellations
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CalendarUserViewModel(private val useCase: CalendarUserUseCase) : ViewModel() {
+class CalendarUserViewModel(private val useCase: GetSchedulesCancellations) : ViewModel() {
     private var _scheduleList = MutableLiveData<List<EventItemPresentation>>()
     val scheduleList: LiveData<List<EventItemPresentation>> = _scheduleList
 
@@ -23,7 +23,7 @@ class CalendarUserViewModel(private val useCase: CalendarUserUseCase) : ViewMode
 
     fun getEvents(idCondominium: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            when (val response = useCase.execute(idCondominium)) {
+            when (val response = useCase.invoke(idCondominium)) {
                 is ResultWrapper.Success -> {
                     response.content.toEventsPresentation().let {
                         when {

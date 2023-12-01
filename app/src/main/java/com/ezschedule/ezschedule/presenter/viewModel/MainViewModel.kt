@@ -51,7 +51,7 @@ class MainViewModel(
 
     fun logoutTenant(email: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            when (useCase.execute(email)) {
+            when (useCase.invoke(email)) {
                 is ResultWrapper.Success -> _setLogoutAction.postValue(Unit)
 
                 is ResultWrapper.Error -> resourceWrapper.getString(com.ezschedule.network.R.string.bt_logout_error)

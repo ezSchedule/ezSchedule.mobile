@@ -5,18 +5,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ezschedule.network.domain.useCase.pix.GetAllPixAttempts
-import com.ezschedule.network.domain.useCase.firebase.HistoryUseCase
 import com.ezschedule.network.data.ext.toHistory
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.data.PixCobData
 import com.ezschedule.network.domain.presentation.HistoryPresentation
 import com.ezschedule.network.domain.presentation.TenantPresentation
+import com.ezschedule.network.domain.useCase.firebase.FirestoreUseCase
+import com.ezschedule.network.domain.useCase.pix.GetAllPixAttempts
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.launch
 
 class HistoryViewModel(
-    private val historyUseCase: HistoryUseCase,
+    private val historyUseCase: FirestoreUseCase,
     private val getAllPixAttempts: GetAllPixAttempts,
 ) : ViewModel() {
 

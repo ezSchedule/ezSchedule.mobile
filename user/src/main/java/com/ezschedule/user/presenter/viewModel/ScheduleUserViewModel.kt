@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.presentation.SchedulesPresentation
-import com.ezschedule.network.domain.useCase.schedule.ScheduleUserUseCase
+import com.ezschedule.network.domain.useCase.schedule.GetSchedulesByTenant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ScheduleUserViewModel(private val useCase: ScheduleUserUseCase) : ViewModel() {
+class ScheduleUserViewModel(private val useCase: GetSchedulesByTenant) : ViewModel() {
 
     private var _schedules = MutableLiveData<List<SchedulesPresentation>>()
     val schedules: LiveData<List<SchedulesPresentation>> = _schedules
@@ -22,7 +22,7 @@ class ScheduleUserViewModel(private val useCase: ScheduleUserUseCase) : ViewMode
     val error: LiveData<Exception> = _error
 
     fun getSchedules(id: Int) = viewModelScope.launch(Dispatchers.IO) {
-        when (val response = useCase.execute(id)) {
+        when (val response = useCase.invoke(id)) {
             is ResultWrapper.Success -> response.content.toSchedulesPresentation().let {
                 when {
                     it.isEmpty() -> _empty.postValue(Unit)

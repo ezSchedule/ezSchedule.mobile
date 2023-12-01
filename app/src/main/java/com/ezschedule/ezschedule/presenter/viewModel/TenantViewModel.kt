@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ezschedule.ezschedule.R
-import com.ezschedule.network.domain.useCase.tenant.LoginUseCase
-import com.ezschedule.utils.ResourceWrapper
 import com.ezschedule.ezschedule.presenter.utils.isValidEmail
 import com.ezschedule.network.data.network.exception.ClientException
 import com.ezschedule.network.data.network.exception.ServerException
@@ -14,6 +12,8 @@ import com.ezschedule.network.data.network.exception.UnknownResponseException
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
 import com.ezschedule.network.domain.data.TenantRequest
 import com.ezschedule.network.domain.presentation.TenantPresentation
+import com.ezschedule.network.domain.useCase.tenant.LoginUseCase
+import com.ezschedule.utils.ResourceWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -52,7 +52,7 @@ class TenantViewModel(
 
     fun login(tenant: TenantRequest) {
         viewModelScope.launch(Dispatchers.IO) {
-            when (val response = loginUseCase.execute(tenant)) {
+            when (val response = loginUseCase.invoke(tenant)) {
                 is ResultWrapper.Success -> {
                     response.content.toTenantPresentation().let {
                         _loginSuccess.postValue(it)

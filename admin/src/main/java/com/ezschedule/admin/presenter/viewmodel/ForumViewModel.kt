@@ -4,18 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ezschedule.network.domain.useCase.firebase.ForumUseCase
-import com.ezschedule.network.domain.useCase.notification.SendNotificationUseCase
 import com.ezschedule.network.data.ext.toObject
 import com.ezschedule.network.domain.data.CondominiumRequest
 import com.ezschedule.network.domain.data.NotificationRequest
 import com.ezschedule.network.domain.data.PostData
 import com.ezschedule.network.domain.presentation.PostPresentation
+import com.ezschedule.network.domain.useCase.firebase.FirestoreUseCase
+import com.ezschedule.network.domain.useCase.notification.SendNotificationUseCase
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.launch
 
 class ForumViewModel(
-    private val useCase: ForumUseCase,
+    private val useCase: FirestoreUseCase,
     private val sendNotification: SendNotificationUseCase
 ) : ViewModel() {
     private var _posts = MutableLiveData<List<PostPresentation>>()
@@ -31,7 +31,7 @@ class ForumViewModel(
     val error: LiveData<Exception> = _error
 
     fun getAllPosts(id: Int) {
-        useCase.execute("conversations-$id")
+        useCase.invoke("conversations-$id")
             .orderBy(POST_DATE, Query.Direction.ASCENDING)
             .addSnapshotListener { value, e ->
                 when (val response = value?.toObject()) {
@@ -47,7 +47,7 @@ class ForumViewModel(
     }
 
     fun createPost(post: PostData) {
-        useCase.execute("conversations-" + post.idCondominium).add(post)
+        useCase.invoke("conversations-" + post.idCondominium).add(post)
             .addOnSuccessListener {
                 _postCreated.postValue(Unit)
                 send(post)
@@ -57,7 +57,7 @@ class ForumViewModel(
             }
     }
 
-    fun send(post: PostData) = viewModelScope.launch {
+    private fun send(post: PostData) = viewModelScope.launch {
         val notification = NotificationRequest(
             CondominiumRequest(post.idCondominium!!.toInt()),
             post.isEdited,

@@ -27,10 +27,4 @@ class ServiceRepository(private val endpoint: ServicesEndpoint) {
             endpoint.createService(service)
         }
     }
-
-    suspend fun getServices(id: Int): ResultWrapper<ServicesResponse> {
-        return requestHandler {
-            endpoint.servicesList(id).toResponse()
-        }
-    }
 }
