@@ -21,7 +21,7 @@ class ServiceUserViewModel(private val useCase: GetServiceListUseCase) : ViewMod
     val error: LiveData<Exception> = _error
 
     fun getServices(id: Int) = viewModelScope.launch(Dispatchers.IO) {
-        when (val response = useCase.invoke(id)) {
+        when (val response = useCase(id)) {
             is ResultWrapper.Success -> response.content.toPresentation().let {
                 when {
                     it.isEmpty() -> _empty.postValue(Unit)

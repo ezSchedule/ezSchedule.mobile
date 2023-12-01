@@ -52,7 +52,7 @@ class TenantViewModel(
 
     fun login(tenant: TenantRequest) {
         viewModelScope.launch(Dispatchers.IO) {
-            when (val response = loginUseCase.invoke(tenant)) {
+            when (val response = loginUseCase(tenant)) {
                 is ResultWrapper.Success -> {
                     response.content.toTenantPresentation().let {
                         _loginSuccess.postValue(it)

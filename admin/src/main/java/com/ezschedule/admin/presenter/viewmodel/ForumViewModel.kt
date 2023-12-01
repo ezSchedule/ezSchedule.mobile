@@ -31,7 +31,7 @@ class ForumViewModel(
     val error: LiveData<Exception> = _error
 
     fun getAllPosts(id: Int) {
-        useCase.invoke("conversations-$id")
+        useCase("conversations-$id")
             .orderBy(POST_DATE, Query.Direction.ASCENDING)
             .addSnapshotListener { value, e ->
                 when (val response = value?.toObject()) {
@@ -47,7 +47,7 @@ class ForumViewModel(
     }
 
     fun createPost(post: PostData) {
-        useCase.invoke("conversations-" + post.idCondominium).add(post)
+        useCase("conversations-" + post.idCondominium).add(post)
             .addOnSuccessListener {
                 _postCreated.postValue(Unit)
                 send(post)

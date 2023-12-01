@@ -27,17 +27,17 @@ import com.ezschedule.network.data.repository.TenantRepository
 import com.ezschedule.network.domain.useCase.condominium.GetCondominiumSettingsUseCase
 import com.ezschedule.network.domain.useCase.firebase.FirestoreUseCase
 import com.ezschedule.network.domain.useCase.notification.SendNotificationUseCase
-import com.ezschedule.network.domain.useCase.pix.GetAllPixAttempts
+import com.ezschedule.network.domain.useCase.pix.GetAllPixAttemptsUseCase
 import com.ezschedule.network.domain.useCase.pix.PixUseCase
-import com.ezschedule.network.domain.useCase.pix.UserGetAllPixAttempts
+import com.ezschedule.network.domain.useCase.pix.UserGetAllPixAttemptsUseCase
 import com.ezschedule.network.domain.useCase.saloon.CreateSaloonUseCase
 import com.ezschedule.network.domain.useCase.saloon.GetSaloonUseCase
-import com.ezschedule.network.domain.useCase.schedule.GetSchedules
 import com.ezschedule.network.domain.useCase.schedule.CancelDateUseCase
-import com.ezschedule.network.domain.useCase.schedule.GetSchedulesCancellations
 import com.ezschedule.network.domain.useCase.schedule.CreateScheduleUseCase
-import com.ezschedule.network.domain.useCase.schedule.GetDashboardData
-import com.ezschedule.network.domain.useCase.schedule.GetSchedulesByTenant
+import com.ezschedule.network.domain.useCase.schedule.GetDashboardDataUseCase
+import com.ezschedule.network.domain.useCase.schedule.GetSchedulesUseCase
+import com.ezschedule.network.domain.useCase.schedule.GetSchedulesByTenantUseCase
+import com.ezschedule.network.domain.useCase.schedule.GetSchedulesCancellationsUseCase
 import com.ezschedule.network.domain.useCase.schedule.ValidateScheduleUseCase
 import com.ezschedule.network.domain.useCase.service.CreateServiceUseCase
 import com.ezschedule.network.domain.useCase.service.GetServiceListUseCase
@@ -80,25 +80,24 @@ val moduleMain = module {
     factory { SendNotificationUseCase(get()) }
     factory { LoginUseCase(get()) }
     factory { LogoutUseCase(get()) }
-    factory { GetSchedules(get()) }
+    factory { GetSchedulesUseCase(get()) }
     factory { GetCondominiumSettingsUseCase(get()) }
     factory { UpdateTenantSettingsUseCase(get()) }
     factory { CreateSaloonUseCase(get()) }
     factory { CreateServiceUseCase(get()) }
-    factory { GetDashboardData(get()) }
+    factory { GetDashboardDataUseCase(get()) }
     factory { FirestoreUseCase() }
     factory { GetTenantsListUseCase(get()) }
     factory { GetServiceListUseCase(get()) }
-    factory { HistoryUserViewModel(get(), get(), get()) }
-    factory { GetSchedulesByTenant(get()) }
-    factory { GetSchedulesCancellations(get()) }
+    factory { GetSchedulesByTenantUseCase(get()) }
+    factory { GetSchedulesCancellationsUseCase(get()) }
     factory { GetSaloonUseCase(get()) }
     factory { CreateScheduleUseCase(get()) }
     factory { GetTenantByIdUseCase(get()) }
     factory { PixUseCase(get()) }
-    factory { UserGetAllPixAttempts(get()) }
+    factory { UserGetAllPixAttemptsUseCase(get()) }
     factory { ValidateScheduleUseCase(get()) }
-    factory { GetAllPixAttempts(get()) }
+    factory { GetAllPixAttemptsUseCase(get()) }
     factory { CancelDateUseCase(get()) }
 
     viewModel { TenantViewModel(get(), get()) }
@@ -114,4 +113,5 @@ val moduleMain = module {
     viewModel { CalendarUserViewModel(get()) }
     viewModel { NewDateViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { HistoryViewModel(get(), get()) }
+    viewModel { HistoryUserViewModel(get(), get(), get()) }
 }

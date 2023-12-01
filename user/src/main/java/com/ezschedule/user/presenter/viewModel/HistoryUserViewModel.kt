@@ -11,13 +11,13 @@ import com.ezschedule.network.domain.data.PixCobData
 import com.ezschedule.network.domain.presentation.HistoryPresentation
 import com.ezschedule.network.domain.presentation.TenantPresentation
 import com.ezschedule.network.domain.useCase.firebase.FirestoreUseCase
-import com.ezschedule.network.domain.useCase.pix.UserGetAllPixAttempts
+import com.ezschedule.network.domain.useCase.pix.UserGetAllPixAttemptsUseCase
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.launch
 
 class HistoryUserViewModel(
     private val historyUseCase: FirestoreUseCase,
-    private val userGetAllPixAttempts: UserGetAllPixAttempts,
+    private val userGetAllPixAttempts: UserGetAllPixAttemptsUseCase,
     private val firestoreUseCase: FirestoreUseCase
 ) : ViewModel() {
 

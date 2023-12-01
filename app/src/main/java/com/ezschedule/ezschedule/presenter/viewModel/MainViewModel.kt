@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ezschedule.ezschedule.R
-import com.ezschedule.network.domain.useCase.tenant.LogoutUseCase
 import com.ezschedule.network.data.network.wrapper.ResultWrapper
+import com.ezschedule.network.domain.useCase.tenant.LogoutUseCase
 import com.ezschedule.utils.ResourceWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -51,7 +51,7 @@ class MainViewModel(
 
     fun logoutTenant(email: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            when (useCase.invoke(email)) {
+            when (useCase(email)) {
                 is ResultWrapper.Success -> _setLogoutAction.postValue(Unit)
 
                 is ResultWrapper.Error -> resourceWrapper.getString(com.ezschedule.network.R.string.bt_logout_error)
